@@ -13,32 +13,7 @@ import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 
 const Layout = () => {
-<<<<<<< HEAD
-    return (
-        <Box sx={{ display: "inline-block", width: "100%", borderBottom: 1, borderColor: 'divider' }}>
-            {/* header */}
-            <AppBar
-            sx ={{background:'#06390'}}
-                // enableColorOnDark
-                // display="block"
-                // color="inherit"
-                // elevation={0}
-            >
-                <Toolbar>
-                    <Box style={{ marginTop: "20px" }}>
-                    <Tabs textColor="inherit">
-                      <Tab icon={<HeadsetIcon />} iconPosition="start" label="STREAMING" />
-                      <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
-                    </Tabs>
-                    <Button sx={{marginLeft: "auto"}} variant="contained">Login</Button>
-                    <Button variant="contained">Register</Button>   
-                    </Box>
-                </Toolbar>
-                <Divider sx={{ mt: 0.25, mb: 0.25, marginTop: "-7px" }} />
-            </AppBar>
-=======
   const [account, setAccount] = useState('');
->>>>>>> c25c47f9b733f37e5aa8a89bfbe9cc8afc339fd5
 
   const getAccount = async () => {
     try {
