@@ -77,7 +77,7 @@ const Layout = () => {
       >
         <Toolbar>
           <img src="/images/logo.png" alt="logo" />
-          <Tabs textColor="inherit">
+          <Tabs textColor="inherit" value={false}>
             <Tab
               icon={<HeadsetIcon />}
               iconPosition="start"
@@ -85,12 +85,25 @@ const Layout = () => {
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
           </Tabs>
-          <Button sx={{ marginLeft: 'auto' }} variant="contained">
-            Login
-          </Button>
-          <Button variant="contained" onClick={handleOpen}>
-            Register
-          </Button>
+          {account === '' ? (
+            <>
+              <Button
+                sx={{ marginLeft: 'auto' }}
+                variant="contained"
+                onClick={getAccount}
+              >
+                Login
+              </Button>
+              <Button variant="contained" onClick={handleOpen}>
+                Register
+              </Button>
+            </>
+          ) : (
+            <Button sx={{ marginLeft: 'auto' }} variant="contained">
+              로그인 완료
+            </Button>
+          )}
+
           <Modal
             open={open}
             onClose={handleClose}
