@@ -12,7 +12,7 @@ const Auth = ComposedClass => {
         if (await !response.payload.isAuth) {
           props.history.push('/');
         } else {
-          props.history.push('/');
+          props.history.push('/'); // 수정 예정
         }
       });
     }, [dispatch, props.history]);

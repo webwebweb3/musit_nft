@@ -36,9 +36,27 @@ const Layout = () => {
   const [genre, setGenre] = useState('');
   const [nationality, setNationality] = useState('');
   const [account, setAccount] = useState('');
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // 메타 마스크 회원가입
+  const handleMetaMaskOpen = () => {
+    if (account) {
+      handleRegisterOpen();
+      return;
+    }
+    getAccount();
+    setLoading(true);
+  };
+
+  // 나머지 정보 회원가입
+  const handleRegisterOpen = () => {
+    setLoading(false);
+    setOpen(true);
+  };
+
   const handleClose = () => setOpen(false);
+  const handleLoadingClose = () => setLoading(false);
 
   const getAccount = async () => {
     try {
@@ -61,12 +79,16 @@ const Layout = () => {
     const addr = window.localStorage.getItem('address');
     if (addr !== null) {
       setAccount(addr);
+      // if (!nationality) {  디스패치 예정
+      handleRegisterOpen();
+      // }
     }
   }, [account]);
 
   const onSubmitForm = e => {
     e.preventDefault();
     let dataToSubmit = {
+      metamask: account,
       genre,
       nationality,
     };
@@ -117,7 +139,7 @@ const Layout = () => {
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
           </Tabs>
-          {account === '' ? (
+          {nationality === '' ? (
             <>
               <Button
                 sx={{ marginLeft: 'auto' }}
@@ -126,7 +148,7 @@ const Layout = () => {
               >
                 Login
               </Button>
-              <Button variant="contained" onClick={handleOpen}>
+              <Button variant="contained" onClick={handleMetaMaskOpen}>
                 Register
               </Button>
             </>
@@ -136,6 +158,18 @@ const Layout = () => {
             </Button>
           )}
 
+          <Modal
+            open={loading}
+            onClose={handleLoadingClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Paper sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                메타마스크 로그인 해주세요.
+              </Typography>
+            </Paper>
+          </Modal>
           <Modal
             open={open}
             onClose={handleClose}

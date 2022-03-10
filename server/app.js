@@ -11,7 +11,7 @@ const Router = require('./routes');
 
 const app = express();
 
-app.set('port', process.env.PORT || 8002);
+app.set('port', process.env.PORT || 8000);
 
 sequelize
   .sync({ force: true })
