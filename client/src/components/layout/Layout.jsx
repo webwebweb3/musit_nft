@@ -76,7 +76,7 @@ const Layout = () => {
         sx={{ background: '#06390' }}
       >
         <Toolbar>
-          <img src="/images/logo.png" alt="logo" />
+          <img width="70px" height="70px" src="/images/logo.png" alt="logo" />
           <Tabs textColor="inherit" value={false}>
             <Tab
               icon={<HeadsetIcon />}
