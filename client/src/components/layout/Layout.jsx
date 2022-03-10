@@ -64,7 +64,7 @@ const Layout = () => {
           <Box style={{ marginTop: '20px' }}>
             {account === '' ? (
               <>
-                <Tabs textColor="inherit">
+                <Tabs textColor="inherit" value={false}>
                   <Tab
                     sx={{ marginLeft: '1400px' }}
                     icon={<HeadsetIcon />}
