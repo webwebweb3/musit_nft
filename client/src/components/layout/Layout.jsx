@@ -63,7 +63,7 @@ const Layout = () => {
         <Toolbar style={{ padding: 0, marginTop: '-5px' }}>
           <Box style={{ marginTop: '20px' }}>
             <>
-              <Tabs textColor="inherit">
+              <Tabs textColor="inherit" value={false}>
                 <Tab
                   sx={{ marginLeft: '1400px' }}
                   icon={<HeadsetIcon />}
@@ -105,7 +105,7 @@ const Layout = () => {
           marginTop: '100px',
         }}
       >
-        <Outlet />
+        <Outlet account={account} />
       </Box>
     </Box>
   );
