@@ -15,13 +15,14 @@ const Layout = () => {
                 // elevation={0}
             >
                 <Toolbar>
-                    <Box style={{ marginTop: "20px" }}></Box>
+                    <Box style={{ marginTop: "20px" }}>
                     <Tabs textColor="inherit">
-                      <Tab sx={{marginLeft: "1400px"}} icon={<HeadsetIcon />} iconPosition="start" label="STREAMING" />
+                      <Tab icon={<HeadsetIcon />} iconPosition="start" label="STREAMING" />
                       <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
                     </Tabs>
                     <Button sx={{marginLeft: "auto"}} variant="contained">Login</Button>
-                    <Button variant="contained">Register</Button>
+                    <Button variant="contained">Register</Button>   
+                    </Box>
                 </Toolbar>
                 <Divider sx={{ mt: 0.25, mb: 0.25, marginTop: "-7px" }} />
             </AppBar>
