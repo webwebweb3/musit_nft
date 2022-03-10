@@ -73,9 +73,13 @@ const Layout = () => {
                   />
                   <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
                 </Tabs>
-                <Button sx={{ marginLeft: 'auto' }} onClick={getAccount}>
+                <Button
+                  sx={{ marginLeft: 'auto' }}
+                  onClick={getAccount}
+                  variant="contained"
+                >
                   {' '}
-                  variant="contained">Login
+                  Login
                 </Button>
                 <Button variant="contained">Register</Button>
               </>
