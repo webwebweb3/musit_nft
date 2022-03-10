@@ -119,7 +119,7 @@ const Layout = () => {
           marginTop: '100px',
         }}
       >
-        <Outlet />
+        <Outlet account={account} />
       </Box>
     </Box>
   );
