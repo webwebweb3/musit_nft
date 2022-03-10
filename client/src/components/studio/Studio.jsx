@@ -1,8 +1,10 @@
 import { Box, Button } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { mintMusicTokenContract } from '../../contracts';
+import { FileUpload } from 'react-ipfs-uploader';
 
 const Studio = () => {
+  const [fileUrl, setFileUrl] = useState('');
   const account = '0x79B9950946fe1099f65A55ff29643eAB52c7003B';
 
   const onClickMint = async () => {
@@ -30,6 +32,11 @@ const Studio = () => {
       }}
     >
       <Box>mint test</Box>
+      <FileUpload setUrl={setFileUrl} />
+      FileUrl :{' '}
+      <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+        {fileUrl}
+      </a>
       <Button onClick={onClickMint}>Mint</Button>
     </Box>
   );
