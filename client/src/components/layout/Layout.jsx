@@ -1,7 +1,16 @@
-import { Button } from '@mui/material';
-import { AppBar, Box, Divider, Toolbar } from '@mui/material';
 import { useEffect, useState } from 'react';
+import {
+  AppBar,
+  Box,
+  Divider,
+  Toolbar,
+  Tabs,
+  Tab,
+  Button,
+} from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import HeadsetIcon from '@mui/icons-material/Headset';
+import TokenIcon from '@mui/icons-material/Token';
 
 const Layout = () => {
   const [account, setAccount] = useState('');
@@ -31,13 +40,45 @@ const Layout = () => {
   }, [account]);
 
   return (
-    <Box sx={{ display: 'inline-block', width: '100%' }}>
+    <Box
+      sx={{
+        display: 'inline-block',
+        width: '100%',
+        borderBottom: 1,
+        borderColor: 'divider',
+      }}
+    >
       {/* header */}
-      <AppBar enableColorOnDark display="block" color="inherit" elevation={0}>
+      <AppBar
+        enableColorOnDark
+        display="block"
+        color="inherit"
+        elevation={0}
+        sx={{ background: '#06390' }}
+        // enableColorOnDark
+        // display="block"
+        // color="inherit"
+        // elevation={0}
+      >
         <Toolbar style={{ padding: 0, marginTop: '-5px' }}>
-          <Box style={{ marginTop: '10px' }}>
+          <Box style={{ marginTop: '20px' }}>
             {account === '' ? (
-              <Button onClick={getAccount}>LOGIN</Button>
+              <>
+                <Tabs textColor="inherit">
+                  <Tab
+                    sx={{ marginLeft: '1400px' }}
+                    icon={<HeadsetIcon />}
+                    iconPosition="start"
+                    label="STREAMING"
+                  />
+                  <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
+                </Tabs>
+                <Button sx={{ marginLeft: 'auto' }} onClick={getAccount}>
+                  {' '}
+                  variant="contained">Login
+                </Button>
+                <Button variant="contained">Register</Button>
+              </>
             ) : (
               <Button>로그인완료</Button>
             )}
