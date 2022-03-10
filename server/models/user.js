@@ -10,11 +10,11 @@ module.exports = class User extends Sequelize.Model {
           unique: true,
         },
         nationality: {
-          type: Sequelize.STRING(100),
+          type: Sequelize.CHAR(2),
           allowNull: true,
         },
         genre: {
-          type: Sequelize.STRING(15),
+          type: Sequelize.CHAR(15),
           allowNull: false,
         },
         img: {

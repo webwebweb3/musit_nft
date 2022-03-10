@@ -14,11 +14,11 @@ module.exports = class Artist extends Sequelize.Model {
           allowNull: false,
         },
         nationality: {
-          type: Sequelize.STRING(100),
+          type: Sequelize.CHAR(2),
           allowNull: true,
         },
         genre: {
-          type: Sequelize.STRING(15),
+          type: Sequelize.CHAR(15),
           allowNull: false,
         },
         img: {

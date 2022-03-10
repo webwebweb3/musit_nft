@@ -10,11 +10,14 @@ import {
   Button,
   Modal,
   Typography,
+  Paper,
 } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import TextField from '@mui/material/TextField';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../_actions/user_actions';
 
 const style = {
   position: 'absolute',
@@ -29,6 +32,9 @@ const style = {
 };
 
 const Layout = () => {
+  const dispatch = useDispatch();
+  const [genre, setGenre] = useState('');
+  const [nationality, setNationality] = useState('');
   const [account, setAccount] = useState('');
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -58,6 +64,32 @@ const Layout = () => {
     }
   }, [account]);
 
+  const onSubmitForm = e => {
+    e.preventDefault();
+    let dataToSubmit = {
+      genre,
+      nationality,
+    };
+
+    dispatch(registerUser(dataToSubmit)).then(response => {
+      if (response.payload.success) {
+        window.location.replace('/');
+      } else {
+        alert(response.payload.err);
+      }
+    });
+    setGenre('');
+    setNationality('');
+  };
+
+  const onChangeGenre = e => {
+    setGenre(e.target.value);
+  };
+
+  const onChangeNationality = e => {
+    setNationality(e.target.value);
+  };
+
   return (
     <Box
       sx={{
@@ -76,7 +108,7 @@ const Layout = () => {
         sx={{ background: '#06390' }}
       >
         <Toolbar>
-          <img src="/images/logo.png" alt="logo" />
+          <img src="/images/logo.png" alt="logo" width={'50px'} />
           <Tabs textColor="inherit" value={false}>
             <Tab
               icon={<HeadsetIcon />}
@@ -110,16 +142,33 @@ const Layout = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                장르
-              </Typography>
-              <TextField id="outlined-basic" label="장르" variant="outlined" />
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                국가
-              </Typography>
-              <TextField id="outlined-basic" label="국가" variant="outlined" />
-            </Box>
+            <Paper sx={style}>
+              <form onSubmit={onSubmitForm}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  장르
+                </Typography>
+                <TextField
+                  id="outlined-basic"
+                  label="장르"
+                  variant="outlined"
+                  value={genre}
+                  onChange={onChangeGenre}
+                />
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  국가
+                </Typography>
+                <TextField
+                  id="outlined-basic"
+                  label="국가"
+                  variant="outlined"
+                  value={nationality}
+                  onChange={onChangeNationality}
+                />
+                <Button type="submit" variant="text" color="secondary">
+                  가입하기
+                </Button>
+              </form>
+            </Paper>
           </Modal>
           <Divider sx={{ mt: 0.25, mb: 0.25, marginTop: '-7px' }} />
         </Toolbar>
