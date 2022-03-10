@@ -1,0 +1,52 @@
+{
+  "name": "musit_nft",
+  "version": "1.0.0",
+  "description": "musit_nft",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "nodemon": "nodemon server/app.js",
+    "frontend": "npm run start --prefix client",
+    "dev": "concurrently \"npm start\" \"npm run frontend\"",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webwebweb3/musit_nft.git"
+  },
+  "author": "WebWebWeb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webwebweb3/musit_nft/issues"
+  },
+  "homepage": "https://github.com/webwebweb3/musit_nft#readme",
+  "dependencies": {
+    "concurrently": "^7.0.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "passport": "^0.5.2",
+    "sequelize": "^6.17.0",
+    "sequelize-cli": "^6.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.3",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.5",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
+}
