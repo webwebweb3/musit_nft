@@ -62,30 +62,37 @@ const Layout = () => {
       >
         <Toolbar style={{ padding: 0, marginTop: '-5px' }}>
           <Box style={{ marginTop: '20px' }}>
-            {account === '' ? (
-              <>
-                <Tabs textColor="inherit">
-                  <Tab
-                    sx={{ marginLeft: '1400px' }}
-                    icon={<HeadsetIcon />}
-                    iconPosition="start"
-                    label="STREAMING"
-                  />
-                  <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
-                </Tabs>
+            <>
+              <Tabs textColor="inherit">
+                <Tab
+                  sx={{ marginLeft: '1400px' }}
+                  icon={<HeadsetIcon />}
+                  iconPosition="start"
+                  label="STREAMING"
+                />
+                <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
+              </Tabs>
+              {account === '' ? (
+                <>
+                  <Button
+                    sx={{ marginLeft: 'auto' }}
+                    onClick={getAccount}
+                    variant="contained"
+                  >
+                    Login
+                  </Button>
+                  <Button variant="contained">Register</Button>
+                </>
+              ) : (
                 <Button
                   sx={{ marginLeft: 'auto' }}
                   onClick={getAccount}
                   variant="contained"
                 >
-                  {' '}
-                  Login
+                  로그인완료
                 </Button>
-                <Button variant="contained">Register</Button>
-              </>
-            ) : (
-              <Button>로그인완료</Button>
-            )}
+              )}
+            </>
           </Box>
         </Toolbar>
         <Divider sx={{ mt: 0.25, mb: 0.25, marginTop: '-7px' }} />
