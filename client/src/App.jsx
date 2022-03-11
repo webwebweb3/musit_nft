@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
 import Main from './components/main/Main';
 import Layout from './components/layout/Layout';
 import NotFound from './components/notfound/NotFound';

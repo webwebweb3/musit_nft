@@ -66,7 +66,22 @@ const Layout = () => {
         });
         window.localStorage.setItem('address', accounts[0]);
         setAccount(accounts[0]);
-        console.log(accounts[0]);
+      } else {
+        alert('Install Metamask!');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onClickLogin = async () => {
+    try {
+      if (window.ethereum) {
+        const accounts = await window.ethereum.request({
+          method: 'eth_requestAccounts',
+        });
+        window.localStorage.setItem('address', accounts[0]);
+        setAccount(accounts[0]);
         dispatch(loginUser(accounts[0])).then(response => {
           console.log(response);
           if (response.payload.loginSuccess) {
@@ -128,13 +143,7 @@ const Layout = () => {
       }}
     >
       {/* header */}
-      <AppBar
-        // enableColorOnDark
-        // display="block"
-        // color="inherit"
-        // elevation={0}
-        sx={{ background: '#000' }}
-      >
+      <AppBar sx={{ background: '#000' }}>
         <Toolbar>
           <img width="70px" height="70px" src="/images/logo.png" alt="logo" />
           <Tabs textColor="inherit" value={false}>
@@ -150,7 +159,7 @@ const Layout = () => {
               <Button
                 sx={{ marginLeft: 'auto' }}
                 variant="contained"
-                onClick={getAccount}
+                onClick={onClickLogin}
               >
                 Login
               </Button>
