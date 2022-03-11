@@ -17,7 +17,7 @@ import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../_actions/user_actions';
+import { loginUser, registerUser } from '../../_actions/user_actions';
 
 const style = {
   position: 'absolute',
@@ -66,6 +66,15 @@ const Layout = () => {
         });
         window.localStorage.setItem('address', accounts[0]);
         setAccount(accounts[0]);
+        console.log(accounts[0]);
+        dispatch(loginUser(accounts[0])).then(response => {
+          console.log(response);
+          if (response.payload.loginSuccess) {
+            window.location.replace('/');
+          } else {
+            alert(response.payload.err);
+          }
+        });
       } else {
         alert('Install Metamask!');
       }
@@ -212,7 +221,7 @@ const Layout = () => {
           marginTop: '100px',
         }}
       >
-        <Outlet account={account} />
+        <Outlet />
       </Box>
     </Box>
   );

@@ -6,16 +6,13 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
-
 dotenv.config();
 
 const Router = require('./routes');
-
-passportConfig();
-
 const app = express();
 
 app.set('port', process.env.PORT || 8000);
+passportConfig();
 
 sequelize
   .sync({ force: true })

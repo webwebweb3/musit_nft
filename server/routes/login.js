@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
+//------------------------------------------------
+//               /api/login
+//------------------------------------------------
+
 router.post('/', async (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
@@ -16,7 +20,9 @@ router.post('/', async (req, res, next) => {
         console.error(loginErr);
         return res.status(400).json({ loginSuccess: false });
       }
-      return res.status(200).json({ loginSuccess: true, userId: user.id });
+      return res
+        .status(200)
+        .json({ loginSuccess: true, userId: user.metamask });
     });
   })(req, res, next);
 });
