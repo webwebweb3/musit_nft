@@ -73,10 +73,10 @@ const Layout = () => {
         // display="block"
         // color="inherit"
         // elevation={0}
-        sx={{ background: '#06390' }}
+        sx={{ background: '#000' }}
       >
         <Toolbar>
-          <img src="/images/logo.png" alt="logo" />
+          <img src="/images/logo.png" alt="logo" height="50px" />
           <Tabs textColor="inherit">
             <Tab
               icon={<HeadsetIcon />}
