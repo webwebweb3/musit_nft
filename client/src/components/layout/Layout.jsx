@@ -10,11 +10,14 @@ import {
   Button,
   Modal,
   Typography,
+  Paper,
 } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import TextField from '@mui/material/TextField';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../_actions/user_actions';
 
 const style = {
   position: 'absolute',
@@ -29,10 +32,31 @@ const style = {
 };
 
 const Layout = () => {
+  const dispatch = useDispatch();
+  const [genre, setGenre] = useState('');
+  const [nationality, setNationality] = useState('');
   const [account, setAccount] = useState('');
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // 메타 마스크 회원가입
+  const handleMetaMaskOpen = () => {
+    if (account) {
+      handleRegisterOpen();
+      return;
+    }
+    getAccount();
+    setLoading(true);
+  };
+
+  // 나머지 정보 회원가입
+  const handleRegisterOpen = () => {
+    setLoading(false);
+    setOpen(true);
+  };
+
   const handleClose = () => setOpen(false);
+  const handleLoadingClose = () => setLoading(false);
 
   const getAccount = async () => {
     try {
@@ -55,8 +79,38 @@ const Layout = () => {
     const addr = window.localStorage.getItem('address');
     if (addr !== null) {
       setAccount(addr);
+      // if (!nationality) {  디스패치 예정
+      handleRegisterOpen();
+      // }
     }
   }, [account]);
+
+  const onSubmitForm = e => {
+    e.preventDefault();
+    let dataToSubmit = {
+      metamask: account,
+      genre,
+      nationality,
+    };
+
+    dispatch(registerUser(dataToSubmit)).then(response => {
+      if (response.payload.success) {
+        window.location.replace('/');
+      } else {
+        alert(response.payload.err);
+      }
+    });
+    setGenre('');
+    setNationality('');
+  };
+
+  const onChangeGenre = e => {
+    setGenre(e.target.value);
+  };
+
+  const onChangeNationality = e => {
+    setNationality(e.target.value);
+  };
 
   return (
     <Box
@@ -76,8 +130,8 @@ const Layout = () => {
         sx={{ background: '#000' }}
       >
         <Toolbar>
-          <img src="/images/logo.png" alt="logo" height="50px" />
-          <Tabs textColor="inherit">
+          <img width="70px" height="70px" src="/images/logo.png" alt="logo" />
+          <Tabs textColor="inherit" value={false}>
             <Tab
               icon={<HeadsetIcon />}
               iconPosition="start"
@@ -85,28 +139,70 @@ const Layout = () => {
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
           </Tabs>
-          <Button sx={{ marginLeft: 'auto' }} variant="contained">
-            Login
-          </Button>
-          <Button variant="contained" onClick={handleOpen}>
-            Register
-          </Button>
+          {nationality === '' ? (
+            <>
+              <Button
+                sx={{ marginLeft: 'auto' }}
+                variant="contained"
+                onClick={getAccount}
+              >
+                Login
+              </Button>
+              <Button variant="contained" onClick={handleMetaMaskOpen}>
+                Register
+              </Button>
+            </>
+          ) : (
+            <Button sx={{ marginLeft: 'auto' }} variant="contained">
+              로그인 완료
+            </Button>
+          )}
+
+          <Modal
+            open={loading}
+            onClose={handleLoadingClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Paper sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                메타마스크 로그인 해주세요.
+              </Typography>
+            </Paper>
+          </Modal>
           <Modal
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                장르
-              </Typography>
-              <TextField id="outlined-basic" label="장르" variant="outlined" />
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                국가
-              </Typography>
-              <TextField id="outlined-basic" label="국가" variant="outlined" />
-            </Box>
+            <Paper sx={style}>
+              <form onSubmit={onSubmitForm}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  장르
+                </Typography>
+                <TextField
+                  id="outlined-basic"
+                  label="장르"
+                  variant="outlined"
+                  value={genre}
+                  onChange={onChangeGenre}
+                />
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  국가
+                </Typography>
+                <TextField
+                  id="outlined-basic"
+                  label="국가"
+                  variant="outlined"
+                  value={nationality}
+                  onChange={onChangeNationality}
+                />
+                <Button type="submit" variant="text" color="secondary">
+                  가입하기
+                </Button>
+              </form>
+            </Paper>
           </Modal>
           <Divider sx={{ mt: 0.25, mb: 0.25, marginTop: '-7px' }} />
         </Toolbar>

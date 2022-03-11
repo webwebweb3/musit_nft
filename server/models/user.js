@@ -6,16 +6,16 @@ module.exports = class User extends Sequelize.Model {
       {
         metamask: {
           type: Sequelize.STRING(42),
-          allowNull: true,
+          allowNull: false,
           unique: true,
         },
         nationality: {
-          type: Sequelize.STRING(100),
-          allowNull: true,
+          type: Sequelize.STRING(20), // 숫자로 바꿀 예정
+          allowNull: false,
         },
         genre: {
-          type: Sequelize.STRING(15),
-          allowNull: false,
+          type: Sequelize.STRING(20), // 숫자로 바꿀 예정
+          allowNull: true,
         },
         img: {
           type: Sequelize.STRING(200),
