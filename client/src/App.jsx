@@ -12,7 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/*" element={<Layout />}>
           <Route path="" element={Auth(<Main />)} />
-          <Route path="studio" element={<Studio />} />
+          <Route path="studio" element={Auth(<Studio />)} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

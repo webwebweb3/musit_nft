@@ -3,11 +3,15 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const session = require('express-session');
 const dotenv = require('dotenv');
+const passport = require('passport');
 const { sequelize } = require('./models');
+const passportConfig = require('./passport');
 
 dotenv.config();
 
 const Router = require('./routes');
+
+passportConfig();
 
 const app = express();
 
@@ -37,6 +41,8 @@ app.use(
     },
   }),
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api', Router);
 

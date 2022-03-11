@@ -4,7 +4,7 @@ module.exports = class Artist extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        metamask: {
+        email: {
           type: Sequelize.STRING(42),
           allowNull: true,
           unique: true,
