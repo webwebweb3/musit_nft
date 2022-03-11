@@ -17,7 +17,7 @@ import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../_actions/user_actions';
+import { loginUser, registerUser } from '../../_actions/user_actions';
 
 const style = {
   position: 'absolute',
@@ -74,14 +74,35 @@ const Layout = () => {
     }
   };
 
+  const onClickLogin = async () => {
+    try {
+      if (window.ethereum) {
+        const accounts = await window.ethereum.request({
+          method: 'eth_requestAccounts',
+        });
+        window.localStorage.setItem('address', accounts[0]);
+        setAccount(accounts[0]);
+        dispatch(loginUser(accounts[0])).then(response => {
+          console.log(response);
+          if (response.payload.loginSuccess) {
+            window.location.replace('/');
+          } else {
+            alert(response.payload.err);
+          }
+        });
+      } else {
+        alert('Install Metamask!');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     if (account === '') return;
     const addr = window.localStorage.getItem('address');
     if (addr !== null) {
       setAccount(addr);
-      // if (!nationality) {  디스패치 예정
-      handleRegisterOpen();
-      // }
     }
   }, [account]);
 
@@ -122,13 +143,7 @@ const Layout = () => {
       }}
     >
       {/* header */}
-      <AppBar
-        // enableColorOnDark
-        // display="block"
-        // color="inherit"
-        // elevation={0}
-        sx={{ background: '#000' }}
-      >
+      <AppBar sx={{ background: '#000' }}>
         <Toolbar>
           <img width="70px" height="70px" src="/images/logo.png" alt="logo" />
           <Tabs textColor="inherit" value={false}>
@@ -144,7 +159,7 @@ const Layout = () => {
               <Button
                 sx={{ marginLeft: 'auto' }}
                 variant="contained"
-                onClick={getAccount}
+                onClick={onClickLogin}
               >
                 Login
               </Button>
@@ -215,7 +230,7 @@ const Layout = () => {
           marginTop: '100px',
         }}
       >
-        <Outlet account={account} />
+        <Outlet />
       </Box>
     </Box>
   );

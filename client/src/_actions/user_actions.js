@@ -13,9 +13,12 @@ export const registerUser = dataToSubmit => {
 };
 
 export const loginUser = dataToSubmit => {
-  let request = Axios.post(`/api/login`, dataToSubmit).then(
-    response => response.data,
-  );
+  let data = {
+    metamask: dataToSubmit,
+    password: '1', // 임시 - 수정 예정
+  };
+
+  let request = Axios.post(`/api/login`, data).then(response => response.data);
 
   return {
     type: LOGIN_USER,
