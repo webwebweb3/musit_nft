@@ -59,7 +59,7 @@ const Navbar = () => {
             console.log(response);
             if (response.payload.loginSuccess) {
               setLoginAccount(response.payload.userId);
-              window.location.replace('/');
+              // window.location.replace('/');
             } else {
               alert(response.payload.err);
             }
@@ -73,13 +73,7 @@ const Navbar = () => {
     }
   };
 
-  useEffect(() => {
-    if (account === '') return;
-    const addr = window.localStorage.getItem('address');
-    if (addr !== null) {
-      setAccount(addr);
-    }
-  }, [account]);
+  useEffect(() => {}, []);
 
   return (
     <>
