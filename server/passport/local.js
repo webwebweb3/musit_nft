@@ -7,12 +7,12 @@ module.exports = () => {
   passport.use(
     new LocalStrategy(
       {
-        usernameField: 'email',
+        usernameField: 'metamask',
         passwordField: 'password',
       },
-      async (email, password, done) => {
+      async (metamask, password, done) => {
         try {
-          const exUser = await User.findOne({ where: { email } });
+          const exUser = await User.findOne({ where: { metamask } });
           if (exUser) {
             done(null, exUser);
           } else {

@@ -79,9 +79,6 @@ const Layout = () => {
     const addr = window.localStorage.getItem('address');
     if (addr !== null) {
       setAccount(addr);
-      // if (!nationality) {  디스패치 예정
-      handleRegisterOpen();
-      // }
     }
   }, [account]);
 

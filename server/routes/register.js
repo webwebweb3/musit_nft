@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
     const { metamask, nationality, genre } = req.body;
     const exUser = await User.findOne({
       where: {
-        email: metamask,
+        metamask,
       },
     });
 
@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
     }
 
     await User.create({
-      email: metamask,
+      metamask,
       nationality,
       genre,
     });
