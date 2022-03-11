@@ -131,7 +131,7 @@ const Layout = () => {
       >
         <Toolbar>
           <img width="70px" height="70px" src="/images/logo.png" alt="logo" />
-          <Tabs textColor="inherit" value={false}>
+          <Tabs textColor="#fff" value={false} style={{ alignItems: 'center' }}>
             <Tab
               icon={<HeadsetIcon />}
               iconPosition="start"
@@ -215,7 +215,7 @@ const Layout = () => {
           marginTop: '100px',
         }}
       >
-        <Outlet account={account} />
+        <Outlet account={Outlet} />
       </Box>
     </Box>
   );
