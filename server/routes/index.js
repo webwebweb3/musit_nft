@@ -2,8 +2,16 @@ const express = require('express');
 
 const router = express.Router();
 
-const register = require('./register');
+const registerRouter = require('./register');
+const loginRouter = require('./login');
+const logoutRouter = require('./logout');
+const authRouter = require('./auth');
 
-router.use('/register', register);
+const { auth } = require('../middleware/auth');
+
+router.use('/register', registerRouter);
+router.use('/auth', auth, authRouter);
+router.use('/login', loginRouter);
+router.use('/logout', logoutRouter);
 
 module.exports = router;

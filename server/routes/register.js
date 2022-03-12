@@ -9,9 +9,6 @@ const User = require('../models/user');
 router.post('/', async (req, res) => {
   try {
     const { metamask, nationality, genre } = req.body;
-    console.log(metamask);
-    console.log(nationality);
-    console.log(genre);
     const exUser = await User.findOne({
       where: {
         metamask,
