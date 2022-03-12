@@ -6,10 +6,9 @@ import { useSelector } from 'react-redux';
 
 const Studio = () => {
   const user = useSelector(state => state.user);
-  console.log(user);
+  const account = user.loginSucces.userId;
 
   const [fileUrl, setFileUrl] = useState('');
-  const account = '0x79B9950946fe1099f65A55ff29643eAB52c7003B';
 
   const onClickMint = async () => {
     try {
