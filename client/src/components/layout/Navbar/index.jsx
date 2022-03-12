@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { AppBar, Divider, Toolbar, Tabs, Tab, Button } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import RegisterModal from './RegisterModal';
 import MetamaskModal from './MetamaskModal';
 import { metaMaskUser } from '../../../_actions/metamask_actions';
@@ -11,6 +11,7 @@ import { loginUser } from '../../../_actions/user_actions';
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
   const [nationality, setNationality] = useState('');
   const [account, setAccount] = useState('');
   const [open, setOpen] = useState(false);
@@ -36,11 +37,9 @@ const Navbar = () => {
   const getAccount = async () => {
     try {
       if (window.ethereum) {
-        const accounts = await window.ethereum.request({
-          method: 'eth_requestAccounts',
+        dispatch(metaMaskUser()).then(response => {
+          setAccount(response.payload);
         });
-        window.localStorage.setItem('address', accounts[0]);
-        setAccount(accounts[0]);
       } else {
         alert('Install Metamask!');
       }
@@ -52,19 +51,17 @@ const Navbar = () => {
   const onClickLogin = async () => {
     try {
       if (window.ethereum) {
-        dispatch(metaMaskUser()).then(response => {
-          window.localStorage.setItem('address', response.payload);
-
-          dispatch(loginUser(response.payload)).then(response => {
-            console.log(response);
-            if (response.payload.loginSuccess) {
-              setLoginAccount(response.payload.userId);
-              // window.location.replace('/');
-            } else {
-              alert(response.payload.err);
-            }
-          });
+        // dispatch(metaMaskUser()).then(response => {
+        getAccount();
+        dispatch(loginUser(account)).then(response => {
+          console.log(response);
+          if (response.payload.loginSuccess) {
+            // window.location.replace('/');
+          } else {
+            alert(response.payload.err);
+          }
         });
+        // });
       } else {
         alert('Install Metamask!');
       }
@@ -73,7 +70,10 @@ const Navbar = () => {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setLoginAccount(user);
+    console.log(user);
+  }, [user]);
 
   return (
     <>
@@ -88,7 +88,7 @@ const Navbar = () => {
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
           </Tabs>
-          {loginAccount === '' ? (
+          {Object.keys(loginAccount).length === 0 ? (
             <>
               <Button
                 sx={{ marginLeft: 'auto' }}

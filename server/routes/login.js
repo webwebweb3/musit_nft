@@ -20,9 +20,12 @@ router.post('/', async (req, res, next) => {
         console.error(loginErr);
         return res.status(400).json({ loginSuccess: false });
       }
-      return res
-        .status(200)
-        .json({ loginSuccess: true, userId: user.metamask });
+      return res.status(200).json({
+        loginSuccess: true,
+        userId: user.metamask,
+        userNationality: user.nationality,
+        userGenre: user.genre,
+      });
     });
   })(req, res, next);
 });
