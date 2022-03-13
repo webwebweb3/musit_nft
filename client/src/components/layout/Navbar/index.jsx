@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { AppBar, Divider, Toolbar, Tabs, Tab, Button } from '@mui/material';
+import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import { useDispatch, useSelector } from 'react-redux';
 import RegisterModal from './RegisterModal';
 import MetamaskModal from './MetamaskModal';
 import { loginUser, logoutUser } from '../../../_actions/user_actions';
+import RegisterButton from '../Button';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -72,29 +73,17 @@ const Navbar = () => {
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
           </Tabs>
           {user.isLoggedIn ? (
-            <Button
-              sx={{ marginLeft: 'auto' }}
-              variant="contained"
-              onClick={onClickLogout}
-            >
-              Logout
-            </Button>
+            <div style={{ marginLeft: 'auto' }}>
+              <RegisterButton value="Logout" func={onClickLogout} />
+            </div>
           ) : (
             <>
-              <Button
-                sx={{ marginLeft: 'auto' }}
-                variant="contained"
-                onClick={onClickLogin}
-              >
-                Login
-              </Button>
-              <Button variant="contained" onClick={handleMetaMaskOpen}>
-                Register
-              </Button>
+              <div style={{ marginLeft: 'auto' }}>
+                <RegisterButton value="Login" func={onClickLogin} />
+              </div>
+              <RegisterButton value="Register" func={handleMetaMaskOpen} />
             </>
           )}
-
-          <Divider sx={{ mt: 0.25, mb: 0.25, marginTop: '-7px' }} />
         </Toolbar>
         <MetamaskModal loading={loading} setLoading={setLoading} />
         <RegisterModal setOpen={setOpen} open={open} />
