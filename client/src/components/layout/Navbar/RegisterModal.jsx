@@ -30,13 +30,14 @@ const RegisterModal = ({ open, setOpen }) => {
       e.preventDefault();
 
       let dataToSubmit = {
-        metamask: metamask.account,
+        metamask: metamask.userMetamask,
         genre,
         nationality,
       };
 
       dispatch(registerUser(dataToSubmit)).then(response => {
-        if (response.payload.success) {
+        if (response.request.success) {
+          setOpen(false);
           window.location.replace('/');
         } else {
           alert(response.payload.err);
@@ -45,7 +46,7 @@ const RegisterModal = ({ open, setOpen }) => {
       setGenre('');
       setNationality('');
     },
-    [dispatch, metamask, genre, nationality],
+    [dispatch, metamask, genre, nationality, setOpen],
   );
 
   const onChangeGenre = useCallback(

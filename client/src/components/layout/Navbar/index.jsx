@@ -1,12 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { AppBar, Divider, Toolbar, Tabs, Tab, Button } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import { useDispatch, useSelector } from 'react-redux';
 import RegisterModal from './RegisterModal';
 import MetamaskModal from './MetamaskModal';
-import { metaMaskUser } from '../../../_actions/metamask_actions';
-import { loginUser } from '../../../_actions/user_actions';
+import { loginUser, logoutUser } from '../../../_actions/user_actions';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -27,12 +26,11 @@ const Navbar = () => {
 
   const onClickLogin = useCallback(() => {
     try {
-      console.log(metamask.userMetamask);
       if (metamask.userMetamask) {
         dispatch(loginUser(metamask.userMetamask)).then(response => {
           console.log(response);
           if (response.request.loginSuccess) {
-            // window.location.replace('/');
+            window.location.replace('/');
           } else {
             alert(response.request.err);
           }
@@ -45,11 +43,20 @@ const Navbar = () => {
     }
   }, [dispatch, metamask]);
 
-  useEffect(() => {
-    dispatch(metaMaskUser()).then(response => {
-      console.log(response);
-    });
-  }, [dispatch, user]);
+  const onClickLogout = useCallback(() => {
+    try {
+      dispatch(logoutUser()).then(response => {
+        console.log(response);
+        if (!response.request.loginSuccess) {
+          // window.location.replace('/');
+        } else {
+          alert(response.request.err);
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }, [dispatch]);
 
   return (
     <>
@@ -65,8 +72,12 @@ const Navbar = () => {
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
           </Tabs>
           {user.isLoggedIn ? (
-            <Button sx={{ marginLeft: 'auto' }} variant="contained">
-              로그인 완료
+            <Button
+              sx={{ marginLeft: 'auto' }}
+              variant="contained"
+              onClick={onClickLogout}
+            >
+              Logout
             </Button>
           ) : (
             <>

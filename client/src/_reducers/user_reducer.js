@@ -14,9 +14,10 @@ const initialState = {
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTER_USER:
+      console.log(action);
       return {
         ...state,
-        register: action.payload.success,
+        register: action.request.success,
       };
     case LOGIN_USER:
       return {
@@ -30,6 +31,7 @@ const UserReducer = (state = initialState, action) => {
         userData: action.payload.user,
       };
     case LOGOUT_USER:
+      console.log(action);
       return {
         ...state,
         isLoggedIn: action.loginSuccess,

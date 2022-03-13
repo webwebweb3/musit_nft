@@ -1,9 +1,24 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { metaMaskUser } from '../../_actions/metamask_actions';
 import Navbar from './Navbar';
 
 const Layout = () => {
+  const dispatch = useDispatch();
+  const metamask = useSelector(state => state.metamask);
+
+  useEffect(() => {
+    console.log(metamask.userMetamask);
+    if (metamask.userMetamask) {
+      return;
+    }
+    dispatch(metaMaskUser()).then(response => {
+      console.log(response);
+    });
+  }, [dispatch, metamask]);
+
   return (
     <Box
       sx={{
