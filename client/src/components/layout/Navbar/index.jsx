@@ -3,10 +3,10 @@ import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import { useDispatch, useSelector } from 'react-redux';
-import RegisterModal from './RegisterModal';
-import MetamaskModal from './MetamaskModal';
+import RegisterModal from './Register/RegisterModal';
+import MetamaskModal from './Register/MetamaskModal';
 import { loginUser, logoutUser } from '../../../_actions/user_actions';
-import RegisterButton from '../Button';
+import NavButton from './Register/NavButton';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,6 @@ const Navbar = () => {
     try {
       if (metamask.userMetamask) {
         dispatch(loginUser(metamask.userMetamask)).then(response => {
-          console.log(response);
           if (response.request.loginSuccess) {
             window.location.replace('/');
           } else {
@@ -47,7 +46,6 @@ const Navbar = () => {
   const onClickLogout = useCallback(() => {
     try {
       dispatch(logoutUser()).then(response => {
-        console.log(response);
         if (!response.request.loginSuccess) {
           window.location.replace('/');
         } else {
@@ -63,7 +61,7 @@ const Navbar = () => {
     <>
       <AppBar sx={{ background: '#000' }}>
         <Toolbar>
-          <img width="70px" height="70px" src="/images/logo.png" alt="logo" />
+          <img width="65px" height="65px" src="/images/logoW.png" alt="logo" />
           <Tabs textColor="inherit" value={false}>
             <Tab
               icon={<HeadsetIcon />}
@@ -74,14 +72,14 @@ const Navbar = () => {
           </Tabs>
           {user.isLoggedIn ? (
             <div style={{ marginLeft: 'auto' }}>
-              <RegisterButton value="Logout" func={onClickLogout} />
+              <NavButton value="Logout" func={onClickLogout} />
             </div>
           ) : (
             <>
               <div style={{ marginLeft: 'auto' }}>
-                <RegisterButton value="Login" func={onClickLogin} />
+                <NavButton value="Login" func={onClickLogin} />
               </div>
-              <RegisterButton value="Register" func={handleMetaMaskOpen} />
+              <NavButton value="Register" func={handleMetaMaskOpen} />
             </>
           )}
         </Toolbar>

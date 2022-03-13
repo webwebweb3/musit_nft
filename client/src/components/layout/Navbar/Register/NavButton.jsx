@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { Button } from '@mui/material';
-import { useHover } from '../../../hooks/useHover';
+import propTypes from 'prop-types';
+import { useHover } from '../../../../hooks/useHover';
 
-const RegisterButton = ({ value, func }) => {
+const NavButton = ({ value, func }) => {
   const [isHovering, onMouseOverFunc, onMouseOutFunc] = useHover(false);
 
   const colorWhite = useMemo(
@@ -34,4 +35,9 @@ const RegisterButton = ({ value, func }) => {
   );
 };
 
-export default RegisterButton;
+NavButton.propTypes = {
+  value: propTypes.string.isRequired,
+  func: propTypes.func.isRequired,
+};
+
+export default NavButton;

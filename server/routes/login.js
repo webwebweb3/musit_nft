@@ -7,7 +7,6 @@ const passport = require('passport');
 //------------------------------------------------
 
 router.post('/', async (req, res, next) => {
-  console.log(req.body);
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       console.error(err);
@@ -27,6 +26,7 @@ router.post('/', async (req, res, next) => {
           genre: user.genre,
           id: user.id,
           img: user.img,
+          name: user.name,
           metamask: user.metamask,
           nationality: user.nationality,
           pass: user.pass,

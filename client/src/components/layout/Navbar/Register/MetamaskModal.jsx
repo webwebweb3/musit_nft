@@ -27,7 +27,7 @@ const MetamaskModal = ({ loading, setLoading }) => {
       >
         <Paper sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            메타마스크 로그인 해주세요.
+            메타마스크 로그인 해주세요
           </Typography>
         </Paper>
       </Modal>

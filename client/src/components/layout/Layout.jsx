@@ -10,12 +10,11 @@ const Layout = () => {
   const metamask = useSelector(state => state.metamask);
 
   useEffect(() => {
-    console.log(metamask.userMetamask);
     if (metamask.userMetamask) {
       return;
     }
     dispatch(metaMaskUser()).then(response => {
-      console.log(response);
+      console.log('ok');
     });
   }, [dispatch, metamask]);
 
