@@ -1,7 +1,10 @@
+import React, { useCallback } from 'react';
 import { Button, Modal, Paper, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import propTypes from 'prop-types';
+
+import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../../_actions/user_actions';
+import { useInput } from '../../../hooks/useInput';
 
 const style = {
   position: 'absolute',
@@ -15,44 +18,35 @@ const style = {
   p: 4,
 };
 
-const RegisterModal = ({
-  account,
-  open,
-  setOpen,
-  setNationality,
-  nationality,
-}) => {
+const RegisterModal = ({ open, setOpen }) => {
   const dispatch = useDispatch();
-  const [genre, setGenre] = useState('');
+  const metamask = useSelector(state => state.metamask);
+  const [nationality, onChangeNationality] = useInput('');
+  const [genre, onChangeGenre] = useInput('');
 
-  const handleClose = () => setOpen(false);
+  const handleClose = useCallback(() => setOpen(false), [setOpen]);
 
-  const onSubmitForm = e => {
-    e.preventDefault();
-    let dataToSubmit = {
-      metamask: account,
-      genre,
-      nationality,
-    };
+  const onSubmitForm = useCallback(
+    e => {
+      e.preventDefault();
 
-    dispatch(registerUser(dataToSubmit)).then(response => {
-      if (response.payload.success) {
-        window.location.replace('/');
-      } else {
-        alert(response.payload.err);
-      }
-    });
-    setGenre('');
-    setNationality('');
-  };
+      let dataToSubmit = {
+        metamask: metamask.userMetamask,
+        genre,
+        nationality,
+      };
 
-  const onChangeGenre = e => {
-    setGenre(e.target.value);
-  };
-
-  const onChangeNationality = e => {
-    setNationality(e.target.value);
-  };
+      dispatch(registerUser(dataToSubmit)).then(response => {
+        if (response.request.success) {
+          setOpen(false);
+          window.location.replace('/');
+        } else {
+          alert(response.payload.err);
+        }
+      });
+    },
+    [dispatch, metamask, genre, nationality, setOpen],
+  );
 
   return (
     <>
@@ -92,6 +86,11 @@ const RegisterModal = ({
       </Modal>
     </>
   );
+};
+
+RegisterModal.propTypes = {
+  open: propTypes.bool.isRequired,
+  setOpen: propTypes.func.isRequired,
 };
 
 export default RegisterModal;

@@ -1,79 +1,62 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { AppBar, Divider, Toolbar, Tabs, Tab, Button } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import { useDispatch, useSelector } from 'react-redux';
 import RegisterModal from './RegisterModal';
 import MetamaskModal from './MetamaskModal';
-import { metaMaskUser } from '../../../_actions/metamask_actions';
-import { loginUser } from '../../../_actions/user_actions';
+import { loginUser, logoutUser } from '../../../_actions/user_actions';
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  const [nationality, setNationality] = useState('');
-  const [account, setAccount] = useState('');
+  const metamask = useSelector(state => state.metamask);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [loginAccount, setLoginAccount] = useState('');
 
-  // 메타 마스크 회원가입
-  const handleMetaMaskOpen = () => {
-    if (account) {
-      handleRegisterOpen();
+  // 메타 마스크 회원가입 모달창
+  const handleMetaMaskOpen = useCallback(() => {
+    if (metamask.userMetamask) {
+      setLoading(false);
+      setOpen(true);
       return;
     }
-    getAccount();
     setLoading(true);
-  };
+  }, [metamask]);
 
-  // 나머지 정보 회원가입
-  const handleRegisterOpen = () => {
-    setLoading(false);
-    setOpen(true);
-  };
-
-  const getAccount = async () => {
+  const onClickLogin = useCallback(() => {
     try {
-      if (window.ethereum) {
-        dispatch(metaMaskUser()).then(response => {
-          setAccount(response.payload);
-        });
-      } else {
-        alert('Install Metamask!');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const onClickLogin = async () => {
-    try {
-      if (window.ethereum) {
-        // dispatch(metaMaskUser()).then(response => {
-        getAccount();
-        dispatch(loginUser(account)).then(response => {
+      if (metamask.userMetamask) {
+        dispatch(loginUser(metamask.userMetamask)).then(response => {
           console.log(response);
-          if (response.payload.loginSuccess) {
-            // window.location.replace('/');
+          if (response.request.loginSuccess) {
+            window.location.replace('/');
           } else {
-            alert(response.payload.err);
+            alert(response.request.err);
           }
         });
-        // });
       } else {
         alert('Install Metamask!');
       }
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [dispatch, metamask]);
 
-  useEffect(() => {
-    setLoginAccount(user);
-    console.log(user);
-  }, [user]);
+  const onClickLogout = useCallback(() => {
+    try {
+      dispatch(logoutUser()).then(response => {
+        console.log(response);
+        if (!response.request.loginSuccess) {
+          window.location.replace('/');
+        } else {
+          alert(response.request.err);
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }, [dispatch]);
 
   return (
     <>
@@ -88,7 +71,15 @@ const Navbar = () => {
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
           </Tabs>
-          {Object.keys(loginAccount).length === 0 ? (
+          {user.isLoggedIn ? (
+            <Button
+              sx={{ marginLeft: 'auto' }}
+              variant="contained"
+              onClick={onClickLogout}
+            >
+              Logout
+            </Button>
+          ) : (
             <>
               <Button
                 sx={{ marginLeft: 'auto' }}
@@ -101,22 +92,12 @@ const Navbar = () => {
                 Register
               </Button>
             </>
-          ) : (
-            <Button sx={{ marginLeft: 'auto' }} variant="contained">
-              로그인 완료
-            </Button>
           )}
 
           <Divider sx={{ mt: 0.25, mb: 0.25, marginTop: '-7px' }} />
         </Toolbar>
         <MetamaskModal loading={loading} setLoading={setLoading} />
-        <RegisterModal
-          account={account}
-          setOpen={setOpen}
-          open={open}
-          setNationality={setNationality}
-          nationality={nationality}
-        />
+        <RegisterModal setOpen={setOpen} open={open} />
       </AppBar>
     </>
   );
