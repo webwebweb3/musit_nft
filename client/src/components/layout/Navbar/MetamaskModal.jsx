@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Modal, Paper, Typography } from '@mui/material';
+import propTypes from 'prop-types';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -11,8 +13,9 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
 const MetamaskModal = ({ loading, setLoading }) => {
-  const handleLoadingClose = () => setLoading(false);
+  const handleLoadingClose = useCallback(() => setLoading(false), [setLoading]);
 
   return (
     <>
@@ -30,6 +33,11 @@ const MetamaskModal = ({ loading, setLoading }) => {
       </Modal>
     </>
   );
+};
+
+MetamaskModal.propTypes = {
+  loading: propTypes.bool.isRequired,
+  setLoading: propTypes.func.isRequired,
 };
 
 export default MetamaskModal;

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AppBar, Divider, Toolbar, Tabs, Tab, Button } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
@@ -18,23 +17,7 @@ const Navbar = () => {
   const [loading, setLoading] = useState(false);
   const [loginAccount, setLoginAccount] = useState('');
 
-  // 메타 마스크 회원가입
-  const handleMetaMaskOpen = () => {
-    if (account) {
-      handleRegisterOpen();
-      return;
-    }
-    getAccount();
-    setLoading(true);
-  };
-
-  // 나머지 정보 회원가입
-  const handleRegisterOpen = () => {
-    setLoading(false);
-    setOpen(true);
-  };
-
-  const getAccount = async () => {
+  const getAccount = useCallback(() => {
     try {
       if (window.ethereum) {
         dispatch(metaMaskUser()).then(response => {
@@ -46,29 +29,40 @@ const Navbar = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [dispatch]);
 
-  const onClickLogin = async () => {
+  // 메타 마스크 회원가입 모달창
+  const handleMetaMaskOpen = useCallback(() => {
+    if (account) {
+      setLoading(false);
+      setOpen(true);
+      return;
+    }
+    getAccount();
+    setLoading(true);
+  }, [account, getAccount]);
+
+  const onClickLogin = useCallback(() => {
     try {
       if (window.ethereum) {
-        // dispatch(metaMaskUser()).then(response => {
-        getAccount();
-        dispatch(loginUser(account)).then(response => {
-          console.log(response);
-          if (response.payload.loginSuccess) {
-            // window.location.replace('/');
-          } else {
-            alert(response.payload.err);
-          }
+        dispatch(metaMaskUser()).then(response => {
+          getAccount();
+          dispatch(loginUser(account)).then(response => {
+            console.log(response);
+            if (response.payload.loginSuccess) {
+              // window.location.replace('/');
+            } else {
+              alert(response.payload.err);
+            }
+          });
         });
-        // });
       } else {
         alert('Install Metamask!');
       }
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [dispatch, getAccount, account]);
 
   useEffect(() => {
     setLoginAccount(user);

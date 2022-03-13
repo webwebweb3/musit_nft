@@ -1,5 +1,7 @@
+import React, { useCallback, useState } from 'react';
 import { Button, Modal, Paper, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import propTypes from 'prop-types';
+
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../../_actions/user_actions';
 
@@ -25,34 +27,43 @@ const RegisterModal = ({
   const dispatch = useDispatch();
   const [genre, setGenre] = useState('');
 
-  const handleClose = () => setOpen(false);
+  const handleClose = useCallback(() => setOpen(false), [setOpen]);
 
-  const onSubmitForm = e => {
-    e.preventDefault();
-    let dataToSubmit = {
-      metamask: account,
-      genre,
-      nationality,
-    };
+  const onSubmitForm = useCallback(
+    e => {
+      e.preventDefault();
+      let dataToSubmit = {
+        metamask: account,
+        genre,
+        nationality,
+      };
 
-    dispatch(registerUser(dataToSubmit)).then(response => {
-      if (response.payload.success) {
-        window.location.replace('/');
-      } else {
-        alert(response.payload.err);
-      }
-    });
-    setGenre('');
-    setNationality('');
-  };
+      dispatch(registerUser(dataToSubmit)).then(response => {
+        if (response.payload.success) {
+          window.location.replace('/');
+        } else {
+          alert(response.payload.err);
+        }
+      });
+      setGenre('');
+      setNationality('');
+    },
+    [account, dispatch, genre, nationality, setNationality],
+  );
 
-  const onChangeGenre = e => {
-    setGenre(e.target.value);
-  };
+  const onChangeGenre = useCallback(
+    e => {
+      setGenre(e.target.value);
+    },
+    [setGenre],
+  );
 
-  const onChangeNationality = e => {
-    setNationality(e.target.value);
-  };
+  const onChangeNationality = useCallback(
+    e => {
+      setNationality(e.target.value);
+    },
+    [setNationality],
+  );
 
   return (
     <>
@@ -92,6 +103,14 @@ const RegisterModal = ({
       </Modal>
     </>
   );
+};
+
+RegisterModal.propTypes = {
+  account: propTypes.string.isRequired,
+  open: propTypes.bool.isRequired,
+  setOpen: propTypes.func.isRequired,
+  setNationality: propTypes.func.isRequired,
+  nationality: propTypes.string.isRequired,
 };
 
 export default RegisterModal;
