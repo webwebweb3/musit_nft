@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
 
-const S3Upload = () => {
+const S3Upload = ({ account }) => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState(null);
 
   const handleFileInput = e => {
     const file = e.target.files[0];
@@ -25,12 +26,17 @@ const S3Upload = () => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {}, 3000);
+  }, [uploadedImage]);
+
   const upload = file => {
     const myFile = file;
+    const fileName = `${Date.now()}_${myFile.name}`;
 
     const target = {
       Bucket: 'webwebweb3',
-      Key: 'upload/' + myFile.name,
+      Key: `upload/${fileName}`,
       Body: myFile,
     };
     const creds = {
@@ -54,8 +60,8 @@ const S3Upload = () => {
           setSelectedFile(null);
         }, 2000);
       });
-
       parallelUploads3.done();
+      // setUploadedImage(fileName);
     } catch (e) {
       console.log(e);
     }
@@ -64,6 +70,11 @@ const S3Upload = () => {
     <>
       <input type="file" onChange={handleFileInput} />
       <Button onClick={() => upload(selectedFile)}>Upload</Button>
+      {uploadedImage && (
+        <img
+          src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${uploadedImage}`}
+        />
+      )}
     </>
   );
 };

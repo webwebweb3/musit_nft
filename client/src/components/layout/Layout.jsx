@@ -10,7 +10,6 @@ const Layout = () => {
   const metamask = useSelector(state => state.metamask);
 
   useEffect(() => {
-    console.log(metamask.userMetamask);
     if (metamask.userMetamask) {
       return;
     }
@@ -36,6 +35,7 @@ const Layout = () => {
         style={{
           marginLeft: '20px',
           marginTop: '100px',
+          marginRight: '20px',
         }}
       >
         <Outlet />
