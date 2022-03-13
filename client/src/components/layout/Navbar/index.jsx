@@ -48,7 +48,7 @@ const Navbar = () => {
       dispatch(logoutUser()).then(response => {
         console.log(response);
         if (!response.request.loginSuccess) {
-          // window.location.replace('/');
+          window.location.replace('/');
         } else {
           alert(response.request.err);
         }

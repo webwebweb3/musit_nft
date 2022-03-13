@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { Button, Modal, Paper, TextField, Typography } from '@mui/material';
 import propTypes from 'prop-types';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../../_actions/user_actions';
+import { useInput } from '../../../hooks/useInput';
 
 const style = {
   position: 'absolute',
@@ -20,8 +21,8 @@ const style = {
 const RegisterModal = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const metamask = useSelector(state => state.metamask);
-  const [nationality, setNationality] = useState('');
-  const [genre, setGenre] = useState('');
+  const [nationality, onChangeNationality] = useInput('');
+  const [genre, onChangeGenre] = useInput('');
 
   const handleClose = useCallback(() => setOpen(false), [setOpen]);
 
@@ -43,24 +44,8 @@ const RegisterModal = ({ open, setOpen }) => {
           alert(response.payload.err);
         }
       });
-      setGenre('');
-      setNationality('');
     },
     [dispatch, metamask, genre, nationality, setOpen],
-  );
-
-  const onChangeGenre = useCallback(
-    e => {
-      setGenre(e.target.value);
-    },
-    [setGenre],
-  );
-
-  const onChangeNationality = useCallback(
-    e => {
-      setNationality(e.target.value);
-    },
-    [setNationality],
   );
 
   return (
