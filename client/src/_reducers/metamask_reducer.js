@@ -1,12 +1,12 @@
 import { METAMASK_USER } from '../_actions/types';
 
-const UserReducer = (state = {}, action) => {
+const MetamaskReducer = (state = {}, action) => {
   switch (action.type) {
     case METAMASK_USER:
-      return { ...state, metamask: action.payload };
+      return { ...state, userMetamask: action.userMetamask };
     default:
       return state;
   }
 };
 
-export default UserReducer;
+export default MetamaskReducer;

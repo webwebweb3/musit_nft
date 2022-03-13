@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Button, Modal, Paper, TextField, Typography } from '@mui/material';
 import propTypes from 'prop-types';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../../_actions/user_actions';
 
 const style = {
@@ -17,14 +17,10 @@ const style = {
   p: 4,
 };
 
-const RegisterModal = ({
-  account,
-  open,
-  setOpen,
-  setNationality,
-  nationality,
-}) => {
+const RegisterModal = ({ open, setOpen }) => {
   const dispatch = useDispatch();
+  const metamask = useSelector(state => state.metamask);
+  const [nationality, setNationality] = useState('');
   const [genre, setGenre] = useState('');
 
   const handleClose = useCallback(() => setOpen(false), [setOpen]);
@@ -32,8 +28,9 @@ const RegisterModal = ({
   const onSubmitForm = useCallback(
     e => {
       e.preventDefault();
+
       let dataToSubmit = {
-        metamask: account,
+        metamask: metamask.account,
         genre,
         nationality,
       };
@@ -48,7 +45,7 @@ const RegisterModal = ({
       setGenre('');
       setNationality('');
     },
-    [account, dispatch, genre, nationality, setNationality],
+    [dispatch, metamask, genre, nationality],
   );
 
   const onChangeGenre = useCallback(
@@ -106,11 +103,8 @@ const RegisterModal = ({
 };
 
 RegisterModal.propTypes = {
-  account: propTypes.string.isRequired,
   open: propTypes.bool.isRequired,
   setOpen: propTypes.func.isRequired,
-  setNationality: propTypes.func.isRequired,
-  nationality: propTypes.string.isRequired,
 };
 
 export default RegisterModal;

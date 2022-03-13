@@ -8,21 +8,23 @@ export const registerUser = dataToSubmit => {
 
   return {
     type: REGISTER_USER,
-    payload: request,
+    request,
   };
 };
 
-export const loginUser = dataToSubmit => {
+export const loginUser = async dataToSubmit => {
   let data = {
     metamask: dataToSubmit,
     password: '1', // 임시 - 수정 예정
   };
 
-  let request = Axios.post(`/api/login`, data).then(response => response.data);
+  let request = await Axios.post(`/api/login`, data).then(
+    response => response.data,
+  );
 
   return {
     type: LOGIN_USER,
-    payload: request,
+    request,
   };
 };
 

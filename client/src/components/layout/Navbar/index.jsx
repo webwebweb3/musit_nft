@@ -11,50 +11,31 @@ import { loginUser } from '../../../_actions/user_actions';
 const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  const [nationality, setNationality] = useState('');
-  const [account, setAccount] = useState('');
+  const metamask = useSelector(state => state.metamask);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [loginAccount, setLoginAccount] = useState('');
-
-  const getAccount = useCallback(() => {
-    try {
-      if (window.ethereum) {
-        dispatch(metaMaskUser()).then(response => {
-          setAccount(response.payload);
-        });
-      } else {
-        alert('Install Metamask!');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }, [dispatch]);
 
   // 메타 마스크 회원가입 모달창
   const handleMetaMaskOpen = useCallback(() => {
-    if (account) {
+    if (metamask.userMetamask) {
       setLoading(false);
       setOpen(true);
       return;
     }
-    getAccount();
     setLoading(true);
-  }, [account, getAccount]);
+  }, [metamask]);
 
   const onClickLogin = useCallback(() => {
     try {
-      if (window.ethereum) {
-        dispatch(metaMaskUser()).then(response => {
-          getAccount();
-          dispatch(loginUser(account)).then(response => {
-            console.log(response);
-            if (response.payload.loginSuccess) {
-              // window.location.replace('/');
-            } else {
-              alert(response.payload.err);
-            }
-          });
+      console.log(metamask.userMetamask);
+      if (metamask.userMetamask) {
+        dispatch(loginUser(metamask.userMetamask)).then(response => {
+          console.log(response);
+          if (response.request.loginSuccess) {
+            // window.location.replace('/');
+          } else {
+            alert(response.request.err);
+          }
         });
       } else {
         alert('Install Metamask!');
@@ -62,12 +43,13 @@ const Navbar = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [dispatch, getAccount, account]);
+  }, [dispatch, metamask]);
 
   useEffect(() => {
-    setLoginAccount(user);
-    console.log(user);
-  }, [user]);
+    dispatch(metaMaskUser()).then(response => {
+      console.log(response);
+    });
+  }, [dispatch, user]);
 
   return (
     <>
@@ -82,7 +64,11 @@ const Navbar = () => {
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
           </Tabs>
-          {Object.keys(loginAccount).length === 0 ? (
+          {user.isLoggedIn ? (
+            <Button sx={{ marginLeft: 'auto' }} variant="contained">
+              로그인 완료
+            </Button>
+          ) : (
             <>
               <Button
                 sx={{ marginLeft: 'auto' }}
@@ -95,22 +81,12 @@ const Navbar = () => {
                 Register
               </Button>
             </>
-          ) : (
-            <Button sx={{ marginLeft: 'auto' }} variant="contained">
-              로그인 완료
-            </Button>
           )}
 
           <Divider sx={{ mt: 0.25, mb: 0.25, marginTop: '-7px' }} />
         </Toolbar>
         <MetamaskModal loading={loading} setLoading={setLoading} />
-        <RegisterModal
-          account={account}
-          setOpen={setOpen}
-          open={open}
-          setNationality={setNationality}
-          nationality={nationality}
-        />
+        <RegisterModal setOpen={setOpen} open={open} />
       </AppBar>
     </>
   );
