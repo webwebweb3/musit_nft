@@ -77,10 +77,10 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ background: '#000' }}>
+      <AppBar sx={{ background: '#B3C8FF' }}>
         <Toolbar>
           <img width="70px" height="70px" src="/images/logo.png" alt="logo" />
-          <Tabs textColor="inherit" value={false}>
+          <Tabs textColor="#fff" value={false}>
             <Tab
               icon={<HeadsetIcon />}
               iconPosition="start"

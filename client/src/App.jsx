@@ -3,8 +3,8 @@ import Main from './components/main/Main';
 import Layout from './components/layout/Layout';
 import NotFound from './components/notfound/NotFound';
 import Studio from './components/studio/Studio';
-import MyPage from './components/myPage/myPage';
-import Auth from './hoc/auth';
+import MyPage from './components/Pages/myPage';
+//import Auth from './hoc/auth';
 
 const App = () => {
   return (
