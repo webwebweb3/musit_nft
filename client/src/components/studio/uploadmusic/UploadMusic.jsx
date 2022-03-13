@@ -7,10 +7,10 @@ const UploadMusic = () => {
   return (
     <Box>
       <Box>
-        <IPFSUpload />
+        <S3Upload />
       </Box>
       <Box>
-        <S3Upload />
+        <IPFSUpload />
       </Box>
     </Box>
   );

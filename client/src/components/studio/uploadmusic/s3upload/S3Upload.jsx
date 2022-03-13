@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '@mui/material';
+import { Box, Button, Input } from '@mui/material';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
 
@@ -56,9 +56,6 @@ const S3Upload = ({ account }) => {
 
       parallelUploads3.on('httpUploadProgress', progress => {
         console.log(progress);
-        setTimeout(() => {
-          setSelectedFile(null);
-        }, 2000);
       });
       parallelUploads3.done();
       // setUploadedImage(fileName);
@@ -68,7 +65,10 @@ const S3Upload = ({ account }) => {
   };
   return (
     <>
-      <input type="file" onChange={handleFileInput} />
+      <Box>
+        <Input type="file" onChange={handleFileInput} />
+        {selectedFile && <img src={URL.createObjectURL(selectedFile)} />}
+      </Box>
       <Button onClick={() => upload(selectedFile)}>Upload</Button>
       {uploadedImage && (
         <img
