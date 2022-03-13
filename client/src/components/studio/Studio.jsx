@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { mintMusicTokenContract } from '../../contracts';
 import { FileUpload } from 'react-ipfs-uploader';
 import { useSelector } from 'react-redux';
+import S3Upload from './s3upload/S3Upload';
 
 const Studio = () => {
   const user = useSelector(state => state.user);
@@ -41,6 +42,7 @@ const Studio = () => {
         {fileUrl}
       </a>
       <Button onClick={onClickMint}>Mint</Button>
+      <S3Upload />
     </Box>
   );
 };
