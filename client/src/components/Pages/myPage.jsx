@@ -4,18 +4,20 @@ import Sidebar from '../layout/Sidebar';
 
 const MyPage = () => {
   return (
-    <Box
-      sx={{
-        marginTop: '200px',
-        justifyContent: 'center',
-        alignItems: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <>
       <Sidebar />
-      <Box></Box>
-    </Box>
+      <Box
+        sx={{
+          marginTop: '200px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Box></Box>
+      </Box>
+    </>
   );
 };
 
