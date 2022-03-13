@@ -15,6 +15,7 @@ import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import IconButton from '@mui/material/IconButton';
 import StyledAvatar from './StyledAvatar';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 const Sidebar = () => {
   return (
@@ -45,6 +46,14 @@ const Sidebar = () => {
                   <TokenIcon />
                 </ListItemIcon>
                 <ListItemText primary="My NFT" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AutoAwesomeIcon />
+                </ListItemIcon>
+                <ListItemText primary="내 스튜디오" />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>

@@ -13,9 +13,8 @@ const MyPage = () => {
         flexDirection: 'column',
       }}
     >
-      <Box>
-        <Sidebar />
-      </Box>
+      <Sidebar />
+      <Box></Box>
     </Box>
   );
 };
