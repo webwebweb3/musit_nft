@@ -35,6 +35,7 @@ const Layout = () => {
         style={{
           marginLeft: '20px',
           marginTop: '100px',
+          marginRight: '20px',
         }}
       >
         <Outlet />
