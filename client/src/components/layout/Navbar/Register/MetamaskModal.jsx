@@ -1,21 +1,24 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Modal, Paper, Typography } from '@mui/material';
 import propTypes from 'prop-types';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
 const MetamaskModal = ({ loading, setLoading }) => {
   const handleLoadingClose = useCallback(() => setLoading(false), [setLoading]);
+
+  const style = useMemo(
+    () => ({
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 400,
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      boxShadow: 24,
+      p: 4,
+    }),
+    [],
+  );
 
   return (
     <>
