@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Dialog, Paper, Tab, Tabs, TextField, Typography } from '@mui/material';
+import { Dialog, Paper, Tab, Tabs, TextField } from '@mui/material';
 import propTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,12 +7,12 @@ import {
   registerArtist,
   registerUser,
 } from '../../../../_actions/user_actions';
-import { useInput } from '../../../../hooks/useInput';
-import { Box } from '@mui/system';
+import { useGenreInput, useInput } from '../../../../hooks/useInput';
 import { useTheme } from '@emotion/react';
-import RegisterButton from './RegisterButton';
+import RegisterButton from '../Register/button/RegisterButton';
 import UnstyledSelectsMultiple from './mui/SelectNationality';
 import MultipleSelectChip from './mui/ChipGenre';
+import TabPanel from './mui/TanPanel';
 
 const style = {
   position: 'absolute',
@@ -24,35 +24,13 @@ const style = {
   boxShadow: 24,
 };
 
-const TabPanel = props => {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`action-tabpanel-${index}`}
-      aria-labelledby={`action-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </Typography>
-  );
-};
-
-TabPanel.propTypes = {
-  children: propTypes.node,
-  index: propTypes.number.isRequired,
-  value: propTypes.number.isRequired,
-};
-
 const RegisterModal = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const metamask = useSelector(state => state.metamask);
   const [nationality, onChangeNationality] = useState(0);
-  const [genre, setGenre] = useState([]);
+  const [genre, onChangeGenre] = useGenreInput([]);
+
   const [artist, onChangeArtist] = useInput('');
   const [value, setValue] = useState(0);
 
@@ -65,16 +43,6 @@ const RegisterModal = ({ open, setOpen }) => {
   };
 
   const handleClose = useCallback(() => setOpen(false), [setOpen]);
-
-  const onChangeGenre = event => {
-    const {
-      target: { value },
-    } = event;
-    setGenre(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
 
   const onSubmitUserForm = useCallback(
     e => {
