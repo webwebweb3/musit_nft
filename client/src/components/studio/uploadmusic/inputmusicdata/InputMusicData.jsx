@@ -1,5 +1,5 @@
 import { Box, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
@@ -9,38 +9,45 @@ import axios from 'axios';
 const currencies = Util.utilCurrencies;
 
 const InputMusicData = ({ account }) => {
+  const [artistName, setArtistName] = useState('');
   const [currency, setCurrency] = useState('balad');
 
   const userArtist = async () => {
-    console.log('1414');
-    const request = await axios.get(`/api/uploadmusic/${account}`);
-    console.log(request);
+    //TODO:const request =
+    await axios
+      .get(`/api/uploadmusic/${account}`)
+      .then(res => setArtistName(res.data.artistName));
   };
   userArtist();
+  useEffect(() => {}, [artistName]);
 
-  const handleChange = event => {
+  const onHandleChangeGenre = event => {
     setCurrency(event.target.value);
   };
 
   return (
     <Box>
-      <FormControl sx={{ width: '25ch' }}>
-        <TextField id="standardc" label="타이틀" variant="standard" />
+      <FormControl sx={{ width: '40ch' }} margin="normal">
+        <TextField id="standardc" label="타이틀" variant="standard" required />
         <TextField
           id="standard-basic"
           label="아티스트"
           variant="standard"
-          value={account}
+          value={artistName}
           inputProps={{ readOnly: true }}
+          required
         />
-        <TextField id="standard-basic" label="Standdard" variant="standard" />
+        <TextField id="standard-basic" label="앨범명" variant="standard" />
+        <TextField id="standard-basic" label="발매년도" variant="standard" />
+        <TextField id="standard-basic" label="작곡가" variant="standard" />
+        <TextField id="standard-basic" label="작사가" variant="standard" />
 
         <TextField
           id="outlined-select-currency"
           select
           label="Genre"
           value={currency}
-          onChange={handleChange}
+          onChange={onHandleChangeGenre}
           helperText="Please select music genre"
         >
           {currencies.map(option => (
@@ -69,6 +76,6 @@ export default InputMusicData;
 
 //   return <FormHelperText>{helperText}</FormHelperText>;
 // }
-{
-  /* <MyFormHelperText /> */
-}
+// {
+//   /* <MyFormHelperText /> */
+// }

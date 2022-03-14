@@ -14,19 +14,22 @@ router.get('/:id', async (req, res) => {
         metamask: user,
       },
     });
-    console.log('ex?', exUser);
     if (exUser) {
-      return res.json({ success: false });
+      return res.json({ artistName: exUser.dataValues.name });
     }
   } catch (error) {
     console.error(error);
   }
 });
 
-// router.post('/', async (req, res) => {
-//   try {
-//     // const
-//   } catch (error) {}
-// });
+router.post('/', async (req, res) => {
+  try {
+    const { a } = req.body;
+    console.log(a);
+    return res.json({ uploadSuccess: true });
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 module.exports = router;
