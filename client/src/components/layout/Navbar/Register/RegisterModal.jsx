@@ -11,8 +11,8 @@ import { useInput } from '../../../../hooks/useInput';
 import { Box } from '@mui/system';
 import { useTheme } from '@emotion/react';
 import RegisterButton from './RegisterButton';
-import UnstyledSelectsMultiple from './SelectNationality';
-import MultipleSelectChip from './ChipGenre';
+import UnstyledSelectsMultiple from './mui/SelectNationality';
+import MultipleSelectChip from './mui/ChipGenre';
 
 const style = {
   position: 'absolute',
