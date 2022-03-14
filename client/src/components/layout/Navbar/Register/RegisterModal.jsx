@@ -44,11 +44,12 @@ const RegisterModal = ({ open, setOpen }) => {
       };
 
       dispatch(registerUser(dataToSubmit)).then(response => {
+        console.log(response);
         if (response.request.success) {
           setOpen(false);
           window.location.replace('/');
         } else {
-          alert(response.payload.err);
+          alert(response.request.message);
         }
       });
     },
@@ -71,7 +72,7 @@ const RegisterModal = ({ open, setOpen }) => {
           setOpen(false);
           window.location.replace('/');
         } else {
-          alert(response.payload.err);
+          alert(response.request.message);
         }
       });
     },

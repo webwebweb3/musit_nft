@@ -32,7 +32,7 @@ const Navbar = () => {
           if (response.request.loginSuccess) {
             window.location.replace('/');
           } else {
-            alert(response.request.err);
+            alert(response.request.info.message);
           }
         });
       } else {

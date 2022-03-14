@@ -20,6 +20,7 @@ module.exports = () => {
             if (exArtist) {
               done(null, exArtist);
             } else {
+              console.log(111);
               done(null, false, { message: '가입되지 않은 회원입니다' });
             }
           }

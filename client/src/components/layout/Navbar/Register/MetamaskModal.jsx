@@ -3,7 +3,10 @@ import { Modal, Paper, Typography } from '@mui/material';
 import propTypes from 'prop-types';
 
 const MetamaskModal = ({ loading, setLoading }) => {
-  const handleLoadingClose = useCallback(() => setLoading(false), [setLoading]);
+  const handleLoadingClose = useCallback(() => {
+    setLoading(false);
+    window.location.reload();
+  }, [setLoading]);
 
   const style = useMemo(
     () => ({
