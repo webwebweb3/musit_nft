@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { Artist } = require('../models');
-console.log('라우터 밖');
+const { Artist, Music } = require('../models');
+
 //------------------------------------------------
 //               /api/uploadmusic
 //------------------------------------------------
 router.get('/:id', async (req, res) => {
   try {
     const user = req.params.id;
-    console.log('user', user);
     const exUser = await Artist.findOne({
       where: {
         metamask: user,
@@ -24,8 +23,18 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { a } = req.body;
-    console.log(a);
+    const { title, artist, albumName, release, songwriter, lyricist, genre } =
+      req.body;
+    await Music.create({
+      title,
+      artist,
+      albumName,
+      release,
+      songwriter,
+      lyricist,
+      genre,
+    });
+
     return res.json({ uploadSuccess: true });
   } catch (error) {
     console.error(error);

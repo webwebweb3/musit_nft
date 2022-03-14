@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import S3Upload from './s3upload/S3Upload';
 import IPFSUpload from './ipfsupload/IPFSUpload';
 import InputMusicData from './inputmusicdata/InputMusicData';
@@ -8,13 +8,13 @@ import axios from 'axios';
 
 const UploadMusic = () => {
   const user = useSelector(state => state.user);
+  const [stateValues, setStateValues] = useState({});
+  console.log('state', stateValues);
   const account = user.loginSucces.userId;
 
   const onSubmitForm = async e => {
     e.preventDefault();
-    let dataToSubmit = {
-      a: 'a',
-    };
+    let dataToSubmit = stateValues;
     //TODO: let request =
     await axios
       .post(`/api/uploadmusic`, dataToSubmit)
@@ -30,7 +30,11 @@ const UploadMusic = () => {
           <IPFSUpload account={account} />
         </Box>
         <Box>
-          <InputMusicData account={account} />
+          <InputMusicData
+            account={account}
+            stateValues={stateValues}
+            onChange={value => setStateValues({ ...stateValues, ...value })}
+          />
         </Box>
         <Box>
           <Button type="submit" variant="text">
