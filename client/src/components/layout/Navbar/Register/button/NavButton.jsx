@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Button } from '@mui/material';
 import propTypes from 'prop-types';
-import { useHover } from '../../../../hooks/useHover';
+import { useHover } from '../../../../../hooks/useHover';
 
 const NavButton = ({ value, func }) => {
   const [isHovering, onMouseOverFunc, onMouseOutFunc] = useHover(false);

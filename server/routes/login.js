@@ -10,17 +10,17 @@ router.post('/', async (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       console.error(err);
-      res.status(401).json({ loginSuccess: false });
+      res.json({ loginSuccess: false });
     }
     if (info) {
-      return res.status(401).json({ loginSuccess: false, info });
+      return res.json({ loginSuccess: false, info });
     }
     return req.login(user, async loginErr => {
       if (loginErr) {
         console.error(loginErr);
-        return res.status(400).json({ loginSuccess: false });
+        return res.json({ loginSuccess: false });
       }
-      return res.status(200).json({
+      return res.json({
         loginSuccess: true,
         userData: {
           genre: user.genre,
