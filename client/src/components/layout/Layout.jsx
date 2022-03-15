@@ -32,6 +32,7 @@ const Layout = () => {
       <Navbar />
 
       {/* main content */}
+
       <Box
         style={{
           marginLeft: '20px',

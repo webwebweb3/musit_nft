@@ -46,7 +46,7 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ background: '#000' }}>
+      <AppBar sx={{ background: 'linear-gradient(90deg, #0546d6, #3f89fc)' }}>
         <Toolbar>
           <img width="65px" height="65px" src="/images/logoW.png" alt="logo" />
           <Tabs textColor="inherit" value={false}>

@@ -1,6 +1,6 @@
 import { Box, Button } from '@mui/material';
 import React, { useState } from 'react';
-import { mintMusicTokenContract } from '../../contracts';
+import { mintMusicTokenContract } from '../../../contracts';
 import { useSelector } from 'react-redux';
 import S3Upload from './uploadmusic/s3upload/S3Upload';
 import { Link } from 'react-router-dom';
