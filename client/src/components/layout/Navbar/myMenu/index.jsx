@@ -12,8 +12,11 @@ import {
 import { LibraryMusic, QueueMusic } from '@mui/icons-material';
 import LogoutButton from './LogoutButton';
 import MyPageButton from './MyPageButton';
+import { useSelector } from 'react-redux';
 
 const ProfileButton = () => {
+  const { userData } = useSelector(state => state.user);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -37,7 +40,9 @@ const ProfileButton = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar
+              src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
+            />
           </IconButton>
         </Tooltip>
       </Box>

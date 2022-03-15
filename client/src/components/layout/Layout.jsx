@@ -28,11 +28,10 @@ const Layout = () => {
         borderColor: 'divider',
       }}
     >
-      {/* header */}
+      {/* sidebar */}
       <Navbar />
 
-      {/* main content */}
-
+      {/* MyPage content */}
       <Box
         style={{
           marginLeft: '20px',

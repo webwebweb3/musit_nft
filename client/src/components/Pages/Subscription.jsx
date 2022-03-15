@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import Sidebar from '../layout/Sidebar';
 
 const Subscription = () => {
   return (

@@ -7,7 +7,7 @@ import RegisterModal from './Register/RegisterModal';
 import MetamaskModal from './Register/MetamaskModal';
 import { loginUser } from '../../../_actions/user_actions';
 import NavButton from './Register/button/NavButton';
-import ProfileButton from './Register/myMenu';
+import ProfileButton from './myMenu';
 
 const Navbar = () => {
   const dispatch = useDispatch();
