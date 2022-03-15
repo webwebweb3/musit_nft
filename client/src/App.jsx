@@ -15,11 +15,10 @@ const App = () => {
         <Route path="/*" element={<Layout />}>
           <Route path="" element={<Home />} />
           <Route path="mypage/*" element={<MyPage />}>
-            <Route path="" element={<MyInfo />} />
+            <Route path="infoedit" element={<MyInfo />} />
           </Route>
           <Route path="studio" element={<Studio />} />
           <Route path="subscription" element={<Subscription />} />
-          <Route path="home" element={<Home />} />
           <Route path="studio/uploadmusic" element={<UploadMusic />} />
           <Route path="*" element={<NotFound />} />
         </Route>

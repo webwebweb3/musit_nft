@@ -8,7 +8,7 @@ import { height } from '@mui/system';
 
 const Studio = () => {
   const user = useSelector(state => state.user);
-  const account = user.loginSucces.userId;
+  const account = user.userData.userId;
 
   const onClickMint = async () => {
     try {
