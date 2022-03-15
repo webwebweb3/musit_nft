@@ -10,16 +10,12 @@ module.exports = class Artist extends Sequelize.Model {
           unique: true,
         },
         name: {
-          type: Sequelize.STRING(15),
+          type: Sequelize.STRING(16),
           allowNull: false,
         },
         nationality: {
-          type: Sequelize.CHAR(2),
+          type: Sequelize.INTEGER,
           allowNull: true,
-        },
-        genre: {
-          type: Sequelize.CHAR(15),
-          allowNull: false,
         },
         img: {
           type: Sequelize.STRING(200),
@@ -51,5 +47,6 @@ module.exports = class Artist extends Sequelize.Model {
       as: 'Subscribing',
       through: 'Subscribe',
     });
+    db.Artist.belongsToMany(db.Genre, { through: 'ArtistGenre' });
   }
 };

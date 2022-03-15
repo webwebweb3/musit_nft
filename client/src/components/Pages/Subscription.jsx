@@ -2,18 +2,9 @@ import { Box } from '@mui/material';
 import React from 'react';
 import Sidebar from '../layout/Sidebar';
 
-const MyPage = () => {
+const Subscription = () => {
   return (
     <>
-      <Box
-        sx={{
-          marginTop: '80px',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <Sidebar />
-      </Box>
       <Box
         sx={{
           marginTop: '200px',
@@ -29,4 +20,4 @@ const MyPage = () => {
   );
 };
 
-export default MyPage;
+export default Subscription;

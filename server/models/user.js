@@ -10,19 +10,15 @@ module.exports = class User extends Sequelize.Model {
           unique: true,
         },
         nationality: {
-          type: Sequelize.STRING(20), // 숫자로 바꿀 예정
+          type: Sequelize.INTEGER,
           allowNull: false,
-        },
-        genre: {
-          type: Sequelize.STRING(20), // 숫자로 바꿀 예정
-          allowNull: true,
         },
         img: {
           type: Sequelize.STRING(200),
           allowNull: true,
         },
         pass: {
-          type: Sequelize.STRING(200),
+          type: Sequelize.INTEGER,
           allowNull: true,
         },
       },
@@ -41,5 +37,6 @@ module.exports = class User extends Sequelize.Model {
 
   static associate(db) {
     db.User.hasMany(db.Artist);
+    db.User.belongsToMany(db.Genre, { through: 'UserGenre' });
   }
 };

@@ -22,9 +22,16 @@ router.post('/', async (req, res, next) => {
       }
       return res.status(200).json({
         loginSuccess: true,
-        userId: user.metamask,
-        userNationality: user.nationality,
-        userGenre: user.genre,
+        userData: {
+          genre: user.genre,
+          id: user.id,
+          img: user.img,
+          name: user.name,
+          metamask: user.metamask,
+          nationality: user.nationality,
+          pass: user.pass,
+          createdAt: user.createdAt,
+        },
       });
     });
   })(req, res, next);

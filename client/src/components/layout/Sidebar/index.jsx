@@ -16,6 +16,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import IconButton from '@mui/material/IconButton';
 import StyledAvatar from './StyledAvatar';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const Sidebar = () => {
   return (
@@ -29,8 +30,18 @@ const Sidebar = () => {
           alignItems: 'flex-end',
         }}
       >
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
         <nav aria-label="사이드바">
-          <Divider sx={{ mt: 0.25, mb: 0.25, marginTop: '-7px' }} />
           <List>
             <ListItem disablePadding>
               <ListItemButton>

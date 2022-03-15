@@ -8,7 +8,9 @@ const router = express.Router();
 router.get('/', (req, res) => {
   req.logout();
   req.session.destroy();
-  res.send('ok');
+  return res.status(200).json({
+    loginSuccess: false,
+  });
 });
 
 module.exports = router;

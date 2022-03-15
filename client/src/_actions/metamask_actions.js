@@ -7,6 +7,6 @@ export const metaMaskUser = async () => {
 
   return {
     type: METAMASK_USER,
-    payload: request[0],
+    userMetamask: request[0],
   };
 };

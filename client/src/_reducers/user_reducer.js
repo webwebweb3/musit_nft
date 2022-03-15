@@ -5,16 +5,36 @@ import {
   LOGOUT_USER,
 } from '../_actions/types';
 
-const UserReducer = (state = {}, action) => {
+const initialState = {
+  isLoggedIn: false,
+  register: false,
+  userData: null,
+};
+
+const UserReducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTER_USER:
-      return { ...state, register: action.payload };
+      return {
+        ...state,
+        register: action.request.success,
+      };
     case LOGIN_USER:
-      return { ...state, loginSucces: action.payload };
+      return {
+        ...state,
+        isLoggedIn: action.request.loginSuccess,
+        userData: action.request.userData,
+      };
     case AUTH_USER:
-      return { ...state, userData: action.payload };
+      return {
+        ...state.user,
+        userData: action.payload.user,
+      };
     case LOGOUT_USER:
-      return { ...state };
+      return {
+        ...state,
+        isLoggedIn: action.loginSuccess,
+        userData: null,
+      };
     default:
       return state;
   }
