@@ -19,7 +19,7 @@ export const homeObjTwo = {
     '전세계 스트리밍 서비스로 모든 아티스트 음원을 플레이스트, 좋아하는 아티스트를 저장함으로서 감상이 가능합니다.',
   buttonLabel: '스트리밍 바로가기',
   imgStart: '',
-  img: 'HomePage/bgimg.jpg',
+  img: 'images/bgimg.jpg',
   alt: 'Vault',
 };
 
@@ -33,6 +33,6 @@ export const homeObjThree = {
     '아티스트의 동의 하에 모든 음원은 NFT 로 유통이 되며 구매/판매 및 경매를 할 수 있습니다.',
   buttonLabel: 'NFT 바로가기',
   imgStart: 'start',
-  img: './bgimg.jpg',
+  img: 'bgimg.jpg',
   alt: 'Vault',
 };
