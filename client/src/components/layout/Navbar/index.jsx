@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RegisterModal from './Register/RegisterModal';
 import MetamaskModal from './Register/MetamaskModal';
 import { loginUser, logoutUser } from '../../../_actions/user_actions';
-import NavButton from './Register/NavButton';
+import NavButton from './Register/button/NavButton';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Navbar = () => {
           if (response.request.loginSuccess) {
             window.location.replace('/');
           } else {
-            alert(response.request.err);
+            alert(response.request.info.message);
           }
         });
       } else {

@@ -48,5 +48,9 @@ module.exports = class Artist extends Sequelize.Model {
       through: 'Subscribe',
     });
     db.Artist.belongsToMany(db.Genre, { through: 'ArtistGenre' });
+
+    // chs
+    // music db 연결
+    db.Artist.hasMany(db.Music);
   }
 };

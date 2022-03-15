@@ -10,3 +10,17 @@ export const useInput = (initValue = null) => {
   );
   return [value, handler];
 };
+
+export const useGenreInput = (initValue = null) => {
+  const [value, setValue] = useState(initValue);
+  const handler = event => {
+    const {
+      target: { value },
+    } = event;
+    setValue(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+  return [value, handler];
+};

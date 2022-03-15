@@ -16,7 +16,7 @@ router.post('/user', async (req, res) => {
     });
 
     if (exUser) {
-      return res.json({ success: false });
+      return res.json({ success: false, message: '가입된 회원입니다' });
     }
 
     const user = await User.create({
@@ -53,7 +53,7 @@ router.post('/artist', async (req, res) => {
     });
 
     if (exUser) {
-      return res.json({ success: false });
+      return res.json({ success: false, message: '가입된 회원입니다' });
     }
 
     const artist = await Artist.create({
@@ -73,7 +73,7 @@ router.post('/artist', async (req, res) => {
       await artist.addGenre(result.map(r => r[0]));
     }
 
-    return res.status(200).json({
+    return res.json({
       success: true,
     });
   } catch (error) {
