@@ -2,10 +2,11 @@ import React, { useCallback, useState } from 'react';
 import { Dialog, Tab, Tabs, TextField } from '@mui/material';
 import propTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
-import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../../../_actions/user_actions';
-import { useGenreInput, useInput } from '../../../../hooks/useInput';
+import { useDispatch } from 'react-redux';
 import { useTheme } from '@emotion/react';
+import { registerUser } from '../../../../_actions/user_actions';
+import { metaMaskUser } from '../../../../_actions/metamask_actions';
+import { useGenreInput, useInput } from '../../../../hooks/useInput';
 import RegisterButton from '../Register/button/RegisterButton';
 import UnstyledSelectsMultiple from './mui/SelectNationality';
 import MultipleSelectChip from './mui/ChipGenre';
@@ -14,7 +15,6 @@ import TabPanel from './mui/TanPanel';
 const RegisterModal = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
-  const metamask = useSelector(state => state.metamask);
   const [artist, onChangeArtist] = useInput('');
   const [genre, onChangeGenre] = useGenreInput([]);
   const [nationality, onChangeNationality] = useState(0);
@@ -33,47 +33,52 @@ const RegisterModal = ({ open, setOpen }) => {
   const onSubmitUserForm = useCallback(
     e => {
       e.preventDefault();
+      dispatch(metaMaskUser()).then(response => {
+        let dataToSubmit = {
+          metamask: response.userMetamask,
+          genre,
+          nationality,
+        };
 
-      let dataToSubmit = {
-        metamask: metamask.userMetamask,
-        genre,
-        nationality,
-      };
-
-      dispatch(registerUser(dataToSubmit)).then(response => {
-        if (response.request.success) {
-          setOpen(false);
-          window.location.replace('/');
-        } else {
-          alert(response.request.message);
-        }
+        dispatch(metaMaskUser()).then(response => {
+          console.log(response);
+          dispatch(registerUser(dataToSubmit)).then(response => {
+            if (response.request.success) {
+              setOpen(false);
+              window.location.replace('/');
+            } else {
+              alert(response.request.message);
+            }
+          });
+        });
       });
     },
-    [dispatch, metamask, genre, nationality, setOpen],
+    [dispatch, genre, nationality, setOpen],
   );
 
   const onSubmitArtistForm = useCallback(
     e => {
       e.preventDefault();
+      dispatch(metaMaskUser()).then(response => {
+        let dataToSubmit = {
+          metamask: response.userMetamask,
+          name: artist,
+          genre,
+          nationality,
+          role: '1',
+        };
 
-      let dataToSubmit = {
-        metamask: metamask.userMetamask,
-        name: artist,
-        genre,
-        nationality,
-        role: '1',
-      };
-
-      dispatch(registerUser(dataToSubmit)).then(response => {
-        if (response.request.success) {
-          setOpen(false);
-          window.location.replace('/');
-        } else {
-          alert(response.request.message);
-        }
+        dispatch(registerUser(dataToSubmit)).then(response => {
+          if (response.request.success) {
+            setOpen(false);
+            window.location.replace('/');
+          } else {
+            alert(response.request.message);
+          }
+        });
       });
     },
-    [dispatch, metamask, artist, genre, nationality, setOpen],
+    [dispatch, artist, genre, nationality, setOpen],
   );
 
   return (
