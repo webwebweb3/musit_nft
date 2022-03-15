@@ -9,6 +9,7 @@ const Layout = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // 다른 방법 생각중...
     try {
       dispatch(metaMaskUser()).then(response => {
         console.log('ok');

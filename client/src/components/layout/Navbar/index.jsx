@@ -5,8 +5,9 @@ import TokenIcon from '@mui/icons-material/Token';
 import { useDispatch, useSelector } from 'react-redux';
 import RegisterModal from './Register/RegisterModal';
 import MetamaskModal from './Register/MetamaskModal';
-import { loginUser, logoutUser } from '../../../_actions/user_actions';
+import { loginUser } from '../../../_actions/user_actions';
 import NavButton from './Register/button/NavButton';
+import ProfileButton from './Register/myMenu';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -43,20 +44,6 @@ const Navbar = () => {
     }
   }, [dispatch, metamask]);
 
-  const onClickLogout = useCallback(() => {
-    try {
-      dispatch(logoutUser()).then(response => {
-        if (!response.request.loginSuccess) {
-          window.location.replace('/');
-        } else {
-          alert(response.request.err);
-        }
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }, [dispatch]);
-
   return (
     <>
       <AppBar sx={{ background: '#000' }}>
@@ -72,7 +59,7 @@ const Navbar = () => {
           </Tabs>
           {user.isLoggedIn ? (
             <div style={{ marginLeft: 'auto' }}>
-              <NavButton value="Logout" func={onClickLogout} />
+              <ProfileButton />
             </div>
           ) : (
             <>
