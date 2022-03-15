@@ -7,6 +7,7 @@ import Subscription from './components/Pages/Subscription';
 import Studio from './components/Pages/studio/Studio';
 import UploadMusic from './components/Pages/studio/uploadmusic/UploadMusic';
 import MyInfo from './components/Pages/mypage/MyInfo';
+import DashBoard from './components/Pages/mypage/DashBoard';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="" element={<Home />} />
           <Route path="mypage/*" element={<MyPage />}>
             <Route path="infoedit" element={<MyInfo />} />
+            <Route path="dashboard" element={<DashBoard />} />
           </Route>
           <Route path="studio" element={<Studio />} />
           <Route path="subscription" element={<Subscription />} />
