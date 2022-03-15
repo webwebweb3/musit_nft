@@ -1,14 +1,8 @@
 import Axios from 'axios';
-import {
-  LOGIN_USER,
-  REGISTER_USER,
-  AUTH_USER,
-  LOGOUT_USER,
-  REGISTER_ARTIST,
-} from './types';
+import { LOGIN_USER, REGISTER_USER, AUTH_USER, LOGOUT_USER } from './types';
 
 export const registerUser = async dataToSubmit => {
-  let request = await Axios.post(`/api/register/user`, dataToSubmit).then(
+  let request = await Axios.post(`/api/register`, dataToSubmit).then(
     response => response.data,
   );
 
@@ -48,17 +42,6 @@ export const logoutUser = async () => {
 
   return {
     type: LOGOUT_USER,
-    request,
-  };
-};
-
-export const registerArtist = async dataToSubmit => {
-  let request = await Axios.post(`/api/register/artist`, dataToSubmit).then(
-    response => response.data,
-  );
-
-  return {
-    type: REGISTER_ARTIST,
     request,
   };
 };

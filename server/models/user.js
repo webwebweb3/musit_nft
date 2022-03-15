@@ -9,6 +9,10 @@ module.exports = class User extends Sequelize.Model {
           allowNull: false,
           unique: true,
         },
+        name: {
+          type: Sequelize.STRING(16),
+          allowNull: true,
+        },
         nationality: {
           type: Sequelize.INTEGER,
           allowNull: false,
@@ -21,6 +25,11 @@ module.exports = class User extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
+        role: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          defaultValue: '0',
+        },
       },
       {
         sequelize,
@@ -28,7 +37,7 @@ module.exports = class User extends Sequelize.Model {
         underscored: false,
         modelName: 'User',
         tableName: 'users',
-        paranoid: true, // 삭제한척
+        paranoid: true,
         charset: 'utf8',
         collate: 'utf8_general_ci',
       },
@@ -36,7 +45,17 @@ module.exports = class User extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.User.hasMany(db.Artist);
+    db.User.belongsToMany(db.User, {
+      foreignKey: 'subscribeId',
+      as: 'Subscribers',
+      through: 'Subscribe',
+    });
+    db.User.belongsToMany(db.User, {
+      foreignKey: 'subscribeId',
+      as: 'Subscribing',
+      through: 'Subscribe',
+    });
     db.User.belongsToMany(db.Genre, { through: 'UserGenre' });
+    db.User.hasMany(db.Music);
   }
 };

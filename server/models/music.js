@@ -39,7 +39,7 @@ module.exports = class Music extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.Music.belongsToMany(db.Artist, {
+    db.Music.belongsToMany(db.User, {
       foreignKey: 'subscribeId',
       as: 'Subscribers',
       through: 'Subscribe',

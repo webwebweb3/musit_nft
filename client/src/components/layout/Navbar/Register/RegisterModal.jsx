@@ -3,10 +3,7 @@ import { Dialog, Tab, Tabs, TextField } from '@mui/material';
 import propTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  registerArtist,
-  registerUser,
-} from '../../../../_actions/user_actions';
+import { registerUser } from '../../../../_actions/user_actions';
 import { useGenreInput, useInput } from '../../../../hooks/useInput';
 import { useTheme } from '@emotion/react';
 import RegisterButton from '../Register/button/RegisterButton';
@@ -44,7 +41,6 @@ const RegisterModal = ({ open, setOpen }) => {
       };
 
       dispatch(registerUser(dataToSubmit)).then(response => {
-        console.log(response);
         if (response.request.success) {
           setOpen(false);
           window.location.replace('/');
@@ -65,9 +61,10 @@ const RegisterModal = ({ open, setOpen }) => {
         name: artist,
         genre,
         nationality,
+        role: '1',
       };
 
-      dispatch(registerArtist(dataToSubmit)).then(response => {
+      dispatch(registerUser(dataToSubmit)).then(response => {
         if (response.request.success) {
           setOpen(false);
           window.location.replace('/');
