@@ -56,6 +56,7 @@ module.exports = class User extends Sequelize.Model {
       through: 'Subscribe',
     });
     db.User.belongsToMany(db.Genre, { through: 'UserGenre' });
-    db.User.hasMany(db.Music);
+    // 유저는 여러개의 음악을 가질 수 있다.
+    db.User.hasMany(db.Music, { foreignKey: 'uploader', sourceKey: 'id' });
   }
 };

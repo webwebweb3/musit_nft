@@ -80,12 +80,12 @@ const Studio = () => {
 
 export default Studio;
 
-{
-  /* <FileUpload setUrl={setFileUrl} />
-FileUrl :{' '}
-<a href={fileUrl} target="_blank" rel="noopener noreferrer">
-  {fileUrl}
-</a>
-<Button onClick={onClickMint}>Mint</Button>
-<S3Upload account={account} /> */
-}
+// {
+//   /* <FileUpload setUrl={setFileUrl} />
+// FileUrl :{' '}
+// <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+//   {fileUrl}
+// </a>
+// <Button onClick={onClickMint}>Mint</Button>
+// <S3Upload account={account} /> */
+// }
