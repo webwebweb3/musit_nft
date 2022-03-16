@@ -4,21 +4,21 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Reducer from './_reducers';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import { persistStore } from 'redux-persist';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { PersistGate } from 'redux-persist/integration/react';
 
-const createStoreWithMiddleware = applyMiddleware(
-  promiseMiddleware,
-  ReduxThunk,
-)(createStore);
+const middlewares = [promiseMiddleware, ReduxThunk];
 
-const store = createStoreWithMiddleware(
-  Reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
+const enhancer =
+  process.env.NODE_ENV === 'production'
+    ? compose(applyMiddleware(...middlewares))
+    : composeWithDevTools(applyMiddleware(...middlewares));
+
+const store = createStore(Reducer, enhancer);
 
 const persistor = persistStore(store);
 

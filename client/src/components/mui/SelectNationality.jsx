@@ -128,7 +128,7 @@ const UnstyledSelectsMultiple = ({ value, func }) => {
 
 UnstyledSelectsMultiple.propTypes = {
   value: propTypes.number.isRequired,
-  func: propTypes.func.isRequired,
+  func: propTypes.func,
 };
 
 export default UnstyledSelectsMultiple;
