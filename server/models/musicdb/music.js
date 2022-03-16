@@ -39,10 +39,21 @@ module.exports = class Music extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.Music.belongsToMany(db.User, {
-      foreignKey: 'subscribeId',
-      as: 'Subscribers',
-      through: 'Subscribe',
+    // 음악은 하나의 유저를 가진다.
+    db.Music.belongsTo(db.User, {
+      foreignKey: 'uploader',
+      sourceKey: 'id',
+    });
+    // 음악은 하나의 플레이타임을 가진다.
+    db.Music.hasOne(db.MusicPlayTime, {
+      foreignKey: 'musicId',
+      sourceKey: 'id',
+    });
+
+    // 음악은 하나의 좋아요를 가진다.
+    db.Music.hasOne(db.MusicLike, {
+      foreignKey: 'musicId',
+      sourceKey: 'id',
     });
   }
 };

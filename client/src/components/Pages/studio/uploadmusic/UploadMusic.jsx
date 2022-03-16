@@ -21,29 +21,61 @@ const UploadMusic = () => {
       .then(res => console.log(res.data));
   };
   return (
-    <Box>
-      <form onSubmit={onSubmitForm}>
-        <Box>
-          <S3Upload account={account} />
+    <form onSubmit={onSubmitForm}>
+      <Box sx={style.uploadMusicContainer}>
+        <Box sx={style.leftSide}>
+          <Box sx={style.S3UploadContainer}>
+            <S3Upload account={account} />
+          </Box>
+          <Box sx={style.IPFSUploadContainer}>
+            <IPFSUpload account={account} />
+          </Box>
         </Box>
-        <Box>
-          <IPFSUpload account={account} />
+        <Box sx={style.rightSide}>
+          <Box sx={style.inputMusicDataContainer}>
+            <InputMusicData
+              account={account}
+              stateValues={stateValues}
+              onChange={value => setStateValues({ ...stateValues, ...value })}
+            />
+          </Box>
+          <Box sx={style.uploadMusicBtnContainer}>
+            <Button type="submit" variant="text">
+              등록하기
+            </Button>
+          </Box>
         </Box>
-        <Box>
-          <InputMusicData
-            account={account}
-            stateValues={stateValues}
-            onChange={value => setStateValues({ ...stateValues, ...value })}
-          />
-        </Box>
-        <Box>
-          <Button type="submit" variant="text">
-            등록하기
-          </Button>
-        </Box>
-      </form>
-    </Box>
+        <Box sx={{}}></Box>
+      </Box>
+    </form>
   );
 };
 
 export default UploadMusic;
+
+const style = {
+  uploadMusicContainer: {
+    margin: '100px',
+    marginTop: '140px',
+    height: '100%',
+    width: '960px',
+    border: '1px solid black',
+    display: 'flex',
+  },
+
+  leftSide: { margin: '0', padding: '0', flex: 1 },
+
+  S3UploadContainer: {
+    margin: '0',
+    padding: '30px 30px 0 30px',
+    height: '260px',
+  },
+
+  IPFSUploadContainer: { margin: '0', padding: '0 30px' },
+
+  rightSide: { margin: '0', padding: '0', flex: 2 },
+
+  inputMusicDataContainer: {},
+
+  uploadMusicBtnContainer: { margin: '0', padding: '0' },
+};

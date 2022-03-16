@@ -1,24 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { metaMaskUser } from '../../_actions/metamask_actions';
 import Navbar from './Navbar';
 
 const Layout = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    // 다른 방법 생각중...
-    try {
-      dispatch(metaMaskUser()).then(response => {
-        console.log('ok');
-      });
-    } catch (error) {
-      return;
-    }
-  }, [dispatch]);
-
   return (
     <Box
       sx={{
