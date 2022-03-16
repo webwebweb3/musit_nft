@@ -2,15 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Box, Button, Input } from '@mui/material';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
+import FileUploader from '../../../streaming/musicCard/Testing';
 
 const S3Upload = ({ account }) => {
-  const inputRef = useRef(null);
+  const hiddenFileInput = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
 
   const handleFileInput = e => {
     const file = e.target.files[0];
-    console.log(file);
     const fileExt = file.name.split('.').pop();
     if (
       file.type === 'image/jpeg' ||
@@ -27,18 +27,12 @@ const S3Upload = ({ account }) => {
       return;
     }
   };
-  const reset = () => {
-    console.log('1', inputRef.current.value);
-    console.log('2', inputRef.current.focus());
-    console.log('3', inputRef.current.value);
-    console.log('4', inputRef.current.value);
-    inputRef.current.value = '';
-    console.log(selectedFile);
+
+  const uploadAlbumCoverBtn = () => {
+    hiddenFileInput.current.click();
   };
 
-  useEffect(() => {
-    setTimeout(() => {}, 3000);
-  }, [uploadedImage]);
+  useEffect(() => {}, [uploadedImage]);
 
   const upload = file => {
     const myFile = file;
@@ -90,7 +84,6 @@ const S3Upload = ({ account }) => {
         <Box
           sx={style.cancelBtn}
           onClick={() => {
-            reset();
             setSelectedFile(null);
           }}
         >
@@ -102,8 +95,11 @@ const S3Upload = ({ account }) => {
         id="uploadBtn"
         type="file"
         onChange={handleFileInput}
-        ref={inputRef}
+        ref={hiddenFileInput}
+        sx={{ display: 'none' }}
       />
+      {/* <FileUploader /> */}
+      <Button onClick={uploadAlbumCoverBtn}>Upload Album Cover</Button>
       <Button sx={style.uploadBtn} onClick={() => upload(selectedFile)}>
         Upload
       </Button>

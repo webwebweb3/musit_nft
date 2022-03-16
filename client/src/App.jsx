@@ -8,6 +8,7 @@ import Studio from './components/Pages/studio/Studio';
 import UploadMusic from './components/Pages/studio/uploadmusic/UploadMusic';
 import MyInfo from './components/Pages/mypage/MyInfo';
 import Streaming from './components/Pages/streaming/Streaming';
+import FileUploader from './components/Pages/streaming/musicCard/Testing';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="infoedit" element={<MyInfo />} />
           </Route>
           <Route path="streaming" element={<Streaming />} />
+          <Route path="test" element={<FileUploader />} />
           <Route path="studio/:id" element={<Studio />} />
           <Route
             path="studio/:artistName/uploadmusic"
