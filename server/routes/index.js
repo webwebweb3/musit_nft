@@ -2,10 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
-const registerRouter = require('./register');
-const loginRouter = require('./login');
-const logoutRouter = require('./logout');
-const authRouter = require('./auth');
+const registerRouter = require('./user/register');
+const loginRouter = require('./user/login');
+const logoutRouter = require('./user/logout');
+const authRouter = require('./user/auth');
 const uploadMusicRouter = require('./uploadMusic');
 
 const { auth } = require('../middleware/auth');
