@@ -23,14 +23,13 @@ router.post('/', async (req, res, next) => {
       return res.json({
         loginSuccess: true,
         userData: {
-          genre: user.genre,
-          id: user.id,
           img: user.img,
           name: user.name,
           metamask: user.metamask,
           nationality: user.nationality,
           pass: user.pass,
           createdAt: user.createdAt,
+          role: user.role,
         },
       });
     });

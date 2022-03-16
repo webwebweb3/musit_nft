@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Dialog, Tab, Tabs, TextField } from '@mui/material';
+import { Dialog, Tab, Tabs } from '@mui/material';
 import propTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useDispatch } from 'react-redux';
@@ -8,9 +8,10 @@ import { registerUser } from '../../../../_actions/user_actions';
 import { metaMaskUser } from '../../../../_actions/metamask_actions';
 import { useGenreInput, useInput } from '../../../../hooks/useInput';
 import RegisterButton from '../Register/button/RegisterButton';
-import UnstyledSelectsMultiple from './mui/SelectNationality';
-import MultipleSelectChip from './mui/ChipGenre';
-import TabPanel from './mui/TanPanel';
+import UnstyledSelectsMultiple from '../../../mui/SelectNationality';
+import MultipleSelectChip from '../../../mui/ChipGenre';
+import TabPanel from '../../../mui/TanPanel';
+import TextFieldInput from '../../../mui/TextFieldInput';
 
 const RegisterModal = ({ open, setOpen }) => {
   const dispatch = useDispatch();
@@ -40,33 +41,15 @@ const RegisterModal = ({ open, setOpen }) => {
           nationality,
         };
 
-        dispatch(metaMaskUser()).then(response => {
-          console.log(response);
-          dispatch(registerUser(dataToSubmit)).then(response => {
-            if (response.request.success) {
-              setOpen(false);
-              window.location.replace('/');
-            } else {
-              alert(response.request.message);
-            }
-          });
-        });
-      });
-    },
-    [dispatch, genre, nationality, setOpen],
-  );
+        if (artist) {
+          dataToSubmit = {
+            ...dataToSubmit,
+            name: artist,
+            role: '1',
+          };
+        }
 
-  const onSubmitArtistForm = useCallback(
-    e => {
-      e.preventDefault();
-      dispatch(metaMaskUser()).then(response => {
-        let dataToSubmit = {
-          metamask: response.userMetamask,
-          name: artist,
-          genre,
-          nationality,
-          role: '1',
-        };
+        console.log(dataToSubmit);
 
         dispatch(registerUser(dataToSubmit)).then(response => {
           if (response.request.success) {
@@ -117,14 +100,11 @@ const RegisterModal = ({ open, setOpen }) => {
             </form>
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <form onSubmit={onSubmitArtistForm}>
-              <TextField
+            <form onSubmit={onSubmitUserForm}>
+              <TextFieldInput
                 label="아티스트 명"
-                variant="outlined"
                 value={artist}
-                onChange={onChangeArtist}
-                fullWidth
-                sx={{ display: 'block', margin: '1px', width: '320px' }}
+                func={onChangeArtist}
               />
               <UnstyledSelectsMultiple
                 value={nationality}
