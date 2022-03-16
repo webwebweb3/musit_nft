@@ -62,7 +62,7 @@ const Studio = props => {
             top: '-150px',
             float: 'right',
           }}
-          onClick={() => navigate(`/studio/${props}/uploadmusic`)}
+          onClick={() => navigate(`uploadmusic`)}
         >
           + Add Music NFT
         </Button>

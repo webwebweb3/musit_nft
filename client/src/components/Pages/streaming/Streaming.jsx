@@ -10,7 +10,7 @@ const Streaming = () => {
       <MusicCard
         musicTitle={'title'}
         albumCover={'https://mui.com/static/images/cards/live-from-space.jpg'}
-        artistName={'artist2'}
+        artistName={'artist1'}
       />
     </>
   );
