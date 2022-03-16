@@ -1,8 +1,7 @@
+require('dotenv').config();
 const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'development';
 /* 왜 안될까 이유가 멀까 */
-console.log(typeof env);
-console.log(env);
 const config = require('../config/config')[env];
 // const config = require('../config/config')['test'];
 console.log(config);
