@@ -1,10 +1,20 @@
-import React from 'react';
 import styled from 'styled-components';
 import { BsMusicPlayerFill } from 'react-icons/bs';
 import { IoStatsChart } from 'react-icons/io5';
 import { FaHeartbeat } from 'react-icons/fa';
 import { SiSubstack } from 'react-icons/si';
 import { cardStyles } from './ReusableStyles';
+import * as React from 'react';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
 
 const Section = styled.section`
   display: grid;
@@ -49,6 +59,8 @@ const Section = styled.section`
 `;
 
 const DashBoard = () => {
+  const theme = useTheme();
+
   return (
     <>
       <Section>
@@ -87,6 +99,60 @@ const DashBoard = () => {
           <div className="logo">
             <SiSubstack />
           </div>
+        </div>
+
+        <div>
+          {/* <Box height={300}>
+                    <h3>최근 플레이 목록</h3>
+                    <Grid container wrap="nowrap">
+                    <Stack spacing={1}>
+                     <Skeleton variant="rectangular" width={210} height={210} />
+                     <Skeleton variant="text" width={210} />
+                    </Stack>
+                    </ Grid>
+                    </Box> */}
+
+          <Card sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <CardContent sx={{ flex: '1 0 auto' }}>
+                <Typography component="div" variant="h5">
+                  노래제목
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
+                  아티스트이름
+                </Typography>
+              </CardContent>
+              <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+                <IconButton aria-label="previous">
+                  {theme.direction === 'rtl' ? (
+                    <SkipNextIcon />
+                  ) : (
+                    <SkipPreviousIcon />
+                  )}
+                </IconButton>
+                <IconButton aria-label="play/pause">
+                  <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+                </IconButton>
+                <IconButton aria-label="next">
+                  {theme.direction === 'rtl' ? (
+                    <SkipPreviousIcon />
+                  ) : (
+                    <SkipNextIcon />
+                  )}
+                </IconButton>
+              </Box>
+            </Box>
+            <CardMedia
+              component="img"
+              sx={{ width: 151 }}
+              image=""
+              alt="앨범 커버"
+            />
+          </Card>
         </div>
       </Section>
     </>
