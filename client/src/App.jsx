@@ -7,6 +7,7 @@ import Subscription from './components/Pages/Subscription';
 import Studio from './components/Pages/studio/Studio';
 import UploadMusic from './components/Pages/studio/uploadmusic/UploadMusic';
 import MyInfo from './components/Pages/mypage/MyInfo';
+import Streaming from './components/Pages/streaming/Streaming';
 
 const App = () => {
   return (
@@ -17,9 +18,13 @@ const App = () => {
           <Route path="mypage/*" element={<MyPage />}>
             <Route path="infoedit" element={<MyInfo />} />
           </Route>
-          <Route path="studio" element={<Studio />} />
+          <Route path="streaming" element={<Streaming />} />
+          <Route path="studio/:id" element={<Studio />} />
+          <Route
+            path="studio/:artistName/uploadmusic"
+            element={<UploadMusic />}
+          />
           <Route path="subscription" element={<Subscription />} />
-          <Route path="studio/uploadmusic" element={<UploadMusic />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

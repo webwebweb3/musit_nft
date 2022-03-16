@@ -1,12 +1,19 @@
 import { Box, Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { mintMusicTokenContract } from '../../../contracts';
 import { useSelector } from 'react-redux';
 import S3Upload from './uploadmusic/s3upload/S3Upload';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { height } from '@mui/system';
 
-const Studio = () => {
+const Studio = props => {
+  //TODO: delete
+  let navigate = useNavigate();
+  props = 'artist1';
+
+  useEffect(() => {
+    console.log(props);
+  }, [props]);
   const user = useSelector(state => state.user);
   const account = user.userData.userId;
 
@@ -49,17 +56,16 @@ const Studio = () => {
         profile Image
       </Box>
       <Box>
-        <Link to={'/studio/uploadmusic'}>
-          <Button
-            sx={{
-              position: 'relative',
-              top: '-150px',
-              float: 'right',
-            }}
-          >
-            + Add Music NFT
-          </Button>
-        </Link>
+        <Button
+          sx={{
+            position: 'relative',
+            top: '-150px',
+            float: 'right',
+          }}
+          onClick={() => navigate(`/studio/${props}/uploadmusic`)}
+        >
+          + Add Music NFT
+        </Button>
       </Box>
       {/* TODO: height 값 100%  */}
       <Box
@@ -73,6 +79,7 @@ const Studio = () => {
         }}
       >
         Artist's Musics
+        {/* {location.state.user} */}
       </Box>
     </Box>
   );

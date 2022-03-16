@@ -8,11 +8,14 @@ import { loginUser } from '../../../_actions/user_actions';
 import NavButton from './Register/button/NavButton';
 import ProfileButton from './myMenu';
 import { metaMaskUser } from '../../../_actions/metamask_actions';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const [open, setOpen] = useState(false);
+
+  let navigate = useNavigate();
 
   // 메타 마스크 회원가입 모달창
   const handleMetaMaskOpen = useCallback(() => {
@@ -58,8 +61,16 @@ const Navbar = () => {
               icon={<HeadsetIcon />}
               iconPosition="start"
               label="STREAMING"
+              onClick={() => navigate('/streaming')}
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
+
+            <Tab
+              icon={<TokenIcon />}
+              iconPosition="start"
+              label="STUDIO"
+              onClick={() => navigate('/studio/artist1')}
+            />
           </Tabs>
           {user.isLoggedIn ? (
             <div style={{ marginLeft: 'auto' }}>
