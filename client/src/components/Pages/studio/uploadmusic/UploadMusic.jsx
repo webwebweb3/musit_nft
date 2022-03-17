@@ -71,7 +71,7 @@ const style = {
     height: '260px',
   },
 
-  IPFSUploadContainer: { margin: '0', padding: '0 30px' },
+  IPFSUploadContainer: { marginTop: '100px', padding: '0 30px' },
 
   rightSide: { margin: '0', padding: '0', flex: 2 },
 
