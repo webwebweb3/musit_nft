@@ -8,6 +8,7 @@ import Studio from './components/Pages/studio/Studio';
 import UploadMusic from './components/Pages/studio/uploadmusic/UploadMusic';
 import MyInfo from './components/Pages/mypage/MyInfo';
 import DashBoard from './components/Pages/mypage/DashBoard';
+import MyFavoriteTracks from './components/Pages/mypage/MyFavoriteTracks';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="mypage/*" element={<MyPage />}>
             <Route path="infoedit" element={<MyInfo />} />
             <Route path="dashboard" element={<DashBoard />} />
+            <Route path="likedtracks" element={<MyFavoriteTracks />} />
           </Route>
           <Route path="studio" element={<Studio />} />
           <Route path="subscription" element={<Subscription />} />
