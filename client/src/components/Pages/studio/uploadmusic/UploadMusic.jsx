@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import TextFieldInput from './inputmusicdata/TextFieldInput';
 import { useLocation } from 'react-router-dom';
 import * as Util from './utils';
-
+import { mintMusicTokenContract } from '../../../../contracts';
 const currencies = Util.utilCurrencies;
 
 const UploadMusic = () => {
@@ -51,7 +51,6 @@ const UploadMusic = () => {
 
     await axios.post(`/api/uploadmusic`, dataToSubmit).then(res => {
       if (res.data.uploadSuccess === 'true') {
-        console.log('우와 다 통과');
         let jsonData = {
           title: 'musit NFT',
           description: 'This data is for minting a NFT.',
@@ -62,7 +61,17 @@ const UploadMusic = () => {
             S3AlbumCover: S3AlbumCover,
           },
         };
-        console.log(JSON.parse(jsonData));
+        const mintingData = JSON.stringify(jsonData);
+
+        const minting = async () => {
+          try {
+            const response = await mintMusicTokenContract.methods
+              .mintMusicToken(mintingData)
+              .send({ from: account });
+            console.log(response);
+          } catch (error) {}
+        };
+        minting();
       } else if (res.data.uploadSuccess !== 'empty') {
         alert(res.data.message);
       } else {
