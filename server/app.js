@@ -15,7 +15,7 @@ app.set('port', process.env.PORT || 8000);
 passportConfig();
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log('데이터베이스 연결 성공');
   })
@@ -23,9 +23,14 @@ sequelize
     console.error(err);
   });
 
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined'));
+} else {
+  app.use(morgan('dev'));
+}
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({

@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@emotion/react';
-import { registerUser } from '../../../../_actions/user_actions';
+import { registerRequestAction } from '../../../../_actions/user_actions';
 import { metaMaskUser } from '../../../../_actions/metamask_actions';
 import { useGenreInput, useInput } from '../../../../hooks/useInput';
 import RegisterButton from '../Register/button/RegisterButton';
@@ -49,19 +49,11 @@ const RegisterModal = ({ open, setOpen }) => {
           };
         }
 
-        console.log(dataToSubmit);
-
-        dispatch(registerUser(dataToSubmit)).then(response => {
-          if (response.request.success) {
-            setOpen(false);
-            window.location.replace('/');
-          } else {
-            alert(response.request.message);
-          }
-        });
+        dispatch(registerRequestAction(dataToSubmit));
+        window.location.replace('/');
       });
     },
-    [dispatch, artist, genre, nationality, setOpen],
+    [dispatch, artist, genre, nationality],
   );
 
   return (

@@ -21,16 +21,13 @@ router.post('/', async (req, res, next) => {
         return res.json({ loginSuccess: false });
       }
       return res.json({
-        loginSuccess: true,
-        userData: {
-          img: user.img,
-          name: user.name,
-          metamask: user.metamask,
-          nationality: user.nationality,
-          pass: user.pass,
-          createdAt: user.createdAt,
-          role: user.role,
-        },
+        img: user.img,
+        name: user.name,
+        metamask: user.metamask,
+        nationality: user.nationality,
+        pass: user.pass,
+        createdAt: user.createdAt,
+        role: user.role,
       });
     });
   })(req, res, next);

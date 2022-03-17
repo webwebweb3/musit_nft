@@ -6,7 +6,7 @@ import Sidebar from './Sidebar';
 const MyPage = () => {
   return (
     <>
-      <Grid container spacing={1}>
+      <Grid container style={{ minWidth: '1300px' }} spacing={1}>
         <Grid item xs={2}>
           <Box
             sx={{

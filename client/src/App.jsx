@@ -7,6 +7,9 @@ import Subscription from './components/Pages/Subscription';
 import Studio from './components/Pages/studio/Studio';
 import UploadMusic from './components/Pages/studio/uploadmusic/UploadMusic';
 import MyInfo from './components/Pages/mypage/MyInfo';
+import Streaming from './components/Pages/streaming/Streaming';
+//TODO: delete
+import FileUploader from './components/Pages/streaming/musicCard/Testing';
 import DashBoard from './components/Pages/mypage/DashBoard';
 import MyFavoriteTracks from './components/Pages/mypage/MyFavoriteTracks';
 
@@ -21,9 +24,15 @@ const App = () => {
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="likedtracks" element={<MyFavoriteTracks />} />
           </Route>
-          <Route path="studio" element={<Studio />} />
+          <Route path="streaming" element={<Streaming />} />
+          //TODO: delete
+          <Route path="test" element={<FileUploader />} />
+          <Route path="studio/:id" element={<Studio />} />
+          <Route
+            path="studio/:artistName/uploadmusic"
+            element={<UploadMusic />}
+          />
           <Route path="subscription" element={<Subscription />} />
-          <Route path="studio/uploadmusic" element={<UploadMusic />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
