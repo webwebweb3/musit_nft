@@ -1,11 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Dialog, Tab, Tabs } from '@mui/material';
 import propTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@emotion/react';
 import { registerRequestAction } from '../../../../_actions/user_actions';
-import { metaMaskUser } from '../../../../_actions/metamask_actions';
 import { useGenreInput, useInput } from '../../../../hooks/useInput';
 import RegisterButton from '../Register/button/RegisterButton';
 import UnstyledSelectsMultiple from '../../../mui/SelectNationality';
@@ -13,13 +12,22 @@ import MultipleSelectChip from '../../../mui/ChipGenre';
 import TabPanel from '../../../mui/TanPanel';
 import TextFieldInput from '../../../mui/TextFieldInput';
 
-const RegisterModal = ({ open, setOpen }) => {
+const RegisterModal = ({ open, setOpen, id }) => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
   const theme = useTheme();
   const [artist, onChangeArtist] = useInput('');
   const [genre, onChangeGenre] = useGenreInput([]);
   const [nationality, onChangeNationality] = useState(0);
   const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    console.log(user);
+    if (user.registerUserError) {
+      alert(user.registerUserError);
+    }
+    setOpen(false);
+  }, [user, setOpen]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -34,26 +42,23 @@ const RegisterModal = ({ open, setOpen }) => {
   const onSubmitUserForm = useCallback(
     e => {
       e.preventDefault();
-      dispatch(metaMaskUser()).then(response => {
-        let dataToSubmit = {
-          metamask: response.userMetamask,
-          genre,
-          nationality,
+      let dataToSubmit = {
+        metamask: id,
+        genre,
+        nationality,
+      };
+
+      if (artist) {
+        dataToSubmit = {
+          ...dataToSubmit,
+          name: artist,
+          role: '1',
         };
+      }
 
-        if (artist) {
-          dataToSubmit = {
-            ...dataToSubmit,
-            name: artist,
-            role: '1',
-          };
-        }
-
-        dispatch(registerRequestAction(dataToSubmit));
-        window.location.replace('/');
-      });
+      dispatch(registerRequestAction(dataToSubmit));
     },
-    [dispatch, artist, genre, nationality],
+    [dispatch, artist, genre, nationality, id],
   );
 
   return (
@@ -115,6 +120,7 @@ const RegisterModal = ({ open, setOpen }) => {
 RegisterModal.propTypes = {
   open: propTypes.bool.isRequired,
   setOpen: propTypes.func.isRequired,
+  id: propTypes.string.isRequired,
 };
 
 export default RegisterModal;

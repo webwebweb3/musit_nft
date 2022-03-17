@@ -11,24 +11,30 @@ import {
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAILURE,
   USER_IMAGES_REQUEST,
   USER_IMAGES_SUCCESS,
   USER_IMAGES_FAILURE,
 } from '../_actions/types';
 
-function logInAPI(data) {
+async function logInAPI(data) {
   let loginData = {
     metamask: data,
     password: '1', // 임시 - 수정 예정
   };
 
-  const test = Axios.post('/login', loginData);
+  const test = await Axios.post('/login', loginData);
+  console.log(test);
   return test;
 }
 
 function* logIn(action) {
   try {
-    const result = yield call(logInAPI, action.data);
+    console.log(action.data);
+    const result = yield call(logInAPI(action.data));
+    console.log(result);
     yield put({
       type: LOGIN_USER_SUCCESS,
       data: result.data,
@@ -37,7 +43,7 @@ function* logIn(action) {
     console.error(err);
     yield put({
       type: LOGIN_USER_FAILURE,
-      error: err.response.data,
+      error: err.name,
     });
   }
 }
@@ -56,7 +62,7 @@ function* logOut() {
     console.error(err);
     yield put({
       type: LOGOUT_USER_FAILURE,
-      error: err.response.data,
+      error: err.name,
     });
   }
 }
@@ -68,6 +74,7 @@ function registerAPI(data) {
 function* register(action) {
   try {
     yield call(registerAPI, action.data);
+
     yield put({
       type: REGISTER_USER_SUCCESS,
     });
@@ -81,7 +88,7 @@ function* register(action) {
 }
 
 function userImgAPI(data) {
-  return Axios.post('/userimg', data);
+  return Axios.post('/useredit/img', data);
 }
 
 function* userImg(action) {
@@ -96,7 +103,28 @@ function* userImg(action) {
     console.error(err);
     yield put({
       type: USER_IMAGES_FAILURE,
-      error: err.response.data,
+      error: err.name,
+    });
+  }
+}
+
+function userEditAPI(data) {
+  return Axios.post('/useredit', data);
+}
+
+function* userEdit(action) {
+  try {
+    const result = yield call(userEditAPI, action.data);
+
+    yield put({
+      type: EDIT_USER_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: EDIT_USER_FAILURE,
+      error: err.name,
     });
   }
 }
@@ -117,11 +145,16 @@ function* watchUserImg() {
   yield takeLatest(USER_IMAGES_REQUEST, userImg);
 }
 
+function* watchUserEdit() {
+  yield takeLatest(EDIT_USER_REQUEST, userEdit);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
     fork(watchLogOut),
     fork(watchRegister),
     fork(watchUserImg),
+    fork(watchUserEdit),
   ]);
 }

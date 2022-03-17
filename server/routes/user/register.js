@@ -9,6 +9,7 @@ const { User, Genre } = require('../../models');
 router.post('/', async (req, res) => {
   try {
     const { metamask, nationality, genre, name, role } = req.body;
+    console.log(req.body);
     const exUser = await User.findOne({
       where: {
         metamask,
@@ -16,7 +17,7 @@ router.post('/', async (req, res) => {
     });
 
     if (exUser) {
-      return res.json({ success: false, message: '가입된 회원입니다' });
+      return res.status(400).send('이미 사용 중입니다.');
     }
 
     const user = await User.create({

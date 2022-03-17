@@ -7,20 +7,21 @@ const passport = require('passport');
 //------------------------------------------------
 
 router.post('/', async (req, res, next) => {
+  console.log(req.body);
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       console.error(err);
-      res.json({ loginSuccess: false });
+      return next(err);
     }
     if (info) {
-      return res.json({ loginSuccess: false, info });
+      return res.status(401).send(info.reason);
     }
     return req.login(user, async loginErr => {
       if (loginErr) {
         console.error(loginErr);
-        return res.json({ loginSuccess: false });
+        return next(loginErr);
       }
-      return res.json({
+      return res.status(200).json({
         img: user.img,
         name: user.name,
         metamask: user.metamask,

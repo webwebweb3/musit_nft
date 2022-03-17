@@ -21,7 +21,6 @@ const App = () => {
             <Route path="infoedit" element={<MyInfo />} />
           </Route>
           <Route path="streaming" element={<Streaming />} />
-          //TODO: delete
           <Route path="test" element={<FileUploader />} />
           <Route path="studio/:id" element={<Studio />} />
           <Route

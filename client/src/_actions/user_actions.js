@@ -1,4 +1,5 @@
 import {
+  EDIT_USER_REQUEST,
   LOGIN_USER_REQUEST,
   LOGOUT_USER_REQUEST,
   REGISTER_USER_REQUEST,
@@ -21,5 +22,10 @@ export const registerRequestAction = dataToSubmit => ({
 
 export const userImgRequestAction = dataToSubmit => ({
   type: USER_IMAGES_REQUEST,
+  data: dataToSubmit,
+});
+
+export const userEditRequestAction = dataToSubmit => ({
+  type: EDIT_USER_REQUEST,
   data: dataToSubmit,
 });
