@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 // Style the Button component
 const Button = styled.button`
-  margin-top: 30px;
+  margin-top: -30px;
   display: block;
   width: 100%;
   height: 50px;
