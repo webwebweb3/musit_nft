@@ -1,11 +1,30 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { create } from 'ipfs-http-client';
 import { Button } from '@mui/material';
 import ReactAudioPlayer from 'react-audio-player';
+import styled from 'styled-components';
+
+const IPFSUploadButton = styled.button`
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: linear-gradient(135deg, #3a8ffe 0%, #9658fe 100%);
+`;
 
 const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const IPFSUpload = () => {
+  const hiddenIPSFileInput = useRef(null);
   const [selectedMusic, setSelectedMusic] = useState(null);
   const [fileUrl, updateFileUrl] = useState(``);
 
@@ -31,6 +50,9 @@ const IPFSUpload = () => {
     }
   };
 
+  const onChange = () => {
+    hiddenIPSFileInput.current.click();
+  };
   const onChange1 = async () => {
     console.log('1');
     try {
@@ -46,8 +68,25 @@ const IPFSUpload = () => {
 
   return (
     <div className="App">
-      <input type="file" onChange={handleMusicInput} />
-      <Button onClick={onChange1}>IPFS 업로드</Button>
+      <input
+        ref={hiddenIPSFileInput}
+        type="file"
+        onChange={handleMusicInput}
+        style={{ display: 'none' }}
+      />
+      <IPFSUploadButton onClick={onChange}>MUSIC UPLOAD</IPFSUploadButton>
+      <Button
+        sx={{
+          backgroundColor: '#aaa',
+          borderRadius: '20px',
+          color: '#fff',
+          margin: '10px auto',
+          float: 'right',
+        }}
+        onClick={onChange1}
+      >
+        Upload to IPFS
+      </Button>
       {fileUrl && <ReactAudioPlayer src={fileUrl} controls />}
     </div>
   );

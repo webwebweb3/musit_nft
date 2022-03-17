@@ -7,15 +7,24 @@ import axios from 'axios';
 import { useInput } from '../../../../hooks/useInput';
 import MenuItem from '@mui/material/MenuItem';
 import TextFieldInput from './inputmusicdata/TextFieldInput';
+import { useLocation } from 'react-router-dom';
 import * as Util from './utils';
 
 const currencies = Util.utilCurrencies;
 
 const UploadMusic = () => {
+  const location = useLocation();
+  const artist = location.pathname.split('/')[2];
+
   const user = useSelector(state => state.user);
 
   const [title, onChangeTitle] = useInput('');
+  // const [artist, onChangeArtist] = useInput('');
+  const [albumName, onChangeAlbumName] = useInput('');
   const [genre, onChangeGenre] = useInput('balad');
+  const [release, onChangeRelease] = useInput('');
+  const [songwriter, onChangeSongwriter] = useInput('');
+  const [lyricist, onChangeLyricist] = useInput('');
   const [stateValues, setStateValues] = useState({});
 
   console.log('state', stateValues);
@@ -42,25 +51,31 @@ const UploadMusic = () => {
         </Box>
         <Box sx={style.rightSide}>
           <Box sx={style.inputMusicDataContainer}>
-            <TextFieldInput label="타이틀" value={title} func={onChangeTitle} />
+            <TextFieldInput
+              label="타이틀"
+              value={title}
+              func={onChangeTitle}
+              required={true}
+            />
             <TextFieldInput
               label="아티스트"
-              value={title}
-              func={onChangeTitle}
+              value={artist}
+              required={true}
+              inputProps={{ readOnly: true }}
             />
-            <TextFieldInput label="앨범명" value={title} func={onChangeTitle} />
             <TextFieldInput
-              label="발매년도"
-              value={title}
-              func={onChangeTitle}
+              label="앨범명"
+              value={albumName}
+              func={onChangeAlbumName}
             />
             <TextField
+              variant="standard"
               id="music_genre"
               select
-              label="Genre"
+              label="장르"
               value={genre}
               onChange={onChangeGenre}
-              helperText="Please select music genre"
+              sx={{ width: '520px', margin: '10px 0' }}
             >
               {currencies.map(option => (
                 <MenuItem key={option.value} value={option.value}>
@@ -68,8 +83,21 @@ const UploadMusic = () => {
                 </MenuItem>
               ))}
             </TextField>
-            <TextFieldInput label="작곡가" value={title} func={onChangeTitle} />
-            <TextFieldInput label="작사가" value={title} func={onChangeTitle} />
+            <TextFieldInput
+              label="발매년도"
+              value={release}
+              func={onChangeRelease}
+            />
+            <TextFieldInput
+              label="작곡가"
+              value={songwriter}
+              func={onChangeSongwriter}
+            />
+            <TextFieldInput
+              label="작사가"
+              value={lyricist}
+              func={onChangeLyricist}
+            />
             {/* <InputMusicData
               account={account}
               stateValues={stateValues}
@@ -96,7 +124,7 @@ const style = {
     marginTop: '140px',
     height: '100%',
     width: '960px',
-    border: '1px solid black',
+
     display: 'flex',
   },
 
@@ -105,12 +133,12 @@ const style = {
   S3UploadContainer: {
     margin: '0',
     padding: '30px 30px 0 30px',
-    height: '310px',
+    height: '304px',
   },
 
   IPFSUploadContainer: { marginTop: '0', padding: '0 30px' },
 
-  rightSide: { margin: '0', padding: '30px 30px 0 0', flex: 2 },
+  rightSide: { margin: '0', padding: '30px 0 0 30px', flex: 2 },
 
   inputMusicDataContainer: {},
 

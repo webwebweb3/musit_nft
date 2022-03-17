@@ -2,12 +2,12 @@ import { TextField } from '@mui/material';
 import propTypes from 'prop-types';
 import React from 'react';
 
-const TextFieldInput = ({ label, value, func }) => {
+const TextFieldInput = ({ label, value, func, required, inputProps }) => {
   return (
     <>
       <TextField
         label={label}
-        variant="outlined"
+        variant="standard"
         value={value}
         onChange={func}
         fullWidth
@@ -17,6 +17,8 @@ const TextFieldInput = ({ label, value, func }) => {
           width: '520px',
           marginBottom: '10px',
         }}
+        required={required}
+        inputProps={inputProps}
       />
     </>
   );

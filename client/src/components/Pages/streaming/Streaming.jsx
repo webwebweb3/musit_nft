@@ -12,6 +12,11 @@ const Streaming = () => {
         albumCover={'https://mui.com/static/images/cards/live-from-space.jpg'}
         artistName={'artist1'}
       />
+      <MusicCard
+        musicTitle={'title'}
+        albumCover={'https://mui.com/static/images/cards/live-from-space.jpg'}
+        artistName={'artist3'}
+      />
     </>
   );
 };
