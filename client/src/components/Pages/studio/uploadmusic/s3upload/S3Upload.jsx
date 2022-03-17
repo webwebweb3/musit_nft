@@ -91,12 +91,12 @@ const S3Upload = ({ account }) => {
         </Box>
         <Box sx={style.fileName}>File name here</Box>
       </Box>
-      <Input
+      <input
         id="uploadBtn"
         type="file"
         onChange={handleFileInput}
         ref={hiddenFileInput}
-        sx={{ display: 'none' }}
+        style={{ display: 'none' }}
       />
       {/* <FileUploader /> */}
       <Button onClick={uploadAlbumCoverBtn}>Upload Album Cover</Button>
