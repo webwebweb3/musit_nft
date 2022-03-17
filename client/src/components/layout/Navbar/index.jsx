@@ -4,7 +4,7 @@ import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import { useDispatch, useSelector } from 'react-redux';
 import RegisterModal from './Register/RegisterModal';
-import { loginUser } from '../../../_actions/user_actions';
+import { loginRequestAction } from '../../../_actions/user_actions';
 import NavButton from './Register/button/NavButton';
 import ProfileButton from './myMenu';
 import { metaMaskUser } from '../../../_actions/metamask_actions';
@@ -32,13 +32,7 @@ const Navbar = () => {
     try {
       dispatch(metaMaskUser()).then(response => {
         if (response.userMetamask) {
-          dispatch(loginUser(response.userMetamask)).then(response => {
-            if (response.request.loginSuccess) {
-              window.location.replace('/');
-            } else {
-              alert(response.request.info.message);
-            }
-          });
+          dispatch(loginRequestAction(response.userMetamask));
         } else {
           alert('Install Metamask!');
         }
@@ -61,7 +55,7 @@ const Navbar = () => {
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
           </Tabs>
-          {user.isLoggedIn ? (
+          {user.userData ? (
             <div style={{ marginLeft: 'auto' }}>
               <ProfileButton />
             </div>

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User, Genre } = require('../models');
+const { User, Genre } = require('../../models');
 
 //------------------------------------------------
 //               /api/register

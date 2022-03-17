@@ -11,6 +11,7 @@ module.exports = () => {
         passwordField: 'password',
       },
       async (metamask, password, done) => {
+        console.log(metamask);
         try {
           const exUser = await User.findOne({ where: { metamask } });
           if (exUser) {

@@ -13,7 +13,6 @@ const MyInfo = () => {
   const [editNationality, onEditNationality] = useState(false);
   const { userData } = useSelector(state => state.user);
   const [nationality, onChangeNationality] = useState(userData.nationality);
-  console.log(userData);
 
   const onEditClick = useCallback(() => {
     onEditInfo(prev => !prev);
@@ -63,7 +62,7 @@ const MyInfo = () => {
               </InputLabel>
               <MyImgButton />
               <Avatar
-                src={`https://avatars.dicebear.com/api/gridy/zzz.svg`}
+                src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
                 style={{ width: '200px' }}
                 alt={'v'}
               />

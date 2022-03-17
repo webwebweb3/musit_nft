@@ -5,11 +5,11 @@
   "main": "server/app.js",
   "scripts": {
     "start": "node server/app.js",
-    "test": "cross-env NODE_ENV=test node server/app.js",
+    "test_backend": "cross-env NODE_ENV=test node server/app.js",
     "nodemon": "nodemon server/app.js",
     "frontend": "npm run start --prefix client",
     "dev": "concurrently \"npm start\" \"npm run frontend\"",
-    "test_dev": "concurrently \"npm run test_backend\" \"npm run frontend\"",
+    "test": "concurrently \"npm run test_backend\" \"npm run frontend\"",
     "prepare": "husky install"
   },
   "repository": {
