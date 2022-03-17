@@ -14,7 +14,7 @@ const TextFieldInput = ({ label, value, func, required, inputProps }) => {
         sx={{
           display: 'block',
           margin: '1px',
-          width: '520px',
+          width: '420px',
           marginBottom: '10px',
         }}
         required={required}

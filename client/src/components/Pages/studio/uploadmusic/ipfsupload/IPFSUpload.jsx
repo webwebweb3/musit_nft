@@ -74,7 +74,9 @@ const IPFSUpload = () => {
         onChange={handleMusicInput}
         style={{ display: 'none' }}
       />
-      <IPFSUploadButton onClick={onChange}>MUSIC UPLOAD</IPFSUploadButton>
+      <IPFSUploadButton type="button" onClick={onChange}>
+        MUSIC UPLOAD
+      </IPFSUploadButton>
       <Button
         sx={{
           backgroundColor: '#aaa',
@@ -87,7 +89,9 @@ const IPFSUpload = () => {
       >
         Upload to IPFS
       </Button>
-      {fileUrl && <ReactAudioPlayer src={fileUrl} controls />}
+      {fileUrl && (
+        <ReactAudioPlayer src={fileUrl} controls style={{ width: '250px' }} />
+      )}
     </div>
   );
 };

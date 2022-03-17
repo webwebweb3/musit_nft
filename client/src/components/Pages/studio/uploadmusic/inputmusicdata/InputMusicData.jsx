@@ -19,8 +19,6 @@ const InputMusicData = props => {
     lyricist: '',
     genre: 'balad',
   });
-  console.log(props);
-  console.log(window.location.href);
 
   const userArtist = async () => {
     //TODO:const request =

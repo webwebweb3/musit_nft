@@ -55,7 +55,14 @@ const Navbar = () => {
     <>
       <AppBar sx={{ background: 'linear-gradient(90deg, #0546d6, #3f89fc)' }}>
         <Toolbar>
-          <img width="65px" height="65px" src="/images/logoW.png" alt="logo" />
+          <img
+            width="65px"
+            height="65px"
+            src="/images/logoW.png"
+            alt="logo"
+            onClick={() => navigate('/')}
+            style={{ cursor: 'pointer' }}
+          />
           <Tabs textColor="inherit" value={false}>
             <Tab
               icon={<HeadsetIcon />}
@@ -64,13 +71,6 @@ const Navbar = () => {
               onClick={() => navigate('/streaming')}
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
-
-            <Tab
-              icon={<TokenIcon />}
-              iconPosition="start"
-              label="STUDIO"
-              onClick={() => navigate('/studio/artist1')}
-            />
           </Tabs>
           {user.isLoggedIn ? (
             <div style={{ marginLeft: 'auto' }}>

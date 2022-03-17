@@ -84,6 +84,7 @@ const S3Upload = ({ account }) => {
       console.log(e);
     }
   };
+
   return (
     <>
       <Box sx={selectedFile ? style.imgwrapper : style.wrapper}>
@@ -116,6 +117,7 @@ const S3Upload = ({ account }) => {
       />
       {/* <FileUploader /> */}
       <AlbumCoverButton
+        type="button"
         onClick={uploadAlbumCoverBtn}
         style={selectedFile ? { display: 'none' } : {}}
       >

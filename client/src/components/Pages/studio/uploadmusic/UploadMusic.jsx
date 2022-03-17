@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import S3Upload from './s3upload/S3Upload';
 import IPFSUpload from './ipfsupload/IPFSUpload';
 import { useSelector } from 'react-redux';
@@ -16,7 +16,7 @@ const UploadMusic = () => {
   const location = useLocation();
   const artist = location.pathname.split('/')[2];
 
-  const user = useSelector(state => state.user);
+  const { userData } = useSelector(state => state.user);
 
   const [title, onChangeTitle] = useInput('');
   // const [artist, onChangeArtist] = useInput('');
@@ -25,18 +25,50 @@ const UploadMusic = () => {
   const [release, onChangeRelease] = useInput('');
   const [songwriter, onChangeSongwriter] = useInput('');
   const [lyricist, onChangeLyricist] = useInput('');
-  const [stateValues, setStateValues] = useState({});
+  const [IPFSUrl, onChangeIPFSURl] = useInput('');
+  const [S3AlbumCover, onChangeS3AlbumCover] = useInput('');
 
-  console.log('state', stateValues);
-  const account = user.loginSucces.userId;
+  const account = userData.metamask;
 
   const onSubmitForm = async e => {
     e.preventDefault();
-    let dataToSubmit = stateValues;
-    //TODO: let request =
-    await axios
-      .post(`/api/uploadmusic`, dataToSubmit)
-      .then(res => console.log(res.data));
+
+    let dataToSubmit = {
+      userName: userData.name,
+      title,
+      artist,
+      albumName,
+      genre,
+      release,
+      songwriter,
+      lyricist,
+    };
+
+    if (userData.name !== artist) {
+      alert('This user is not that artist');
+      return;
+    }
+
+    await axios.post(`/api/uploadmusic`, dataToSubmit).then(res => {
+      if (res.data.uploadSuccess === 'true') {
+        console.log('우와 다 통과');
+        let jsonData = {
+          title: 'musit NFT',
+          description: 'This data is for minting a NFT.',
+          type: 'object',
+          properties: {
+            dataToSubmit,
+            IPFSUrl: IPFSUrl,
+            S3AlbumCover: S3AlbumCover,
+          },
+        };
+        console.log(JSON.parse(jsonData));
+      } else if (res.data.uploadSuccess !== 'empty') {
+        alert(res.data.message);
+      } else {
+        alert(res.data.message);
+      }
+    });
   };
   return (
     <form onSubmit={onSubmitForm}>
@@ -75,7 +107,7 @@ const UploadMusic = () => {
               label="장르"
               value={genre}
               onChange={onChangeGenre}
-              sx={{ width: '520px', margin: '10px 0' }}
+              sx={{ width: '200px', margin: '10px 0' }}
             >
               {currencies.map(option => (
                 <MenuItem key={option.value} value={option.value}>
@@ -98,11 +130,6 @@ const UploadMusic = () => {
               value={lyricist}
               func={onChangeLyricist}
             />
-            {/* <InputMusicData
-              account={account}
-              stateValues={stateValues}
-              onChange={value => setStateValues({ ...stateValues, ...value })}
-            /> */}
           </Box>
           <Box sx={style.uploadMusicBtnContainer}>
             <Button type="submit" variant="text">
@@ -138,7 +165,7 @@ const style = {
 
   IPFSUploadContainer: { marginTop: '0', padding: '0 30px' },
 
-  rightSide: { margin: '0', padding: '30px 0 0 30px', flex: 2 },
+  rightSide: { margin: '0', padding: '10px 0 0 40px', flex: 2 },
 
   inputMusicDataContainer: {},
 

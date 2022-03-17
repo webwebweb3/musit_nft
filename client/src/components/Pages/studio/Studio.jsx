@@ -10,12 +10,9 @@ const Studio = props => {
   //TODO: delete
   let navigate = useNavigate();
   props = 'artist1';
+  const { userData } = useSelector(state => state.user);
 
-  useEffect(() => {
-    console.log(props);
-  }, [props]);
-  const user = useSelector(state => state.user);
-  const account = user.userData.userId;
+  const account = userData.metamask;
 
   const onClickMint = async () => {
     try {
