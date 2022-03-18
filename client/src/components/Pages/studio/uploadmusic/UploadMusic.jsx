@@ -1,24 +1,84 @@
-import { Box, Button } from '@mui/material';
-import React, { useState } from 'react';
+import { Box, Button, TextField } from '@mui/material';
+import React from 'react';
 import S3Upload from './s3upload/S3Upload';
 import IPFSUpload from './ipfsupload/IPFSUpload';
-import InputMusicData from './inputmusicdata/InputMusicData';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { useInput } from '../../../../hooks/useInput';
+import MenuItem from '@mui/material/MenuItem';
+import TextFieldInput from './inputmusicdata/TextFieldInput';
+import { useLocation } from 'react-router-dom';
+import * as Util from './utils';
+import { mintMusicTokenContract } from '../../../../contracts';
+const currencies = Util.utilCurrencies;
 
 const UploadMusic = () => {
-  const user = useSelector(state => state.user);
-  const [stateValues, setStateValues] = useState({});
-  console.log('state', stateValues);
-  const account = user.loginSucces.userId;
+  const location = useLocation();
+  const artist = location.pathname.split('/')[2];
+
+  const { userData } = useSelector(state => state.user);
+
+  const [title, onChangeTitle] = useInput('');
+  // const [artist, onChangeArtist] = useInput('');
+  const [albumName, onChangeAlbumName] = useInput('');
+  const [genre, onChangeGenre] = useInput('balad');
+  const [release, onChangeRelease] = useInput('');
+  const [songwriter, onChangeSongwriter] = useInput('');
+  const [lyricist, onChangeLyricist] = useInput('');
+  const [IPFSUrl, onChangeIPFSURl] = useInput('');
+  const [S3AlbumCover, onChangeS3AlbumCover] = useInput('');
+
+  const account = userData.metamask;
 
   const onSubmitForm = async e => {
     e.preventDefault();
-    let dataToSubmit = stateValues;
-    //TODO: let request =
-    await axios
-      .post(`/api/uploadmusic`, dataToSubmit)
-      .then(res => console.log(res.data));
+
+    let dataToSubmit = {
+      userName: userData.name,
+      title,
+      artist,
+      albumName,
+      genre,
+      release,
+      songwriter,
+      lyricist,
+    };
+
+    if (userData.name !== artist) {
+      alert('This user is not that artist');
+      return;
+    }
+    console.log('12', IPFSUrl);
+
+    await axios.post(`/api/uploadmusic`, dataToSubmit).then(res => {
+      if (res.data.uploadSuccess === 'true') {
+        let jsonData = {
+          title: 'musit NFT',
+          description: 'This data is for minting a NFT.',
+          type: 'object',
+          properties: {
+            dataToSubmit,
+            IPFSUrl: IPFSUrl,
+            S3AlbumCover: S3AlbumCover,
+          },
+        };
+        const mintingData = JSON.stringify(jsonData);
+
+        const minting = async () => {
+          try {
+            const response = await mintMusicTokenContract.methods
+              .mintMusicToken(mintingData)
+              .send({ from: account });
+            console.log(response);
+          } catch (error) {}
+        };
+        minting();
+      } else if (res.data.uploadSuccess !== 'empty') {
+        alert(res.data.message);
+      } else {
+        alert(res.data.message);
+      }
+    });
   };
   return (
     <form onSubmit={onSubmitForm}>
@@ -28,15 +88,57 @@ const UploadMusic = () => {
             <S3Upload account={account} />
           </Box>
           <Box sx={style.IPFSUploadContainer}>
-            <IPFSUpload account={account} />
+            <IPFSUpload account={account} func={onChangeIPFSURl} />
           </Box>
         </Box>
         <Box sx={style.rightSide}>
           <Box sx={style.inputMusicDataContainer}>
-            <InputMusicData
-              account={account}
-              stateValues={stateValues}
-              onChange={value => setStateValues({ ...stateValues, ...value })}
+            <TextFieldInput
+              label="타이틀"
+              value={title}
+              func={onChangeTitle}
+              required={true}
+            />
+            <TextFieldInput
+              label="아티스트"
+              value={artist}
+              required={true}
+              inputProps={{ readOnly: true }}
+            />
+            <TextFieldInput
+              label="앨범명"
+              value={albumName}
+              func={onChangeAlbumName}
+            />
+            <TextField
+              variant="standard"
+              id="music_genre"
+              select
+              label="장르"
+              value={genre}
+              onChange={onChangeGenre}
+              sx={{ width: '200px', margin: '10px 0' }}
+            >
+              {currencies.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextFieldInput
+              label="발매년도"
+              value={release}
+              func={onChangeRelease}
+            />
+            <TextFieldInput
+              label="작곡가"
+              value={songwriter}
+              func={onChangeSongwriter}
+            />
+            <TextFieldInput
+              label="작사가"
+              value={lyricist}
+              func={onChangeLyricist}
             />
           </Box>
           <Box sx={style.uploadMusicBtnContainer}>
@@ -59,7 +161,7 @@ const style = {
     marginTop: '140px',
     height: '100%',
     width: '960px',
-    border: '1px solid black',
+
     display: 'flex',
   },
 
@@ -68,12 +170,12 @@ const style = {
   S3UploadContainer: {
     margin: '0',
     padding: '30px 30px 0 30px',
-    height: '260px',
+    height: '304px',
   },
 
-  IPFSUploadContainer: { marginTop: '100px', padding: '0 30px' },
+  IPFSUploadContainer: { marginTop: '0', padding: '0 30px' },
 
-  rightSide: { margin: '0', padding: '0', flex: 2 },
+  rightSide: { margin: '0', padding: '10px 0 0 40px', flex: 2 },
 
   inputMusicDataContainer: {},
 

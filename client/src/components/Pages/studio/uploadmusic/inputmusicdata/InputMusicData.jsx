@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 // import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
-import * as Util from './utils';
+import * as Util from '../utils';
 import axios from 'axios';
 
 const currencies = Util.utilCurrencies;
@@ -19,8 +19,6 @@ const InputMusicData = props => {
     lyricist: '',
     genre: 'balad',
   });
-  console.log(props);
-  console.log(window.location.href);
 
   const userArtist = async () => {
     //TODO:const request =
