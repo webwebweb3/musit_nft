@@ -23,7 +23,7 @@ const IPFSUploadButton = styled.button`
 
 const client = create('https://ipfs.infura.io:5001/api/v0');
 
-const IPFSUpload = () => {
+const IPFSUpload = ({ func }) => {
   const hiddenIPSFileInput = useRef(null);
   const [selectedMusic, setSelectedMusic] = useState(null);
   const [fileUrl, updateFileUrl] = useState(``);
@@ -31,7 +31,6 @@ const IPFSUpload = () => {
   const handleMusicInput = e => {
     const file = e.target.files[0];
     const fileExt = file.name.split('.').pop();
-    console.log(file);
     if (
       file.type === 'audio/mpeg' ||
       fileExt === 'mp3' ||
@@ -54,13 +53,11 @@ const IPFSUpload = () => {
     hiddenIPSFileInput.current.click();
   };
   const onChange1 = async () => {
-    console.log('1');
     try {
-      console.log(selectedMusic);
       const added = await client.add(selectedMusic);
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
       updateFileUrl(url);
-      console.log(fileUrl);
+      func(url);
     } catch (error) {
       console.log('Error uploading file: ', error);
     }

@@ -48,6 +48,7 @@ const UploadMusic = () => {
       alert('This user is not that artist');
       return;
     }
+    console.log('12', IPFSUrl);
 
     await axios.post(`/api/uploadmusic`, dataToSubmit).then(res => {
       if (res.data.uploadSuccess === 'true') {
@@ -87,7 +88,7 @@ const UploadMusic = () => {
             <S3Upload account={account} />
           </Box>
           <Box sx={style.IPFSUploadContainer}>
-            <IPFSUpload account={account} />
+            <IPFSUpload account={account} func={onChangeIPFSURl} />
           </Box>
         </Box>
         <Box sx={style.rightSide}>

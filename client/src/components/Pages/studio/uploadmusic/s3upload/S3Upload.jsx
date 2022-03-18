@@ -81,7 +81,7 @@ const S3Upload = ({ account }) => {
       parallelUploads3.done();
       // setUploadedImage(fileName);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
