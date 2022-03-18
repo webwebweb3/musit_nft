@@ -11,7 +11,7 @@ import MetamaskButton from './Register/button/metamaskButton';
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { userData } = useSelector(state => state.login);
+  const { userData } = useSelector(state => state.user);
   const metamask = useSelector(state => state.metamask);
   const [open, setOpen] = useState(false);
   const [metamaskLogin, setMetamaskLogin] = useState(false);

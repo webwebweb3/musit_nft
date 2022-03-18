@@ -1,20 +1,24 @@
 import { combineReducers } from 'redux';
-import user from './user_reducer';
-import metamask from './metamask_reducer';
-import login from './login_reducer';
+import userReducer from './user_reducer';
+import metamaskReducer from './metamask_reducer';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-const persistConfig = {
+const rootPersistConfig = {
   key: 'root',
   storage,
-  whitelist: ['login'],
+  whitelist: ['user'],
+};
+
+const authPersistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['userData'],
 };
 
 const rootReducer = combineReducers({
-  user,
-  login,
-  metamask,
+  user: persistReducer(authPersistConfig, userReducer),
+  metamask: metamaskReducer,
 });
 
-export default persistReducer(persistConfig, rootReducer);
+export default persistReducer(rootPersistConfig, rootReducer);

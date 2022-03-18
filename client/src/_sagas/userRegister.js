@@ -24,35 +24,23 @@ function logInAPI(data) {
     metamask: data,
     password: '1', // 임시 - 수정 예정
   };
-  console.log(loginData);
 
-  // const t = Axios.post('/login', loginData);
-  // console.log(t);
   return Axios.post('/login', loginData);
 }
 
 function* logIn(action) {
   try {
-    console.log(action.data);
-
-    const result = yield call(logInAPI(action.data));
-    // 성공을 해도 결과가 여기로 안나오고 에러로 간다.
-    console.log(result);
+    const result = yield call(logInAPI, action.data);
 
     yield put({
       type: LOGIN_USER_SUCCESS,
       data: result.data,
     });
   } catch (err) {
-    // 성공해도 결과가 여기로 온다.
-    console.log(2222222222222222222222);
-    console.log(err);
-    console.log(err.response);
-    // console.log(err.response.data);
     console.error(err);
     yield put({
       type: LOGIN_USER_FAILURE,
-      error: '로그인 실패', // 임시, 해결중...
+      error: err.response.data,
     });
   }
 }
@@ -64,6 +52,7 @@ function logOutAPI() {
 function* logOut() {
   try {
     yield call(logOutAPI);
+
     yield put({
       type: LOGOUT_USER_SUCCESS,
     });
@@ -88,7 +77,6 @@ function* register(action) {
       type: REGISTER_USER_SUCCESS,
     });
   } catch (err) {
-    console.log(err.response);
     console.error(err);
     yield put({
       type: REGISTER_USER_FAILURE,

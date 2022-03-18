@@ -10,7 +10,7 @@ const Studio = () => {
   const location = useLocation();
   const artist = location.pathname.split('/')[2];
 
-  const { userData } = useSelector(state => state.login);
+  const { userData } = useSelector(state => state.user);
 
   const account = userData.metamask;
 

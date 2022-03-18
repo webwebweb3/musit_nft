@@ -6,7 +6,7 @@ const { User, Genre } = require('../../models');
 //               /api/register
 //------------------------------------------------
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   try {
     const { metamask, nationality, genre, name, role } = req.body;
     const exUser = await User.findOne({
@@ -41,7 +41,8 @@ router.post('/', async (req, res) => {
       success: true,
     });
   } catch (error) {
-    return res.json({ success: false, error });
+    console.error(error);
+    next(error);
   }
 });
 

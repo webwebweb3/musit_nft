@@ -15,7 +15,7 @@ import MyPageButton from './MyPageButton';
 import { useSelector } from 'react-redux';
 
 const ProfileButton = () => {
-  const { userData } = useSelector(state => state.login);
+  const { userData } = useSelector(state => state.user);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);

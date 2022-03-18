@@ -12,7 +12,7 @@ const MyInfo = () => {
   const dispatch = useDispatch();
   const [editInfo, onEditInfo] = useState(false);
   const [editNationality, onEditNationality] = useState(false);
-  const { userData } = useSelector(state => state.login);
+  const { userData } = useSelector(state => state.user);
   const { imagePaths } = useSelector(state => state.user);
   const [nationality, onChangeNationality] = useState(userData.nationality);
   const [nickname, onChangeNickname] = useInput(userData.name);
@@ -67,39 +67,6 @@ const MyInfo = () => {
                   <CustomizedInputs label="name" read={true} value={nickname} />
                 )}
                 <MyInfoButton value={editInfo} func={onEditClick} />
-              </>
-            )}
-
-            {imagePaths ? (
-              <>
-                <InputLabel
-                  sx={{ color: '#000', fontWeight: 'bold', fontSize: '20px' }}
-                  shrink
-                  htmlFor="bootstrap-input"
-                >
-                  Profile
-                </InputLabel>
-                <Avatar
-                  src={`http://localhost:3000/gotosns1647504418774.png`}
-                  style={{ width: '200px' }}
-                  alt={'v'}
-                />
-                <MyImgButton />
-              </>
-            ) : (
-              <>
-                <InputLabel
-                  sx={{ color: '#000', fontWeight: 'bold', fontSize: '20px' }}
-                  shrink
-                  htmlFor="bootstrap-input"
-                >
-                  Profile
-                </InputLabel>
-                <Avatar
-                  src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
-                  alt={'Avatar'}
-                />
-                <MyImgButton />
               </>
             )}
 
