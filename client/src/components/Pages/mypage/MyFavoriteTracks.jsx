@@ -29,6 +29,7 @@ const MyFavoriteTracks = () => {
         </List>
       </div>
       <Divider textAlign="left">Hear the tracks you’ve liked:</Divider>
+      <br />
       <div className="likedList">
         <Card sx={{ maxWidth: 200 }}>
           <CardMedia component="img" height="200" image="" alt="앨범커버" />

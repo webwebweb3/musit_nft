@@ -12,6 +12,7 @@ import Streaming from './components/Pages/streaming/Streaming';
 import FileUploader from './components/Pages/streaming/musicCard/Testing';
 import DashBoard from './components/Pages/mypage/DashBoard';
 import MyFavoriteTracks from './components/Pages/mypage/MyFavoriteTracks';
+import FavArtists from './components/Pages/mypage/FavArtists';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="infoedit" element={<MyInfo />} />
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="likedtracks" element={<MyFavoriteTracks />} />
+            <Route path="favartists" element={<FavArtists />} />
           </Route>
           <Route path="streaming" element={<Streaming />} />
           //TODO: delete
