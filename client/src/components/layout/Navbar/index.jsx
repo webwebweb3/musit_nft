@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const { userData } = useSelector(state => state.login);
   const [open, setOpen] = useState(false);
 
   let navigate = useNavigate();
@@ -47,7 +47,7 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ background: 'linear-gradient(90deg, #0546d6, #3f89fc)' }}>
+      <AppBar sx={{ background: 'linear-gradient(90deg, #000, #000)' }}>
         <Toolbar>
           <img
             width="65px"
@@ -66,7 +66,7 @@ const Navbar = () => {
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
           </Tabs>
-          {user.userData ? (
+          {userData ? (
             <div style={{ marginLeft: 'auto' }}>
               <ProfileButton />
             </div>

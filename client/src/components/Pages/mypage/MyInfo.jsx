@@ -11,8 +11,10 @@ import MyInfoButton from './MyInfoButton';
 const MyInfo = () => {
   const [editInfo, onEditInfo] = useState(false);
   const [editNationality, onEditNationality] = useState(false);
-  const { userData } = useSelector(state => state.user);
+  const { userData } = useSelector(state => state.login);
+  const { imagePaths } = useSelector(state => state.user);
   const [nationality, onChangeNationality] = useState(userData.nationality);
+  console.log(imagePaths);
 
   const onEditClick = useCallback(() => {
     onEditInfo(prev => !prev);
@@ -61,25 +63,35 @@ const MyInfo = () => {
                 Profile
               </InputLabel>
               <MyImgButton />
-              <Avatar
+              {/* <Avatar
                 src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
                 style={{ width: '200px' }}
                 alt={'v'}
-              />
+              /> */}
             </>
           ) : (
             <>
-              <InputLabel
-                sx={{ color: '#000', fontWeight: 'bold', fontSize: '20px' }}
-                shrink
-                htmlFor="bootstrap-input"
-              >
-                Profile
-              </InputLabel>
-              <Avatar
-                src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
-                alt={'Avatar'}
-              />
+              {imagePaths ? (
+                <>
+                  <div>
+                    <Avatar src={imagePaths[0]} alt={'Avatar'} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <InputLabel
+                    sx={{ color: '#000', fontWeight: 'bold', fontSize: '20px' }}
+                    shrink
+                    htmlFor="bootstrap-input"
+                  >
+                    Profile
+                  </InputLabel>
+                  <Avatar
+                    src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
+                    alt={'Avatar'}
+                  />
+                </>
+              )}
               <MyImgButton />
             </>
           )}
