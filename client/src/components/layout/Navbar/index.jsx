@@ -6,10 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RegisterModal from './Register/RegisterModal';
 import ProfileButton from './myMenu';
 import { useNavigate } from 'react-router-dom';
-import {
-  metaMaskLoginRequestAction,
-  metaMaskRequestAction,
-} from '../../../_actions/metamask_actions';
+import { metaMaskRequestAction } from '../../../_actions/metamask_actions';
 import MetamaskButton from './Register/button/metamaskButton';
 
 const Navbar = () => {
@@ -44,14 +41,6 @@ const Navbar = () => {
     }
   }, [dispatch]);
 
-  const onClickLogin = useCallback(() => {
-    try {
-      dispatch(metaMaskLoginRequestAction());
-    } catch (error) {
-      console.error(error);
-    }
-  }, [dispatch]);
-
   return (
     <>
       <AppBar sx={{ background: 'linear-gradient(90deg, #0546d6, #3f89fc)' }}>
@@ -80,7 +69,7 @@ const Navbar = () => {
           ) : (
             <MetamaskButton
               metamaskLogin={metamaskLogin}
-              loginfunc={onClickLogin}
+              setMetamaskLogin={setMetamaskLogin}
               metaopenfunc={handleMetaMaskOpen}
             />
           )}

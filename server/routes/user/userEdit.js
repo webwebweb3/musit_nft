@@ -52,7 +52,6 @@ router.post('/', upload.none(), async (req, res) => {
 });
 
 router.post('/img', upload.array('image'), (req, res) => {
-  console.log(req.files);
   res.json(req.files.map(v => v.filename));
 });
 

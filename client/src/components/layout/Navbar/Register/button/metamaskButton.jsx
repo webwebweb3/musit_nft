@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { metaMaskLoginRequestAction } from '../../../../../_actions/metamask_actions';
 import NavButton from './NavButton';
 
-const MetamaskButton = ({ metamaskLogin, loginfunc, metaopenfunc }) => {
+const MetamaskButton = ({ metamaskLogin, setMetamaskLogin, metaopenfunc }) => {
+  const dispatch = useDispatch();
+  const metamask = useSelector(state => state.metamask);
+
   const onClickHandler = () => {
     window.location.reload();
   };
+
+  useEffect(() => {
+    // 메타마스크 로그인 상태
+    if (metamask.metamaskLoginLoading && metamask.metamaskData == null) {
+      setMetamaskLogin(true);
+    }
+
+    // 메타마스크 비로그인 상태
+    if (metamask.metamaskData !== null && metamask.metamaskLoginDone) {
+      setMetamaskLogin(false);
+    }
+  }, [metamask, setMetamaskLogin]);
+
+  const onClickLogin = useCallback(() => {
+    try {
+      dispatch(metaMaskLoginRequestAction());
+    } catch (error) {
+      console.error(error);
+    }
+  }, [dispatch]);
 
   return (
     <>
@@ -18,7 +43,7 @@ const MetamaskButton = ({ metamaskLogin, loginfunc, metaopenfunc }) => {
       ) : (
         <>
           <div style={{ marginLeft: 'auto' }}>
-            <NavButton value="Login" func={loginfunc} />
+            <NavButton value="Login" func={onClickLogin} />
           </div>
           <NavButton value="Register" func={metaopenfunc} />
         </>

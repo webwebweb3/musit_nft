@@ -19,31 +19,40 @@ import {
   USER_IMAGES_FAILURE,
 } from '../_actions/types';
 
-async function logInAPI(data) {
+function logInAPI(data) {
   let loginData = {
     metamask: data,
     password: '1', // 임시 - 수정 예정
   };
+  console.log(loginData);
 
-  const test = await Axios.post('/login', loginData);
-  console.log(test);
-  return test;
+  // const t = Axios.post('/login', loginData);
+  // console.log(t);
+  return Axios.post('/login', loginData);
 }
 
 function* logIn(action) {
   try {
     console.log(action.data);
+
     const result = yield call(logInAPI(action.data));
+    // 성공을 해도 결과가 여기로 안나오고 에러로 간다.
     console.log(result);
+
     yield put({
       type: LOGIN_USER_SUCCESS,
       data: result.data,
     });
   } catch (err) {
+    // 성공해도 결과가 여기로 온다.
+    console.log(2222222222222222222222);
+    console.log(err);
+    console.log(err.response);
+    // console.log(err.response.data);
     console.error(err);
     yield put({
       type: LOGIN_USER_FAILURE,
-      error: err.name,
+      error: '로그인 실패', // 임시, 해결중...
     });
   }
 }
@@ -62,7 +71,7 @@ function* logOut() {
     console.error(err);
     yield put({
       type: LOGOUT_USER_FAILURE,
-      error: err.name,
+      error: err.response.data,
     });
   }
 }
@@ -79,6 +88,7 @@ function* register(action) {
       type: REGISTER_USER_SUCCESS,
     });
   } catch (err) {
+    console.log(err.response);
     console.error(err);
     yield put({
       type: REGISTER_USER_FAILURE,
@@ -103,7 +113,7 @@ function* userImg(action) {
     console.error(err);
     yield put({
       type: USER_IMAGES_FAILURE,
-      error: err.name,
+      error: err.response.data,
     });
   }
 }
@@ -124,7 +134,7 @@ function* userEdit(action) {
     console.error(err);
     yield put({
       type: EDIT_USER_FAILURE,
-      error: err.name,
+      error: err.response.data,
     });
   }
 }

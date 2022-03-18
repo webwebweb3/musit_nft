@@ -22,7 +22,6 @@ const RegisterModal = ({ open, setOpen, id }) => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    console.log(user);
     if (user.registerUserError) {
       alert(user.registerUserError);
     }

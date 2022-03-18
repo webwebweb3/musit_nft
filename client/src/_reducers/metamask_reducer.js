@@ -25,6 +25,10 @@ const MetamaskReducer = (state = initialState, action) =>
         draft.metamaskLoading = true;
         draft.metamaskError = null;
         draft.metamaskDone = false;
+        draft.metamaskLoginLoading = false;
+        draft.metamaskLoginError = null;
+        draft.metamaskLoginDone = false;
+        draft.metamaskData = null;
         break;
       case METAMASK_SUCCESS:
         draft.metamaskLoading = false;
@@ -36,13 +40,17 @@ const MetamaskReducer = (state = initialState, action) =>
         draft.metamaskError = action.error;
         break;
       case METAMASK_LOGIN_REQUEST:
+        draft.metamaskLoading = false;
+        draft.metamaskError = null;
+        draft.metamaskDone = false;
         draft.metamaskLoginLoading = true;
         draft.metamaskLoginError = null;
         draft.metamaskLoginDone = false;
+        draft.metamaskData = null;
         break;
       case METAMASK_LOGIN_SUCCESS:
         draft.metamaskLoginLoading = false;
-        draft.metamaskLoginData = action.data;
+        draft.metamaskData = action.data;
         draft.metamaskLoginDone = true;
         break;
       case METAMASK_LOGIN_FAILURE:

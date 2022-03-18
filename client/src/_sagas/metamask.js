@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, takeLatest, throttle } from 'redux-saga/effects';
 import {
   LOGIN_USER_REQUEST,
   METAMASK_FAILURE,
@@ -20,7 +20,6 @@ function metamaskAPI() {
 function* metamask() {
   try {
     const result = yield call(metamaskAPI);
-    console.log(result);
 
     yield put({
       type: METAMASK_SUCCESS,
@@ -30,7 +29,7 @@ function* metamask() {
     console.error(err);
     yield put({
       type: METAMASK_FAILURE,
-      error: err.name,
+      error: err.response.data,
     });
   }
 }
@@ -46,20 +45,23 @@ function metamaskloginAPI() {
 function* metamasklogin() {
   try {
     const result = yield call(metamaskloginAPI);
+    console.log(result[0]);
+
+    yield put({
+      type: METAMASK_LOGIN_SUCCESS,
+      data: result[0],
+    });
 
     yield put({
       type: LOGIN_USER_REQUEST,
       data: result[0],
     });
-    yield put({
-      type: METAMASK_LOGIN_SUCCESS,
-      data: result[0],
-    });
   } catch (err) {
     console.error(err);
+    console.log(err.response.data);
     yield put({
       type: METAMASK_LOGIN_FAILURE,
-      error: err.name,
+      error: err.response.data,
     });
   }
 }
@@ -69,7 +71,7 @@ function* watchMetamask() {
 }
 
 function* watchMetamaskLogin() {
-  yield takeLatest(METAMASK_LOGIN_REQUEST, metamasklogin);
+  yield throttle(5000, METAMASK_LOGIN_REQUEST, metamasklogin);
 }
 
 export default function* userSaga() {
