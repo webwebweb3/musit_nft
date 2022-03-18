@@ -5,11 +5,12 @@ const path = require('path');
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 const multer = require('multer');
+const { User } = require('../../models');
 
 require('dotenv').config();
 
 //------------------------------------------------
-//               /api/userImg
+//               /api/userEdit
 //------------------------------------------------
 
 try {
@@ -36,7 +37,29 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 },
 });
 
-router.post('/', upload.array('image'), (req, res) => {
+router.post('/', upload.none(), async (req, res) => {
+  try {
+    console.log(req.body);
+    // 메타 마스크를 추가해주자.
+    const { metamask, name, nationality, img, pass } = req.body;
+    await User.update(
+      {
+        name,
+        nationality,
+        img,
+        pass,
+      },
+      {
+        where: { metamask },
+      },
+    );
+    res.json('ok');
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.post('/img', upload.array('image'), (req, res) => {
   console.log(req.files);
   res.json(req.files.map(v => v.location));
 });

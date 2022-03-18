@@ -50,7 +50,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const CustomizedInputs = ({ label, read, value }) => {
+const CustomizedInputs = ({ label, read, value, func }) => {
   return (
     <>
       <Global />
@@ -79,7 +79,11 @@ const CustomizedInputs = ({ label, read, value }) => {
               id="bootstrap-input"
             />
           ) : (
-            <BootstrapInput placeholder={value} id="bootstrap-input" />
+            <BootstrapInput
+              placeholder={value}
+              onChange={func}
+              id="bootstrap-input"
+            />
           )}
         </FormControl>
       </Box>

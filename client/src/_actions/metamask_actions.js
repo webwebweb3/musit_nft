@@ -1,12 +1,9 @@
-import { METAMASK_USER } from './types';
+import { METAMASK_LOGIN_REQUEST, METAMASK_REQUEST } from './types';
 
-export const metaMaskUser = async () => {
-  let request = await window.ethereum.request({
-    method: 'eth_requestAccounts',
-  });
+export const metaMaskRequestAction = () => ({
+  type: METAMASK_REQUEST,
+});
 
-  return {
-    type: METAMASK_USER,
-    userMetamask: request[0],
-  };
-};
+export const metaMaskLoginRequestAction = () => ({
+  type: METAMASK_LOGIN_REQUEST,
+});
