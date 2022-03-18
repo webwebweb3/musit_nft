@@ -21,7 +21,7 @@ const AlbumCoverButton = styled.button`
   background: linear-gradient(135deg, #3a8ffe 0%, #9658fe 100%);
 `;
 
-const S3Upload = ({ account }) => {
+const S3Upload = ({ func }) => {
   const hiddenFileInput = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -83,6 +83,7 @@ const S3Upload = ({ account }) => {
     } catch (e) {
       console.error(e);
     }
+    func(target.Key);
   };
 
   return (
@@ -124,9 +125,9 @@ const S3Upload = ({ account }) => {
         Upload ALBUM COVER
       </AlbumCoverButton>
       {/* <Button onClick={uploadAlbumCoverBtn}>Upload Album Cover</Button> */}
-      {/* <Button sx={style.uploadBtn} onClick={() => upload(selectedFile)}>
+      <Button sx={style.uploadBtn} onClick={() => upload(selectedFile)}>
         Upload
-      </Button> */}
+      </Button>
       {uploadedImage && (
         <img
           src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${uploadedImage}`}
