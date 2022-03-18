@@ -11,7 +11,7 @@ const rootPersistConfig = {
 };
 
 const authPersistConfig = {
-  key: 'root',
+  key: 'user',
   storage,
   whitelist: ['userData'],
 };

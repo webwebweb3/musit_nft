@@ -53,7 +53,16 @@ router.post('/', upload.none(), async (req, res) => {
         where: { metamask },
       },
     );
-    res.json('ok');
+
+    const UserInfo = await User.findOne({
+      attributes: {
+        exclude: ['id', 'updatedAt', 'deletedAt'],
+      },
+      where: { metamask },
+    });
+
+    console.log(UserInfo);
+    res.status(200).json(UserInfo);
   } catch (error) {
     console.error(error);
   }

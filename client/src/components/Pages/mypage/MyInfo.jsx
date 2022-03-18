@@ -13,14 +13,15 @@ const MyInfo = () => {
   const [editInfo, onEditInfo] = useState(false);
   const [editNationality, onEditNationality] = useState(false);
   const { userData } = useSelector(state => state.user);
-  const { imagePaths } = useSelector(state => state.user);
+  const { imagePath } = useSelector(state => state.user);
   const [nationality, onChangeNationality] = useState(userData.nationality);
   const [nickname, onChangeNickname] = useInput(userData.name);
-  console.log(imagePaths);
+  console.log(userData);
 
   const onSubmit = useCallback(() => {
     let editData = {
-      img: imagePaths[0],
+      metamask: userData.metamask,
+      img: imagePath[0],
       nationality,
       name: nickname,
     };
@@ -33,7 +34,7 @@ const MyInfo = () => {
     }
 
     dispatch(userEditRequestAction(formData));
-  }, [dispatch, nationality, nickname, imagePaths]);
+  }, [dispatch, nationality, nickname, imagePath, userData]);
 
   const onEditClick = useCallback(() => {
     onEditInfo(prev => !prev);
@@ -70,7 +71,7 @@ const MyInfo = () => {
               </>
             )}
 
-            {userData.img ? (
+            {userData && userData.img ? (
               <>
                 <InputLabel
                   sx={{ color: '#000', fontWeight: 'bold', fontSize: '20px' }}
@@ -79,19 +80,23 @@ const MyInfo = () => {
                 >
                   Profile
                 </InputLabel>
+                {imagePath ? (
+                  <Avatar src={imagePath[0]} alt={'Avatar'} />
+                ) : (
+                  <>
+                    <div>
+                      <Avatar src={userData.img} alt={'Avatar'} />
+                    </div>
+                  </>
+                )}
                 <MyImgButton />
-                {/* <Avatar
-                src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
-                style={{ width: '200px' }}
-                alt={'v'}
-              /> */}
               </>
             ) : (
               <>
-                {imagePaths ? (
+                {imagePath ? (
                   <>
                     <div>
-                      <Avatar src={imagePaths[0]} alt={'Avatar'} />
+                      <Avatar src={imagePath[0]} alt={'Avatar'} />
                     </div>
                   </>
                 ) : (

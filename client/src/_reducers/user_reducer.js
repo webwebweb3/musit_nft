@@ -90,6 +90,8 @@ const UserReducer = (state = initialState, action) =>
       case EDIT_USER_SUCCESS:
         draft.editUserLoading = false;
         draft.editUserDone = true;
+        draft.userData = action.data;
+        draft.imagePath = null;
         break;
       case EDIT_USER_FAILURE:
         draft.editUserLoading = false;
