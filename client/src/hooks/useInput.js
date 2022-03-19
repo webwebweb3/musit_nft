@@ -8,7 +8,7 @@ export const useInput = (initValue = null) => {
     },
     [setValue],
   );
-  return [value, handler];
+  return [value, handler, setValue];
 };
 
 export const useGenreInput = (initValue = null) => {

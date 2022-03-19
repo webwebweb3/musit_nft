@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, InputLabel } from '@mui/material';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInput } from '../../../hooks/useInput';
 import { userEditRequestAction } from '../../../_actions/user_actions';
@@ -16,11 +16,16 @@ const MyInfo = () => {
   const [booleanNationality, onBooleanNationality] = useState(false);
   const { userData } = useSelector(state => state.user);
   const { imagePath } = useSelector(state => state.user);
-  const [editNationality, onChangeEditNationality] = useState(
-    userData.nationality,
-  );
-  const [editNickname, onChangeEditNickname] = useInput(userData.name);
+  const [editNationality, onChangeEditNationality] = useState('');
+  const [editNickname, onChangeEditNickname, setEditNickname] = useInput('');
   // const [editGenre, setEditGenre] = useState([]);
+
+  useEffect(() => {
+    if (userData) {
+      setEditNickname(userData.name);
+      onChangeEditNationality(userData.nationality);
+    }
+  }, [userData, setEditNickname, onChangeEditNationality]);
 
   const onSubmit = useCallback(() => {
     let editData = {
@@ -80,7 +85,7 @@ const MyInfo = () => {
                   <CustomizedInputs
                     label="name"
                     read={true}
-                    value={editNickname}
+                    value={userData.name}
                   />
                 )}
                 <MyInfoButton type={true} value={editInfo} func={onEditClick} />
@@ -125,6 +130,17 @@ const MyInfo = () => {
               </>
             ) : (
               <>
+                <InputLabel
+                  sx={{
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    fontSize: '20px',
+                  }}
+                  shrink
+                  htmlFor="bootstrap-input"
+                >
+                  Profile
+                </InputLabel>
                 {imagePath ? (
                   <>
                     <Avatar
@@ -139,17 +155,6 @@ const MyInfo = () => {
                   </>
                 ) : (
                   <>
-                    <InputLabel
-                      sx={{
-                        color: '#fff',
-                        fontWeight: 'bold',
-                        fontSize: '20px',
-                      }}
-                      shrink
-                      htmlFor="bootstrap-input"
-                    >
-                      Profile
-                    </InputLabel>
                     <Avatar
                       style={{
                         display: 'inline-block',
