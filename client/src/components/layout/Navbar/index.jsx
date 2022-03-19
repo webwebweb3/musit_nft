@@ -47,7 +47,7 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ background: 'linear-gradient(90deg, #0546d6, #3f89fc)' }}>
+      <AppBar sx={{ background: 'black' }}>
         <Toolbar>
           <img
             width="65px"
