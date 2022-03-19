@@ -64,11 +64,13 @@ router.post('/', async (req, res) => {
       });
       return;
     }
+
     const exUser = await User.findOne({
       where: {
         name: artist,
       },
     });
+    console.log(exUser);
 
     const postMusic = await Music.create({
       title,

@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import S3Upload from './s3upload/S3Upload';
 import IPFSUpload from './ipfsupload/IPFSUpload';
 import { useSelector } from 'react-redux';
@@ -25,8 +25,8 @@ const UploadMusic = () => {
   const [release, onChangeRelease] = useInput('');
   const [songwriter, onChangeSongwriter] = useInput('');
   const [lyricist, onChangeLyricist] = useInput('');
-  const [IPFSUrl, onChangeIPFSURl] = useInput('');
-  const [S3AlbumCover, onChangeS3AlbumCover] = useInput('');
+  const [IPFSUrl, setIPFSUrl] = useState('');
+  const [S3AlbumCover, setS3AlbumCover] = useState('');
 
   const account = userData.metamask;
 
@@ -49,6 +49,7 @@ const UploadMusic = () => {
       return;
     }
     console.log('12', IPFSUrl);
+    console.log('34', S3AlbumCover);
 
     await axios.post(`/api/uploadmusic`, dataToSubmit).then(res => {
       if (res.data.uploadSuccess === 'true') {
@@ -75,6 +76,10 @@ const UploadMusic = () => {
         minting();
       } else if (res.data.uploadSuccess !== 'empty') {
         alert(res.data.message);
+      } else if (res.data.uploadSuccess !== 'emptyIPFS') {
+        alert(res.data.message);
+      } else if (res.data.uploadSuccess !== 'emptyS3AlbumCover') {
+        alert(res.data.message);
       } else {
         alert(res.data.message);
       }
@@ -85,10 +90,10 @@ const UploadMusic = () => {
       <Box sx={style.uploadMusicContainer}>
         <Box sx={style.leftSide}>
           <Box sx={style.S3UploadContainer}>
-            <S3Upload account={account} />
+            <S3Upload account={account} func={setS3AlbumCover} />
           </Box>
           <Box sx={style.IPFSUploadContainer}>
-            <IPFSUpload account={account} func={onChangeIPFSURl} />
+            <IPFSUpload account={account} func={setIPFSUrl} />
           </Box>
         </Box>
         <Box sx={style.rightSide}>

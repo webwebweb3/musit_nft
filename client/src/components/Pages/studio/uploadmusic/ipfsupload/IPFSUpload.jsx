@@ -52,12 +52,12 @@ const IPFSUpload = ({ func }) => {
   const onChange = () => {
     hiddenIPSFileInput.current.click();
   };
-  const onChange1 = async () => {
+  const uploadToIPFS = async () => {
     try {
       const added = await client.add(selectedMusic);
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
       updateFileUrl(url);
-      func(url);
+      func(added.path);
     } catch (error) {
       console.log('Error uploading file: ', error);
     }
@@ -82,7 +82,7 @@ const IPFSUpload = ({ func }) => {
           margin: '10px auto',
           float: 'right',
         }}
-        onClick={onChange1}
+        onClick={uploadToIPFS}
       >
         Upload to IPFS
       </Button>
