@@ -58,15 +58,14 @@ const CustomizedInputs = ({ label, read, value, func }) => {
         component="form"
         noValidate
         sx={{
-          display: 'grid',
-          gridTemplateColumns: { sm: '1fr 1fr' },
-          gap: 2,
+          display: 'inline-block',
+          width: '450px',
           marginBottom: '20px',
         }}
       >
-        <FormControl variant="standard">
+        <FormControl sx={{ margin: 0 }} variant="standard">
           <InputLabel
-            sx={{ color: '#000', fontWeight: 'bold', fontSize: '20px' }}
+            sx={{ color: '#fff', fontWeight: 'bold', fontSize: '20px' }}
             shrink
             htmlFor="bootstrap-input"
           >
@@ -75,12 +74,14 @@ const CustomizedInputs = ({ label, read, value, func }) => {
           {read ? (
             <BootstrapInput
               defaultValue={value}
+              sx={{ fontSize: '20px', width: '480px' }}
               readOnly
               id="bootstrap-input"
             />
           ) : (
             <BootstrapInput
               placeholder={value}
+              sx={{ fontSize: '20px', width: '480px' }}
               onChange={func}
               id="bootstrap-input"
             />

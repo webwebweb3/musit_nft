@@ -1,33 +1,37 @@
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 const MyPage = () => {
   return (
-    <>
-      <Grid container style={{ minWidth: '1300px' }} spacing={1}>
-        <Grid item xs={2}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <Sidebar />
-          </Box>
-        </Grid>
-        <Grid item xs={10}>
-          <Box
-            sx={{
-              marginLeft: '100px',
-            }}
-          >
-            <Outlet />
-          </Box>
-        </Grid>
-      </Grid>
-    </>
+    <div style={{ minWidth: '1300px' }}>
+      <Box
+        sx={{
+          display: 'inline-block',
+          verticalAlign: 'top',
+        }}
+      >
+        <Sidebar />
+      </Box>
+      <Box
+        sx={{
+          display: 'inline-block',
+          width: '1px',
+          height: '650px',
+          backgroundColor: 'gray',
+        }}
+      />
+      <Box
+        sx={{
+          display: 'inline-block',
+          marginLeft: '70px',
+          verticalAlign: 'top',
+        }}
+      >
+        <Outlet />
+      </Box>
+    </div>
   );
 };
 

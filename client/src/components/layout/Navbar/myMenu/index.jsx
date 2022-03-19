@@ -40,9 +40,13 @@ const ProfileButton = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar
-              src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
-            />
+            {userData.img ? (
+              <Avatar src={userData.img} alt={'Avatar'} />
+            ) : (
+              <Avatar
+                src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
+              />
+            )}
           </IconButton>
         </Tooltip>
       </Box>

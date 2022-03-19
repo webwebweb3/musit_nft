@@ -12,9 +12,6 @@ import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import SpatialTrackingIcon from '@mui/icons-material/SpatialTracking';
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import IconButton from '@mui/material/IconButton';
-import StyledAvatar from './StyledAvatar';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useNavigate } from 'react-router-dom';
@@ -29,27 +26,25 @@ const Sidebar = () => {
           height: '100%',
           width: '300px',
           maxWidth: 360,
-          bgcolor: '#fff',
-          alignItems: 'flex-end',
-          color: 'black',
+          color: '#gray',
         }}
       >
         <List>
           <ListItem disablePadding>
             <ListItemButton>
-              <ListItemIcon>
+              <ListItemIcon sx={{ color: '#fff' }}>
                 <DashboardIcon />
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItemButton>
           </ListItem>
         </List>
-        <Divider />
+        <Divider sx={{ bgcolor: '#fff' }} />
         <nav aria-label="사이드바">
           <List>
             <ListItem disablePadding>
               <ListItemButton onClick={() => navigate('/mypage/infoedit')}>
-                <ListItemIcon>
+                <ListItemIcon sx={{ color: '#fff' }}>
                   <Person />
                 </ListItemIcon>
                 <ListItemText primary="회원 정보 수정" />
@@ -57,7 +52,7 @@ const Sidebar = () => {
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon>
+                <ListItemIcon sx={{ color: '#fff' }}>
                   <TokenIcon />
                 </ListItemIcon>
                 <ListItemText primary="My NFT" />
@@ -65,7 +60,7 @@ const Sidebar = () => {
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon>
+                <ListItemIcon sx={{ color: '#fff' }}>
                   <AutoAwesomeIcon />
                 </ListItemIcon>
                 <ListItemText primary="내 스튜디오" />
@@ -73,7 +68,7 @@ const Sidebar = () => {
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon>
+                <ListItemIcon sx={{ color: '#fff' }}>
                   <AudiotrackIcon />
                 </ListItemIcon>
                 <ListItemText primary="좋아하는 노래" />
@@ -81,7 +76,7 @@ const Sidebar = () => {
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon>
+                <ListItemIcon sx={{ color: '#fff' }}>
                   <SpatialTrackingIcon />
                 </ListItemIcon>
                 <ListItemText primary="좋아하는 아티스트" />
@@ -89,7 +84,7 @@ const Sidebar = () => {
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon>
+                <ListItemIcon sx={{ color: '#fff' }}>
                   <LibraryMusicIcon />
                 </ListItemIcon>
                 <ListItemText primary="나의 재생목록" />
@@ -97,24 +92,10 @@ const Sidebar = () => {
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
-                <ListItemIcon>
+                <ListItemIcon sx={{ color: '#fff' }}>
                   <CardMembershipIcon />
                 </ListItemIcon>
                 <ListItemText primary="이용권 정보 조회" />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </nav>
-        <Divider />
-        <nav aria-label="회원 메타마스크 정보">
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <StyledAvatar />
-                <ListItemText primary="아티스트/ 유저" />
-                <IconButton contained sx={{ color: 'lightGray' }}>
-                  <ExitToAppIcon />
-                </IconButton>
               </ListItemButton>
             </ListItem>
           </List>

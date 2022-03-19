@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const { User, Genre } = require('../../models');
 
 //------------------------------------------------
 //               /api/login
@@ -20,15 +21,18 @@ router.post('/', async (req, res, next) => {
         console.error(loginErr);
         return next(loginErr);
       }
-      return res.json({
-        img: user.img,
-        name: user.name,
-        metamask: user.metamask,
-        nationality: user.nationality,
-        pass: user.pass,
-        createdAt: user.createdAt,
-        role: user.role,
+      const UserInfo = await User.findOne({
+        where: { metamask: user.metamask },
+        attributes: {
+          exclude: ['id', 'updatedAt', 'deletedAt'],
+        },
+        include: {
+          model: Genre,
+          attribute: ['content'],
+        },
       });
+
+      return res.status(200).json(UserInfo);
     });
   })(req, res, next);
 });

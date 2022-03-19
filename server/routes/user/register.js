@@ -9,6 +9,7 @@ const { User, Genre } = require('../../models');
 router.post('/', async (req, res, next) => {
   try {
     const { metamask, nationality, genre, name, role } = req.body;
+
     const exUser = await User.findOne({
       where: {
         metamask,
@@ -37,9 +38,7 @@ router.post('/', async (req, res, next) => {
       await user.addGenre(result.map(r => r[0]));
     }
 
-    return res.status(200).json({
-      success: true,
-    });
+    return res.status(200).json('ok');
   } catch (error) {
     console.error(error);
     next(error);

@@ -5,7 +5,7 @@ const path = require('path');
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 const multer = require('multer');
-const { User } = require('../../models');
+const { User, Genre } = require('../../models');
 
 require('dotenv').config();
 
@@ -40,8 +40,8 @@ const upload = multer({
 router.post('/', upload.none(), async (req, res) => {
   try {
     console.log(req.body);
-    // 메타 마스크를 추가해주자.
     const { metamask, name, nationality, img, pass } = req.body;
+
     await User.update(
       {
         name,
@@ -55,14 +55,28 @@ router.post('/', upload.none(), async (req, res) => {
     );
 
     const UserInfo = await User.findOne({
+      where: { metamask },
       attributes: {
         exclude: ['id', 'updatedAt', 'deletedAt'],
       },
-      where: { metamask },
+      include: {
+        model: Genre,
+        attribute: ['content'],
+      },
     });
 
-    console.log(UserInfo);
-    res.status(200).json(UserInfo);
+    // if (genre) {
+    //   const result = await Promise.all(
+    //     genre.map(index => {
+    //       return Genre.findOrCreate({
+    //         where: { content: index },
+    //       });
+    //     }),
+    //   );
+    //   await UserInfo.addGenre(result.map(r => r[0]));
+    // }
+
+    return res.status(200).json(UserInfo);
   } catch (error) {
     console.error(error);
   }

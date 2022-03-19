@@ -12,7 +12,8 @@ const MyPageButton = () => {
     <MenuItem onClick={() => navigate('/mypage')}>
       {userImg ? (
         <>
-          <Avatar />
+          <Avatar src={userData.img} alt={'Avatar'} />
+          {userData.name ? <>{userData.name}</> : <>USER</>}
         </>
       ) : (
         <>

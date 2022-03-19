@@ -12,17 +12,13 @@ module.exports = () => {
       },
       async (metamask, password, done) => {
         try {
-          console.log('?????????????????');
           const exUser = await User.findOne({ where: { metamask } });
           if (exUser) {
-            console.log('&&&&&&&&&&&&');
             done(null, exUser);
           } else {
-            console.log('##################');
             done(null, false, '가입되지 않은 회원입니다');
           }
         } catch (error) {
-          console.log('ggggggggggggggg');
           console.log(error);
           done(error);
         }
