@@ -17,8 +17,11 @@ import IconButton from '@mui/material/IconButton';
 import StyledAvatar from './StyledAvatar';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
+  let navigate = useNavigate();
+
   return (
     <>
       <Box
@@ -28,6 +31,7 @@ const Sidebar = () => {
           maxWidth: 360,
           bgcolor: '#fff',
           alignItems: 'flex-end',
+          color: 'black',
         }}
       >
         <List>
@@ -44,7 +48,7 @@ const Sidebar = () => {
         <nav aria-label="사이드바">
           <List>
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={() => navigate('/mypage/infoedit')}>
                 <ListItemIcon>
                   <Person />
                 </ListItemIcon>
