@@ -7,8 +7,16 @@ export const LOGOUT_USER_FAILURE = 'logout_user_failure';
 export const REGISTER_USER_REQUEST = 'register_user_request';
 export const REGISTER_USER_SUCCESS = 'register_user_success';
 export const REGISTER_USER_FAILURE = 'register_user_failure';
+export const EDIT_USER_REQUEST = 'edit_user_request';
+export const EDIT_USER_SUCCESS = 'edit_user_success';
+export const EDIT_USER_FAILURE = 'edit_user_failure';
 export const USER_IMAGES_REQUEST = 'user_images_request';
 export const USER_IMAGES_SUCCESS = 'user_images_success';
 export const USER_IMAGES_FAILURE = 'user_images_failure';
 
-export const METAMASK_USER = 'metaMask_user';
+export const METAMASK_REQUEST = 'metaMask_request';
+export const METAMASK_SUCCESS = 'metaMask_success';
+export const METAMASK_FAILURE = 'metaMask_failure';
+export const METAMASK_LOGIN_REQUEST = 'metaMask_login_request';
+export const METAMASK_LOGIN_SUCCESS = 'metaMask_login_success';
+export const METAMASK_LOGIN_FAILURE = 'metaMask_login_failure';

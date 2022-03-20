@@ -117,7 +117,7 @@ CustomSelect.propTypes = {
 
 const UnstyledSelectsMultiple = ({ value, func }) => {
   return (
-    <div>
+    <div id="nationality" style={{ display: 'inline-block' }}>
       <CustomSelect value={value} onChange={func}>
         <StyledOption value={0}>대한민국</StyledOption>
         <StyledOption value={1}>English</StyledOption>

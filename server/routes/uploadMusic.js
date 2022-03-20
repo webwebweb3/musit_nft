@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User, Music } = require('../models');
+const { User, Music, MusicLike, MusicPlayTime } = require('../models');
 
 //------------------------------------------------
 //               /api/uploadmusic
@@ -23,11 +23,58 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { title, user, albumName, release, songwriter, lyricist, genre } =
-      req.body;
-    await Music.create({
+    let {
+      userName,
       title,
-      user,
+      artist,
+      albumName,
+      genre,
+      release,
+      songwriter,
+      lyricist,
+    } = req.body;
+    if (albumName === '') {
+      albumName = null;
+    }
+    if (genre === '') {
+      genre = null;
+    }
+    if (release === '') {
+      release = null;
+    }
+    if (songwriter === '') {
+      songwriter = null;
+    }
+    if (lyricist === '') {
+      lyricist = null;
+    }
+
+    if (title === '' || title === null || artist === '' || artist === null) {
+      res.json({
+        uploadSuccess: 'empty',
+        message: 'Input data is empty',
+      });
+      return;
+    }
+
+    if (userName !== artist) {
+      res.json({
+        uploadSuccess: 'authFail',
+        message: 'This user is not that artist',
+      });
+      return;
+    }
+
+    const exUser = await User.findOne({
+      where: {
+        name: artist,
+      },
+    });
+    console.log(exUser);
+
+    const postMusic = await Music.create({
+      title,
+      uploader: exUser.dataValues.id,
       albumName,
       release,
       songwriter,
@@ -35,7 +82,15 @@ router.post('/', async (req, res) => {
       genre,
     });
 
-    return res.json({ uploadSuccess: true });
+    await MusicLike.create({
+      likes: 0,
+      musicId: postMusic.dataValues.id,
+    });
+    await MusicPlayTime.create({
+      playtime: 0,
+      musicId: postMusic.dataValues.id,
+    });
+    return res.json({ uploadSuccess: 'true' });
   } catch (error) {
     console.error(error);
   }

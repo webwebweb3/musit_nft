@@ -32,6 +32,7 @@ const MyImgButton = () => {
         hidden
         ref={imageInput}
         onChange={onChangeImages}
+        style={{ width: '500px', height: '500px' }}
       />
       <Button
         style={{ color: '#808080' }}

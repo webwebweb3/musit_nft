@@ -2,12 +2,12 @@ import { Button } from '@mui/material';
 import propTypes from 'prop-types';
 import React from 'react';
 
-const MyInfoButton = ({ value, func }) => {
+const NationalityButton = ({ value, func }) => {
   return (
     <>
       {value ? (
         <Button
-          style={{ marginLeft: '-10px', marginTop: '66px', color: '#808080' }}
+          style={{ marginLeft: '30px', color: '#808080' }}
           onClick={func}
           variant="text"
         >
@@ -15,7 +15,7 @@ const MyInfoButton = ({ value, func }) => {
         </Button>
       ) : (
         <Button
-          style={{ marginLeft: '-10px', marginTop: '66px', color: '#808080' }}
+          style={{ marginLeft: '30px', color: '#808080' }}
           onClick={func}
           variant="text"
         >
@@ -26,9 +26,9 @@ const MyInfoButton = ({ value, func }) => {
   );
 };
 
-MyInfoButton.prototype = {
+NationalityButton.prototype = {
   value: propTypes.bool.isRequired,
   func: propTypes.func.isRequired,
 };
 
-export default MyInfoButton;
+export default NationalityButton;

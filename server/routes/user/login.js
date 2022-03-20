@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const { User, Genre } = require('../../models');
 
 //------------------------------------------------
 //               /api/login
@@ -10,25 +11,28 @@ router.post('/', async (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       console.error(err);
-      res.json({ loginSuccess: false });
+      return next(err);
     }
     if (info) {
-      return res.json({ loginSuccess: false, info });
+      return res.status(400).send('이미 사용 중입니다.');
     }
     return req.login(user, async loginErr => {
       if (loginErr) {
         console.error(loginErr);
-        return res.json({ loginSuccess: false });
+        return next(loginErr);
       }
-      return res.json({
-        img: user.img,
-        name: user.name,
-        metamask: user.metamask,
-        nationality: user.nationality,
-        pass: user.pass,
-        createdAt: user.createdAt,
-        role: user.role,
+      const UserInfo = await User.findOne({
+        where: { metamask: user.metamask },
+        attributes: {
+          exclude: ['id', 'updatedAt', 'deletedAt'],
+        },
+        include: {
+          model: Genre,
+          attribute: ['content'],
+        },
       });
+
+      return res.status(200).json(UserInfo);
     });
   })(req, res, next);
 });

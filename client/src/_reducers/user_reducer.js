@@ -1,18 +1,21 @@
 import produce from '../util/produce';
 
 import {
-  LOGIN_USER_REQUEST,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILURE,
   LOGOUT_USER_REQUEST,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_FAILURE,
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAILURE,
   USER_IMAGES_REQUEST,
   USER_IMAGES_SUCCESS,
   USER_IMAGES_FAILURE,
+  LOGIN_USER_REQUEST,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAILURE,
 } from '../_actions/types';
 
 export const initialState = {
@@ -25,7 +28,14 @@ export const initialState = {
   registerUserLoading: false,
   registerUserDone: false,
   registerUserError: null,
+  editImagesLoading: false,
+  editImagesDone: false,
+  editImagesError: null,
+  uploadImagesLoading: false,
+  uploadImagesDone: false,
+  uploadImagesError: null,
   userData: null,
+  imagePath: null,
 };
 
 const UserReducer = (state = initialState, action) =>
@@ -72,13 +82,28 @@ const UserReducer = (state = initialState, action) =>
         draft.registerUserLoading = false;
         draft.registerUserError = action.error;
         break;
+      case EDIT_USER_REQUEST:
+        draft.editUserLoading = true;
+        draft.editUserError = null;
+        draft.editUserDone = false;
+        break;
+      case EDIT_USER_SUCCESS:
+        draft.editUserLoading = false;
+        draft.editUserDone = true;
+        draft.userData = action.data;
+        draft.imagePath = null;
+        break;
+      case EDIT_USER_FAILURE:
+        draft.editUserLoading = false;
+        draft.editUserError = action.error;
+        break;
       case USER_IMAGES_REQUEST:
         draft.uploadImagesLoading = true;
         draft.uploadImagesDone = false;
         draft.uploadImagesError = null;
         break;
       case USER_IMAGES_SUCCESS:
-        draft.imagePaths = action.data;
+        draft.imagePath = action.data;
         draft.uploadImagesLoading = false;
         draft.uploadImagesDone = true;
         break;

@@ -9,7 +9,7 @@ import UploadMusic from './components/Pages/studio/uploadmusic/UploadMusic';
 import MyInfo from './components/Pages/mypage/MyInfo';
 import Streaming from './components/Pages/streaming/Streaming';
 //TODO: delete
-import FileUploader from './components/Pages/streaming/musicCard/Testing';
+//import FileUploader from './components/Pages/streaming/musicCard/Testing';
 import DashBoard from './components/Pages/mypage/DashBoard';
 import MyFavoriteTracks from './components/Pages/mypage/MyFavoriteTracks';
 import FavArtists from './components/Pages/mypage/FavArtists';
@@ -27,8 +27,6 @@ const App = () => {
             <Route path="favartists" element={<FavArtists />} />
           </Route>
           <Route path="streaming" element={<Streaming />} />
-          //TODO: delete
-          <Route path="test" element={<FileUploader />} />
           <Route path="studio/:id" element={<Studio />} />
           <Route
             path="studio/:artistName/uploadmusic"

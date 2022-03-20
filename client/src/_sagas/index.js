@@ -2,12 +2,13 @@ import { all, fork } from 'redux-saga/effects';
 import Axios from 'axios';
 
 import userRegisterSaga from './userRegister';
+import metamaskSaga from './metamask';
 
 Axios.defaults.baseURL = '/api';
 Axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {
-  yield all([fork(userRegisterSaga)]); // all 에 배열을 넣고 배열의 함수들을 한번에 전부 실행
+  yield all([fork(userRegisterSaga), fork(metamaskSaga)]); // all 에 배열을 넣고 배열의 함수들을 한번에 전부 실행
 }
 
 /* redux-saga/effects */

@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const passport = require('passport');
+const path = require('path');
+
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 dotenv.config();
@@ -29,6 +31,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(morgan('dev'));
 }
 
+app.use(express.static(path.join(__dirname, '')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));

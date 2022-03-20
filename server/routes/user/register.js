@@ -6,9 +6,10 @@ const { User, Genre } = require('../../models');
 //               /api/register
 //------------------------------------------------
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   try {
     const { metamask, nationality, genre, name, role } = req.body;
+
     const exUser = await User.findOne({
       where: {
         metamask,
@@ -16,7 +17,7 @@ router.post('/', async (req, res) => {
     });
 
     if (exUser) {
-      return res.json({ success: false, message: '가입된 회원입니다' });
+      return res.status(400).send('이미 사용 중입니다.');
     }
 
     const user = await User.create({
@@ -37,11 +38,10 @@ router.post('/', async (req, res) => {
       await user.addGenre(result.map(r => r[0]));
     }
 
-    return res.status(200).json({
-      success: true,
-    });
+    return res.status(200).json('ok');
   } catch (error) {
-    return res.json({ success: false, error });
+    console.error(error);
+    next(error);
   }
 });
 

@@ -185,9 +185,9 @@ const mintMusicTokenAbi = [
     name: 'musicTokens',
     outputs: [
       {
-        internalType: 'uint256',
+        internalType: 'string',
         name: '',
-        type: 'uint256',
+        type: 'string',
       },
     ],
     stateMutability: 'view',
@@ -554,9 +554,9 @@ const saleMusicTokenAbi = [
 ];
 
 export const mintMusicTokenAddress =
-  '0x4d5eA3FAa5499c60f7607C8672b945512e0F070c';
+  '0x1eEFdc86d6615B39996BED97ea0a0713994250e9';
 export const saleMusicTokenAddress =
-  '0x59A4bFB98B27d52a49bb468ff1Fc9b83C2B5B9F1';
+  '0x4f899e0859d395775702Ac7c4365c60e0036860B';
 
 export const web3 = new Web3(window.ethereum);
 

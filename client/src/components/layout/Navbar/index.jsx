@@ -1,45 +1,41 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import { useDispatch, useSelector } from 'react-redux';
 import RegisterModal from './Register/RegisterModal';
-import { loginRequestAction } from '../../../_actions/user_actions';
-import NavButton from './Register/button/NavButton';
 import ProfileButton from './myMenu';
-import { metaMaskUser } from '../../../_actions/metamask_actions';
 import { useNavigate } from 'react-router-dom';
+import { metaMaskRequestAction } from '../../../_actions/metamask_actions';
+import MetamaskButton from './Register/button/metamaskButton';
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const { userData } = useSelector(state => state.user);
+  const metamask = useSelector(state => state.metamask);
   const [open, setOpen] = useState(false);
+  const [metamaskLogin, setMetamaskLogin] = useState(false);
 
   let navigate = useNavigate();
+
+  useEffect(() => {
+    // 메타마스크 로그인 상태
+    if (metamask.metamaskLoading && metamask.metamaskData == null) {
+      setMetamaskLogin(true);
+    }
+
+    // 메타마스크 비로그인 상태
+    if (metamask.metamaskData !== null && metamask.metamaskDone) {
+      setMetamaskLogin(false);
+      setOpen(true);
+    }
+  }, [metamask]);
 
   // 메타 마스크 회원가입 모달창
   const handleMetaMaskOpen = useCallback(() => {
     try {
-      dispatch(metaMaskUser()).then(response => {
-        if (response.userMetamask) {
-          setOpen(true);
-          return;
-        }
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }, [dispatch]);
-
-  const onClickLogin = useCallback(() => {
-    try {
-      dispatch(metaMaskUser()).then(response => {
-        if (response.userMetamask) {
-          dispatch(loginRequestAction(response.userMetamask));
-        } else {
-          alert('Install Metamask!');
-        }
-      });
+      dispatch(metaMaskRequestAction());
+      return;
     } catch (error) {
       console.error(error);
     }
@@ -47,9 +43,16 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ background: 'linear-gradient(90deg, #0546d6, #3f89fc)' }}>
+      <AppBar sx={{ background: 'linear-gradient(90deg, #000, #000)' }}>
         <Toolbar>
-          <img width="65px" height="65px" src="/images/logoW.png" alt="logo" />
+          <img
+            width="65px"
+            height="65px"
+            src="/images/logoW.png"
+            alt="logo"
+            onClick={() => navigate('/')}
+            style={{ cursor: 'pointer' }}
+          />
           <Tabs textColor="inherit" value={false}>
             <Tab
               icon={<HeadsetIcon />}
@@ -58,28 +61,24 @@ const Navbar = () => {
               onClick={() => navigate('/streaming')}
             />
             <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
-
-            <Tab
-              icon={<TokenIcon />}
-              iconPosition="start"
-              label="STUDIO"
-              onClick={() => navigate('/studio/artist1')}
-            />
           </Tabs>
-          {user.userData ? (
+          {userData ? (
             <div style={{ marginLeft: 'auto' }}>
               <ProfileButton />
             </div>
           ) : (
-            <>
-              <div style={{ marginLeft: 'auto' }}>
-                <NavButton value="Login" func={onClickLogin} />
-              </div>
-              <NavButton value="Register" func={handleMetaMaskOpen} />
-            </>
+            <MetamaskButton
+              metamaskLogin={metamaskLogin}
+              setMetamaskLogin={setMetamaskLogin}
+              metaopenfunc={handleMetaMaskOpen}
+            />
           )}
         </Toolbar>
-        <RegisterModal setOpen={setOpen} open={open} />
+        <RegisterModal
+          id={metamask.metamaskData}
+          setOpen={setOpen}
+          open={open}
+        />
       </AppBar>
     </>
   );

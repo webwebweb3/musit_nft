@@ -1,113 +1,219 @@
-import { Avatar, InputLabel } from '@mui/material';
+import { Avatar, Box, Button, InputLabel } from '@mui/material';
 import React, { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
-// import { useInput } from '../../../hooks/useInput';
-// import MultipleSelectChip from '../../mui/ChipGenre';
+import { useDispatch, useSelector } from 'react-redux';
+import { useInput } from '../../../hooks/useInput';
+import { userEditRequestAction } from '../../../_actions/user_actions';
 import CustomizedInputs from '../../mui/CustomizedInputs';
 import UnstyledSelectsMultiple from '../../mui/SelectNationality';
+// import MyGenre from './MyGenre';
 import MyImgButton from './MyImgButton';
 import MyInfoButton from './MyInfoButton';
+import NationalityButton from './NationalityButton';
 
 const MyInfo = () => {
+  const dispatch = useDispatch();
   const [editInfo, onEditInfo] = useState(false);
-  const [editNationality, onEditNationality] = useState(false);
+  const [booleanNationality, onBooleanNationality] = useState(false);
   const { userData } = useSelector(state => state.user);
-  const [nationality, onChangeNationality] = useState(userData.nationality);
+  const { imagePath } = useSelector(state => state.user);
+  const [editNationality, onChangeEditNationality] = useState(
+    userData.nationality,
+  );
+  const [editNickname, onChangeEditNickname] = useInput(userData.name);
+  // const [editGenre, setEditGenre] = useState([]);
+
+  const onSubmit = useCallback(() => {
+    let editData = {
+      metamask: userData.metamask,
+      nationality: editNationality,
+      // genre: editGenre,
+    };
+
+    if (editNickname) {
+      editData = {
+        ...editData,
+        name: editNickname,
+      };
+    }
+
+    if (imagePath) {
+      editData = {
+        ...editData,
+        img: imagePath[0],
+      };
+    }
+
+    dispatch(userEditRequestAction(editData));
+  }, [dispatch, editNationality, editNickname, imagePath, userData]);
 
   const onEditClick = useCallback(() => {
     onEditInfo(prev => !prev);
   }, []);
 
-  const onEditNationalityClick = useCallback(() => {
-    onEditNationality(prev => !prev);
+  const onBooleanNationalityClick = useCallback(() => {
+    onBooleanNationality(prev => !prev);
   }, []);
 
   return (
     <>
-      <h1 style={{ marginBottom: '40px' }}>프로필 편집하기</h1>
-      {userData && (
-        <>
-          <CustomizedInputs
-            label="metamask"
-            read={true}
-            value={userData.metamask}
-          />
-          {userData.role === 1 && (
-            <>
-              {editInfo ? (
-                <CustomizedInputs
-                  label="name"
-                  read={false}
-                  value={userData.name}
-                />
-              ) : (
-                <CustomizedInputs
-                  label="name"
-                  read={true}
-                  value={userData.name}
-                />
-              )}
-              <MyInfoButton value={editInfo} func={onEditClick} />
-            </>
-          )}
-
-          {userData.img ? (
-            <>
-              <InputLabel
-                sx={{ color: '#000', fontWeight: 'bold', fontSize: '20px' }}
-                shrink
-                htmlFor="bootstrap-input"
-              >
-                Profile
-              </InputLabel>
-              <MyImgButton />
-              <Avatar
-                src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
-                style={{ width: '200px' }}
-                alt={'v'}
-              />
-            </>
-          ) : (
-            <>
-              <InputLabel
-                sx={{ color: '#000', fontWeight: 'bold', fontSize: '20px' }}
-                shrink
-                htmlFor="bootstrap-input"
-              >
-                Profile
-              </InputLabel>
-              <Avatar
-                src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
-                alt={'Avatar'}
-              />
-              <MyImgButton />
-            </>
-          )}
-
-          <InputLabel
-            sx={{ color: '#000', fontWeight: 'bold', fontSize: '20px' }}
-            shrink
-            htmlFor="bootstrap-input"
-          >
-            Nationality
-          </InputLabel>
-
-          {editNationality ? (
-            <UnstyledSelectsMultiple
-              value={nationality}
-              func={onChangeNationality}
+      <h1 style={{ marginTop: '-1px', marginBottom: '25px' }}>
+        프로필 편집하기
+      </h1>
+      <form encType="multipart/form-data" onSubmit={onSubmit}>
+        {userData && (
+          <>
+            <CustomizedInputs
+              label="metamask"
+              read={true}
+              value={userData.metamask}
             />
-          ) : (
-            <UnstyledSelectsMultiple value={nationality} />
-          )}
-          <MyInfoButton value={editNationality} func={onEditNationalityClick} />
-          {/* <MultipleSelectChip value={userData.genre} /> */}
+            {userData.role === 1 && (
+              <Box sx={{ marginTop: '-30px' }}>
+                {editInfo ? (
+                  <CustomizedInputs
+                    label="name"
+                    read={false}
+                    value={editNickname}
+                    func={onChangeEditNickname}
+                  />
+                ) : (
+                  <CustomizedInputs
+                    label="name"
+                    read={true}
+                    value={editNickname}
+                  />
+                )}
+                <MyInfoButton type={true} value={editInfo} func={onEditClick} />
+              </Box>
+            )}
 
-          {userData.role === 0 && (
-            <CustomizedInputs label="pass" value={userData.pass} />
-          )}
-        </>
-      )}
+            {userData && userData.img ? (
+              <>
+                <InputLabel
+                  sx={{ color: '#fff', fontWeight: 'bold', fontSize: '20px' }}
+                  shrink
+                  htmlFor="bootstrap-input"
+                >
+                  Profile
+                </InputLabel>
+                {imagePath ? (
+                  <Avatar
+                    style={{
+                      display: 'inline-block',
+                      width: '100px',
+                      height: '100px',
+                      marginRight: '30px',
+                    }}
+                    src={imagePath[0]}
+                    alt={'Avatar'}
+                  />
+                ) : (
+                  <>
+                    <Avatar
+                      src={userData.img}
+                      alt={'Avatar'}
+                      style={{
+                        display: 'inline-block',
+                        width: '100px',
+                        height: '100px',
+                        marginRight: '30px',
+                      }}
+                    />
+                  </>
+                )}
+                <MyImgButton />
+              </>
+            ) : (
+              <>
+                {imagePath ? (
+                  <>
+                    <Avatar
+                      src={imagePath[0]}
+                      alt={'Avatar'}
+                      style={{
+                        width: '100px',
+                        height: '100px',
+                        marginRight: '30px',
+                      }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <InputLabel
+                      sx={{
+                        color: '#fff',
+                        fontWeight: 'bold',
+                        fontSize: '20px',
+                      }}
+                      shrink
+                      htmlFor="bootstrap-input"
+                    >
+                      Profile
+                    </InputLabel>
+                    <Avatar
+                      style={{
+                        display: 'inline-block',
+                        width: '100px',
+                        height: '100px',
+                        marginRight: '30px',
+                      }}
+                      src={`https://avatars.dicebear.com/api/gridy/${userData.metamask}.svg`}
+                      alt={'Avatar'}
+                    />
+                  </>
+                )}
+                <MyImgButton />
+              </>
+            )}
+            <InputLabel
+              sx={{
+                color: '#fff',
+                marginTop: '15px',
+                marginBottom: '-10px',
+                fontWeight: 'bold',
+                fontSize: '20px',
+              }}
+              shrink
+              htmlFor="nationality"
+            >
+              Nationality
+            </InputLabel>
+
+            {booleanNationality ? (
+              <UnstyledSelectsMultiple
+                value={editNationality}
+                func={onChangeEditNationality}
+              />
+            ) : (
+              <UnstyledSelectsMultiple value={editNationality} />
+            )}
+            <NationalityButton
+              value={booleanNationality}
+              func={onBooleanNationalityClick}
+            />
+
+            {/* 대기 <MyGenre genre={editGenre} setGenre={setEditGenre} /> */}
+
+            {userData.role === 0 && (
+              <Box sx={{ marginTop: '15px' }}>
+                <CustomizedInputs
+                  label="pass 이용권 이후"
+                  value={userData.pass}
+                />
+              </Box>
+            )}
+            <Box>
+              <Button
+                style={{ margin: '10px 0 0 450px', color: '#808080' }}
+                variant="text"
+                onClick={onSubmit}
+              >
+                회원 정보 수정하기
+              </Button>
+            </Box>
+          </>
+        )}
+      </form>
     </>
   );
 };

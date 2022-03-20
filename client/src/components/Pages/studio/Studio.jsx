@@ -1,21 +1,18 @@
 import { Box, Button } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { mintMusicTokenContract } from '../../../contracts';
 import { useSelector } from 'react-redux';
-import S3Upload from './uploadmusic/s3upload/S3Upload';
-import { useNavigate } from 'react-router-dom';
-import { height } from '@mui/system';
+// import S3Upload from './uploadmusic/s3upload/S3Upload';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const Studio = props => {
-  //TODO: delete
+const Studio = () => {
   let navigate = useNavigate();
-  props = 'artist1';
+  const location = useLocation();
+  const artist = location.pathname.split('/')[2];
 
-  useEffect(() => {
-    console.log(props);
-  }, [props]);
-  const user = useSelector(state => state.user);
-  const account = user.userData.userId;
+  const { userData } = useSelector(state => state.user);
+
+  const account = userData.metamask;
 
   const onClickMint = async () => {
     try {
@@ -56,16 +53,20 @@ const Studio = props => {
         profile Image
       </Box>
       <Box>
-        <Button
-          sx={{
-            position: 'relative',
-            top: '-150px',
-            float: 'right',
-          }}
-          onClick={() => navigate(`uploadmusic`)}
-        >
-          + Add Music NFT
-        </Button>
+        {artist === userData.name ? (
+          <Button
+            sx={{
+              position: 'relative',
+              top: '-150px',
+              float: 'right',
+            }}
+            onClick={() => navigate(`uploadmusic`)}
+          >
+            + Add Music NFT
+          </Button>
+        ) : (
+          <div style={{ height: '36.5px' }}></div>
+        )}
       </Box>
       {/* TODO: height 값 100%  */}
       <Box

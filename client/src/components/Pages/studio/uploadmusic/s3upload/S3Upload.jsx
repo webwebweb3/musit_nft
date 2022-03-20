@@ -2,9 +2,26 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Box, Button, Input } from '@mui/material';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
-import FileUploader from '../../../streaming/musicCard/Testing';
+import styled from 'styled-components';
 
-const S3Upload = ({ account }) => {
+const AlbumCoverButton = styled.button`
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: linear-gradient(135deg, #3a8ffe 0%, #9658fe 100%);
+`;
+
+const S3Upload = ({ func }) => {
   const hiddenFileInput = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -64,17 +81,19 @@ const S3Upload = ({ account }) => {
       parallelUploads3.done();
       // setUploadedImage(fileName);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
+    func(target.Key);
   };
+
   return (
     <>
-      <Box sx={style.wrapper}>
+      <Box sx={selectedFile ? style.imgwrapper : style.wrapper}>
         <Box sx={style.image}>
           {selectedFile && (
             <img
               src={URL.createObjectURL(selectedFile)}
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'cover', width: '250px', height: '250px' }}
             />
           )}
         </Box>
@@ -89,7 +108,6 @@ const S3Upload = ({ account }) => {
         >
           X
         </Box>
-        <Box sx={style.fileName}>File name here</Box>
       </Box>
       <input
         id="uploadBtn"
@@ -99,7 +117,14 @@ const S3Upload = ({ account }) => {
         style={{ display: 'none' }}
       />
       {/* <FileUploader /> */}
-      <Button onClick={uploadAlbumCoverBtn}>Upload Album Cover</Button>
+      <AlbumCoverButton
+        type="button"
+        onClick={uploadAlbumCoverBtn}
+        style={selectedFile ? { display: 'none' } : {}}
+      >
+        Upload ALBUM COVER
+      </AlbumCoverButton>
+      {/* <Button onClick={uploadAlbumCoverBtn}>Upload Album Cover</Button> */}
       <Button sx={style.uploadBtn} onClick={() => upload(selectedFile)}>
         Upload
       </Button>
@@ -115,10 +140,21 @@ const S3Upload = ({ account }) => {
 export default S3Upload;
 
 const style = {
+  imgwrapper: {
+    position: 'relative',
+    height: '250px',
+    width: '250px',
+    border: 'none',
+    borderRadius: '10px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
   wrapper: {
     position: 'relative',
-    height: '260px',
-    width: '100%',
+    height: '250px',
+    width: '250px',
     border: '2px dashed #c2cdda',
     borderRadius: '10px',
     display: 'flex',
