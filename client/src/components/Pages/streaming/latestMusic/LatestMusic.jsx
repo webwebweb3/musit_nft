@@ -9,11 +9,12 @@ const LatestMusic = () => {
 
   const getMusic = async () => {
     try {
-      const response = await mintMusicTokenContract.methods
+      const latestMusic = await mintMusicTokenContract.methods
         .getLatestMusicToken()
         .call();
-      console.log(response);
-      setMusics(musics);
+      const objData = JSON.parse(latestMusic);
+      console.log(objData);
+      setMusics(latestMusic);
     } catch (error) {
       console.error(error);
     }
