@@ -138,6 +138,19 @@ const mintMusicTokenAbi = [
     type: 'function',
   },
   {
+    inputs: [],
+    name: 'getLatestMusicToken',
+    outputs: [
+      {
+        internalType: 'string[]',
+        name: '',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [
       {
         internalType: 'address',
@@ -554,7 +567,7 @@ const saleMusicTokenAbi = [
 ];
 
 export const mintMusicTokenAddress =
-  '0x1eEFdc86d6615B39996BED97ea0a0713994250e9';
+  '0x51b7371453cdCAFf1fD494E34A1c83e9D805FC32';
 export const saleMusicTokenAddress =
   '0x4f899e0859d395775702Ac7c4365c60e0036860B';
 
