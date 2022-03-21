@@ -51,7 +51,7 @@ const UploadMusic = () => {
     console.log('12', IPFSUrl);
     console.log('34', S3AlbumCover);
 
-    await axios.post(`/api/uploadmusic`, dataToSubmit).then(res => {
+    await axios.post(`/uploadmusic`, dataToSubmit).then(res => {
       if (res.data.uploadSuccess === 'true') {
         let jsonData = {
           title: 'musit NFT',
