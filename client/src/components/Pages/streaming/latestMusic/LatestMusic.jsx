@@ -1,29 +1,38 @@
 import { Box, Divider } from '@mui/material';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { mintMusicTokenContract } from '../../../../contracts';
+import MusicCard from '../musicCard/MusicCard';
 import { style } from './style';
 
 const LatestMusic = () => {
-  const [musics, setMusics] = useState(null);
+  const [musics, setMusics] = useState([]);
 
   const getMusic = async () => {
     try {
-      const latestMusic = await mintMusicTokenContract.methods
+      const getLatestMusicToken = await mintMusicTokenContract.methods
         .getLatestMusicToken()
         .call();
-      const objData = JSON.parse(latestMusic);
-      console.log(objData);
-      setMusics(latestMusic);
+
+      const latestMusic = getLatestMusicToken.filter(music => {
+        return music !== '' && music !== null && music !== undefined;
+      });
+
+      const tempMusics = [];
+
+      for (let i = 0; i < latestMusic.length; i++) {
+        tempMusics.push(JSON.parse(latestMusic[i]));
+      }
+      setMusics(tempMusics);
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-    getMusic();
-    if (!musics) {
+    if (musics.length === 0) {
+      getMusic();
     }
-  }, []);
+    console.log('2번', musics);
+  }, [musics]);
 
   return (
     <Box>
@@ -32,7 +41,22 @@ const LatestMusic = () => {
       </Box>
       <Divider sx={{ background: 'white', margin: '10px 0' }} />
       <Box>
-        <Box>asdf</Box>
+        <Box>
+          {musics.length !== 0 && (
+            <>
+              {musics.map((v, i) => {
+                return (
+                  <MusicCard
+                    musicTitle={`${v.properties.dataToSubmit.title}`}
+                    albumCover={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/${v.properties.S3AlbumCover}`}
+                    artistName={`${v.properties.dataToSubmit.artist}`}
+                    key={i}
+                  />
+                );
+              })}
+            </>
+          )}
+        </Box>
       </Box>
     </Box>
   );
