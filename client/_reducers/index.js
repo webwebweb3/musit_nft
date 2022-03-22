@@ -3,20 +3,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 import userReducer from './user_reducer';
 import metamaskReducer from './metamask_reducer';
-// import { persistReducer } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-
-// const rootPersistConfig = {
-//   key: 'root',
-//   storage,
-//   whitelist: ['user'],
-// };
-
-// const authPersistConfig = {
-//   key: 'user',
-//   storage,
-//   whitelist: ['userData'],
-// };
+import uploadS3 from './uploadMusic_reducer';
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -27,6 +14,7 @@ const rootReducer = (state, action) => {
       const combinedReducer = combineReducers({
         user: userReducer,
         metamask: metamaskReducer,
+        s3: uploadS3,
       });
       return combinedReducer(state, action);
     }

@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Button } from '@mui/material';
-import { Upload } from '@aws-sdk/lib-storage';
-import { S3Client, S3 } from '@aws-sdk/client-s3';
 import styled from 'styled-components';
 import { style } from './style';
 
@@ -23,6 +21,8 @@ const AlbumCoverButton = styled.button`
 `;
 
 const S3Upload = props => {
+  // const dispatch = useDispatch();
+
   const hiddenFileInput = useRef(null);
   // const [selectedFile, setSelectedFile] = useState(null);
   const selectedFile = props.selectedFile;
@@ -52,47 +52,11 @@ const S3Upload = props => {
     hiddenFileInput.current.click();
   };
 
+  // const uploadToS3 = file => {
+  //   dispatch(s3AlbumCoverRequestAction(file));
+  // };
+
   useEffect(() => {}, [uploadedImage]);
-
-  const uploadToS3 = file => {
-    const myFile = file;
-    const fileName = `${Date.now()}_${myFile.name}`;
-
-    console.log('1', fileName);
-    console.log('2', myFile);
-
-    const target = {
-      Bucket: 'webwebweb3',
-      Key: `upload/${fileName}`,
-      Body: myFile,
-    };
-    const creds = {
-      accessKeyId: process.env.NEXT_PUBLIC_AWS_S3_ACCESS_KEY_ID,
-      secretAccessKey: process.env.NEXT_PUBLIC_AWS_S3_SECRET_ACCESS_KEY,
-    };
-
-    console.log('3', creds);
-
-    try {
-      const parallelUploads3 = new Upload({
-        client:
-          new S3({ region: 'ap-northeast-2', credentials: creds }) ||
-          new S3Client({}),
-        partSize: 10485760,
-        leavePartsOnError: false,
-        params: target,
-      });
-
-      parallelUploads3.on('httpUploadProgress', progress => {
-        console.log('2', progress);
-      });
-      parallelUploads3.done();
-      // setUploadedImage(fileName);
-    } catch (e) {
-      console.error(e);
-    }
-    props.setS3AlbumCover(target.Key);
-  };
 
   return (
     <>
@@ -133,9 +97,9 @@ const S3Upload = props => {
         Upload ALBUM COVER
       </AlbumCoverButton>
       {/* <Button onClick={uploadAlbumCoverBtn}>Upload Album Cover</Button> */}
-      <Button sx={style.uploadBtn} onClick={() => uploadToS3(selectedFile)}>
+      {/* <Button sx={style.uploadBtn} onClick={() => uploadToS3(selectedFile)}>
         Upload
-      </Button>
+      </Button> */}
       {uploadedImage && (
         <img
           src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${uploadedImage}`}

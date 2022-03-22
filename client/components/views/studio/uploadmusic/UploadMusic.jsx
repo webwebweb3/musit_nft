@@ -14,8 +14,16 @@ import { mintMusicTokenContract } from '../../../../contracts';
 import styled from 'styled-components';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
+import { useDispatch } from 'react-redux';
+import {
+  IPFSMusicRequestAction,
+  s3AlbumCoverRequestAction,
+} from '../../../../_actions/uploadMusic_actions';
+import { useEffect } from 'react';
 
 const UploadMusic = () => {
+  const dispatch = useDispatch();
+
   const router = useRouter();
   const artist = router.query.artistName;
   const S3UploadRef = useRef(null);
@@ -35,44 +43,19 @@ const UploadMusic = () => {
   const account = userData.metamask;
 
   const uploadToS3 = file => {
-    console.log('1', file);
-    const myFile = file;
-    const fileName = `${Date.now()}_${myFile.name}`;
-
-    const target = {
-      Bucket: 'webwebweb3',
-      Key: `upload/${fileName}`,
-      Body: myFile,
-    };
-    const creds = {
-      accessKeyId: process.env.REACT_APP_AWS_S3_ACCESS_KEY_ID,
-      secretAccessKey: process.env.REACT_APP_AWS_S3_SECRET_ACCESS_KEY,
-    };
-
-    try {
-      const parallelUploads3 = new Upload({
-        client:
-          new S3({ region: 'ap-northeast-2', credentials: creds }) ||
-          new S3Client({}),
-        partSize: 10485760,
-        leavePartsOnError: false,
-        params: target,
-      });
-
-      parallelUploads3.on('httpUploadProgress', progress => {
-        console.log(progress);
-      });
-      parallelUploads3.done();
-      // setUploadedImage(fileName);
-    } catch (e) {
-      console.error(e);
-    }
-    setS3AlbumCover(target.Key);
+    dispatch(s3AlbumCoverRequestAction(file));
+    setS3AlbumCover(`upload/${file.name}`);
   };
+
+  // const uploadToIPFS = file => {
+  //   dispatch(IPFSMusicRequestAction(file));
+  // };
 
   const minting = async e => {
     e.preventDefault();
     uploadToS3(selectedFile);
+    // uploadToIPFS(IPFSUrl);
+
     if (userData.name !== artist) {
       alert('This user is not that artist');
       return;
@@ -132,6 +115,7 @@ const UploadMusic = () => {
       console.error(error);
     }
   };
+  useEffect(() => {}, []);
 
   return (
     <form onSubmit={minting}>

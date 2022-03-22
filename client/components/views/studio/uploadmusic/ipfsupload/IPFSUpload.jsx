@@ -3,6 +3,8 @@ import { create } from 'ipfs-http-client';
 import { Button } from '@mui/material';
 import ReactAudioPlayer from 'react-audio-player';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { IPFSMusicRequestAction } from '../../../../../_actions/uploadMusic_actions';
 
 const IPFSUploadButton = styled.button`
   margin-top: 10px;
@@ -25,6 +27,7 @@ const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const IPFSUpload = ({ func }) => {
   const hiddenIPSFileInput = useRef(null);
+  const dispatch = useDispatch();
   const [selectedMusic, setSelectedMusic] = useState(null);
   const [fileUrl, updateFileUrl] = useState(``);
 
@@ -52,10 +55,15 @@ const IPFSUpload = ({ func }) => {
   const onChange = () => {
     hiddenIPSFileInput.current.click();
   };
+  const ipfsredux = {
+    client,
+    file: selectedMusic,
+  };
   const uploadToIPFS = async () => {
     try {
       const added = await client.add(selectedMusic);
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      dispatch(IPFSMusicRequestAction(ipfsredux));
+      // const url = `https://ipfs.infura.io/ipfs/${added.path}`;
       updateFileUrl(url);
       func(added.path);
     } catch (error) {
@@ -74,18 +82,7 @@ const IPFSUpload = ({ func }) => {
       <IPFSUploadButton type="button" onClick={onChange}>
         MUSIC UPLOAD
       </IPFSUploadButton>
-      <Button
-        sx={{
-          backgroundColor: '#aaa',
-          borderRadius: '20px',
-          color: '#fff',
-          margin: '10px auto',
-          float: 'right',
-        }}
-        onClick={uploadToIPFS}
-      >
-        Upload to IPFS
-      </Button>
+      <Button onClick={uploadToIPFS}>Upload to IPFS</Button>
       {fileUrl && (
         <ReactAudioPlayer src={fileUrl} controls style={{ width: '250px' }} />
       )}
