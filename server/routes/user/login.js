@@ -13,9 +13,11 @@ router.post('/', async (req, res, next) => {
       console.error(err);
       return next(err);
     }
+
     if (info) {
-      return res.status(400).send('이미 사용 중입니다.');
+      return res.status(400).send(info);
     }
+
     return req.login(user, async loginErr => {
       if (loginErr) {
         console.error(loginErr);

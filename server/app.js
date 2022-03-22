@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const session = require('express-session');
@@ -31,6 +32,12 @@ if (process.env.NODE_ENV === 'production') {
   app.use(morgan('dev'));
 }
 
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  }),
+);
 app.use(express.static(path.join(__dirname, '')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -62,8 +69,8 @@ app.use((req, res, next) => {
 app.use((err, req, res) => {
   res.locals.message = err.message;
   res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
-  res.status(err.status || 500);
-  res.status(500).json({ err });
+  console.log(err.status);
+  res.status(err.status || 500).json({ err });
 });
 
 app.listen(app.get('port'), () => {
