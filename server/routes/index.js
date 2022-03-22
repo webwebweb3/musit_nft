@@ -6,12 +6,16 @@ const registerRouter = require('./user/register');
 const loginRouter = require('./user/login');
 const logoutRouter = require('./user/logout');
 const userEditRouter = require('./user/userEdit');
+const authRouter = require('./user/auth');
 const uploadMusicRouter = require('./uploadMusic');
+
+const { isLoggedIn } = require('../middleware/auth');
 
 router.use('/register', registerRouter);
 router.use('/login', loginRouter);
 router.use('/logout', logoutRouter);
-router.use('/useredit', userEditRouter);
+router.use('/useredit', isLoggedIn, userEditRouter);
+router.use('/user', authRouter);
 
 router.use('/uploadmusic', uploadMusicRouter);
 

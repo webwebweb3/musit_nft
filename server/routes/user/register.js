@@ -8,8 +8,8 @@ const { User, Genre } = require('../../models');
 
 router.post('/', async (req, res, next) => {
   try {
+    console.log(req.body);
     const { metamask, nationality, genre, name, role } = req.body;
-
     const exUser = await User.findOne({
       where: {
         metamask,
