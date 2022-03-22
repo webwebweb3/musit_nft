@@ -9,7 +9,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'eslint-config-prettier',
-    'next/core-web-vitals',
   ],
   parserOptions: {
     ecmaFeatures: {

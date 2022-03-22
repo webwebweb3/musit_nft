@@ -16,9 +16,6 @@ function uploadS3AlbumCover(file) {
   const myFile = file;
   const fileName = `${Date.now()}_${myFile.name}`;
 
-  console.log('1 saga', fileName);
-  console.log('2 saga', myFile);
-
   const target = {
     Bucket: 'webwebweb3',
     Key: `upload/${fileName}`,
@@ -43,6 +40,7 @@ function uploadS3AlbumCover(file) {
       console.log('saga progress', progress);
     });
     parallelUploads3.done();
+    return fileName;
   } catch (e) {
     console.error(e);
   }
@@ -50,10 +48,10 @@ function uploadS3AlbumCover(file) {
 
 function* uploadS3(action) {
   try {
-    console.log('a saga data', action.data);
-    yield call(uploadS3AlbumCover, action.data);
+    const S3Url = yield call(uploadS3AlbumCover, action.data);
     yield put({
       type: S3_ALBUMCOVER_SUCCESS,
+      data: S3Url,
     });
   } catch (err) {
     console.error(err);
@@ -65,10 +63,7 @@ function* uploadS3(action) {
 }
 
 async function uploadIPFSMusic(file) {
-  //   const client = create('https://ipfs.infura.io:5001/api/v0');
-  console.log(file);
   const url = await file.client.add(file.file);
-  console.log(url);
   return url.path;
 }
 

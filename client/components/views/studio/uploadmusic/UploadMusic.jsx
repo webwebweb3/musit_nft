@@ -12,14 +12,16 @@ import { useRouter } from 'next/router';
 import * as Util from './utils';
 import { mintMusicTokenContract } from '../../../../contracts';
 import styled from 'styled-components';
-import { Upload } from '@aws-sdk/lib-storage';
-import { S3Client, S3 } from '@aws-sdk/client-s3';
+
 import { useDispatch } from 'react-redux';
 import {
   IPFSMusicRequestAction,
   s3AlbumCoverRequestAction,
 } from '../../../../_actions/uploadMusic_actions';
 import { useEffect } from 'react';
+import { create } from 'ipfs-http-client';
+
+const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const UploadMusic = () => {
   const dispatch = useDispatch();
@@ -39,12 +41,22 @@ const UploadMusic = () => {
   const [IPFSUrl, setIPFSUrl] = useState('');
   const [S3AlbumCover, setS3AlbumCover] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedIPFSFile, setSelectedIPFSFile] = useState(null);
 
   const account = userData.metamask;
 
   const uploadToS3 = file => {
     dispatch(s3AlbumCoverRequestAction(file));
     setS3AlbumCover(`upload/${file.name}`);
+  };
+
+  const ipfsredux = {
+    client,
+    file: selectedIPFSFile,
+  };
+
+  const uploadToIPFS = file => {
+    dispatch(IPFSMusicRequestAction(ipfsredux));
   };
 
   // const uploadToIPFS = file => {
@@ -54,7 +66,7 @@ const UploadMusic = () => {
   const minting = async e => {
     e.preventDefault();
     uploadToS3(selectedFile);
-    // uploadToIPFS(IPFSUrl);
+    uploadToIPFS(selectedIPFSFile);
 
     if (userData.name !== artist) {
       alert('This user is not that artist');
@@ -131,7 +143,11 @@ const UploadMusic = () => {
             />
           </Box>
           <Box sx={style.IPFSUploadContainer}>
-            <IPFSUpload account={account} func={setIPFSUrl} />
+            <IPFSUpload
+              account={account}
+              func={setIPFSUrl}
+              setSelectedIPFSFile={setSelectedIPFSFile}
+            />
           </Box>
         </Box>
         <Box sx={style.rightSide}>

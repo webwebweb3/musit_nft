@@ -74,9 +74,7 @@ function registerAPI(data) {
 
 function* register(action) {
   try {
-    console.log(action.data);
     yield call(registerAPI, action.data);
-    console.log(1111);
     yield put({
       type: REGISTER_USER_SUCCESS,
     });

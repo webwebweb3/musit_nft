@@ -3,6 +3,9 @@ import {
   IPFS_MUSIC_FAILURE,
   IPFS_MUSIC_REQUEST,
   IPFS_MUSIC_SUCCESS,
+  MINT_MUSIC_NFT_FAILURE,
+  MINT_MUSIC_NFT_REQUEST,
+  MINT_MUSIC_NFT_SUCCESS,
   S3_ALBUMCOVER_FAILURE,
   S3_ALBUMCOVER_REQUEST,
   S3_ALBUMCOVER_SUCCESS,
@@ -17,8 +20,13 @@ export const initialState = {
   IPFSUploadDone: false,
   IPFSUploadError: null,
 
+  MintMusicNFTLoading: false,
+  MintMusicNFTDone: false,
+  MintMusicNFTError: null,
+
   S3Data: null,
   IPFSData: null,
+  jsonData: null,
 };
 
 const UserReducer = (state = initialState, action) =>
@@ -52,6 +60,21 @@ const UserReducer = (state = initialState, action) =>
       case IPFS_MUSIC_FAILURE:
         draft.IPFSUploadLoading = false;
         draft.IPFSUploadError = action.error;
+        break;
+
+      case MINT_MUSIC_NFT_REQUEST:
+        draft.MintMusicNFTLoading = true;
+        draft.MintMusicNFTError = null;
+        draft.MintMusicNFTDone = false;
+        break;
+      case MINT_MUSIC_NFT_SUCCESS:
+        draft.MintMusicNFTLoading = false;
+        draft.jsonData = action.data;
+        draft.MintMusicNFTDone = true;
+        break;
+      case MINT_MUSIC_NFT_FAILURE:
+        draft.MintMusicNFTLoading = false;
+        draft.MintMusicNFTError = action.error;
         break;
       default:
         break;

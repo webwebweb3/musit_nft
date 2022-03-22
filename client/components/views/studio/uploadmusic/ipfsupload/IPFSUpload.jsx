@@ -25,7 +25,7 @@ const IPFSUploadButton = styled.button`
 
 const client = create('https://ipfs.infura.io:5001/api/v0');
 
-const IPFSUpload = ({ func }) => {
+const IPFSUpload = ({ func, setSelectedIPFSFile }) => {
   const hiddenIPSFileInput = useRef(null);
   const dispatch = useDispatch();
   const [selectedMusic, setSelectedMusic] = useState(null);
@@ -44,7 +44,7 @@ const IPFSUpload = ({ func }) => {
       file.type === 'audio/flac' ||
       fileExt === 'flac'
     ) {
-      setSelectedMusic(file);
+      setSelectedIPFSFile(file);
       return;
     } else {
       alert('음악 파일만 업로드 가능합니다.');
@@ -59,17 +59,17 @@ const IPFSUpload = ({ func }) => {
     client,
     file: selectedMusic,
   };
-  const uploadToIPFS = async () => {
-    try {
-      const added = await client.add(selectedMusic);
-      dispatch(IPFSMusicRequestAction(ipfsredux));
-      // const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-      updateFileUrl(url);
-      func(added.path);
-    } catch (error) {
-      console.log('Error uploading file: ', error);
-    }
-  };
+  // const uploadToIPFS = async () => {
+  //   try {
+  //     const added = await client.add(selectedMusic);
+  //     dispatch(IPFSMusicRequestAction(ipfsredux));
+  //     // const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+  //     updateFileUrl(url);
+  //     func(added.path);
+  //   } catch (error) {
+  //     console.log('Error uploading file: ', error);
+  //   }
+  // };
 
   return (
     <div className="App">
@@ -82,10 +82,10 @@ const IPFSUpload = ({ func }) => {
       <IPFSUploadButton type="button" onClick={onChange}>
         MUSIC UPLOAD
       </IPFSUploadButton>
-      <Button onClick={uploadToIPFS}>Upload to IPFS</Button>
-      {fileUrl && (
+      {/* <Button onClick={uploadToIPFS}>Upload to IPFS</Button> */}
+      {/* {fileUrl && (
         <ReactAudioPlayer src={fileUrl} controls style={{ width: '250px' }} />
-      )}
+      )} */}
     </div>
   );
 };
