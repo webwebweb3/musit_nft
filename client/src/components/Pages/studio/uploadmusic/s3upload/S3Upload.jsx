@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Button, Input } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
 import styled from 'styled-components';
+import { style } from './style';
 
 const AlbumCoverButton = styled.button`
   margin-top: 10px;
@@ -21,9 +22,11 @@ const AlbumCoverButton = styled.button`
   background: linear-gradient(135deg, #3a8ffe 0%, #9658fe 100%);
 `;
 
-const S3Upload = ({ func }) => {
+const S3Upload = props => {
   const hiddenFileInput = useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
+  const selectedFile = props.selectedFile;
+
   const [uploadedImage, setUploadedImage] = useState(null);
 
   const handleFileInput = e => {
@@ -37,7 +40,7 @@ const S3Upload = ({ func }) => {
       file.type === 'image/png' ||
       fileExt === 'png'
     ) {
-      setSelectedFile(file);
+      props.setSelectedFile(file);
       return;
     } else {
       alert('이미지 파일만 업로드 가능합니다.');
@@ -51,7 +54,7 @@ const S3Upload = ({ func }) => {
 
   useEffect(() => {}, [uploadedImage]);
 
-  const upload = file => {
+  const uploadToS3 = file => {
     const myFile = file;
     const fileName = `${Date.now()}_${myFile.name}`;
 
@@ -71,19 +74,19 @@ const S3Upload = ({ func }) => {
           new S3({ region: 'ap-northeast-2', credentials: creds }) ||
           new S3Client({}),
         partSize: 10485760,
-        leavePartsOnError: false, // optional manually handle dropped parts
+        leavePartsOnError: false,
         params: target,
       });
 
       parallelUploads3.on('httpUploadProgress', progress => {
-        console.log(progress);
+        console.log('2', progress);
       });
       parallelUploads3.done();
       // setUploadedImage(fileName);
     } catch (e) {
       console.error(e);
     }
-    func(target.Key);
+    props.setS3AlbumCover(target.Key);
   };
 
   return (
@@ -103,7 +106,7 @@ const S3Upload = ({ func }) => {
         <Box
           sx={style.cancelBtn}
           onClick={() => {
-            setSelectedFile(null);
+            props.setSelectedFile(null);
           }}
         >
           X
@@ -125,7 +128,7 @@ const S3Upload = ({ func }) => {
         Upload ALBUM COVER
       </AlbumCoverButton>
       {/* <Button onClick={uploadAlbumCoverBtn}>Upload Album Cover</Button> */}
-      <Button sx={style.uploadBtn} onClick={() => upload(selectedFile)}>
+      <Button sx={style.uploadBtn} onClick={() => uploadToS3(selectedFile)}>
         Upload
       </Button>
       {uploadedImage && (
@@ -138,83 +141,3 @@ const S3Upload = ({ func }) => {
 };
 
 export default S3Upload;
-
-const style = {
-  imgwrapper: {
-    position: 'relative',
-    height: '250px',
-    width: '250px',
-    border: 'none',
-    borderRadius: '10px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-  },
-  wrapper: {
-    position: 'relative',
-    height: '250px',
-    width: '250px',
-    border: '2px dashed #c2cdda',
-    borderRadius: '10px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-  },
-  image: {
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: '20px',
-    fontWeight: '500',
-    color: '#5b5b7b',
-  },
-  cancelBtn: [
-    {
-      position: 'absolute',
-      fontSize: '20px',
-      right: '15px',
-      top: '15px',
-      color: '#9658fe',
-      cursor: 'pointer',
-      fontWeight: '600',
-      // display: 'none',
-    },
-    {
-      '&:hover': {
-        color: 'red',
-      },
-    },
-  ],
-  fileName: {
-    position: 'absolute',
-    bottom: '0px',
-    width: '100%',
-    padding: '8px 0',
-    fontSize: '18px',
-    color: 'black',
-    // display: 'none',
-  },
-  uploadBtn: {
-    marginTop: '30px',
-    display: 'block',
-    width: '100%',
-    height: '50px',
-    border: 'none',
-    outline: 'none',
-    borderRadius: '25px',
-    color: '#fff',
-    fontSize: '18px',
-    fontWeight: '500',
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
-    cursor: 'pointer',
-    // background: 'linear-gradient(135deg, #3a8ffe 0%, #9658fe 100%)',
-  },
-};

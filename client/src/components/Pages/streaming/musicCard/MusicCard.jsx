@@ -16,8 +16,8 @@ const MusicCard = ({ musicTitle, albumCover, artistName }) => {
   let navigate = useNavigate();
 
   return (
-    <Card sx={{ display: 'flex' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Card sx={{ display: 'inline-block' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
             {musicTitle}
