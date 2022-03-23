@@ -16,6 +16,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import {
   IPFSMusicRequestAction,
+  mintMusicNFTRequestAction,
   s3AlbumCoverRequestAction,
 } from '../../../../_actions/uploadMusic_actions';
 import { useEffect } from 'react';
@@ -63,68 +64,30 @@ const UploadMusic = () => {
   //   dispatch(IPFSMusicRequestAction(file));
   // };
 
+  const dataToSubmit = {
+    title,
+    artist,
+    albumName,
+    genre,
+    release,
+    songwriter,
+    lyricist,
+  };
+
+  const mintToData = {
+    dataToSubmit,
+    ipfsredux,
+    selectedFile,
+    selectedIPFSFile,
+    account,
+  };
+
   const minting = async e => {
     e.preventDefault();
-    uploadToS3(selectedFile);
-    uploadToIPFS(selectedIPFSFile);
-
+    dispatch(mintMusicNFTRequestAction(mintToData));
     if (userData.name !== artist) {
       alert('This user is not that artist');
       return;
-    }
-    try {
-      const dataToSubmit = {
-        userName: userData.name,
-        title,
-        artist,
-        albumName,
-        genre,
-        release,
-        songwriter,
-        lyricist,
-      };
-
-      let jsonData = {
-        title: 'musit NFT',
-        description: 'This data is for minting a NFT.',
-        type: 'object',
-        properties: {
-          dataToSubmit,
-          IPFSUrl: IPFSUrl,
-          S3AlbumCover: S3AlbumCover,
-        },
-      };
-
-      const mintingData = JSON.stringify(jsonData);
-
-      const response = await mintMusicTokenContract.methods
-        .mintMusicToken(mintingData)
-        .send({ from: account });
-
-      if (response.status) {
-        const uploadToServer = async e => {
-          try {
-            await axios.post(`/uploadmusic`, dataToSubmit).then(res => {
-              if (res.data.uploadSuccess === 'true') {
-                console.log('good');
-              } else if (res.data.uploadSuccess !== 'empty') {
-                alert(res.data.message);
-              } else if (res.data.uploadSuccess !== 'emptyIPFS') {
-                alert(res.data.message);
-              } else if (res.data.uploadSuccess !== 'emptyS3AlbumCover') {
-                alert(res.data.message);
-              } else {
-                alert(res.data.message);
-              }
-            });
-          } catch (error) {
-            console.error(error);
-          }
-        };
-        uploadToServer();
-      }
-    } catch (error) {
-      console.error(error);
     }
   };
   useEffect(() => {}, []);
