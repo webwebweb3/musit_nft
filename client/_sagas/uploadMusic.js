@@ -103,24 +103,24 @@ async function mintNFTMusic(data) {
       description: 'This data is for minting a NFT.',
       type: 'object',
       properties: {
-        dataToSubmit: data.dataToSubmit,
+        dataToSubmit: data.data,
         IPFSUrl: data.IPFSurl,
         S3AlbumCover: data.S3AlbumUrl,
       },
     };
 
     const mintingData = JSON.stringify(jsonData);
-    console.log('minting', mintingData);
-    console.log('token', mintMusicTokenContract);
+    console.log(mintingData);
 
-    const response = await mintMusicTokenContract.methods
+    const response = { status: true };
+    await mintMusicTokenContract.methods
       .mintMusicToken(mintingData)
       .send({ from: data.account });
 
     if (response.status) {
       const uploadToServer = async e => {
         try {
-          await axios.post(`/uploadmusic`, data.dataToSubmit).then(res => {
+          await axios.post(`/uploadmusic`, data.data).then(res => {
             if (res.data.uploadSuccess === 'true') {
               console.log('good');
             } else if (res.data.uploadSuccess !== 'empty') {

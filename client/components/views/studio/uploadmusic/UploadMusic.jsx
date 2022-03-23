@@ -65,6 +65,7 @@ const UploadMusic = () => {
   // };
 
   const dataToSubmit = {
+    userName: userData.name,
     title,
     artist,
     albumName,

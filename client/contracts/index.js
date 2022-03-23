@@ -1,4 +1,4 @@
-import Web3 from 'web3/dist/web3.min.js';
+import Web3 from 'web3';
 
 const mintMusicTokenAbi = [
   {
@@ -571,14 +571,21 @@ export const mintMusicTokenAddress =
 export const saleMusicTokenAddress =
   '0x4f899e0859d395775702Ac7c4365c60e0036860B';
 
-export const web3 = new Web3(window.ethereum);
+let web3;
+let mintMusicTokenContract;
+let saleMusicTokenContract;
 
-export const mintMusicTokenContract = new web3.eth.Contract(
-  mintMusicTokenAbi,
-  mintMusicTokenAddress,
-);
+if (typeof window !== 'undefined') {
+  web3 = new Web3(window.ethereum);
+  mintMusicTokenContract = new web3.eth.Contract(
+    mintMusicTokenAbi,
+    mintMusicTokenAddress,
+  );
 
-export const saleMusicTokenContract = new web3.eth.Contract(
-  saleMusicTokenAbi,
-  saleMusicTokenAddress,
-);
+  saleMusicTokenContract = new web3.eth.Contract(
+    saleMusicTokenAbi,
+    saleMusicTokenAddress,
+  );
+}
+
+export { web3, mintMusicTokenContract, saleMusicTokenContract };
