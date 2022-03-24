@@ -5,12 +5,15 @@ import axios from 'axios';
 import wrapper from '../../_store/configureStore';
 import MainLayout from '../../components/mainlayout';
 import MyPageLayout from '../../components/views/mypage/layout';
+import DashBoard from '../../components/views/mypage/DashBoard';
 import { myInfoRequestAction } from '../../_actions/user_actions';
 
-const MyPage = () => {
+const DashBoardPage = () => {
   return (
     <MainLayout>
-      <MyPageLayout>Dash</MyPageLayout>
+      <MyPageLayout>
+        <DashBoard />
+      </MyPageLayout>
     </MainLayout>
   );
 };
@@ -30,4 +33,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default MyPage;
+export default DashBoardPage;
