@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Subscription = () => {
-  return <></>;
+  return <>asdasd</>;
 };
 
 export default Subscription;
