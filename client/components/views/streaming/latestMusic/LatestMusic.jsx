@@ -1,0 +1,66 @@
+import { Box, Divider } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { mintMusicTokenContract } from '../../../../contracts';
+import MusicCard from '../musicCard/MusicCard';
+import { style } from './style';
+
+const LatestMusic = () => {
+  const [musics, setMusics] = useState([]);
+
+  const getMusic = async () => {
+    try {
+      const getLatestMusicToken = await mintMusicTokenContract.methods
+        .getLatestMusicToken()
+        .call();
+
+      const latestMusic = getLatestMusicToken.filter(music => {
+        return music !== '' && music !== null && music !== undefined;
+      });
+
+      const tempMusics = [];
+
+      for (let i = 0; i < latestMusic.length; i++) {
+        tempMusics.push(JSON.parse(latestMusic[i]));
+      }
+      setMusics(tempMusics);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    if (musics.length === 0) {
+      getMusic();
+    }
+    console.log('2번', musics);
+  }, [musics]);
+
+  return (
+    <Box>
+      <Box>
+        <Box sx={style.title}>최신 등록 음악</Box>
+      </Box>
+      <Divider sx={{ background: 'white', margin: '10px 0' }} />
+      <Box>
+        <Box>
+          {musics.length !== 0 && (
+            <>
+              {musics.map((v, i) => {
+                console.log(v);
+                return (
+                  <MusicCard
+                    musicTitle={`${v.properties.dataToSubmit.title}`}
+                    albumCover={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.properties.S3AlbumCover}`}
+                    artistName={`${v.properties.dataToSubmit.artist}`}
+                    key={i}
+                  />
+                );
+              })}
+            </>
+          )}
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export default LatestMusic;

@@ -2,8 +2,11 @@ const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config')[env];
 
-const User = require('./user');
-const Artist = require('./artist');
+const User = require('./userdb/user');
+const Genre = require('./userdb/genre');
+const Music = require('./musicdb/music');
+const MusicLike = require('./musicdb/musicLike');
+const MusicPlayTime = require('./musicdb/musicPlayTime');
 
 const db = {};
 const sequelize = new Sequelize(
@@ -16,12 +19,21 @@ const sequelize = new Sequelize(
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.User = User;
-db.Artist = Artist;
+db.Genre = Genre;
+db.Music = Music;
+db.MusicLike = MusicLike;
+db.MusicPlayTime = MusicPlayTime;
 
 User.init(sequelize);
-Artist.init(sequelize);
+Genre.init(sequelize);
+Music.init(sequelize);
+MusicLike.init(sequelize);
+MusicPlayTime.init(sequelize);
 
 User.associate(db);
-Artist.associate(db);
+Genre.associate(db);
+Music.associate(db);
+MusicLike.associate(db);
+MusicPlayTime.associate(db);
 
 module.exports = db;
