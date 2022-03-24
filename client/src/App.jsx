@@ -13,6 +13,7 @@ import Streaming from './components/Pages/streaming/Streaming';
 import DashBoard from './components/Pages/mypage/DashBoard';
 import MyFavoriteTracks from './components/Pages/mypage/MyFavoriteTracks';
 import FavArtists from './components/Pages/mypage/FavArtists';
+import PlayLists from './components/Pages/mypage/PlayLists';
 
 const App = () => {
   return (
@@ -25,6 +26,8 @@ const App = () => {
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="likedtracks" element={<MyFavoriteTracks />} />
             <Route path="favartists" element={<FavArtists />} />
+            <Route path="playlists" element={<PlayLists />} />
+            <Route path="subscription" element={<Subscription />} />
           </Route>
           <Route path="streaming" element={<Streaming />} />
           <Route path="studio/:id" element={<Studio />} />
