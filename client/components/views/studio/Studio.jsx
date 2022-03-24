@@ -4,10 +4,8 @@ import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { mintMusicTokenContract } from '../../../contracts';
-// import S3Upload from './uploadmusic/s3upload/S3Upload';
 
 const Studio = () => {
-  // const location = useLocation();
   const router = useRouter();
   let { artistName } = router.query;
 
@@ -33,8 +31,6 @@ const Studio = () => {
       console.error(error);
     }
   };
-
-  // useEffect(() => {}, []);
 
   return (
     <Box
@@ -88,20 +84,9 @@ const Studio = () => {
         }}
       >
         Artist's Musics
-        {/* {location.state.user} */}
       </Box>
     </Box>
   );
 };
 
 export default Studio;
-
-// {
-//   /* <FileUpload setUrl={setFileUrl} />
-// FileUrl :{' '}
-// <a href={fileUrl} target="_blank" rel="noopener noreferrer">
-//   {fileUrl}
-// </a>
-// <Button onClick={onClickMint}>Mint</Button>
-// <S3Upload account={account} /> */
-// }

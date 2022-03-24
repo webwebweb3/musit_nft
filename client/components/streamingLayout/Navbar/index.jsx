@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
-import HeadsetIcon from '@mui/icons-material/Headset';
-import TokenIcon from '@mui/icons-material/Token';
+import { Headset, Search } from '@mui/icons-material';
+
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -56,14 +56,10 @@ const Navbar = () => {
 
           <Tabs textColor="inherit" value={false}>
             <Link href="/streaming">
-              <Tab
-                icon={<HeadsetIcon />}
-                iconPosition="start"
-                label="STREAMING"
-              />
+              <Tab icon={<Headset />} iconPosition="start" label="Home" />
             </Link>
-            <Link href="/nft">
-              <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
+            <Link href="/streaming/search">
+              <Tab icon={<Search />} iconPosition="start" label="Search" />
             </Link>
           </Tabs>
           {userData ? (
