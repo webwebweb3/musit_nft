@@ -19,7 +19,7 @@ module.exports = () => {
             done(null, false, '가입되지 않은 회원입니다');
           }
         } catch (error) {
-          console.log(error);
+          console.error(error);
           done(error);
         }
       },

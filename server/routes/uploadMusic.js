@@ -70,8 +70,6 @@ router.post('/', async (req, res) => {
         name: artist,
       },
     });
-    console.log(exUser);
-
     const postMusic = await Music.create({
       title,
       uploader: exUser.dataValues.id,
