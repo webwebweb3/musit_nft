@@ -1,10 +1,6 @@
-import { useRef, useState } from 'react';
-import { create } from 'ipfs-http-client';
-import { Button } from '@mui/material';
-import ReactAudioPlayer from 'react-audio-player';
+import { useRef } from 'react';
+
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { IPFSMusicRequestAction } from '../../../../../_actions/uploadMusic_actions';
 
 const IPFSUploadButton = styled.button`
   margin-top: 10px;
@@ -23,13 +19,8 @@ const IPFSUploadButton = styled.button`
   background: linear-gradient(135deg, #3a8ffe 0%, #9658fe 100%);
 `;
 
-const client = create('https://ipfs.infura.io:5001/api/v0');
-
-const IPFSUpload = ({ func, setSelectedIPFSFile }) => {
+const IPFSUpload = ({ setSelectedIPFSFile }) => {
   const hiddenIPSFileInput = useRef(null);
-  const dispatch = useDispatch();
-  const [selectedMusic, setSelectedMusic] = useState(null);
-  const [fileUrl, updateFileUrl] = useState(``);
 
   const handleMusicInput = e => {
     const file = e.target.files[0];
@@ -55,21 +46,6 @@ const IPFSUpload = ({ func, setSelectedIPFSFile }) => {
   const onChange = () => {
     hiddenIPSFileInput.current.click();
   };
-  const ipfsredux = {
-    client,
-    file: selectedMusic,
-  };
-  // const uploadToIPFS = async () => {
-  //   try {
-  //     const added = await client.add(selectedMusic);
-  //     dispatch(IPFSMusicRequestAction(ipfsredux));
-  //     // const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-  //     updateFileUrl(url);
-  //     func(added.path);
-  //   } catch (error) {
-  //     console.log('Error uploading file: ', error);
-  //   }
-  // };
 
   return (
     <div className="App">
@@ -82,10 +58,6 @@ const IPFSUpload = ({ func, setSelectedIPFSFile }) => {
       <IPFSUploadButton type="button" onClick={onChange}>
         MUSIC UPLOAD
       </IPFSUploadButton>
-      {/* <Button onClick={uploadToIPFS}>Upload to IPFS</Button> */}
-      {/* {fileUrl && (
-        <ReactAudioPlayer src={fileUrl} controls style={{ width: '250px' }} />
-      )} */}
     </div>
   );
 };

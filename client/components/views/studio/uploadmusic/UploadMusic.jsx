@@ -1,25 +1,19 @@
-import { Box, TextField } from '@mui/material';
-import { withStyles } from '@mui/styles';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import S3Upload from './s3upload/S3Upload';
 import IPFSUpload from './ipfsupload/IPFSUpload';
-import { useSelector } from 'react-redux';
+
 import { useInput } from '../../../../hooks/useInput';
-import MenuItem from '@mui/material/MenuItem';
 import TextFieldInput from './inputmusicdata/TextFieldInput';
-import { useRouter } from 'next/router';
-import * as Util from './utils';
-import styled from 'styled-components';
-
-import { useDispatch } from 'react-redux';
-import {
-  IPFSMusicRequestAction,
-  mintMusicNFTRequestAction,
-  s3AlbumCoverRequestAction,
-} from '../../../../_actions/uploadMusic_actions';
-import { useEffect } from 'react';
 import { create } from 'ipfs-http-client';
-
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import { style } from './uploadMusicStyle';
+import { Box, TextField } from '@mui/material';
+import { withStyles } from '@mui/styles';
+import MenuItem from '@mui/material/MenuItem';
+import * as Util from './utils';
+import { mintMusicNFTRequestAction } from '../../../../_actions/uploadMusic_actions';
 const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const UploadMusic = () => {
@@ -37,30 +31,15 @@ const UploadMusic = () => {
   const [release, onChangeRelease] = useInput('');
   const [songwriter, onChangeSongwriter] = useInput('');
   const [lyricist, onChangeLyricist] = useInput('');
-  const [IPFSUrl, setIPFSUrl] = useState('');
-  const [S3AlbumCover, setS3AlbumCover] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedIPFSFile, setSelectedIPFSFile] = useState(null);
 
   const account = userData.metamask;
 
-  const uploadToS3 = file => {
-    dispatch(s3AlbumCoverRequestAction(file));
-    setS3AlbumCover(`upload/${file.name}`);
-  };
-
   const ipfsredux = {
     client,
     file: selectedIPFSFile,
   };
-
-  const uploadToIPFS = file => {
-    dispatch(IPFSMusicRequestAction(ipfsredux));
-  };
-
-  // const uploadToIPFS = file => {
-  //   dispatch(IPFSMusicRequestAction(file));
-  // };
 
   const dataToSubmit = {
     userName: userData.name,
@@ -99,7 +78,6 @@ const UploadMusic = () => {
             <S3Upload
               account={account}
               selectedFile={selectedFile}
-              setS3AlbumCover={setS3AlbumCover}
               setSelectedFile={setSelectedFile}
               S3UploarRef={S3UploadRef}
             />
@@ -107,7 +85,6 @@ const UploadMusic = () => {
           <Box sx={style.IPFSUploadContainer}>
             <IPFSUpload
               account={account}
-              func={setIPFSUrl}
               setSelectedIPFSFile={setSelectedIPFSFile}
             />
           </Box>
@@ -185,32 +162,6 @@ export default UploadMusic;
 // style
 
 ***********************/
-const style = {
-  uploadMusicContainer: {
-    margin: '100px',
-    marginTop: '140px',
-    height: '100%',
-    width: '960px',
-
-    display: 'flex',
-  },
-
-  leftSide: { margin: '0', padding: '0', flex: 1 },
-
-  S3UploadContainer: {
-    margin: '0',
-    padding: '30px 30px 0 30px',
-    height: '304px',
-  },
-
-  IPFSUploadContainer: { marginTop: '0', padding: '0 30px' },
-
-  rightSide: { margin: '0', padding: '10px 0 0 40px', flex: 2 },
-
-  inputMusicDataContainer: {},
-
-  uploadMusicBtnContainer: { margin: '0', padding: '0' },
-};
 
 const UploadButton = styled.button`
   margin-top: 10px;

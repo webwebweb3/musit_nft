@@ -56,43 +56,10 @@ function uploadS3AlbumCover(data) {
   }
 }
 
-function* uploadS3(action) {
-  try {
-    console.log('uploadS3', action);
-    const S3Url = yield call(uploadS3AlbumCover, action.data);
-    yield put({
-      type: S3_ALBUMCOVER_SUCCESS,
-      data: S3Url,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: S3_ALBUMCOVER_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
 async function uploadIPFSMusic(data) {
   const url = await data.ipfsredux.client.add(data.ipfsredux.file);
   console.log('IPFS', url);
   return url.path;
-}
-
-function* uploadIPFS(action) {
-  try {
-    const IPFSurl = yield call(uploadIPFSMusic, action.data);
-    yield put({
-      type: IPFS_MUSIC_SUCCESS,
-      data: IPFSurl,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: IPFS_MUSIC_FAILURE,
-      error: err.response.data,
-    });
-  }
 }
 
 async function mintNFTMusic(data) {
@@ -173,18 +140,18 @@ function* mintNFT(action) {
   } catch (err) {
     console.error(err);
     yield put({
+      type: S3_ALBUMCOVER_FAILURE,
+      error: err.response.data,
+    });
+    yield put({
+      type: IPFS_MUSIC_FAILURE,
+      error: err.response.data,
+    });
+    yield put({
       type: MINT_MUSIC_NFT_FAILURE,
       error: err.response.data,
     });
   }
-}
-
-function* watchS3Upload() {
-  yield takeLatest(S3_ALBUMCOVER_REQUEST, uploadS3);
-}
-
-function* watchIPFSUpload() {
-  yield takeLatest(IPFS_MUSIC_REQUEST, uploadIPFS);
 }
 
 function* watchMintNFTMusic() {
@@ -192,9 +159,5 @@ function* watchMintNFTMusic() {
 }
 
 export default function* uploadMusic() {
-  yield all([
-    // fork(watchS3Upload),
-    // fork(watchIPFSUpload),
-    fork(watchMintNFTMusic),
-  ]);
+  yield all([fork(watchMintNFTMusic)]);
 }

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Box, Button } from '@mui/material';
+import React, { useRef } from 'react';
+import { Box } from '@mui/material';
 import styled from 'styled-components';
 import { style } from './style';
 
@@ -21,13 +21,8 @@ const AlbumCoverButton = styled.button`
 `;
 
 const S3Upload = props => {
-  // const dispatch = useDispatch();
-
   const hiddenFileInput = useRef(null);
-  // const [selectedFile, setSelectedFile] = useState(null);
   const selectedFile = props.selectedFile;
-
-  const [uploadedImage, setUploadedImage] = useState(null);
 
   const handleFileInput = e => {
     const file = e.target.files[0];
@@ -51,12 +46,6 @@ const S3Upload = props => {
   const uploadAlbumCoverBtn = () => {
     hiddenFileInput.current.click();
   };
-
-  // const uploadToS3 = file => {
-  //   dispatch(s3AlbumCoverRequestAction(file));
-  // };
-
-  useEffect(() => {}, [uploadedImage]);
 
   return (
     <>
@@ -88,7 +77,6 @@ const S3Upload = props => {
         ref={hiddenFileInput}
         style={{ display: 'none' }}
       />
-      {/* <FileUploader /> */}
       <AlbumCoverButton
         type="button"
         onClick={uploadAlbumCoverBtn}
@@ -96,15 +84,6 @@ const S3Upload = props => {
       >
         Upload ALBUM COVER
       </AlbumCoverButton>
-      {/* <Button onClick={uploadAlbumCoverBtn}>Upload Album Cover</Button> */}
-      {/* <Button sx={style.uploadBtn} onClick={() => uploadToS3(selectedFile)}>
-        Upload
-      </Button> */}
-      {uploadedImage && (
-        <img
-          src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${uploadedImage}`}
-        />
-      )}
     </>
   );
 };
