@@ -63,7 +63,6 @@ async function uploadIPFSMusic(data) {
 }
 
 async function mintNFTMusic(data) {
-  console.log(data);
   try {
     let jsonData = {
       title: 'musit NFT',
@@ -113,7 +112,6 @@ async function mintNFTMusic(data) {
 
 function* mintNFT(action) {
   try {
-    console.log('action???', action);
     const S3AlbumUrl = yield call(uploadS3AlbumCover, action.data);
     yield put({
       type: S3_ALBUMCOVER_SUCCESS,

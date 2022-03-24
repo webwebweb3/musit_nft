@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import S3Upload from './s3upload/S3Upload';
 import IPFSUpload from './ipfsupload/IPFSUpload';
-
+import { mintMusicNFTRequestAction } from '../../../../_actions/uploadMusic_actions';
 import { useInput } from '../../../../hooks/useInput';
 import TextFieldInput from './inputmusicdata/TextFieldInput';
 import { create } from 'ipfs-http-client';
@@ -13,7 +13,6 @@ import { Box, TextField } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import MenuItem from '@mui/material/MenuItem';
 import * as Util from './utils';
-import { mintMusicNFTRequestAction } from '../../../../_actions/uploadMusic_actions';
 const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const UploadMusic = () => {
