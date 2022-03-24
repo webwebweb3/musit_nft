@@ -2,10 +2,10 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../_store/configureStore';
-import MainLayout from '../components/mainlayout';
-import Streaming from '../components/views/streaming/Streaming';
-import { myInfoRequestAction } from '../_actions/user_actions';
+import wrapper from '../../_store/configureStore';
+import MainLayout from '../../components/mainlayout';
+import Streaming from '../../components/views/streaming/Streaming';
+import { myInfoRequestAction } from '../../_actions/user_actions';
 
 const StreamingHome = () => {
   return (

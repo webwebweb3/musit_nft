@@ -4,13 +4,11 @@ import React, { useRef, useState } from 'react';
 import S3Upload from './s3upload/S3Upload';
 import IPFSUpload from './ipfsupload/IPFSUpload';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 import { useInput } from '../../../../hooks/useInput';
 import MenuItem from '@mui/material/MenuItem';
 import TextFieldInput from './inputmusicdata/TextFieldInput';
 import { useRouter } from 'next/router';
 import * as Util from './utils';
-import { mintMusicTokenContract } from '../../../../contracts';
 import styled from 'styled-components';
 
 import { useDispatch } from 'react-redux';
