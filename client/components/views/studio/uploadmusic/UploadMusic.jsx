@@ -13,6 +13,7 @@ import { Box, TextField } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import MenuItem from '@mui/material/MenuItem';
 import * as Util from './utils';
+
 const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const UploadMusic = () => {
@@ -49,6 +50,7 @@ const UploadMusic = () => {
     release,
     songwriter,
     lyricist,
+    account,
   };
 
   const mintToData = {

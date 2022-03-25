@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const { User, Music, MusicLike, MusicPlayTime } = require('../models');
+const ipfsHttpClient = require('ipfs-http-client');
+
+const fs = require('fs');
 
 //------------------------------------------------
 //               /api/uploadmusic
 //------------------------------------------------
+
+const client = ipfsHttpClient.create('https://ipfs.infura.io:5001/api/v0');
+
 router.get('/:id', async (req, res) => {
   try {
     const user = req.params.id;
@@ -92,6 +98,19 @@ router.post('/', async (req, res) => {
   } catch (error) {
     console.error(error);
   }
+});
+
+router.post('/fs', async (req, res) => {
+  const jsonData = req.body;
+
+  fs.writeFileSync('server/json/mint.json', JSON.stringify(jsonData), err => {
+    if (err) console.error(err);
+  });
+  const mintIPFSurl = await client.add(
+    fs.readFileSync('server/json/mint.json'),
+  );
+
+  res.json(mintIPFSurl);
 });
 
 module.exports = router;
