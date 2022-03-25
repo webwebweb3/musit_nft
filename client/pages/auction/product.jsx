@@ -7,7 +7,7 @@ import MainLayout from '../../components/mainlayout';
 import { myInfoRequestAction } from '../../_actions/user_actions';
 import { Box, Button, Divider, Grid } from '@mui/material';
 
-const ActionHome = () => {
+const Product = () => {
   return (
     <MainLayout>
       <Grid container spacing={2}>
@@ -117,4 +117,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default ActionHome;
+export default Product;
