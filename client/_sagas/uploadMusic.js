@@ -1,12 +1,8 @@
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
-import dynamic from 'next/dynamic';
 import { mintMusicTokenContract } from '../contracts';
-
-// const mintMusicTokenContract = dynamic(() => import('../contracts'), {
-//   ssr: false,
-// });
+import * as fs from 'fs';
 
 import {
   IPFS_MUSIC_FAILURE,
@@ -57,8 +53,9 @@ function uploadS3AlbumCover(data) {
 }
 
 async function uploadIPFSMusic(data) {
+  console.log('ipfs data', data.ipfsredux.file);
   const url = await data.ipfsredux.client.add(data.ipfsredux.file);
-  console.log('IPFS', url);
+
   return url.path;
 }
 
@@ -69,24 +66,28 @@ async function mintNFTMusic(data) {
       description: 'This data is for minting a NFT.',
       type: 'object',
       properties: {
-        dataToSubmit: data.data,
+        dataToSubmit: data.data.dataToSubmit,
         IPFSUrl: data.IPFSurl,
         S3AlbumCover: data.S3AlbumUrl,
       },
     };
 
-    const mintingData = JSON.stringify(jsonData);
-    console.log(mintingData);
+    const mintIPFSurl = await axios.post('/uploadmusic/fs', jsonData);
 
-    const response = { status: true };
-    await mintMusicTokenContract.methods
-      .mintMusicToken(mintingData)
-      .send({ from: data.account });
+    // const NFTIPFSurl = await data.data.ipfsredux.client.add(MintData);
+
+    // console.log('nftipfs', NFTIPFSurl);
+    // const mintingData = JSON.stringify(jsonData);
+    // console.log('mintingdata', mintingData);
+
+    const response = await mintMusicTokenContract.methods
+      .mintMusicToken(mintIPFSurl.data.path)
+      .send({ from: data.data.account });
 
     if (response.status) {
       const uploadToServer = async e => {
         try {
-          await axios.post(`/uploadmusic`, data.data).then(res => {
+          await axios.post(`/uploadmusic`, data.data.dataToSubmit).then(res => {
             if (res.data.uploadSuccess === 'true') {
               console.log('good');
             } else if (res.data.uploadSuccess !== 'empty') {
@@ -123,10 +124,9 @@ function* mintNFT(action) {
       data: IPFSurl,
     });
     const newActionData = {
-      data: action.data.dataToSubmit,
+      data: action.data,
       S3AlbumUrl,
       IPFSurl,
-      account: action.data.account,
     };
 
     yield call(mintNFTMusic, newActionData);

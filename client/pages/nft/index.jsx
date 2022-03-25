@@ -3,15 +3,15 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '../../_store/configureStore';
-import MainLayout from '../../components/mainlayout';
+import NFTLayout from '../../components/nftLayout/StreamingLayout';
 import { myInfoRequestAction } from '../../_actions/user_actions';
 import NFT from '../../components/views/nft/NFT';
 
-const StreamingHome = () => {
+const NFTHome = () => {
   return (
-    <MainLayout>
+    <NFTLayout>
       <NFT />
-    </MainLayout>
+    </NFTLayout>
   );
 };
 
@@ -30,4 +30,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default StreamingHome;
+export default NFTHome;
