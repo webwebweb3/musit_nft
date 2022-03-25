@@ -13,8 +13,6 @@ const LatestMusic = () => {
         .getLatestMusicToken()
         .call();
 
-      console.log(getLatestMusicToken);
-
       const latestMusic = getLatestMusicToken.filter(music => {
         return music !== '' && music !== null && music !== undefined;
       });
@@ -37,7 +35,6 @@ const LatestMusic = () => {
     if (musics.length === 0) {
       getMusic();
     }
-    console.log('2번', musics);
   }, [musics]);
 
   return (
@@ -51,7 +48,6 @@ const LatestMusic = () => {
           {musics.length !== 0 && (
             <>
               {musics.map((v, i) => {
-                console.log(v);
                 return (
                   <MusicCard
                     musicTitle={`${v.properties.dataToSubmit.title}`}

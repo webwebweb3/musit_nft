@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
-import { Headset, Search } from '@mui/icons-material';
-
+import HeadsetIcon from '@mui/icons-material/Headset';
+import TokenIcon from '@mui/icons-material/Token';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -42,28 +42,45 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ background: 'transparent' }} elevation={0}>
-        <Toolbar>
+      <AppBar
+        sx={{
+          padding: '10px 20px ',
+          background: 'transparent',
+          height: '100px',
+        }}
+        elevation={0}
+      >
+        <Toolbar sx={{ paddingRight: '20px' }}>
           <Link href="/">
             <img
-              width="65px"
-              height="65px"
+              width="80px"
+              height="80px"
               src="/logoW.png"
               alt="logo"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer', marginRight: '30px' }}
             />
           </Link>
 
           <Tabs textColor="inherit" value={false}>
             <Link href="/streaming">
-              <Tab icon={<Headset />} iconPosition="start" label="Home" />
+              <Tab
+                icon={<HeadsetIcon />}
+                iconPosition="start"
+                label="STREAMING"
+                sx={{ fontSize: '18px' }}
+              />
             </Link>
-            <Link href="/streaming/search">
-              <Tab icon={<Search />} iconPosition="start" label="Search" />
+            <Link href="/nft">
+              <Tab
+                icon={<TokenIcon />}
+                iconPosition="start"
+                label="NFT"
+                sx={{ fontSize: '18px' }}
+              />
             </Link>
           </Tabs>
           {userData ? (
-            <div style={{ marginLeft: 'auto' }}>
+            <div style={{ marginLeft: 'auto', paddingRight: '20px' }}>
               <ProfileButton />
             </div>
           ) : (
