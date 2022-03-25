@@ -13,14 +13,20 @@ const LatestMusic = () => {
         .getLatestMusicToken()
         .call();
 
+      console.log(getLatestMusicToken);
+
       const latestMusic = getLatestMusicToken.filter(music => {
         return music !== '' && music !== null && music !== undefined;
       });
 
       const tempMusics = [];
 
-      for (let i = 0; i < latestMusic.length; i++) {
-        tempMusics.push(JSON.parse(latestMusic[i]));
+      for (let i = 0; i < getLatestMusicToken.length; i++) {
+        const response = await fetch(
+          `https://ipfs.io/ipfs/${getLatestMusicToken[i]}`,
+        );
+        const data = await response.json();
+        tempMusics.push(data);
       }
       setMusics(tempMusics);
     } catch (error) {
