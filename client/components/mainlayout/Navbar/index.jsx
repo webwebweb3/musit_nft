@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
+import PaidIcon from '@mui/icons-material/Paid';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -64,6 +65,9 @@ const Navbar = () => {
             </Link>
             <Link href="/nft">
               <Tab icon={<TokenIcon />} iconPosition="start" label="NFT" />
+            </Link>
+            <Link href="/action">
+              <Tab icon={<PaidIcon />} iconPosition="start" label="ACTION" />
             </Link>
           </Tabs>
           {userData ? (
