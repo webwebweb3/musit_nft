@@ -80,7 +80,7 @@ const Navbar = () => {
                 sx={{ fontSize: '18px' }}
               />
             </Link>
-            <Link href="/marketplace">
+            <Link href="/nft/marketplace">
               <Tab
                 icon={<StorefrontIcon />}
                 iconPosition="start"
