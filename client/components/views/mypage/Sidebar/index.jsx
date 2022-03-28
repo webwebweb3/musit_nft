@@ -51,12 +51,14 @@ const Sidebar = () => {
               </Link>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ color: '#fff' }}>
-                  <TokenIcon />
-                </ListItemIcon>
-                <ListItemText primary="My NFT" />
-              </ListItemButton>
+              <Link href="/mypage/mynft">
+                <ListItemButton>
+                  <ListItemIcon sx={{ color: '#fff' }}>
+                    <TokenIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="My NFT" />
+                </ListItemButton>
+              </Link>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>

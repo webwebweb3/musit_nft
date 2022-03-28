@@ -16,9 +16,7 @@ const StreamingLayout = ({ children }) => {
       {/* MyPage content */}
       <Box
         style={{
-          marginLeft: '20px',
           marginTop: '100px',
-          marginRight: '20px',
         }}
       >
         {children}
