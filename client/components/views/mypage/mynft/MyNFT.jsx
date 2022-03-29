@@ -14,11 +14,10 @@ const MyNFT = () => {
   const [saleStatus, setSaleStauts] = useState(false);
 
   const { userData } = useSelector(state => state.user);
-  // if (userData === null) {
-  //   alert('로그인 해주세요');
-  //   Router.push('/');
-  //   return null;
-  // }
+  if (userData === null) {
+    alert('로그인 해주세요');
+    Router.push('/');
+  }
   const account = userData.metamask;
 
   const getMyMusicTokens = async () => {
