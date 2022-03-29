@@ -18,6 +18,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import Divider from '@mui/material/Divider';
 
 const Section = styled.section`
+  width: 738.54px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;

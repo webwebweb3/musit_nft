@@ -16,7 +16,7 @@ const MyPageLayout = ({ children }) => {
   }, [userData]);
 
   return (
-    <div style={{ minWidth: '1300px' }}>
+    <div style={{ minWidth: '1300px', display: 'flex' }}>
       <Box
         sx={{
           display: 'inline-block',
@@ -37,7 +37,11 @@ const MyPageLayout = ({ children }) => {
         sx={{
           display: 'inline-block',
           marginLeft: '70px',
+          marginRight: '70px',
           verticalAlign: 'top',
+          minWidth: '1159px',
+          maxWidth: '1159px',
+          width: '1159px',
         }}
       >
         {children}

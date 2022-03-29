@@ -6,11 +6,14 @@ import wrapper from '../../_store/configureStore';
 import MainLayout from '../../components/mainlayout';
 import MyPageLayout from '../../components/views/mypage/layout';
 import { myInfoRequestAction } from '../../_actions/user_actions';
+import MyNFT from '../../components/views/mypage/mynft/MyNFT';
 
 const MyNFTPage = () => {
   return (
     <MainLayout>
-      <MyPageLayout>myNFT</MyPageLayout>
+      <MyPageLayout>
+        <MyNFT />
+      </MyPageLayout>
     </MainLayout>
   );
 };

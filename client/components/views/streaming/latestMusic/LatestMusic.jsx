@@ -1,7 +1,7 @@
 import { Box, Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { mintMusicTokenContract } from '../../../../contracts';
-import MusicCard from '../musicCard/MusicCard';
+import MusicCard from '../../cards/MusicCard';
 import { style } from './style';
 
 const LatestMusic = () => {
@@ -13,9 +13,9 @@ const LatestMusic = () => {
         .getLatestMusicToken()
         .call();
 
-      const latestMusic = getLatestMusicToken.filter(music => {
-        return music !== '' && music !== null && music !== undefined;
-      });
+      // const latestMusic = getLatestMusicToken.filter(music => {
+      //   return music !== '' && music !== null && music !== undefined;
+      // });
 
       const tempMusics = [];
 

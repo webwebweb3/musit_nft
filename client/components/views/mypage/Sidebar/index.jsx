@@ -24,7 +24,7 @@ const Sidebar = () => {
           height: '100%',
           width: '300px',
           maxWidth: 360,
-          color: '#gray',
+          color: 'white',
         }}
       >
         <List>
