@@ -4,13 +4,13 @@ import axios from 'axios';
 
 import wrapper from '../_store/configureStore';
 import MainLayout from '../components/mainlayout';
-import Subscription from '../components/views/Subscription';
+import PurchaseInfo from '../components/views/PurchaseInfo';
 import { myInfoRequestAction } from '../_actions/user_actions';
 
-const StreamingHome = () => {
+const purchaseinfo = () => {
   return (
     <MainLayout>
-      <Subscription />
+      <PurchaseInfo />
     </MainLayout>
   );
 };
@@ -23,11 +23,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (req && cookie) {
         axios.defaults.headers.Cookie = cookie;
       }
+
+      ///
       store.dispatch(myInfoRequestAction());
+      ///
 
       store.dispatch(END);
       await store.sagaTask.toPromise();
     },
 );
 
-export default StreamingHome;
+export default purchaseinfo;
