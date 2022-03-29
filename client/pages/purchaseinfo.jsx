@@ -2,18 +2,15 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../../_store/configureStore';
-import MainLayout from '../../components/mainlayout';
-import MyPageLayout from '../../components/views/mypage/layout';
-import FavArtists from '../../components/views/mypage/FavArtists';
-import { myInfoRequestAction } from '../../_actions/user_actions';
+import wrapper from '../_store/configureStore';
+import MainLayout from '../components/mainlayout';
+import PurchaseInfo from '../components/views/PurchaseInfo';
+import { myInfoRequestAction } from '../_actions/user_actions';
 
-const FavArtistsPage = () => {
+const purchaseinfo = () => {
   return (
     <MainLayout>
-      <MyPageLayout>
-        <FavArtists />
-      </MyPageLayout>
+      <PurchaseInfo />
     </MainLayout>
   );
 };
@@ -26,11 +23,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (req && cookie) {
         axios.defaults.headers.Cookie = cookie;
       }
+
+      ///
       store.dispatch(myInfoRequestAction());
+      ///
 
       store.dispatch(END);
       await store.sagaTask.toPromise();
     },
 );
 
-export default FavArtistsPage;
+export default purchaseinfo;

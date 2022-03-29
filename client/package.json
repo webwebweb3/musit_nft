@@ -26,6 +26,7 @@
     "http-proxy-middleware": "^2.0.3",
     "immer": "^9.0.12",
     "ipfs-http-client": "56.0.1",
+    "material-ui-audio-player": "^1.7.1",
     "next": "^12.1.0",
     "next-redux-wrapper": "^7.0.5",
     "passport": "^0.5.2",
