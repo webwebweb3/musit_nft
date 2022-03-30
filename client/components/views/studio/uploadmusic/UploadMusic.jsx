@@ -51,6 +51,7 @@ const UploadMusic = () => {
     songwriter,
     lyricist,
     account,
+    createdAt: Date.now(),
   };
 
   const mintToData = {

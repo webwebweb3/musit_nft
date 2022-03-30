@@ -13,6 +13,7 @@ import { LibraryMusic, QueueMusic } from '@mui/icons-material';
 import LogoutButton from './LogoutButton';
 import MyPageButton from './MyPageButton';
 import { useSelector } from 'react-redux';
+import Link from 'next/link';
 
 const ProfileButton = () => {
   const { userData } = useSelector(state => state.user);
@@ -87,12 +88,14 @@ const ProfileButton = () => {
       >
         <MyPageButton />
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <LibraryMusic fontSize="small" />
-          </ListItemIcon>
-          My NFT
-        </MenuItem>
+        <Link href="/mypage/mynft">
+          <MenuItem>
+            <ListItemIcon>
+              <LibraryMusic fontSize="small" />
+            </ListItemIcon>
+            My NFT
+          </MenuItem>
+        </Link>
         <MenuItem>
           <ListItemIcon>
             <QueueMusic fontSize="small" />

@@ -4,9 +4,12 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "./SaleMusicToken.sol";
 
 contract MintMusicToken is  ERC721Enumerable, ERC721URIStorage  {
         constructor() ERC721("Musit NFT", "MNFT") {}
+
+        SaleMusicToken public saleMusicToken;
 
         function tokenURI(uint256 tokenId)
                 public
@@ -39,7 +42,13 @@ contract MintMusicToken is  ERC721Enumerable, ERC721URIStorage  {
                 return super.supportsInterface(interfaceId);
         }
 
+
         mapping (uint256 => string) public musicTokens;
+        struct MusicTokenData {
+                uint256 musicTokenId;
+                string musicTokenURI;
+                uint256 musicTokenPrice;
+        }
 
         function mintMusicToken(string memory _metadata) 
                 public 
@@ -50,16 +59,16 @@ contract MintMusicToken is  ERC721Enumerable, ERC721URIStorage  {
                 _mint(msg.sender, musicTokenId);
                 _setTokenURI(musicTokenId, _metadata);
         }
+
         
         function getLatestMusicToken()
                 view
                 public 
                 returns(string[] memory )
         {
-                string[] memory musicTokenDatas = new string[](5);
 
                 uint256 _totalMusicToken = totalSupply();
-                require(_totalMusicToken > 0);
+                require(_totalMusicToken > 0, "There are no tokens in the contract.");
                 uint256 k;
                 if(_totalMusicToken>=5) {
                         k=5;
@@ -72,6 +81,7 @@ contract MintMusicToken is  ERC721Enumerable, ERC721URIStorage  {
                 } else if (_totalMusicToken==1){
                         k=1;
                 } 
+                string[] memory musicTokenDatas = new string[](k);
                 uint256 j = 0;
 
                 for(uint256 i=_totalMusicToken; i>_totalMusicToken-k; i--) {
@@ -81,4 +91,32 @@ contract MintMusicToken is  ERC721Enumerable, ERC721URIStorage  {
 
                 return musicTokenDatas;
         }
+
+        function getMusicTokens(address _musicTokenOwner) 
+                view
+                public
+                returns(MusicTokenData[] memory)
+        {
+                uint256 balanceLength = balanceOf(_musicTokenOwner);
+                require(balanceLength != 0 , "Owner did not have token.");
+
+                MusicTokenData[] memory musicTokenData = new MusicTokenData[](balanceLength);
+
+                for(uint256 i = 0; i < balanceLength; i++){
+                        uint256 musicTokenId = tokenOfOwnerByIndex(_musicTokenOwner, i);
+                        string memory musicTokenURI = musicTokens[musicTokenId];
+                        uint256 musicTokenPrice = saleMusicToken.getMusicTokenPrice(musicTokenId);
+
+                        musicTokenData[i] = MusicTokenData(musicTokenId, musicTokenURI, musicTokenPrice);
+                }
+                
+                return musicTokenData;
+        }
+
+        function setSaleMusicToken(address _saleMusicToken) 
+                public
+        {
+                saleMusicToken = SaleMusicToken(_saleMusicToken);
+        }
+
 }

@@ -546,6 +546,36 @@ const saleMusicTokenAbi = [
   },
   {
     inputs: [],
+    name: 'getOnSaleMusicTokens',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'musicTokenId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'string',
+            name: 'musicTokenURI',
+            type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'musicTokenPrice',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct SaleMusicToken.OnSaleMusicTokenData[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'mintMusicTokenAddress',
     outputs: [
       {
@@ -629,9 +659,9 @@ const saleMusicTokenAbi = [
 ];
 
 export const mintMusicTokenAddress =
-  '0x1D15e17eDb74DEAF3Be382DE897F4EEcECe73dAA';
+  '0xa1bB2CA9fD3dD36946AA18A00Ff24Bf2B6021fAC';
 export const saleMusicTokenAddress =
-  '0xCEF668de06094f3b5B4a3d50370592Fe86f05b38';
+  '0x8DAff91a817A61CF71E15715D58CcEB4786B9393';
 
 let web3;
 let mintMusicTokenContract;
