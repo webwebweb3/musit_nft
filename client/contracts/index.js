@@ -628,14 +628,22 @@ const saleMusicTokenAbi = [
   },
 ];
 
+// const auctionCreatorAbi = [];
+// const auctionAbi = [];
+
 export const mintMusicTokenAddress =
   '0x1D15e17eDb74DEAF3Be382DE897F4EEcECe73dAA';
 export const saleMusicTokenAddress =
   '0xCEF668de06094f3b5B4a3d50370592Fe86f05b38';
 
+// export const auctionCreatorAddress = '';
+// export const auctionAddress = '';
+
 let web3;
 let mintMusicTokenContract;
 let saleMusicTokenContract;
+// let auctionCreatorContract;
+// let auctionContract;
 
 if (typeof window !== 'undefined') {
   web3 = new Web3(window.ethereum);
@@ -648,6 +656,18 @@ if (typeof window !== 'undefined') {
     saleMusicTokenAbi,
     saleMusicTokenAddress,
   );
+
+  // auctionCreatorContract = new web3.eth.Contract(
+  //   auctionCreatorAbi,
+  //   auctionCreatorAddress,
+  // );
+  // auctionContract = new web3.eth.Contract(auctionAbi, auctionAddress);
 }
 
-export { web3, mintMusicTokenContract, saleMusicTokenContract };
+export {
+  web3,
+  mintMusicTokenContract,
+  saleMusicTokenContract,
+  // auctionCreatorContract,
+  // auctionContract,
+};

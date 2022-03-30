@@ -7,7 +7,7 @@ import MainLayout from '../../components/mainlayout';
 import { myInfoRequestAction } from '../../_actions/user_actions';
 import { Grid } from '@mui/material';
 
-const ActionHome = () => {
+const AuctionHome = () => {
   return (
     <MainLayout>
       <Grid container spacing={2}>
@@ -34,4 +34,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default ActionHome;
+export default AuctionHome;
