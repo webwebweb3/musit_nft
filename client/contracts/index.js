@@ -154,6 +154,42 @@ const mintMusicTokenAbi = [
     inputs: [
       {
         internalType: 'address',
+        name: '_musicTokenOwner',
+        type: 'address',
+      },
+    ],
+    name: 'getMusicTokens',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'musicTokenId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'string',
+            name: 'musicTokenURI',
+            type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'musicTokenPrice',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct MintMusicToken.MusicTokenData[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
         name: 'owner',
         type: 'address',
       },
@@ -290,6 +326,19 @@ const mintMusicTokenAbi = [
     type: 'function',
   },
   {
+    inputs: [],
+    name: 'saleMusicToken',
+    outputs: [
+      {
+        internalType: 'contract SaleMusicToken',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [
       {
         internalType: 'address',
@@ -303,6 +352,19 @@ const mintMusicTokenAbi = [
       },
     ],
     name: 'setApprovalForAll',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_saleMusicToken',
+        type: 'address',
+      },
+    ],
+    name: 'setSaleMusicToken',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -567,9 +629,9 @@ const saleMusicTokenAbi = [
 ];
 
 export const mintMusicTokenAddress =
-  '0x51b7371453cdCAFf1fD494E34A1c83e9D805FC32';
+  '0x1D15e17eDb74DEAF3Be382DE897F4EEcECe73dAA';
 export const saleMusicTokenAddress =
-  '0x4f899e0859d395775702Ac7c4365c60e0036860B';
+  '0xCEF668de06094f3b5B4a3d50370592Fe86f05b38';
 
 let web3;
 let mintMusicTokenContract;

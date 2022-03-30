@@ -3,15 +3,18 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '../../_store/configureStore';
-import NFTLayout from '../../components/nftLayout/NFTLayout';
+import MainLayout from '../../components/mainlayout';
+import MyPageLayout from '../../components/views/mypage/layout';
 import { myInfoRequestAction } from '../../_actions/user_actions';
-import NFT from '../../components/views/nft/NFT';
+import MyNFT from '../../components/views/mypage/mynft/MyNFT';
 
-const NFTHome = () => {
+const MyNFTPage = () => {
   return (
-    <NFTLayout>
-      <NFT />
-    </NFTLayout>
+    <MainLayout>
+      <MyPageLayout>
+        <MyNFT />
+      </MyPageLayout>
+    </MainLayout>
   );
 };
 
@@ -30,4 +33,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default NFTHome;
+export default MyNFTPage;

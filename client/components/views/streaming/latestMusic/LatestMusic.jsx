@@ -1,7 +1,7 @@
 import { Box, Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { mintMusicTokenContract } from '../../../../contracts';
-import MusicCard from '../musicCard/MusicCard';
+import MusicCard from '../../cards/MusicCard';
 import { style } from './style';
 
 const LatestMusic = () => {
@@ -13,14 +13,18 @@ const LatestMusic = () => {
         .getLatestMusicToken()
         .call();
 
-      const latestMusic = getLatestMusicToken.filter(music => {
-        return music !== '' && music !== null && music !== undefined;
-      });
+      // const latestMusic = getLatestMusicToken.filter(music => {
+      //   return music !== '' && music !== null && music !== undefined;
+      // });
 
       const tempMusics = [];
 
-      for (let i = 0; i < latestMusic.length; i++) {
-        tempMusics.push(JSON.parse(latestMusic[i]));
+      for (let i = 0; i < getLatestMusicToken.length; i++) {
+        const response = await fetch(
+          `https://ipfs.io/ipfs/${getLatestMusicToken[i]}`,
+        );
+        const data = await response.json();
+        tempMusics.push(data);
       }
       setMusics(tempMusics);
     } catch (error) {
@@ -31,7 +35,6 @@ const LatestMusic = () => {
     if (musics.length === 0) {
       getMusic();
     }
-    console.log('2번', musics);
   }, [musics]);
 
   return (
@@ -45,7 +48,6 @@ const LatestMusic = () => {
           {musics.length !== 0 && (
             <>
               {musics.map((v, i) => {
-                console.log(v);
                 return (
                   <MusicCard
                     musicTitle={`${v.properties.dataToSubmit.title}`}

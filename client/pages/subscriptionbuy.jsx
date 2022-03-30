@@ -2,16 +2,16 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../../_store/configureStore';
-import NFTLayout from '../../components/nftLayout/NFTLayout';
-import { myInfoRequestAction } from '../../_actions/user_actions';
-import NFT from '../../components/views/nft/NFT';
+import wrapper from '../_store/configureStore';
+import MainLayout from '../components/mainlayout';
+import SubscriptionBuy from '../components/views/SubscriptionBuy';
+import { myInfoRequestAction } from '../_actions/user_actions';
 
-const NFTHome = () => {
+const SubscriptionBuyPage = () => {
   return (
-    <NFTLayout>
-      <NFT />
-    </NFTLayout>
+    <MainLayout>
+      <SubscriptionBuy />
+    </MainLayout>
   );
 };
 
@@ -30,4 +30,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default NFTHome;
+export default SubscriptionBuyPage;

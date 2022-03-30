@@ -3,15 +3,19 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '../../_store/configureStore';
-import NFTLayout from '../../components/nftLayout/NFTLayout';
+import MainLayout from '../../components/mainlayout';
 import { myInfoRequestAction } from '../../_actions/user_actions';
-import NFT from '../../components/views/nft/NFT';
+import { Grid } from '@mui/material';
 
-const NFTHome = () => {
+const ActionHome = () => {
   return (
-    <NFTLayout>
-      <NFT />
-    </NFTLayout>
+    <MainLayout>
+      <Grid container spacing={2}>
+        <Grid item xs={6} md={12} sx={{ color: '#fff' }}>
+          Main
+        </Grid>
+      </Grid>
+    </MainLayout>
   );
 };
 
@@ -30,4 +34,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default NFTHome;
+export default ActionHome;

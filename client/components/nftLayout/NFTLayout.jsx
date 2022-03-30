@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Navbar from './Navbar';
 
-const MainLayout = ({ children }) => {
+const NFTLayout = ({ children }) => {
   return (
     <Box
       sx={{
@@ -16,7 +16,9 @@ const MainLayout = ({ children }) => {
       {/* MyPage content */}
       <Box
         style={{
+          marginLeft: '20px',
           marginTop: '100px',
+          marginRight: '20px',
         }}
       >
         {children}
@@ -25,4 +27,4 @@ const MainLayout = ({ children }) => {
   );
 };
 
-export default MainLayout;
+export default NFTLayout;

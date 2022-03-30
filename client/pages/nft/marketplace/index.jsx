@@ -2,16 +2,16 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../_store/configureStore';
-import MainLayout from '../components/mainlayout';
-import Subscription from '../components/views/Subscription';
-import { myInfoRequestAction } from '../_actions/user_actions';
+import wrapper from '../../../_store/configureStore';
+import { myInfoRequestAction } from '../../../_actions/user_actions';
+import MarketPlace from '../../../components/views/nft/marketplace/MarketPlace';
+import NFTLayout from '../../../components/nftLayout/NFTLayout';
 
-const StreamingHome = () => {
+const MarketPlacePage = () => {
   return (
-    <MainLayout>
-      <Subscription />
-    </MainLayout>
+    <NFTLayout>
+      <MarketPlace />
+    </NFTLayout>
   );
 };
 
@@ -30,4 +30,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default StreamingHome;
+export default MarketPlacePage;

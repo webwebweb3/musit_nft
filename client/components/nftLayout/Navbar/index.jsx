@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import GavelIcon from '@mui/icons-material/Gavel';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -75,6 +77,22 @@ const Navbar = () => {
                 icon={<TokenIcon />}
                 iconPosition="start"
                 label="NFT"
+                sx={{ fontSize: '18px' }}
+              />
+            </Link>
+            <Link href="/nft/marketplace">
+              <Tab
+                icon={<StorefrontIcon />}
+                iconPosition="start"
+                label="MarketPlace"
+                sx={{ fontSize: '18px' }}
+              />
+            </Link>
+            <Link href="/auction">
+              <Tab
+                icon={<GavelIcon />}
+                iconPosition="start"
+                label="Auction"
                 sx={{ fontSize: '18px' }}
               />
             </Link>
