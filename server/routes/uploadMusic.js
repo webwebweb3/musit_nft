@@ -102,13 +102,14 @@ router.post('/', async (req, res) => {
 
 router.post('/fs', async (req, res) => {
   const jsonData = req.body;
-
+  console.log('json', jsonData);
   fs.writeFileSync('server/json/mint.json', JSON.stringify(jsonData), err => {
     if (err) console.error(err);
   });
   const mintIPFSurl = await client.add(
     fs.readFileSync('server/json/mint.json'),
   );
+  console.log('mintipfs', mintIPFSurl);
 
   res.json(mintIPFSurl);
 });

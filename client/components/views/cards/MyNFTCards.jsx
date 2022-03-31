@@ -13,6 +13,15 @@ const NFTCards = ({
   const musicTokenData = musicTokenDatas.properties;
   const [sellPrice, setSellPrice] = useState('');
   const [myNFTPrice, setMyNFTPrice] = useState(musicTokenPrices);
+  const [hover, setHover] = useState();
+
+  const handleMouseIn = () => {
+    setHover(true);
+  };
+
+  const handleMouseOut = () => {
+    setHover(false);
+  };
 
   const onChangeSellPrice = e => {
     setSellPrice(e.target.value);
@@ -48,12 +57,31 @@ const NFTCards = ({
   return (
     <Box style={{ color: 'white' }}>
       {musicTokenData.dataToSubmit.title}
-      <img
-        src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenData.S3AlbumCover}`}
-        alt="Album Cover"
-        width={'250px'}
-        height={'250px'}
-      />
+      <Box style={{ position: 'relative' }}>
+        <img
+          src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenData.S3AlbumCover}`}
+          alt="Album Cover"
+          width={'250px'}
+          height={'250px'}
+          onMouseOver={handleMouseIn}
+          onMouseOut={handleMouseOut}
+          style={hover ? { opacity: '0.5' } : { opacity: '1' }}
+        />
+        <Button
+          onMouseOver={handleMouseIn}
+          onMouseOut={handleMouseOut}
+          style={{ position: 'absolute', top: '107px', left: '63px' }}
+        >
+          {hover && '판매'}
+        </Button>
+        <Button
+          onMouseOver={handleMouseIn}
+          onMouseOut={handleMouseOut}
+          style={{ position: 'absolute', top: '107px', left: '123px' }}
+        >
+          {hover && '경매'}
+        </Button>
+      </Box>
 
       <Box>
         <Input

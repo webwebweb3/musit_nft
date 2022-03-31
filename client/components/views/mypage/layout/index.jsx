@@ -23,7 +23,7 @@ const MyPageLayout = ({ children }) => {
           verticalAlign: 'top',
         }}
       >
-        <Sidebar />
+        <Sidebar userData={userData} />
       </Box>
       <Box
         sx={{

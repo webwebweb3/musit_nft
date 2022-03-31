@@ -8,7 +8,7 @@
     "test_backend": "cross-env NODE_ENV=test node server/app.js",
     "nodemon": "nodemon server/app.js",
     "test_nodemon": "cross-env NODE_ENV=test nodemon server/app.js",
-    "frontend": "npm run dev --prefix client",
+    "f": "npm run dev --prefix client",
     "dev": "concurrently \"npm start\" \"npm run frontend\"",
     "dev_nodemon": "concurrently \"npm run nodemon\" \"npm run frontend\"",
     "test": "concurrently \"npm run test_backend\" \"npm run frontend\"",

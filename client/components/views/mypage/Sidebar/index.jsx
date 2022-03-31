@@ -16,7 +16,7 @@ import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
-const Sidebar = () => {
+const Sidebar = ({ userData }) => {
   return (
     <>
       <Box
@@ -61,12 +61,14 @@ const Sidebar = () => {
               </Link>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ color: '#fff' }}>
-                  <AutoAwesomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="내 스튜디오" />
-              </ListItemButton>
+              <Link href={`/studio/${userData.name}`}>
+                <ListItemButton>
+                  <ListItemIcon sx={{ color: '#fff' }}>
+                    <AutoAwesomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="내 스튜디오" />
+                </ListItemButton>
+              </Link>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
