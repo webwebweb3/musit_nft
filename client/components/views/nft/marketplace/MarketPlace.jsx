@@ -6,7 +6,7 @@ import { style } from './style';
 
 const MarketPlace = () => {
   return (
-    <>
+    <Box sx={style.marketplaceAllContainer}>
       <Box sx={style.marketplaceHeader}>
         <h1 style={{ margin: '0 0 0 40px' }}>MarketPlace</h1>
       </Box>
@@ -18,7 +18,7 @@ const MarketPlace = () => {
           <MarketPlaceContents />
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
