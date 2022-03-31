@@ -4,7 +4,6 @@ import { FaFire } from 'react-icons/fa';
 import { BsXDiamondFill } from 'react-icons/bs';
 import { GiCrystalize } from 'react-icons/gi';
 import { IconContext } from 'react-icons/lib';
-
 import { Button } from './Button';
 import { Global } from './pricingStyle';
 
@@ -17,7 +16,7 @@ function Pricing() {
           <div className="pricing__wrapper">
             <h1 className="pricing__heading">Pricing</h1>
             <div className="pricing__container">
-              <Link href="/subscription">
+              <Link href="/subscriptionbuy">
                 <div className="pricing__container-card pricing__container-cardInfo">
                   <div className="icon">
                     <FaFire />
@@ -35,7 +34,7 @@ function Pricing() {
                   </Button>
                 </div>
               </Link>
-              <Link href="/subscription">
+              <Link href="/subscriptionbuy">
                 <div className="pricing__container-cardInfo pricing__container-card">
                   <div className="icon">
                     <BsXDiamondFill />
@@ -53,7 +52,7 @@ function Pricing() {
                   </Button>
                 </div>
               </Link>
-              <Link href="/subscription">
+              <Link href="/subscriptionbuy">
                 <div className="pricing__container-cardInfo pricing__container-card">
                   <div className="icon">
                     <GiCrystalize />
