@@ -2,17 +2,15 @@ import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
 import { mintMusicTokenContract } from '../contracts';
-import * as fs from 'fs';
+import Router from 'next/router';
 
 import {
   IPFS_MUSIC_FAILURE,
-  IPFS_MUSIC_REQUEST,
   IPFS_MUSIC_SUCCESS,
   MINT_MUSIC_NFT_FAILURE,
   MINT_MUSIC_NFT_REQUEST,
   MINT_MUSIC_NFT_SUCCESS,
   S3_ALBUMCOVER_FAILURE,
-  S3_ALBUMCOVER_REQUEST,
   S3_ALBUMCOVER_SUCCESS,
 } from '../_actions/types';
 import axios from 'axios';
@@ -61,6 +59,7 @@ async function uploadIPFSMusic(data) {
 
 async function mintNFTMusic(data) {
   try {
+    console.log('data', data);
     let jsonData = {
       title: 'musit NFT',
       description: 'This data is for minting a NFT.',
@@ -79,17 +78,19 @@ async function mintNFTMusic(data) {
     // console.log('nftipfs', NFTIPFSurl);
     // const mintingData = JSON.stringify(jsonData);
     // console.log('mintingdata', mintingData);
-
+    console.log('account', data.data.account);
     const response = await mintMusicTokenContract.methods
       .mintMusicToken(mintIPFSurl.data.path)
       .send({ from: data.data.account });
+
+    console.log('res', response);
 
     if (response.status) {
       const uploadToServer = async e => {
         try {
           await axios.post(`/uploadmusic`, data.data.dataToSubmit).then(res => {
             if (res.data.uploadSuccess === 'true') {
-              console.log('good');
+              Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
             } else if (res.data.uploadSuccess !== 'empty') {
               alert(res.data.message);
             } else if (res.data.uploadSuccess !== 'emptyIPFS') {
@@ -108,6 +109,7 @@ async function mintNFTMusic(data) {
     }
   } catch (error) {
     console.error(error);
+    alert('error.. reload page please..');
   }
 }
 

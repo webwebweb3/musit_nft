@@ -13,6 +13,11 @@ contract SaleMusicToken {
     mapping (uint256 => uint256) public musicTokenPrices;
 
     uint256[] public onSaleMusicTokenArray;
+    struct OnSaleMusicTokenData {
+        uint256 musicTokenId;
+        string musicTokenURI;
+        uint256 musicTokenPrice;
+    }
 
     function setForSaleMusicToken(uint256 _musicTokenId, uint256 _price)
         public
@@ -59,6 +64,25 @@ contract SaleMusicToken {
         returns(uint256)
     {
         return onSaleMusicTokenArray.length;
+    }
+
+    function getOnSaleMusicTokens()
+        public
+        view
+        returns(OnSaleMusicTokenData[] memory)
+    {
+        uint256 onSaleMusicTokenLength = getOnSaleMusicTokenArrayLength();
+
+        OnSaleMusicTokenData[] memory onSaleMusicTokenDatas = new OnSaleMusicTokenData[](onSaleMusicTokenLength);
+
+        for(uint256 i = 0; i < onSaleMusicTokenLength; i++){
+            uint256 musicTokenId = onSaleMusicTokenArray[i];
+            string memory musicTokenURI = mintMusicTokenAddress.tokenURI(musicTokenId);
+            uint256 musicTokenPrice = getMusicTokenPrice(musicTokenId);
+            onSaleMusicTokenDatas[i] = OnSaleMusicTokenData(musicTokenId, musicTokenURI, musicTokenPrice);
+        }
+        
+        return onSaleMusicTokenDatas;
     }
 
     function getMusicTokenPrice(uint256 _musicTokenId)

@@ -26,7 +26,7 @@ export const Global = createGlobalStyle`
   .pricing__container-card:hover {
     transform: scale(1.06);
     transition: all 0.3s ease-out;
-    color: #1c2237;
+    color: #b8c7ff;
   }
   
   .pricing__container-card:nth-child(2) {

@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const Global = createGlobalStyle`
   .home__hero-section {
     color: #fff;
-    padding: 160px 0;
+    padding: 100px 0;
   }
   
   .home__hero-row {
@@ -32,6 +32,7 @@ export const Global = createGlobalStyle`
     max-width: 540px;
     padding-top: 0;
     padding-bottom: 60px;
+    padding-left: 70px;
   }
   
   .top-line {
@@ -83,7 +84,7 @@ export const Global = createGlobalStyle`
     border: 0;
     max-width: 100%;
     vertical-align: middle;
-    display: inline-block;
+    display: flex;
   }
   
   @media screen and (max-width: 991px) {
@@ -99,6 +100,10 @@ export const Global = createGlobalStyle`
     }
   
     .col {
+      max-width: 100%;
+      flex-basis: 100%;
+    }
+    .col2 {
       max-width: 100%;
       flex-basis: 100%;
     }
