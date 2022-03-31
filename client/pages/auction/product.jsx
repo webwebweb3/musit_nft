@@ -3,13 +3,13 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '../../_store/configureStore';
-import MainLayout from '../../components/mainlayout';
+import NFTLayout from '../../components/nftLayout/NFTLayout';
 import { myInfoRequestAction } from '../../_actions/user_actions';
 import { Box, Button, Divider, Grid } from '@mui/material';
 
 const Product = () => {
   return (
-    <MainLayout>
+    <NFTLayout>
       <Grid container spacing={2}>
         <Grid item xs={6} md={5}>
           <img src="/bgimg.jpg" alt="img" width={'550px'} height={'550px'} />
@@ -98,7 +98,7 @@ const Product = () => {
           </Box>
         </Grid>
       </Grid>
-    </MainLayout>
+    </NFTLayout>
   );
 };
 

@@ -1,21 +1,26 @@
 import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
+import { Button, Grid } from '@mui/material';
+import Link from 'next/link';
 
 import wrapper from '../../_store/configureStore';
-import MainLayout from '../../components/mainlayout';
+import NFTLayout from '../../components/nftLayout/NFTLayout';
 import { myInfoRequestAction } from '../../_actions/user_actions';
-import { Grid } from '@mui/material';
 
 const AuctionHome = () => {
   return (
-    <MainLayout>
+    <NFTLayout>
       <Grid container spacing={2}>
         <Grid item xs={6} md={12} sx={{ color: '#fff' }}>
-          Main
+          <Link href="/auction/upload">
+            <Button variant="contained" sx={{ bgcolor: 'gray' }}>
+              등록하기
+            </Button>
+          </Link>
         </Grid>
       </Grid>
-    </MainLayout>
+    </NFTLayout>
   );
 };
 
