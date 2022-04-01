@@ -6,13 +6,10 @@ export const style = {
     maxWidth: '1600px',
     color: 'white',
     lineHeight: '72px',
-    paddingTop: '60px',
-    paddingBottom: '60px',
+    paddingTop: '100px',
+    paddingBottom: '100px',
     fontSize: '30px',
     fontWeight: '700',
-    '&.h1': {
-      margin: '0',
-    },
   },
   marketplaceContainer: {
     width: '100%',

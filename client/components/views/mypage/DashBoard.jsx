@@ -143,7 +143,7 @@ const DashBoard = () => {
             <CardMedia
               component="img"
               sx={{ width: 151 }}
-              image="../../public/images/bgimg.jpg"
+              image="bgimg.jpg"
               alt="앨범 커버"
             />
           </Card>
@@ -186,7 +186,7 @@ const DashBoard = () => {
             <CardMedia
               component="img"
               sx={{ width: 151 }}
-              image="../../public/images/bgimg.jpg"
+              image="bgimg.jpg"
               alt="앨범 커버"
             />
           </Card>
@@ -229,7 +229,7 @@ const DashBoard = () => {
             <CardMedia
               component="img"
               sx={{ width: 151 }}
-              image="../../public/images/bgimg.jpg"
+              image="bgimg.jpg"
               alt="앨범 커버"
             />
           </Card>
@@ -272,7 +272,7 @@ const DashBoard = () => {
             <CardMedia
               component="img"
               sx={{ width: 151 }}
-              image="../../public/images/bgimg.jpg"
+              image="bgimg.jpg"
               alt="앨범 커버"
             />
           </Card>

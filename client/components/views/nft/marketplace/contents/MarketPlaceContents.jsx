@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import Router from 'next/router';
 
 const MarketPlaceContents = () => {
-  const [saleMusicTokens, setSaleMusicTokens] = useState();
+  const [saleMusicTokens, setSaleMusicTokens] = useState([]);
   const { userData } = useSelector(state => state.user);
   if (userData === null) {
     alert('로그인 해주세요');

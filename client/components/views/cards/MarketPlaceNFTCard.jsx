@@ -8,9 +8,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material/';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import { FavoriteBorder, Favorite } from '@mui/icons-material/FavoriteBorder';
 import Link from 'next/link';
 import { web3 } from '../../../contracts';
 import { useState } from 'react';
@@ -50,15 +48,25 @@ const MarketPlaceNFTCard = ({
       >
         <CardMedia
           component="img"
-          sx={{
-            width: '300px',
-            height: '300px',
-          }}
+          sx={
+            hover
+              ? {
+                  width: '310px',
+                  height: '310px',
+                }
+              : {
+                  width: '300px',
+                  height: '300px',
+                }
+          }
           image={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenDatas.properties.S3AlbumCover}`}
           alt={`title album Cover`}
         />
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flex: '1 0 auto' }}>
+            <Typography component="div" variant="h5" style={{ float: 'right' }}>
+              <FavoriteBorder />a
+            </Typography>
             <Typography component="div" variant="h5">
               {musicTokenInputData.title}
             </Typography>

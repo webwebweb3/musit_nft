@@ -660,6 +660,7 @@ const saleMusicTokenAbi = [
 
 export const mintMusicTokenAddress =
   '0x474f521b703c641D95922927Dc347B9B5803e47D';
+
 export const saleMusicTokenAddress =
   '0x4Fd0cf281D22E9387F2bdE7eacC820D1cE08F46A';
 

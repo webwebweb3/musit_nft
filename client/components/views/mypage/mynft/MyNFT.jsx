@@ -34,11 +34,12 @@ const MyNFT = () => {
       const response = await mintMusicTokenContract.methods
         .getMusicTokens(account)
         .call();
-
+      console.log('res', response);
       for (let i = 0; i < response.length; i++) {
         const ipfsData = await fetch(
           `https://ipfs.io/ipfs/${response[i].musicTokenURI}`,
         );
+        console.log('ipfs', ipfsData);
         const data = await ipfsData.json();
         tempMusicCardArray.push({
           musicTokenId: response[i].musicTokenId,
