@@ -3,13 +3,19 @@ import Axios from 'axios';
 
 import userRegisterSaga from './userRegister';
 import metamaskSaga from './metamask';
+import auctionSaga from './auction';
 import uploadMusic from './uploadMusic';
 
 Axios.defaults.baseURL = 'http://localhost:8000/api';
 Axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {
-  yield all([fork(userRegisterSaga), fork(metamaskSaga), fork(uploadMusic)]); // all 에 배열을 넣고 배열의 함수들을 한번에 전부 실행
+  yield all([
+    fork(userRegisterSaga),
+    fork(metamaskSaga),
+    fork(auctionSaga),
+    fork(uploadMusic),
+  ]); // all 에 배열을 넣고 배열의 함수들을 한번에 전부 실행
 }
 
 /* redux-saga/effects */

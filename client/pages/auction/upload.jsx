@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 import { Button, Grid, TextField } from '@mui/material';
@@ -6,12 +6,13 @@ import { Button, Grid, TextField } from '@mui/material';
 import wrapper from '../../_store/configureStore';
 import NFTLayout from '../../components/nftLayout/NFTLayout';
 import { myInfoRequestAction } from '../../_actions/user_actions';
-import { auctionAbi, auctionCreatorContract, web3 } from '../../contracts';
 import { useInput } from '../../hooks/useInput';
 import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { createAuctionAction } from '../../_actions/auctionAction';
 
 const AuctionHome = () => {
+  const dispatch = useDispatch();
   const { userData } = useSelector(state => state.user);
   const account = userData.metamask;
 
@@ -19,31 +20,15 @@ const AuctionHome = () => {
   const [endAt, onChangeEndAt] = useInput('');
   const [tokenID, onChangeTokenID] = useInput('');
 
-  const createAuctionFunction = useCallback(async () => {
-    await auctionCreatorContract.methods
-      .createAuction(startingBid, endAt, tokenID)
-      .send({ from: account });
-  }, [startingBid, endAt, tokenID, account]);
-
   const onClickAuction = useCallback(() => {
-    console.log(auctionCreatorContract.methods);
-    createAuctionFunction();
-  }, [createAuctionFunction]);
-
-  useEffect(() => {
-    console.log(auctionCreatorContract.methods);
-
-    const te = async () => {
-      // auctionCreatorContract.methods.createAuction(bidcrement, start, end, ipgs)
-      const test = await auctionCreatorContract.methods.allAuctions().call();
-      console.log(test);
-      let auctionAddress = test[0];
-      let auctionContract = new web3.eth.Contract(auctionAbi, auctionAddress);
-      console.log(auctionContract);
+    let data = {
+      startingBid,
+      endAt,
+      tokenID,
+      account,
     };
-
-    te();
-  }, []);
+    dispatch(createAuctionAction(data));
+  }, [dispatch, startingBid, endAt, tokenID, account]);
 
   return (
     <NFTLayout>

@@ -24,6 +24,13 @@ export const METAMASK_LOGIN_REQUEST = 'METAMASK_LOGIN_REQUEST';
 export const METAMASK_LOGIN_SUCCESS = 'METAMASK_LOGIN_SUCCESS';
 export const METAMASK_LOGIN_FAILURE = 'METAMASK_LOGIN_FAILURE';
 
+export const CreateAuction_REQUEST = 'CreateAuction_REQUEST';
+export const CreateAuction_SUCCESS = 'CreateAuction_SUCCESS';
+export const CreateAuction_FAILURE = 'CreateAuction_FAILURE';
+export const AllAuctions_REQUEST = 'AllAuctions_REQUEST';
+export const AllAuctions_SUCCESS = 'AllAuctions_SUCCESS';
+export const AllAuctions_FAILURE = 'AllAuctions_FAILURE';
+
 export const S3_ALBUMCOVER_REQUEST = 'S3_ALBUMCOVER_REQUEST';
 export const S3_ALBUMCOVER_SUCCESS = 'S3_ALBUMCOVER_SUCCESS';
 export const S3_ALBUMCOVER_FAILURE = 'S3_ALBUMCOVER_FAILURE';
