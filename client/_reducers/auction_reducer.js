@@ -12,7 +12,7 @@ import {
   AUCTION_REQUEST,
   AUCTION_SUCCESS,
   AUCTION_FAILURE,
-} from '../_actions/types';
+} from '../_request/types';
 
 export const initialState = {
   createAuctionLoading: false,

@@ -1,18 +1,16 @@
 import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
-import { Button, Grid } from '@mui/material';
-import Link from 'next/link';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import wrapper from '../../_store/configureStore';
 import NFTLayout from '../../components/nftLayout/NFTLayout';
-import { myInfoRequestAction } from '../../_actions/user_actions';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { allAuctionsAction } from '../../_actions/auctionAction';
+import { myInfoRequestAction } from '../../_request/user_actions';
+import { allAuctionsAction } from '../../_request/auction_request';
+import AuctionMainPage from '../../components/views/auctionpage';
 
 const AuctionHome = () => {
-  const { allAuctionData } = useSelector(state => state.auction);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,23 +19,7 @@ const AuctionHome = () => {
 
   return (
     <NFTLayout>
-      <Grid container spacing={2}>
-        <Grid item xs={6} md={6} sx={{ color: '#fff' }}>
-          <Link href="/auction/upload">
-            <Button variant="contained" sx={{ bgcolor: 'gray' }}>
-              등록하기
-            </Button>
-          </Link>
-        </Grid>
-        <Grid item xs={6} md={6} sx={{ color: '#fff' }}>
-          {allAuctionData &&
-            allAuctionData.map(auction => (
-              <div key={auction}>
-                <Link href={`/auction/${auction}`}>{auction}</Link>
-              </div>
-            ))}
-        </Grid>
-      </Grid>
+      <AuctionMainPage />
     </NFTLayout>
   );
 };

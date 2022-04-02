@@ -6,7 +6,7 @@ import wrapper from '../../_store/configureStore';
 import MainLayout from '../../components/mainlayout';
 import MyPageLayout from '../../components/views/mypage/layout';
 import MyInfo from '../../components/views/mypage/MyInfo';
-import { myInfoRequestAction } from '../../_actions/user_actions';
+import { myInfoRequestAction } from '../../_request/user_request';
 
 const InfoEdit = () => {
   return (

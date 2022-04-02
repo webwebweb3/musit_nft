@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@emotion/react';
-import { registerRequestAction } from '../../../../_actions/user_actions';
+import { registerRequestAction } from '../../../../_request/user_request';
 import { useGenreInput, useInput } from '../../../../hooks/useInput';
 import RegisterButton from './button/RegisterButton';
 import UnstyledSelectsMultiple from '../../../mui/SelectNationality';

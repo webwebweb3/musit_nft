@@ -5,7 +5,7 @@ import axios from 'axios';
 import wrapper from '../../../_store/configureStore';
 import MainLayout from '../../../components/mainlayout';
 // import UploadMusic from '../../../components/views/studio/uploadmusic/UploadMusic';
-import { myInfoRequestAction } from '../../../_actions/user_actions';
+import { myInfoRequestAction } from '../../../_request/user_request';
 import dynamic from 'next/dynamic';
 const UploadMusic = dynamic(
   () => import('../../../components/views/studio/uploadmusic/UploadMusic'),

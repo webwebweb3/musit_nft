@@ -6,7 +6,7 @@ import {
   METAMASK_LOGIN_SUCCESS,
   METAMASK_REQUEST,
   METAMASK_SUCCESS,
-} from '../_actions/types';
+} from '../_request/types';
 
 export const initialState = {
   metamaskLoading: false,

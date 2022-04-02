@@ -13,7 +13,7 @@ import {
   AUCTION_INFO_REQUEST,
   AUCTION_INFO_SUCCESS,
   AUCTION_INFO_FAILURE,
-} from '../_actions/types';
+} from '../_request/types';
 
 async function createauctionAPI(data) {
   let { startingBid, endAt, tokenID, account } = data;

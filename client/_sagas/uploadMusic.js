@@ -12,7 +12,7 @@ import {
   MINT_MUSIC_NFT_SUCCESS,
   S3_ALBUMCOVER_FAILURE,
   S3_ALBUMCOVER_SUCCESS,
-} from '../_actions/types';
+} from '../_request/types';
 import axios from 'axios';
 
 function uploadS3AlbumCover(data) {

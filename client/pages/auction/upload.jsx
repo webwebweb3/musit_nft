@@ -5,11 +5,11 @@ import { Button, Grid, TextField } from '@mui/material';
 
 import wrapper from '../../_store/configureStore';
 import NFTLayout from '../../components/nftLayout/NFTLayout';
-import { myInfoRequestAction } from '../../_actions/user_actions';
+import { myInfoRequestAction } from '../../_request/user_request';
 import { useInput } from '../../hooks/useInput';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createAuctionAction } from '../../_actions/auctionAction';
+import { createAuctionAction } from '../../_request/auction_request';
 
 const AuctionHome = () => {
   const dispatch = useDispatch();

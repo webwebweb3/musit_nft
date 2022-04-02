@@ -3,7 +3,7 @@ import { ListItemIcon, MenuItem } from '@mui/material';
 import { Box } from '@mui/system';
 import { useDispatch } from 'react-redux';
 import { Logout } from '@mui/icons-material';
-import { logoutRequestAction } from '../../../../_actions/user_actions';
+import { logoutRequestAction } from '../../../../_request/user_request';
 
 const LogoutButton = () => {
   const dispatch = useDispatch();

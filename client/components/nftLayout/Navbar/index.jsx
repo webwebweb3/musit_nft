@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import RegisterModal from './Register/RegisterModal';
 import ProfileButton from './myMenu';
-import { metaMaskRequestAction } from '../../../_actions/metamask_actions';
+import { metaMaskRequestAction } from '../../../_request/metamask_request';
 import MetamaskButton from './Register/button/metamaskButton';
 
 const Navbar = () => {
