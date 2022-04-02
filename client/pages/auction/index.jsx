@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { allAuctionsAction } from '../../_actions/auctionAction';
 
 const AuctionHome = () => {
-  const auction = useSelector(state => state.auction);
+  const { allAuctionData } = useSelector(state => state.auction);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,8 +30,8 @@ const AuctionHome = () => {
           </Link>
         </Grid>
         <Grid item xs={6} md={6} sx={{ color: '#fff' }}>
-          {auction.AuctionData &&
-            auction.AuctionData.map(auction => (
+          {allAuctionData &&
+            allAuctionData.map(auction => (
               <div key={auction}>
                 <Link href={`/auction/${auction}`}>{auction}</Link>
               </div>
