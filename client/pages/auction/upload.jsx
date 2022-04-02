@@ -1,24 +1,42 @@
 import React, { useEffect } from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
-import { Grid, TextField } from '@mui/material';
+import { Button, Grid, TextField } from '@mui/material';
 
 import wrapper from '../../_store/configureStore';
 import NFTLayout from '../../components/nftLayout/NFTLayout';
 import { myInfoRequestAction } from '../../_actions/user_actions';
 import { auctionAbi, auctionCreatorContract, web3 } from '../../contracts';
 import { useInput } from '../../hooks/useInput';
+import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 const AuctionHome = () => {
-  const [bidIncrement, onChangeBidIncrement] = useInput('');
-  const [startBlock, onChangeStartBlock] = useInput('');
-  const [endBlock, onChangeEndBlock] = useInput('');
+  const { userData } = useSelector(state => state.user);
+  const account = userData.metamask;
+
+  const [startingBid, onChangeStartingBid] = useInput('');
+  const [endAt, onChangeEndAt] = useInput('');
+  const [tokenID, onChangeTokenID] = useInput('');
+
+  const createAuctionFunction = useCallback(async () => {
+    await auctionCreatorContract.methods
+      .createAuction(startingBid, endAt, tokenID)
+      .send({ from: account });
+  }, [startingBid, endAt, tokenID, account]);
+
+  const onClickAuction = useCallback(() => {
+    console.log(auctionCreatorContract.methods);
+    createAuctionFunction();
+  }, [createAuctionFunction]);
 
   useEffect(() => {
+    console.log(auctionCreatorContract.methods);
+
     const te = async () => {
       // auctionCreatorContract.methods.createAuction(bidcrement, start, end, ipgs)
       const test = await auctionCreatorContract.methods.allAuctions().call();
-      console.log(test[0]);
+      console.log(test);
       let auctionAddress = test[0];
       let auctionContract = new web3.eth.Contract(auctionAbi, auctionAddress);
       console.log(auctionContract);
@@ -32,10 +50,10 @@ const AuctionHome = () => {
       <Grid container spacing={2}>
         <Grid item xs={6} md={12} sx={{ color: '#fff' }}>
           <TextField
-            label="bidIncrement"
+            label="startingBid"
             variant="outlined"
-            value={bidIncrement}
-            onChange={onChangeBidIncrement}
+            value={startingBid}
+            onChange={onChangeStartingBid}
             fullWidth
             sx={{
               bgcolor: 'gray',
@@ -44,10 +62,10 @@ const AuctionHome = () => {
             }}
           />
           <TextField
-            label="startBlock"
+            label="endAt"
             variant="outlined"
-            value={startBlock}
-            onChange={onChangeStartBlock}
+            value={endAt}
+            onChange={onChangeEndAt}
             fullWidth
             sx={{
               bgcolor: 'gray',
@@ -55,11 +73,12 @@ const AuctionHome = () => {
               width: '320px',
             }}
           />
+          {/* 임시 tokenID */}
           <TextField
-            label="endBlock"
+            label="tokenID"
             variant="outlined"
-            value={endBlock}
-            onChange={onChangeEndBlock}
+            value={tokenID}
+            onChange={onChangeTokenID}
             fullWidth
             sx={{
               bgcolor: 'gray',
@@ -67,6 +86,13 @@ const AuctionHome = () => {
               width: '320px',
             }}
           />
+          <Button
+            variant="contained"
+            sx={{ bgcolor: 'gray' }}
+            onClick={onClickAuction}
+          >
+            경매 등록하기
+          </Button>
         </Grid>
       </Grid>
     </NFTLayout>

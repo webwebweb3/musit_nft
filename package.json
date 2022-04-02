@@ -9,9 +9,9 @@
     "nodemon": "nodemon server/app.js",
     "test_nodemon": "cross-env NODE_ENV=test nodemon server/app.js",
     "f": "npm run dev --prefix client",
-    "dev": "concurrently \"npm start\" \"npm run frontend\"",
-    "dev_nodemon": "concurrently \"npm run nodemon\" \"npm run frontend\"",
-    "test": "concurrently \"npm run test_backend\" \"npm run frontend\"",
+    "dev": "concurrently \"npm start\" \"npm run f\"",
+    "dev_nodemon": "concurrently \"npm run nodemon\" \"npm run f\"",
+    "test": "concurrently \"npm run test_backend\" \"npm run f\"",
     "prepare": "husky install"
   },
   "repository": {

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
 const path = require('path');
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
@@ -12,13 +11,6 @@ require('dotenv').config();
 //------------------------------------------------
 //               /api/userEdit
 //------------------------------------------------
-
-try {
-  fs.accessSync('uploads');
-} catch (error) {
-  console.log('uploads 폴더 생성.');
-  fs.mkdirSync('uploads');
-}
 
 AWS.config.update({
   accessKeyId: process.env.S3_ACCESS_KEY_ID,

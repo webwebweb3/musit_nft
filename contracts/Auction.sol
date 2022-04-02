@@ -2,12 +2,12 @@
 
 pragma solidity >=0.5.0 <0.9.0;
 
-contract Auction{
-    address payable public owner;
 
-    uint public startBlock; // 경매 시작 시간
-    uint public endBlock;   // 종료 시간
-    string public ipfsHash;
+contract Auction{
+    address payable public immutable owner;
+    uint256 public startBlock; // 경매 시작 시간
+    uint256 public endBlock;   // 종료 시간
+    uint256 public tokenID;    // 토큰 ID
 
     enum State {
         Started,
@@ -17,22 +17,22 @@ contract Auction{
     }
     State public auctionState;
 
-    uint public highestBindingBid;
+    uint256 public highestBindingBid;
     address payable public highestBidder;
-    mapping(address => uint) public bids;
+    mapping(address => uint256) public bids;
 
-    uint bidIncrement;
+    uint256 bidIncrement;
 
-    constructor(address _eoa, uint _bidIncrement, uint _startBlock, uint _endBlock, string memory _ipfsHash) {
+    constructor(address _eoa, uint256 _bidIncrement, uint256 _startBlock, uint256 _endBlock, uint256 _tokenID) {
         require(_startBlock < _endBlock);
-        require(_startBlock >= block.number);
+        // require(_startBlock >= block.number);
         
         owner = payable(_eoa); 
         auctionState = State.Running;
         bidIncrement = _bidIncrement;
         startBlock = _startBlock;
         endBlock = _endBlock;
-        ipfsHash = _ipfsHash;
+        tokenID = _tokenID;
     }
 
     // 제한 상황
@@ -58,7 +58,7 @@ contract Auction{
         _;
     }
 
-    function min(uint a, uint b) pure internal returns(uint){
+    function min(uint256 a, uint256 b) pure internal returns(uint256){
         if(a <= b) {
             return a;
         } else {
@@ -74,7 +74,7 @@ contract Auction{
         require(auctionState == State.Running);
         require(msg.value != 0);
 
-        uint currentBid = bids[msg.sender] + msg.value;
+        uint256 currentBid = bids[msg.sender] + msg.value;
         require(currentBid > highestBindingBid);
         bids[msg.sender] = currentBid;
 
@@ -91,7 +91,7 @@ contract Auction{
         require(msg.sender == owner || bids[msg.sender] > 0);
 
         address payable recipient;
-        uint value;
+        uint256 value;
 
         // 경매 종료의 2가지 경우
         // 1. 경매는 취소되고 모든 사람들이 그들이 보낸 모든 돈을 요철하거나 받을 수 있다.
