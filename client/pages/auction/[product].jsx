@@ -5,7 +5,7 @@ import Clock from 'react-live-clock';
 
 import wrapper from '../../_store/configureStore';
 import NFTLayout from '../../components/nftLayout/NFTLayout';
-import { myInfoRequestAction } from '../../_request/user_actions';
+import { myInfoRequestAction } from '../../_request/user_request';
 import { Box, Button, Divider, Grid } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

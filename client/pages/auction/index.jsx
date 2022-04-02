@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import wrapper from '../../_store/configureStore';
 import NFTLayout from '../../components/nftLayout/NFTLayout';
-import { myInfoRequestAction } from '../../_request/user_actions';
+import { myInfoRequestAction } from '../../_request/user_request';
 import { allAuctionsAction } from '../../_request/auction_request';
 import AuctionMainPage from '../../components/views/auctionpage';
 
