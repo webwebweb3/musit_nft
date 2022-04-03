@@ -114,3 +114,14 @@ export const EthereumImg = styled.img`
   height: 50px;
   margin-right: 10px;
 `;
+
+export const StyledCancelButton = styled(Button)`
+  background-color: transparent;
+  color: #dada;
+  padding: 6px 12px;
+  margin-left: 220px;
+  &:hover {
+    color: #000;
+    background-color: #dada;
+  }
+`;

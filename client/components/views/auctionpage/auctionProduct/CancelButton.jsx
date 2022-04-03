@@ -1,7 +1,7 @@
-import { Button } from '@mui/material';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { auctionCancelAction } from '../../../../_request/auction_request';
+import { StyledCancelButton } from '../style';
 
 const CancelButton = ({ product }) => {
   const dispatch = useDispatch();
@@ -17,12 +17,9 @@ const CancelButton = ({ product }) => {
   }, [dispatch, userData, product]);
 
   return (
-    <Button
-      sx={{ color: '#dada', marginLeft: '220px' }}
-      onClick={onClickCancelAuction}
-    >
+    <StyledCancelButton onClick={onClickCancelAuction}>
       경매취소
-    </Button>
+    </StyledCancelButton>
   );
 };
 
