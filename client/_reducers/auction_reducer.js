@@ -12,6 +12,9 @@ import {
   AUCTION_REQUEST,
   AUCTION_SUCCESS,
   AUCTION_FAILURE,
+  AUCTION_CANCEL_REQUEST,
+  AUCTION_CANCEL_SUCCESS,
+  AUCTION_CANCEL_FAILURE,
 } from '../_request/types';
 
 export const initialState = {
@@ -27,6 +30,9 @@ export const initialState = {
   auctionLoading: false,
   auctionDone: false,
   auctionError: null,
+  cancelAuctionLoading: false,
+  cancelAuctionDone: false,
+  cancelAuctionError: null,
   allAuctionData: null,
   auctionData: null,
 };
@@ -89,6 +95,19 @@ const MetamaskReducer = (state = initialState, action) =>
       case AUCTION_INFO_FAILURE:
         draft.infoAuctionLoading = false;
         draft.infoAuctionError = action.error;
+        break;
+      case AUCTION_CANCEL_REQUEST:
+        draft.cancelAuctionLoading = true;
+        draft.cancelAuctionError = null;
+        draft.cancelAuctionDone = false;
+        break;
+      case AUCTION_CANCEL_SUCCESS:
+        draft.cancelAuctionLoading = false;
+        draft.cancelAuctionDone = true;
+        break;
+      case AUCTION_CANCEL_FAILURE:
+        draft.cancelAuctionLoading = false;
+        draft.cancelAuctionError = action.error;
         break;
 
       default:

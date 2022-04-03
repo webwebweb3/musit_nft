@@ -24,6 +24,7 @@ const AuctionUploadPage = () => {
       tokenID,
       account,
     };
+    console.log(data);
     dispatch(createAuctionAction(data));
   }, [dispatch, startingBid, endAt, tokenID, account]);
 

@@ -8,8 +8,9 @@ import {
   Divider,
   IconButton,
   Tooltip,
+  Badge,
 } from '@mui/material';
-import { LibraryMusic, QueueMusic } from '@mui/icons-material';
+import { LibraryMusic, QueueMusic, Campaign } from '@mui/icons-material';
 import LogoutButton from './LogoutButton';
 import MyPageButton from './MyPageButton';
 import { useSelector } from 'react-redux';
@@ -32,6 +33,9 @@ const ProfileButton = () => {
   return (
     <Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+        <Badge color="secondary" badgeContent={99}>
+          <Campaign />
+        </Badge>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
