@@ -84,7 +84,7 @@ export const Global = createGlobalStyle`
     border: 0;
     max-width: 100%;
     vertical-align: middle;
-    display: flex;
+    display: inline-block;
   }
   
   @media screen and (max-width: 991px) {
@@ -103,9 +103,6 @@ export const Global = createGlobalStyle`
       max-width: 100%;
       flex-basis: 100%;
     }
-    .col2 {
-      max-width: 100%;
-      flex-basis: 100%;
-    }
+
   }
 `;
