@@ -9,7 +9,7 @@ import {
   S3_ALBUMCOVER_FAILURE,
   S3_ALBUMCOVER_REQUEST,
   S3_ALBUMCOVER_SUCCESS,
-} from '../_actions/types';
+} from '../_request/types';
 
 export const initialState = {
   S3UploadLoading: false,

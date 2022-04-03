@@ -1,21 +1,26 @@
 import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import wrapper from '../../_store/configureStore';
-import MainLayout from '../../components/mainlayout';
-import { myInfoRequestAction } from '../../_actions/user_actions';
-import { Grid } from '@mui/material';
+import NFTLayout from '../../components/nftLayout/NFTLayout';
+import { myInfoRequestAction } from '../../_request/user_request';
+import { allAuctionsAction } from '../../_request/auction_request';
+import AuctionMainPage from '../../components/views/auctionpage';
 
-const ActionHome = () => {
+const AuctionHome = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(allAuctionsAction());
+  }, [dispatch]);
+
   return (
-    <MainLayout>
-      <Grid container spacing={2}>
-        <Grid item xs={6} md={12} sx={{ color: '#fff' }}>
-          Main
-        </Grid>
-      </Grid>
-    </MainLayout>
+    <NFTLayout>
+      <AuctionMainPage />
+    </NFTLayout>
   );
 };
 
@@ -34,4 +39,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default ActionHome;
+export default AuctionHome;

@@ -2,13 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
-import PaidIcon from '@mui/icons-material/Paid';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RegisterModal from './Register/RegisterModal';
 import ProfileButton from './myMenu';
-import { metaMaskRequestAction } from '../../../_actions/metamask_actions';
+import { metaMaskRequestAction } from '../../../_request/metamask_request';
 import MetamaskButton from './Register/button/metamaskButton';
 
 const Navbar = () => {
@@ -78,9 +77,6 @@ const Navbar = () => {
                 label="NFT"
                 sx={{ fontSize: '18px' }}
               />
-            </Link>
-            <Link href="/action">
-              <Tab icon={<PaidIcon />} iconPosition="start" label="ACTION" />
             </Link>
           </Tabs>
           {userData ? (

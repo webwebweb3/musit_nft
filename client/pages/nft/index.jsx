@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import wrapper from '../../_store/configureStore';
 import NFTLayout from '../../components/nftLayout/NFTLayout';
-import { myInfoRequestAction } from '../../_actions/user_actions';
+import { myInfoRequestAction } from '../../_request/user_request';
 import NFT from '../../components/views/nft/NFT';
 
 const NFTHome = () => {

@@ -6,7 +6,7 @@ import wrapper from '../../_store/configureStore';
 import MainLayout from '../../components/mainlayout';
 import MyPageLayout from '../../components/views/mypage/layout';
 import FavArtists from '../../components/views/mypage/FavArtists';
-import { myInfoRequestAction } from '../../_actions/user_actions';
+import { myInfoRequestAction } from '../../_request/user_request';
 
 const FavArtistsPage = () => {
   return (

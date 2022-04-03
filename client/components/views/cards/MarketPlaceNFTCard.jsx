@@ -12,27 +12,68 @@ import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import Link from 'next/link';
+import { web3 } from '../../../contracts';
+import { useState } from 'react';
 
-const MusicCard = ({ musicTitle, albumCover, artistName }) => {
+const MarketPlaceNFTCard = ({
+  musicTokenIds,
+  musicTokenPrices,
+  musicTokenDatas,
+}) => {
+  const [hover, setHover] = useState();
+
   const theme = useTheme();
+  const musicTokenInputData = musicTokenDatas.properties.dataToSubmit;
+  const handleMouseIn = () => {
+    setHover(true);
+  };
+
+  const handleMouseOut = () => {
+    setHover(false);
+  };
 
   return (
-    <Card sx={{ display: 'inline-block' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
-            {musicTitle}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-            style={{ cursor: 'pointer' }}
-          >
-            <Link href={`/studio/${artistName}`}>{artistName}</Link>
-          </Typography>
-        </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+    <Link
+      href={`/nft/marketplace/edition/${musicTokenDatas.properties.IPFSUrl}`}
+    >
+      <Card
+        sx={{
+          display: 'inline-block',
+          width: '300px',
+          backgroundColor: '#2c3352',
+          color: 'white',
+          borderRadius: '1rem',
+        }}
+        onMouseOver={handleMouseIn}
+        onMouseOut={handleMouseOut}
+        style={hover ? { opacity: '0.8', cursor: 'pointer' } : { opacity: '1' }}
+      >
+        <CardMedia
+          component="img"
+          sx={{
+            width: '300px',
+            height: '300px',
+          }}
+          image={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenDatas.properties.S3AlbumCover}`}
+          alt={`title album Cover`}
+        />
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <CardContent sx={{ flex: '1 0 auto' }}>
+            <Typography component="div" variant="h5">
+              {musicTokenInputData.title}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              component="div"
+              style={{ color: '#768fb5' }}
+            >
+              {musicTokenInputData.artist}
+            </Typography>
+            <Box
+              style={{ fontWeight: '600', color: '#18c99b' }}
+            >{`$${web3.utils.fromWei(musicTokenPrices)} ETH`}</Box>
+          </CardContent>
+          {/* <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
           <IconButton aria-label="previous">
             {theme.direction === 'rtl' ? (
               <SkipNextIcon />
@@ -50,16 +91,11 @@ const MusicCard = ({ musicTitle, albumCover, artistName }) => {
               <SkipNextIcon />
             )}
           </IconButton>
+        </Box> */}
         </Box>
-      </Box>
-      <CardMedia
-        component="img"
-        sx={{ width: '200px' }}
-        image={albumCover}
-        alt={`${musicTitle} album Cover`}
-      />
-    </Card>
+      </Card>
+    </Link>
   );
 };
 
-export default MusicCard;
+export default MarketPlaceNFTCard;

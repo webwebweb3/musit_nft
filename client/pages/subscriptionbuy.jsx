@@ -5,7 +5,7 @@ import axios from 'axios';
 import wrapper from '../_store/configureStore';
 import MainLayout from '../components/mainlayout';
 import SubscriptionBuy from '../components/views/SubscriptionBuy';
-import { myInfoRequestAction } from '../_actions/user_actions';
+import { myInfoRequestAction } from '../_request/user_request';
 
 const SubscriptionBuyPage = () => {
   return (

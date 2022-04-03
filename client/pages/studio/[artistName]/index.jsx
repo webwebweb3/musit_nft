@@ -3,7 +3,7 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 import wrapper from '../../../_store/configureStore';
 import MainLayout from '../../../components/mainlayout';
-import { myInfoRequestAction } from '../../../_actions/user_actions';
+import { myInfoRequestAction } from '../../../_request/user_request';
 import dynamic from 'next/dynamic';
 const Studio = dynamic(
   () => import('../../../components/views/studio/Studio'),

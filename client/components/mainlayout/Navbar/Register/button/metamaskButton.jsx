@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router';
 
-import { metaMaskLoginRequestAction } from '../../../../../_actions/metamask_actions';
+import { metaMaskLoginRequestAction } from '../../../../../_request/metamask_request';
 import NavButton from './NavButton';
 
 const MetamaskButton = ({ metamaskLogin, setMetamaskLogin, metaopenfunc }) => {

@@ -6,7 +6,7 @@ import wrapper from '../../_store/configureStore';
 import MainLayout from '../../components/mainlayout';
 import MyPageLayout from '../../components/views/mypage/layout';
 import MyFavoriteTracks from '../../components/views/mypage/MyFavoriteTracks';
-import { myInfoRequestAction } from '../../_actions/user_actions';
+import { myInfoRequestAction } from '../../_request/user_request';
 
 const MyFavoriteTracksPage = () => {
   return (

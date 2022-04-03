@@ -1,4 +1,5 @@
 export const style = {
+  marketplaceAllContainer: { margin: '0 80px' },
   marketplaceHeader: {
     width: '100%',
     minWidth: '1600px',
@@ -23,5 +24,5 @@ export const style = {
     margin: '0 40px',
   },
   marketplaceLeftSideBar: { flex: 2 },
-  marketplaceWrapper: { flex: 10 },
+  marketplaceWrapper: { flex: 10, paddingRight: '100px' },
 };

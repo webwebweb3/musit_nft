@@ -37,7 +37,6 @@ const NFTCards = ({
         alert('NFT 판매에 동의를 먼재 해주세요.');
         return;
       }
-      console.log(web3.utils.toWei(sellPrice, 'ether'));
 
       const response = await saleMusicTokenContract.methods
         .setForSaleMusicToken(
@@ -52,7 +51,6 @@ const NFTCards = ({
       console.error(error);
     }
   };
-  console.log(sellPrice);
 
   return (
     <Box style={{ color: 'white' }}>

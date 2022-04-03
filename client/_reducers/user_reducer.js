@@ -19,7 +19,7 @@ import {
   MY_INFO_REQUEST,
   MY_INFO_SUCCESS,
   MY_INFO_FAILURE,
-} from '../_actions/types';
+} from '../_request/types';
 
 export const initialState = {
   logInUserLoading: false,
