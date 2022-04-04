@@ -22,6 +22,9 @@ import {
   AUCTION_MYBID_REQUEST,
   AUCTION_MYBID_SUCCESS,
   AUCTION_MYBID_FAILURE,
+  AUCTION_FINALIZE_REQUEST,
+  AUCTION_FINALIZE_SUCCESS,
+  AUCTION_FINALIZE_FAILURE,
 } from '../_request/types';
 
 async function createauctionAPI(data) {
@@ -210,6 +213,30 @@ function* auctionmybid(action) {
   }
 }
 
+async function auctionFinalizeAPI(data) {
+  let auctionContract = await new web3.eth.Contract(auctionAbi, data.product);
+  await auctionContract.methods.finalizeAuction().send({ from: data.metamask });
+
+  return;
+}
+
+function* auctionfinalize(action) {
+  try {
+    let result = yield call(auctionFinalizeAPI, action.data);
+
+    yield put({
+      type: AUCTION_FINALIZE_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AUCTION_FINALIZE_FAILURE,
+      error: 'err',
+    });
+  }
+}
+
 function* watchCreateAuction() {
   yield takeLatest(AUCTION_CREATE_REQUEST, createauction);
 }
@@ -238,6 +265,10 @@ function* watchAuctionMyBid() {
   yield takeLatest(AUCTION_MYBID_REQUEST, auctionmybid);
 }
 
+function* watchAuctionFinalize() {
+  yield takeLatest(AUCTION_FINALIZE_REQUEST, auctionfinalize);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchCreateAuction),
@@ -247,5 +278,6 @@ export default function* userSaga() {
     fork(watchAuctionCancel),
     fork(watchAuctionBid),
     fork(watchAuctionMyBid),
+    fork(watchAuctionFinalize),
   ]);
 }

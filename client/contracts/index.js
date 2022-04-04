@@ -909,7 +909,6 @@ export const auctionAbi = [
 
 export const mintMusicTokenAddress =
   '0x474f521b703c641D95922927Dc347B9B5803e47D';
-
 export const saleMusicTokenAddress =
   '0x65D4b59C65B61f6d0FE53Eb9656CC8B226E00d48';
 export const auctionCreatorAddress =

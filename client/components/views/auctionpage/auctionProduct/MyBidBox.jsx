@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { auctionMyBidAction } from '../../../../_request/auction_request';
+import {
+  auctionFinalizeAction,
+  auctionMyBidAction,
+} from '../../../../_request/auction_request';
+import { AuctionDivider, AuctionStyledButton } from '../style';
 
-const MyBidBox = ({ product }) => {
+const MyBidBox = ({ product, gapTime }) => {
   const dispatch = useDispatch();
   const { userData } = useSelector(state => state.user);
   const { myBidData } = useSelector(state => state.auction);
@@ -15,10 +20,31 @@ const MyBidBox = ({ product }) => {
     dispatch(auctionMyBidAction(data));
   }, [dispatch, product, userData]);
 
+  const onClickAuction = useCallback(async () => {
+    let data = {
+      product,
+      metamask: userData.metamask,
+    };
+
+    dispatch(auctionFinalizeAction(data));
+  }, [dispatch, product, userData]);
+
   return (
-    <div>
-      <div>나의 총 입찰가 - {myBidData} ETH</div>
-    </div>
+    <>
+      {myBidData !== 0 && (
+        <>
+          <>나의 총 입찰가 - {myBidData} ETH</>
+          <AuctionDivider />
+        </>
+      )}
+      {gapTime && (
+        <>
+          <AuctionStyledButton onClick={onClickAuction}>
+            반환받기
+          </AuctionStyledButton>
+        </>
+      )}
+    </>
   );
 };
 

@@ -5,16 +5,14 @@ import { useSelector } from 'react-redux';
 import { AuctionGray, AuctionTime } from '../style';
 import CancelButton from './CancelButton';
 
-const TimeBox = ({ product }) => {
+const TimeBox = ({ product, gapTime, gapTimeFunc, owner, ownerFunc }) => {
   const { auctionData } = useSelector(state => state.auction);
   const { userData } = useSelector(state => state.user);
-  const [owner, setOwner] = useState('');
   const [auctionState, setAuctionState] = useState('');
 
   const [auctionTime, setAuctionTime] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [time, setTime] = useState('');
-  const [gapTime, setGapTime] = useState(false);
 
   let onFlag = e => {
     setTime(e);
@@ -30,9 +28,9 @@ const TimeBox = ({ product }) => {
 
   useEffect(() => {
     if (!gapTime && gap < 0) {
-      setGapTime(true);
+      gapTimeFunc(true);
     } else {
-      setGapTime(false);
+      gapTimeFunc(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gap && gap < 0]);
@@ -40,10 +38,10 @@ const TimeBox = ({ product }) => {
   useEffect(() => {
     if (auctionData) {
       setAuctionTime(auctionData.time);
-      setOwner(auctionData.owner);
+      ownerFunc(auctionData.owner);
       setAuctionState(auctionData.auctionState);
     }
-  }, [auctionData]);
+  }, [auctionData, ownerFunc]);
 
   return (
     <>

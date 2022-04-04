@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { auctionAction } from '../../../../_request/auction_request';
 import {
   AuctionAllContainer,
@@ -15,11 +14,15 @@ import BidBox from './BidBox';
 import TitleBox from './TitleBox';
 import MyBidBox from './MyBidBox';
 import AuctionBidButton from './AuctionBidButton';
+import { useState } from 'react';
 
 const AuctionProductPage = () => {
   const dispatch = useDispatch();
+  const { userData } = useSelector(state => state.user);
   const router = useRouter();
   let { product } = router.query;
+  const [gapTime, setGapTime] = useState(false);
+  const [owner, setOwner] = useState('');
 
   useEffect(() => {
     dispatch(auctionAction(product));
@@ -37,35 +40,29 @@ const AuctionProductPage = () => {
           <AuctionDivider />
 
           {/* 경매 시간 */}
-          <TimeBox product={product} />
+          <TimeBox
+            product={product}
+            gapTime={gapTime}
+            gapTimeFunc={setGapTime}
+            owner={owner}
+            ownerFunc={setOwner}
+          />
           <AuctionDivider />
 
           {/* 경매가 */}
-          <BidBox product={product} />
+          <BidBox gapTime={gapTime} />
           <AuctionDivider />
 
           {/* 나의 경매 금액 */}
-          <MyBidBox product={product} />
-          <AuctionDivider />
-
-          {/* 입찰하기 */}
-          <AuctionBidButton product={product} />
-          <AuctionDivider />
+          <MyBidBox product={product} gapTime={gapTime} />
+          {!gapTime && owner.toLowerCase() !== userData.metamask.toLowerCase() && (
+            <>
+              {/* 입찰하기 */}
+              <AuctionBidButton product={product} />
+            </>
+          )}
         </AuctionContents>
       </AuctionContentsContainer>
-
-      {/* 고민 중 */}
-      <Box
-        sx={{
-          color: '#fff',
-          display: 'inline-block',
-          marginTop: '45px',
-          width: '100%',
-          fontSize: '25px',
-        }}
-      >
-        Price History? Description? About Artist? Like? + Ratings and Reviews?
-      </Box>
     </AuctionAllContainer>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AuctionBox, AuctionGray, EthereumImg } from '../style';
 
-const BidBox = ({ product }) => {
+const BidBox = ({ gapTime }) => {
   const { auctionData } = useSelector(state => state.auction);
   const [highestBid, setHighestBid] = useState('');
   const [highestBidder, setHighestBidder] = useState('');
@@ -21,13 +21,26 @@ const BidBox = ({ product }) => {
 
   return (
     <>
-      <AuctionGray>현재 경매가</AuctionGray>
-      <AuctionBox>
-        <EthereumImg src="/ethereum-1.svg" alt="ethereum" />
-        {highestBid}
-      </AuctionBox>
-      {highestBidder && (
-        <AuctionGray>현재 최고 낙찰자 - {highestBidder}</AuctionGray>
+      {gapTime ? (
+        <>
+          <AuctionGray>최종 낙찰가</AuctionGray>
+          <AuctionBox>
+            <EthereumImg src="/ethereum-1.svg" alt="ethereum" />
+            {highestBid}
+          </AuctionBox>
+          {highestBidder && <AuctionGray>낙찰자 - {highestBidder}</AuctionGray>}
+        </>
+      ) : (
+        <>
+          <AuctionGray>현재 경매가</AuctionGray>
+          <AuctionBox>
+            <EthereumImg src="/ethereum-1.svg" alt="ethereum" />
+            {highestBid}
+          </AuctionBox>
+          {highestBidder && (
+            <AuctionGray>현재 최고 낙찰자 - {highestBidder}</AuctionGray>
+          )}
+        </>
       )}
     </>
   );

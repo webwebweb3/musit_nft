@@ -21,6 +21,9 @@ import {
   AUCTION_MYBID_REQUEST,
   AUCTION_MYBID_SUCCESS,
   AUCTION_MYBID_FAILURE,
+  AUCTION_FINALIZE_REQUEST,
+  AUCTION_FINALIZE_SUCCESS,
+  AUCTION_FINALIZE_FAILURE,
 } from '../_request/types';
 
 export const initialState = {
@@ -45,6 +48,9 @@ export const initialState = {
   myBidAuctionLoading: false,
   myBidAuctionDone: false,
   myBidAuctionError: null,
+  finalizeAuctionLoading: false,
+  finalizeAuctionDone: false,
+  finalizeAuctionError: null,
   myBidData: null,
   allAuctionData: null,
   auctionData: null,
@@ -149,6 +155,19 @@ const MetamaskReducer = (state = initialState, action) =>
       case AUCTION_MYBID_FAILURE:
         draft.myBidAuctionLoading = false;
         draft.myBidAuctionError = action.error;
+        break;
+      case AUCTION_FINALIZE_REQUEST:
+        draft.finalizeAuctionLoading = true;
+        draft.finalizeAuctionError = null;
+        draft.finalizeAuctionDone = false;
+        break;
+      case AUCTION_FINALIZE_SUCCESS:
+        draft.finalizeAuctionLoading = false;
+        draft.finalizeAuctionDone = true;
+        break;
+      case AUCTION_FINALIZE_FAILURE:
+        draft.finalizeAuctionLoading = false;
+        draft.finalizeAuctionError = action.error;
         break;
       default:
         return state;
