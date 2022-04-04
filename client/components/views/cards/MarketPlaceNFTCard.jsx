@@ -15,7 +15,12 @@ import Link from 'next/link';
 import { web3 } from '../../../contracts';
 import { useState } from 'react';
 
-const NFTCards = ({ musicTokenIds, musicTokenPrices, musicTokenDatas }) => {
+const NFTCards = ({
+  musicTokenIds,
+  musicTokenPrices,
+  musicTokenDatas,
+  musicTokenURI,
+}) => {
   const [hover, setHover] = useState();
 
   const musicTokenInputData = musicTokenDatas.properties.dataToSubmit;
@@ -30,9 +35,7 @@ const NFTCards = ({ musicTokenIds, musicTokenPrices, musicTokenDatas }) => {
   const theme = useTheme();
 
   return (
-    <Link
-      href={`/nft/marketplace/edition/${musicTokenDatas.properties.IPFSUrl}`}
-    >
+    <Link href={`/nft/marketplace/edition/${musicTokenURI}`}>
       <Card
         sx={{
           display: 'inline-block',

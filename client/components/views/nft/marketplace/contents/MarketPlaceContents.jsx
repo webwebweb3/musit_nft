@@ -35,6 +35,7 @@ const MarketPlaceContents = () => {
           musicTokenId: onSaleMusicTokenArray[i].musicTokenId,
           musicTokenData: data,
           musicTokenPrice: onSaleMusicTokenArray[i].musicTokenPrice,
+          musicTokenURI: onSaleMusicTokenArray[i].musicTokenURI,
         });
       }
       console.log('temp', tempMusicTokenArray);
@@ -64,6 +65,7 @@ const MarketPlaceContents = () => {
                   musicTokenIds={v.musicTokenId}
                   musicTokenPrices={v.musicTokenPrice}
                   musicTokenDatas={v.musicTokenData}
+                  musicTokenURI={v.musicTokenURI}
                 />
               </Grid>
             );
