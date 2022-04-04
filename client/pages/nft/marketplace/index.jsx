@@ -5,13 +5,13 @@ import axios from 'axios';
 import wrapper from '../../../_store/configureStore';
 import { myInfoRequestAction } from '../../../_request/user_request';
 import MarketPlace from '../../../components/views/nft/marketplace/MarketPlace';
-import NFTLayout from '../../../components/nftLayout/NFTLayout';
+import MainLayout from '../../../components/mainlayout';
 
 const MarketPlacePage = () => {
   return (
-    <NFTLayout>
+    <MainLayout value="nft">
       <MarketPlace />
-    </NFTLayout>
+    </MainLayout>
   );
 };
 

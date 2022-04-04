@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import GavelIcon from '@mui/icons-material/Gavel';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,7 +12,7 @@ import ProfileButton from './myMenu';
 import { metaMaskRequestAction } from '../../../_request/metamask_request';
 import MetamaskButton from './Register/button/metamaskButton';
 
-const Navbar = () => {
+const Navbar = ({ value }) => {
   const dispatch = useDispatch();
   const { userData } = useSelector(state => state.user);
   const metamask = useSelector(state => state.metamask);
@@ -78,6 +80,26 @@ const Navbar = () => {
                 sx={{ fontSize: '18px' }}
               />
             </Link>
+            {value === 'nft' && (
+              <>
+                <Link href="/nft/marketplace">
+                  <Tab
+                    icon={<StorefrontIcon />}
+                    iconPosition="start"
+                    label="MarketPlace"
+                    sx={{ fontSize: '18px' }}
+                  />
+                </Link>
+                <Link href="/auction">
+                  <Tab
+                    icon={<GavelIcon />}
+                    iconPosition="start"
+                    label="Auction"
+                    sx={{ fontSize: '18px' }}
+                  />
+                </Link>
+              </>
+            )}
           </Tabs>
           {userData ? (
             <div style={{ marginLeft: 'auto', paddingRight: '20px' }}>

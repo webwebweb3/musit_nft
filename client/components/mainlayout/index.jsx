@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Navbar from './Navbar';
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, value }) => {
   return (
     <Box
       sx={{
@@ -11,12 +11,14 @@ const MainLayout = ({ children }) => {
       }}
     >
       {/* sidebar */}
-      <Navbar />
+      <Navbar value={value} />
 
       {/* MyPage content */}
       <Box
         style={{
+          marginLeft: '20px',
           marginTop: '100px',
+          marginRight: '20px',
         }}
       >
         {children}

@@ -3,14 +3,14 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 import wrapper from '../../../../_store/configureStore';
 import { myInfoRequestAction } from '../../../../_actions/user_actions';
-import NFTLayout from '../../../../components/nftLayout/NFTLayout';
 import EditionIPFSUrl from '../../../../components/views/nft/editions/editionIPFSUrl';
+import MainLayout from '../../../../components/mainlayout';
 
 const EditionIPFSUrlPage = () => {
   return (
-    <NFTLayout>
+    <MainLayout value="nft">
       <EditionIPFSUrl />
-    </NFTLayout>
+    </MainLayout>
   );
 };
 
