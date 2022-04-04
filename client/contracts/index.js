@@ -911,7 +911,7 @@ export const mintMusicTokenAddress =
   '0x474f521b703c641D95922927Dc347B9B5803e47D';
 
 export const saleMusicTokenAddress =
-  '0x65D4b59C65B61f6d0FE53Eb9656CC8B226E00d48';
+  '0x4Fd0cf281D22E9387F2bdE7eacC820D1cE08F46A';
 export const auctionCreatorAddress =
   '0xDDcFb95739dE157e060d9879E6e38Ed4BEf7EBBf';
 
