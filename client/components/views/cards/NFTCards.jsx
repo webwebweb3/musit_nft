@@ -37,7 +37,6 @@ const NFTCards = ({ musicTokenIds, musicTokenPrices, musicTokenDatas }) => {
         sx={{
           display: 'inline-block',
           width: '300px',
-
           backgroundColor: '#2c3352',
           color: 'white',
           borderRadius: '1rem',
@@ -48,18 +47,10 @@ const NFTCards = ({ musicTokenIds, musicTokenPrices, musicTokenDatas }) => {
       >
         <CardMedia
           component="img"
-          sx={
-            hover
-              ? {
-                  width: '320px',
-                  height: '300px',
-                  marginLeft: '-10px',
-                }
-              : {
-                  width: '300px',
-                  height: '300px',
-                }
-          }
+          sx={{
+            width: '300px',
+            height: '300px',
+          }}
           image={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenDatas.properties.S3AlbumCover}`}
           alt={`title album Cover`}
         />

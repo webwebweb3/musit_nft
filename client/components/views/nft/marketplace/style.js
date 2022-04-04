@@ -20,6 +20,6 @@ export const style = {
     color: 'white',
     margin: '0 40px',
   },
-  marketplaceLeftSideBar: { flex: 2 },
-  marketplaceWrapper: { flex: 10, paddingRight: '100px' },
+  marketplaceLeftSideBar: { flex: 3 },
+  marketplaceWrapper: { flex: 11, paddingRight: '100px' },
 };

@@ -1,21 +1,21 @@
 import { Box, Grid } from '@mui/material';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { style } from './style.js';
 import { saleMusicTokenContract } from '../../../../../contracts';
 import { useEffect } from 'react';
-import MarketPlaceNFTCard from '../../../cards/MarketPlaceNFTCard.jsx';
 import { useSelector } from 'react-redux';
+import MarketPlaceNFTCard from '../../../cards/MarketPlaceNFTCard.jsx';
 import Router from 'next/router';
+import NFTCards from '../../../cards/NFTCards.jsx';
 
 const MarketPlaceContents = () => {
-  const [saleMusicTokens, setSaleMusicTokens] = useState([]);
-  const { userData } = useSelector(state => state.user);
-  if (userData === null) {
-    alert('로그인 해주세요');
-    Router.push('/');
-  }
-  const account = userData.metamask;
+  const [saleMusicTokens, setSaleMusicTokens] = useState();
+  // const { userData } = useSelector(state => state.user);
+  // if (userData === null) {
+  //   alert('로그인 해주세요');
+  //   Router.push('/');
+  // }
+  // const account = userData.metamask;
 
   const getOnSaleMusicTokens = async () => {
     try {
@@ -23,10 +23,12 @@ const MarketPlaceContents = () => {
         .getOnSaleMusicTokens()
         .call();
 
+      console.log('onsale', onSaleMusicTokenArray);
+
       const tempMusicTokenArray = [];
       for (let i = 0; i < onSaleMusicTokenArray.length; i++) {
         const ipfsData = await fetch(
-          `https://ipfs.io/ipfs/${onSaleMusicTokenArray[i].musicTokenURI}`,
+          `https://ipfs.infura.io/ipfs/${onSaleMusicTokenArray[i].musicTokenURI}`,
         );
         const data = await ipfsData.json();
         tempMusicTokenArray.push({
@@ -35,6 +37,7 @@ const MarketPlaceContents = () => {
           musicTokenPrice: onSaleMusicTokenArray[i].musicTokenPrice,
         });
       }
+      console.log('temp', tempMusicTokenArray);
       setSaleMusicTokens(tempMusicTokenArray);
     } catch (error) {
       console.error(error);
@@ -42,7 +45,7 @@ const MarketPlaceContents = () => {
   };
   useEffect(() => {
     if (!saleMusicTokens) getOnSaleMusicTokens();
-    console.log(saleMusicTokens);
+    console.log('sale', saleMusicTokens);
   }, [saleMusicTokens]);
 
   return (
@@ -58,10 +61,9 @@ const MarketPlaceContents = () => {
             return (
               <Grid item xs={2} sm={4} md={4} key={i}>
                 <MarketPlaceNFTCard
-                  account={account}
                   musicTokenIds={v.musicTokenId}
-                  musicTokenDatas={v.musicTokenData}
                   musicTokenPrices={v.musicTokenPrice}
+                  musicTokenDatas={v.musicTokenData}
                 />
               </Grid>
             );
