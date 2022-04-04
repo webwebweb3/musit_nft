@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { ListItemIcon, MenuItem } from '@mui/material';
 import { Box } from '@mui/system';
-import { useDispatch } from 'react-redux';
 import { Logout } from '@mui/icons-material';
+
 import { logoutRequestAction } from '../../../../_request/user_request';
 
 const LogoutButton = () => {

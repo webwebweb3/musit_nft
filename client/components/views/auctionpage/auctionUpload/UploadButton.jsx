@@ -37,7 +37,7 @@ const UploadButton = ({ endAt, startingBid, tokenID }) => {
 
   return (
     <>
-      <AuctionButton text={'경매 등록'} func={onClickAuction} />
+      <AuctionButton text="경매 등록" func={onClickAuction} />
     </>
   );
 };

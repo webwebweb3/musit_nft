@@ -1,11 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
-import HeadsetIcon from '@mui/icons-material/Headset';
-import TokenIcon from '@mui/icons-material/Token';
-import StorefrontIcon from '@mui/icons-material/Storefront';
-import GavelIcon from '@mui/icons-material/Gavel';
-import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
+import Link from 'next/link';
+import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
+import { Gavel, Storefront, Token, Headset } from '@mui/icons-material';
 
 import RegisterModal from './Register/RegisterModal';
 import ProfileButton from './myMenu';
@@ -66,7 +63,7 @@ const Navbar = ({ value }) => {
           <Tabs textColor="inherit" value={false}>
             <Link href="/streaming">
               <Tab
-                icon={<HeadsetIcon />}
+                icon={<Headset />}
                 iconPosition="start"
                 label="STREAMING"
                 sx={{ fontSize: '18px', marginRight: '10px' }}
@@ -74,7 +71,7 @@ const Navbar = ({ value }) => {
             </Link>
             <Link href="/nft">
               <Tab
-                icon={<TokenIcon />}
+                icon={<Token />}
                 iconPosition="start"
                 label="NFT"
                 sx={{ fontSize: '18px' }}
@@ -84,7 +81,7 @@ const Navbar = ({ value }) => {
               <>
                 <Link href="/nft/marketplace">
                   <Tab
-                    icon={<StorefrontIcon />}
+                    icon={<Storefront />}
                     iconPosition="start"
                     label="MarketPlace"
                     sx={{ fontSize: '18px' }}
@@ -92,7 +89,7 @@ const Navbar = ({ value }) => {
                 </Link>
                 <Link href="/auction">
                   <Tab
-                    icon={<GavelIcon />}
+                    icon={<Gavel />}
                     iconPosition="start"
                     label="Auction"
                     sx={{ fontSize: '18px' }}
@@ -102,9 +99,14 @@ const Navbar = ({ value }) => {
             )}
           </Tabs>
           {userData ? (
-            <div style={{ marginLeft: 'auto', paddingRight: '20px' }}>
-              <ProfileButton />
-            </div>
+            <>
+              <div style={{ marginLeft: 'auto', paddingRight: '20px' }}>
+                <div>
+                  <ProfileButton value="notice" />
+                </div>
+                <ProfileButton value="img" />
+              </div>
+            </>
           ) : (
             <MetamaskButton
               metamaskLogin={metamaskLogin}

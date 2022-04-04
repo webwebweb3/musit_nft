@@ -31,6 +31,7 @@ const AuctionProductPage = () => {
   return (
     <AuctionAllContainer>
       <AuctionContentsContainer>
+        {/* 상품 이미지 */}
         <AuctionContentImg>
           <img src="/bgimg.jpg" alt="img" width={'550px'} height={'550px'} />
         </AuctionContentImg>

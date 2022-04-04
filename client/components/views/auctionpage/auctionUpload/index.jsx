@@ -30,24 +30,18 @@ const AuctionUploadPage = () => {
   return (
     <Box style={{ color: '#dada', marginTop: '130px', textAlign: 'center' }}>
       <h1>경매 등록 하기</h1>
+
       <AuctionTextField
-        text={'시작 금액'}
+        text="시작 금액"
         value={startingBid}
         func={onChangeStartingBid}
-        uint={'ETH'}
-      />
-      <AuctionAppointment
-        text={'종료 시간'}
-        value={endAt}
-        func={onChangeEndAt}
+        uint="ETH"
       />
 
+      <AuctionAppointment text="종료 시간" value={endAt} func={onChangeEndAt} />
+
       {/* 임시 tokenID */}
-      <AuctionTextField
-        value={tokenID}
-        func={onChangeTokenID}
-        text={'tokenID'}
-      />
+      <AuctionTextField value={tokenID} func={onChangeTokenID} text="tokenID" />
 
       {loading ? (
         <>
@@ -60,7 +54,7 @@ const AuctionUploadPage = () => {
           tokenID={tokenID}
         />
       )}
-      <AuctionButton text={'경매 메인으로 가기'} link={'auction'} />
+      <AuctionButton text="경매 메인으로 가기" link={'auction'} />
     </Box>
   );
 };
