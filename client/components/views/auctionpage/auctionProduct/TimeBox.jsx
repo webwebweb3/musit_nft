@@ -56,7 +56,9 @@ const TimeBox = ({ product }) => {
       <AuctionGray>
         {auctionTime && new Date(auctionTime * 1000).toLocaleString()} 마감
         {owner.toLowerCase() === userData.metamask.toLowerCase() &&
-          auctionState !== '3' && <CancelButton product={product} />}
+          !(auctionState === '3' || gapTime) && (
+            <CancelButton product={product} />
+          )}
       </AuctionGray>
       <AuctionTime>
         {auctionState === '3' ? (

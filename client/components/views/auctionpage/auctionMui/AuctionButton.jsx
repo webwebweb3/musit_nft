@@ -12,7 +12,7 @@ const AuctionButton = ({ text, func, link }) => {
         </StyledButton>
       )}
       {link && (
-        <Link href={`/auction/${link}`}>
+        <Link href={`/${link}`}>
           <StyledButton variant="contained">{text}</StyledButton>
         </Link>
       )}

@@ -1,16 +1,8 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  AuctionBox,
-  AuctionGray,
-  AuctionStyledButton,
-  EthereumImg,
-} from '../style';
+import { AuctionBox, AuctionGray, EthereumImg } from '../style';
 
-const BidBox = () => {
+const BidBox = ({ product }) => {
   const { auctionData } = useSelector(state => state.auction);
   const [highestBid, setHighestBid] = useState('');
   const [highestBidder, setHighestBidder] = useState('');
@@ -27,10 +19,6 @@ const BidBox = () => {
     }
   }, [auctionData]);
 
-  const onClickAuction = useCallback(() => {
-    console.log(1111);
-  }, []);
-
   return (
     <>
       <AuctionGray>현재 경매가</AuctionGray>
@@ -41,9 +29,6 @@ const BidBox = () => {
       {highestBidder && (
         <AuctionGray>현재 최고 낙찰자 - {highestBidder}</AuctionGray>
       )}
-      <AuctionStyledButton onClick={onClickAuction}>
-        입찰하기
-      </AuctionStyledButton>
     </>
   );
 };

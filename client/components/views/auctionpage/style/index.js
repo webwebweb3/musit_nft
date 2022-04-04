@@ -1,6 +1,14 @@
 import styled from '@emotion/styled';
 import { Box } from '@mui/system';
-import { Button, Divider, TextField } from '@mui/material';
+import {
+  Button,
+  Divider,
+  FormControl,
+  FormHelperText,
+  OutlinedInput,
+  TextField,
+} from '@mui/material';
+import { createGlobalStyle } from 'styled-components';
 
 export const AuctionAllContainer = styled(Box)`
   margin: 0 80px;
@@ -41,12 +49,24 @@ export const AuctionWrapper = styled(Box)`
 `;
 
 export const StyledButton = styled(Button)`
+  width: 500px;
+  display: block;
+  margin: 20px auto;
   background-color: transparent;
-  color: #fff;
+  color: #dada;
   padding: 6px 12px;
   &:hover {
-    color: #000;
-    background-color: #fff;
+    color: #111;
+    background-color: #dada;
+  }
+`;
+
+export const StyledNewAuctionButton = styled(StyledButton)`
+  width: 150px;
+  margin: 0;
+  &:hover {
+    color: #fff;
+    background-color: transparent;
   }
 `;
 
@@ -123,5 +143,39 @@ export const StyledCancelButton = styled(Button)`
   &:hover {
     color: #000;
     background-color: #dada;
+  }
+`;
+
+export const StyledOutlinedInput = styled(OutlinedInput)`
+  width: 500px;
+`;
+
+export const StyledFormControl = styled(FormControl)`
+  display: block;
+  width: 100%;
+  margin: 25px auto;
+  text-align: center;
+`;
+
+export const StyledFormHelperText = styled(FormHelperText)`
+  text-align: center;
+  color: #dada;
+  font-size: 15px;
+  margin-bottom: 7px;
+  margin-right: 430px;
+`;
+
+export const GlobalAppointment = createGlobalStyle`
+  .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+    color: #dada
+  }
+  .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+    border-color: #dada;
+  }
+`;
+
+export const GlobalTextField = createGlobalStyle`
+  .css-as3o9j-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+    border-color: #dada;
   }
 `;

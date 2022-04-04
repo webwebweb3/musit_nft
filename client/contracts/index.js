@@ -659,29 +659,6 @@ const saleMusicTokenAbi = [
 ];
 const auctionCreatorAbi = [
   {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '_startingBid',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: '_endAt',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: '_tokenID',
-        type: 'uint256',
-      },
-    ],
-    name: 'createAuction',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
     inputs: [],
     name: 'allAuctions',
     outputs: [
@@ -711,6 +688,29 @@ const auctionCreatorAbi = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_startingBid',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '_endAt',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '_tokenID',
+        type: 'uint256',
+      },
+    ],
+    name: 'createAuction',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -748,27 +748,6 @@ const auctionCreatorAbi = [
   },
 ];
 export const auctionAbi = [
-  {
-    inputs: [],
-    name: 'cancelAuction',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'finalizeAuction',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'placeBid',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-  },
   {
     inputs: [
       {
@@ -829,6 +808,13 @@ export const auctionAbi = [
   },
   {
     inputs: [],
+    name: 'cancelAuction',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'endAt',
     outputs: [
       {
@@ -838,6 +824,13 @@ export const auctionAbi = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'finalizeAuction',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -881,6 +874,13 @@ export const auctionAbi = [
   },
   {
     inputs: [],
+    name: 'placeBid',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'startAt',
     outputs: [
       {
@@ -912,7 +912,7 @@ export const mintMusicTokenAddress =
 export const saleMusicTokenAddress =
   '0x65D4b59C65B61f6d0FE53Eb9656CC8B226E00d48';
 export const auctionCreatorAddress =
-  '0xDDcFb95739dE157e060d9879E6e38Ed4BEf7EBBf';
+  '0x8B4871fF0e0c70bacA7Cf90F1B3393E0d9dCAfEc';
 
 let web3;
 let mintMusicTokenContract;

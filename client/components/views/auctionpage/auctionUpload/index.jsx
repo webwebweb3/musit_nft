@@ -1,64 +1,67 @@
-import React from 'react';
-import { Grid, TextField } from '@mui/material';
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Box, CircularProgress } from '@mui/material';
 
 import { useInput } from '../../../../hooks/useInput';
-import { createAuctionAction } from '../../../../_request/auction_request';
-import AuctionButton from '../auctionMui/AuctionButton';
 import AuctionTextField from '../auctionMui/AuctionTextField';
+import AuctionAppointment from '../auctionMui/AuctionAppointment';
+import { timeFunction } from '../../../../util/timefunc';
+import UploadButton from './UploadButton';
+import AuctionButton from '../auctionMui/AuctionButton';
 
 const AuctionUploadPage = () => {
-  const dispatch = useDispatch();
-  const { userData } = useSelector(state => state.user);
-  const account = userData.metamask;
-
+  const auction = useSelector(state => state.auction);
+  const [loading, setLoading] = useState(false);
   const [startingBid, onChangeStartingBid] = useInput('');
-  const [endAt, onChangeEndAt] = useInput('');
-  const [tokenID, onChangeTokenID] = useInput('');
+  const [endAt, onChangeEndAt, setEndAt] = useInput('');
+  const [tokenID, onChangeTokenID] = useInput('tokenID 임시');
 
-  const onClickAuction = useCallback(() => {
-    let data = {
-      startingBid,
-      endAt,
-      tokenID,
-      account,
-    };
-    console.log(data);
-    dispatch(createAuctionAction(data));
-  }, [dispatch, startingBid, endAt, tokenID, account]);
+  useEffect(() => {
+    let date = timeFunction();
+
+    // 형식: 2022-02-02T02:02:02
+    setEndAt(date);
+  }, [setEndAt]);
+
+  useEffect(() => {
+    setLoading(auction.createAuctionLoading);
+  }, [auction]);
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={6} md={12} sx={{ color: '#fff' }}>
-        <AuctionTextField
-          text={'시작 금액'}
-          value={startingBid}
-          func={onChangeStartingBid}
-        />
-        <AuctionTextField
-          text={'종료 시간'}
-          value={endAt}
-          func={onChangeEndAt}
-        />
+    <Box style={{ color: '#dada', marginTop: '130px', textAlign: 'center' }}>
+      <h1>경매 등록 하기</h1>
+      <AuctionTextField
+        text={'시작 금액'}
+        value={startingBid}
+        func={onChangeStartingBid}
+        uint={'ETH'}
+      />
+      <AuctionAppointment
+        text={'종료 시간'}
+        value={endAt}
+        func={onChangeEndAt}
+      />
 
-        {/* 임시 tokenID */}
-        <TextField
-          label="tokenID"
-          variant="outlined"
-          value={tokenID}
-          onChange={onChangeTokenID}
-          fullWidth
-          sx={{
-            bgcolor: 'gray',
-            margin: '1px',
-            width: '320px',
-          }}
-        />
+      {/* 임시 tokenID */}
+      <AuctionTextField
+        value={tokenID}
+        func={onChangeTokenID}
+        text={'tokenID'}
+      />
 
-        <AuctionButton text={'경매 등록하기'} func={onClickAuction} />
-      </Grid>
-    </Grid>
+      {loading ? (
+        <>
+          <CircularProgress color="inherit" />
+        </>
+      ) : (
+        <UploadButton
+          endAt={endAt}
+          startingBid={startingBid}
+          tokenID={tokenID}
+        />
+      )}
+      <AuctionButton text={'경매 메인으로 가기'} link={'auction'} />
+    </Box>
   );
 };
 

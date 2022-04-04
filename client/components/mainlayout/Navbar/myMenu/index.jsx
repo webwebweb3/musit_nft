@@ -33,9 +33,9 @@ const ProfileButton = () => {
   return (
     <Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Badge color="secondary" badgeContent={99}>
+        {/* <Badge color="secondary" badgeContent={99}>
           <Campaign />
-        </Badge>
+        </Badge> */}
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}

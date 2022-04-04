@@ -13,6 +13,8 @@ import {
 import TimeBox from './TimeBox';
 import BidBox from './BidBox';
 import TitleBox from './TitleBox';
+import MyBidBox from './MyBidBox';
+import AuctionBidButton from './AuctionBidButton';
 
 const AuctionProductPage = () => {
   const dispatch = useDispatch();
@@ -39,7 +41,16 @@ const AuctionProductPage = () => {
           <AuctionDivider />
 
           {/* 경매가 */}
-          <BidBox />
+          <BidBox product={product} />
+          <AuctionDivider />
+
+          {/* 나의 경매 금액 */}
+          <MyBidBox product={product} />
+          <AuctionDivider />
+
+          {/* 입찰하기 */}
+          <AuctionBidButton product={product} />
+          <AuctionDivider />
         </AuctionContents>
       </AuctionContentsContainer>
 

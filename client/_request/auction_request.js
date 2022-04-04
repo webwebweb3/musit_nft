@@ -3,6 +3,8 @@ import {
   AUCTION_ALL_REQUEST,
   AUCTION_REQUEST,
   AUCTION_CANCEL_REQUEST,
+  AUCTION_BID_REQUEST,
+  AUCTION_MYBID_REQUEST,
 } from './types';
 
 export const createAuctionAction = data => ({
@@ -21,5 +23,15 @@ export const auctionAction = data => ({
 
 export const auctionCancelAction = data => ({
   type: AUCTION_CANCEL_REQUEST,
+  data,
+});
+
+export const auctionBidAction = data => ({
+  type: AUCTION_BID_REQUEST,
+  data,
+});
+
+export const auctionMyBidAction = data => ({
+  type: AUCTION_MYBID_REQUEST,
   data,
 });

@@ -16,13 +16,19 @@ import {
   AUCTION_CANCEL_REQUEST,
   AUCTION_CANCEL_SUCCESS,
   AUCTION_CANCEL_FAILURE,
+  AUCTION_BID_REQUEST,
+  AUCTION_BID_SUCCESS,
+  AUCTION_BID_FAILURE,
+  AUCTION_MYBID_REQUEST,
+  AUCTION_MYBID_SUCCESS,
+  AUCTION_MYBID_FAILURE,
 } from '../_request/types';
 
 async function createauctionAPI(data) {
-  let { startingBid, endAt, tokenID, account } = data;
+  let { startingBid, endTimestamp, tokenID, account } = data;
 
   await auctionCreatorContract.methods
-    .createAuction(startingBid, endAt, tokenID)
+    .createAuction(startingBid, endTimestamp, tokenID)
     .send({ from: account });
 
   return;
@@ -95,10 +101,11 @@ function* auction(action) {
 
 async function auctionInfoAPI(data) {
   let time = await data.methods.endAt().call();
-  let highestBindingBid = await data.methods.highestBindingBid().call();
+  let highestBindingBidWei = await data.methods.highestBindingBid().call();
   let highestBidder = await data.methods.highestBidder().call();
   let owner = await data.methods.owner().call();
   let auctionState = await data.methods.auctionState().call();
+  let highestBindingBid = highestBindingBidWei / 1000000000000000000;
 
   let infoData = {
     time,
@@ -152,6 +159,57 @@ function* auctioncancel(action) {
   }
 }
 
+async function auctionbidAPI(data) {
+  let auctionContract = await new web3.eth.Contract(auctionAbi, data.product);
+  await auctionContract.methods.placeBid().send({
+    from: data.metamask,
+    value: web3.utils.toWei(`${data.bid}`, 'ether'),
+  });
+
+  return;
+}
+
+function* auctionbid(action) {
+  try {
+    yield call(auctionbidAPI, action.data);
+
+    yield put({
+      type: AUCTION_BID_SUCCESS,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AUCTION_BID_FAILURE,
+      error: 'err',
+    });
+  }
+}
+
+async function auctionMyBidAPI(data) {
+  let auctionContract = await new web3.eth.Contract(auctionAbi, data.product);
+  let request = await auctionContract.methods.bids(data.metamask).call();
+  let myBindingBid = request / 1000000000000000000;
+
+  return myBindingBid;
+}
+
+function* auctionmybid(action) {
+  try {
+    let result = yield call(auctionMyBidAPI, action.data);
+
+    yield put({
+      type: AUCTION_MYBID_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AUCTION_MYBID_FAILURE,
+      error: 'err',
+    });
+  }
+}
+
 function* watchCreateAuction() {
   yield takeLatest(AUCTION_CREATE_REQUEST, createauction);
 }
@@ -172,6 +230,14 @@ function* watchAuctionCancel() {
   yield takeLatest(AUCTION_CANCEL_REQUEST, auctioncancel);
 }
 
+function* watchAuctionBid() {
+  yield takeLatest(AUCTION_BID_REQUEST, auctionbid);
+}
+
+function* watchAuctionMyBid() {
+  yield takeLatest(AUCTION_MYBID_REQUEST, auctionmybid);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchCreateAuction),
@@ -179,5 +245,7 @@ export default function* userSaga() {
     fork(watchAuction),
     fork(watchAuctionInfo),
     fork(watchAuctionCancel),
+    fork(watchAuctionBid),
+    fork(watchAuctionMyBid),
   ]);
 }
