@@ -15,14 +15,14 @@ import Link from 'next/link';
 import { web3 } from '../../../contracts';
 import { useState } from 'react';
 
-const MarketPlaceNFTCard = ({
+const NFTCards = ({
   musicTokenIds,
   musicTokenPrices,
   musicTokenDatas,
+  musicTokenURI,
 }) => {
   const [hover, setHover] = useState();
 
-  const theme = useTheme();
   const musicTokenInputData = musicTokenDatas.properties.dataToSubmit;
   const handleMouseIn = () => {
     setHover(true);
@@ -32,14 +32,15 @@ const MarketPlaceNFTCard = ({
     setHover(false);
   };
 
+  const theme = useTheme();
+
   return (
-    <Link
-      href={`/nft/marketplace/edition/${musicTokenDatas.properties.IPFSUrl}`}
-    >
+    <Link href={`/nft/marketplace/edition/${musicTokenURI}`}>
       <Card
         sx={{
           display: 'inline-block',
           width: '300px',
+
           backgroundColor: '#2c3352',
           color: 'white',
           borderRadius: '1rem',
@@ -50,10 +51,18 @@ const MarketPlaceNFTCard = ({
       >
         <CardMedia
           component="img"
-          sx={{
-            width: '300px',
-            height: '300px',
-          }}
+          sx={
+            hover
+              ? {
+                  width: '320px',
+                  height: '300px',
+                  marginLeft: '-10px',
+                }
+              : {
+                  width: '300px',
+                  height: '300px',
+                }
+          }
           image={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenDatas.properties.S3AlbumCover}`}
           alt={`title album Cover`}
         />
@@ -73,29 +82,10 @@ const MarketPlaceNFTCard = ({
               style={{ fontWeight: '600', color: '#18c99b' }}
             >{`$${web3.utils.fromWei(musicTokenPrices)} ETH`}</Box>
           </CardContent>
-          {/* <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-          <IconButton aria-label="previous">
-            {theme.direction === 'rtl' ? (
-              <SkipNextIcon />
-            ) : (
-              <SkipPreviousIcon />
-            )}
-          </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-          </IconButton>
-          <IconButton aria-label="next">
-            {theme.direction === 'rtl' ? (
-              <SkipPreviousIcon />
-            ) : (
-              <SkipNextIcon />
-            )}
-          </IconButton>
-        </Box> */}
         </Box>
       </Card>
     </Link>
   );
 };
 
-export default MarketPlaceNFTCard;
+export default NFTCards;
