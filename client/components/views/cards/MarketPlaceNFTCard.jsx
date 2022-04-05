@@ -1,16 +1,6 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Typography,
-} from '@mui/material/';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material/';
 import Link from 'next/link';
 import { web3 } from '../../../contracts';
 import { useState } from 'react';
@@ -64,7 +54,7 @@ const NFTCards = ({
                 }
           }
           image={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenDatas.properties.S3AlbumCover}`}
-          alt={`title album Cover`}
+          alt={`${musicTokenInputData.title} album Cover`}
         />
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flex: '1 0 auto' }}>
