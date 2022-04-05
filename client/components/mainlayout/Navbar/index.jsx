@@ -61,14 +61,25 @@ const Navbar = ({ value }) => {
           </Link>
 
           <Tabs textColor="inherit" value={false}>
-            <Link href="/streaming">
-              <Tab
-                icon={<Headset />}
-                iconPosition="start"
-                label="STREAMING"
-                sx={{ fontSize: '18px', marginRight: '10px' }}
-              />
-            </Link>
+            {value === 'nft' ? (
+              <Link href="/streaming">
+                <Tab
+                  icon={<Headset />}
+                  iconPosition="start"
+                  label=""
+                  sx={{ fontSize: '0', marginRight: '-20px' }}
+                />
+              </Link>
+            ) : (
+              <Link href="/streaming">
+                <Tab
+                  icon={<Headset />}
+                  iconPosition="start"
+                  label="STREAMING"
+                  sx={{ fontSize: '18px', marginRight: '10px' }}
+                />
+              </Link>
+            )}
             <Link href="/nft">
               <Tab
                 icon={<Token />}
