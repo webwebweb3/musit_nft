@@ -172,6 +172,14 @@ export const GlobalAppointment = createGlobalStyle`
   .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
     border-color: #dada;
   }
+  input[type="datetime-local" i]::-webkit-calendar-picker-indicator {
+    background-color: #dada;
+    padding: 5px;
+    border-radius: 50%;
+    &:hover {
+      background-color: #fff;
+    }
+  }
 `;
 
 export const GlobalTextField = createGlobalStyle`
