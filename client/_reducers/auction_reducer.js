@@ -12,6 +12,18 @@ import {
   AUCTION_REQUEST,
   AUCTION_SUCCESS,
   AUCTION_FAILURE,
+  AUCTION_CANCEL_REQUEST,
+  AUCTION_CANCEL_SUCCESS,
+  AUCTION_CANCEL_FAILURE,
+  AUCTION_BID_REQUEST,
+  AUCTION_BID_SUCCESS,
+  AUCTION_BID_FAILURE,
+  AUCTION_MYBID_REQUEST,
+  AUCTION_MYBID_SUCCESS,
+  AUCTION_MYBID_FAILURE,
+  AUCTION_FINALIZE_REQUEST,
+  AUCTION_FINALIZE_SUCCESS,
+  AUCTION_FINALIZE_FAILURE,
 } from '../_request/types';
 
 export const initialState = {
@@ -27,6 +39,19 @@ export const initialState = {
   auctionLoading: false,
   auctionDone: false,
   auctionError: null,
+  cancelAuctionLoading: false,
+  cancelAuctionDone: false,
+  cancelAuctionError: null,
+  bidAuctionLoading: false,
+  bidAuctionDone: false,
+  bidAuctionError: null,
+  myBidAuctionLoading: false,
+  myBidAuctionDone: false,
+  myBidAuctionError: null,
+  finalizeAuctionLoading: false,
+  finalizeAuctionDone: false,
+  finalizeAuctionError: null,
+  myBidData: null,
   allAuctionData: null,
   auctionData: null,
 };
@@ -90,7 +115,60 @@ const MetamaskReducer = (state = initialState, action) =>
         draft.infoAuctionLoading = false;
         draft.infoAuctionError = action.error;
         break;
-
+      case AUCTION_CANCEL_REQUEST:
+        draft.cancelAuctionLoading = true;
+        draft.cancelAuctionError = null;
+        draft.cancelAuctionDone = false;
+        break;
+      case AUCTION_CANCEL_SUCCESS:
+        draft.cancelAuctionLoading = false;
+        draft.cancelAuctionDone = true;
+        break;
+      case AUCTION_CANCEL_FAILURE:
+        draft.cancelAuctionLoading = false;
+        draft.cancelAuctionError = action.error;
+        break;
+      case AUCTION_BID_REQUEST:
+        draft.bidAuctionLoading = true;
+        draft.bidAuctionError = null;
+        draft.bidAuctionDone = false;
+        break;
+      case AUCTION_BID_SUCCESS:
+        draft.bidAuctionLoading = false;
+        draft.bidAuctionDone = true;
+        break;
+      case AUCTION_BID_FAILURE:
+        draft.bidAuctionLoading = false;
+        draft.bidAuctionError = action.error;
+        break;
+      case AUCTION_MYBID_REQUEST:
+        draft.myBidAuctionLoading = true;
+        draft.myBidAuctionError = null;
+        draft.myBidAuctionDone = false;
+        draft.myBidData = null;
+        break;
+      case AUCTION_MYBID_SUCCESS:
+        draft.myBidAuctionLoading = false;
+        draft.myBidAuctionDone = true;
+        draft.myBidData = action.data;
+        break;
+      case AUCTION_MYBID_FAILURE:
+        draft.myBidAuctionLoading = false;
+        draft.myBidAuctionError = action.error;
+        break;
+      case AUCTION_FINALIZE_REQUEST:
+        draft.finalizeAuctionLoading = true;
+        draft.finalizeAuctionError = null;
+        draft.finalizeAuctionDone = false;
+        break;
+      case AUCTION_FINALIZE_SUCCESS:
+        draft.finalizeAuctionLoading = false;
+        draft.finalizeAuctionDone = true;
+        break;
+      case AUCTION_FINALIZE_FAILURE:
+        draft.finalizeAuctionLoading = false;
+        draft.finalizeAuctionError = action.error;
+        break;
       default:
         return state;
     }

@@ -57,119 +57,6 @@ const mintMusicTokenAbi = [
     type: 'event',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'to',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-    ],
-    name: 'approve',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'string',
-        name: '_metadata',
-        type: 'string',
-      },
-    ],
-    name: 'mintMusicToken',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'from',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: 'to',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-    ],
-    name: 'safeTransferFrom',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'from',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: 'to',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'bytes',
-        name: '_data',
-        type: 'bytes',
-      },
-    ],
-    name: 'safeTransferFrom',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'operator',
-        type: 'address',
-      },
-      {
-        internalType: 'bool',
-        name: 'approved',
-        type: 'bool',
-      },
-    ],
-    name: 'setApprovalForAll',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_saleMusicToken',
-        type: 'address',
-      },
-    ],
-    name: 'setSaleMusicToken',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
     anonymous: false,
     inputs: [
       {
@@ -198,11 +85,6 @@ const mintMusicTokenAbi = [
     inputs: [
       {
         internalType: 'address',
-        name: 'from',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
         name: 'to',
         type: 'address',
       },
@@ -212,7 +94,7 @@ const mintMusicTokenAbi = [
         type: 'uint256',
       },
     ],
-    name: 'transferFrom',
+    name: 'approve',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -331,6 +213,19 @@ const mintMusicTokenAbi = [
   {
     inputs: [
       {
+        internalType: 'string',
+        name: '_metadata',
+        type: 'string',
+      },
+    ],
+    name: 'mintMusicToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'uint256',
         name: '',
         type: 'uint256',
@@ -380,6 +275,57 @@ const mintMusicTokenAbi = [
     type: 'function',
   },
   {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+    ],
+    name: 'safeTransferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'bytes',
+        name: '_data',
+        type: 'bytes',
+      },
+    ],
+    name: 'safeTransferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
     inputs: [],
     name: 'saleMusicToken',
     outputs: [
@@ -390,6 +336,37 @@ const mintMusicTokenAbi = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'operator',
+        type: 'address',
+      },
+      {
+        internalType: 'bool',
+        name: 'approved',
+        type: 'bool',
+      },
+    ],
+    name: 'setApprovalForAll',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_saleMusicToken',
+        type: 'address',
+      },
+    ],
+    name: 'setSaleMusicToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -497,6 +474,29 @@ const mintMusicTokenAbi = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+    ],
+    name: 'transferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
 ];
@@ -659,29 +659,6 @@ const saleMusicTokenAbi = [
 ];
 const auctionCreatorAbi = [
   {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '_startingBid',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: '_endAt',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: '_tokenID',
-        type: 'uint256',
-      },
-    ],
-    name: 'createAuction',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
     inputs: [],
     name: 'allAuctions',
     outputs: [
@@ -711,6 +688,29 @@ const auctionCreatorAbi = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_startingBid',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '_endAt',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '_tokenID',
+        type: 'uint256',
+      },
+    ],
+    name: 'createAuction',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -748,27 +748,6 @@ const auctionCreatorAbi = [
   },
 ];
 export const auctionAbi = [
-  {
-    inputs: [],
-    name: 'cancelAuction',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'finalizeAuction',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'placeBid',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-  },
   {
     inputs: [
       {
@@ -829,6 +808,13 @@ export const auctionAbi = [
   },
   {
     inputs: [],
+    name: 'cancelAuction',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'endAt',
     outputs: [
       {
@@ -838,6 +824,13 @@ export const auctionAbi = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'finalizeAuction',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -881,6 +874,13 @@ export const auctionAbi = [
   },
   {
     inputs: [],
+    name: 'placeBid',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'startAt',
     outputs: [
       {
@@ -908,11 +908,11 @@ export const auctionAbi = [
 ];
 
 export const mintMusicTokenAddress =
-  '0xFb150D183af06EF8866018Ab5d529C029B79A340';
+  '0x168FeB56A7Fd933460A6286a645F5374002E57A4';
 export const saleMusicTokenAddress =
-  '0x65D4b59C65B61f6d0FE53Eb9656CC8B226E00d48';
+  '0x22D8AF97C0B59A028892D54Cd8Fc26ED7Ce587d9';
 export const auctionCreatorAddress =
-  '0xDDcFb95739dE157e060d9879E6e38Ed4BEf7EBBf';
+  '0xf975FCCB7fa68403D8433DDb0a4be5624e405504';
 
 let web3;
 let mintMusicTokenContract;

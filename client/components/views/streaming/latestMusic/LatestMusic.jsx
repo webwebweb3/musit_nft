@@ -21,7 +21,7 @@ const LatestMusic = () => {
 
       for (let i = 0; i < getLatestMusicToken.length; i++) {
         const response = await fetch(
-          `https://ipfs.io/ipfs/${getLatestMusicToken[i]}`,
+          `https://ipfs.infura.io/ipfs/${getLatestMusicToken[i]}`,
         );
         const data = await response.json();
         tempMusics.push(data);

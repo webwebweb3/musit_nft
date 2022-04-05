@@ -5,13 +5,13 @@ import axios from 'axios';
 import wrapper from '../../_store/configureStore';
 import Streaming from '../../components/views/streaming/Streaming';
 import { myInfoRequestAction } from '../../_request/user_request';
-import StreamingLayout from '../../components/streamingLayout/StreamingLayout';
+import MainLayout from '../../components/mainlayout';
 
 const StreamingHome = () => {
   return (
-    <StreamingLayout>
+    <MainLayout>
       <Streaming />
-    </StreamingLayout>
+    </MainLayout>
   );
 };
 

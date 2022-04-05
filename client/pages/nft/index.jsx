@@ -3,15 +3,15 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '../../_store/configureStore';
-import NFTLayout from '../../components/nftLayout/NFTLayout';
 import { myInfoRequestAction } from '../../_request/user_request';
 import NFT from '../../components/views/nft/NFT';
+import MainLayout from '../../components/mainlayout';
 
 const NFTHome = () => {
   return (
-    <NFTLayout>
+    <MainLayout value="nft">
       <NFT />
-    </NFTLayout>
+    </MainLayout>
   );
 };
 

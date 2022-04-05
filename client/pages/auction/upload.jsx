@@ -1,86 +1,17 @@
 import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
-import { Button, Grid, TextField } from '@mui/material';
 
 import wrapper from '../../_store/configureStore';
-import NFTLayout from '../../components/nftLayout/NFTLayout';
 import { myInfoRequestAction } from '../../_request/user_request';
-import { useInput } from '../../hooks/useInput';
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createAuctionAction } from '../../_request/auction_request';
+import AuctionUploadPage from '../../components/views/auctionpage/auctionUpload';
+import MainLayout from '../../components/mainlayout';
 
-const AuctionHome = () => {
-  const dispatch = useDispatch();
-  const { userData } = useSelector(state => state.user);
-  const account = userData.metamask;
-
-  const [startingBid, onChangeStartingBid] = useInput('');
-  const [endAt, onChangeEndAt] = useInput('');
-  const [tokenID, onChangeTokenID] = useInput('');
-
-  const onClickAuction = useCallback(() => {
-    let data = {
-      startingBid,
-      endAt,
-      tokenID,
-      account,
-    };
-    dispatch(createAuctionAction(data));
-  }, [dispatch, startingBid, endAt, tokenID, account]);
-
+const AuctionUpload = () => {
   return (
-    <NFTLayout>
-      <Grid container spacing={2}>
-        <Grid item xs={6} md={12} sx={{ color: '#fff' }}>
-          <TextField
-            label="startingBid"
-            variant="outlined"
-            value={startingBid}
-            onChange={onChangeStartingBid}
-            fullWidth
-            sx={{
-              bgcolor: 'gray',
-              margin: '1px',
-              width: '320px',
-            }}
-          />
-          <TextField
-            label="endAt"
-            variant="outlined"
-            value={endAt}
-            onChange={onChangeEndAt}
-            fullWidth
-            sx={{
-              bgcolor: 'gray',
-              margin: '1px',
-              width: '320px',
-            }}
-          />
-          {/* 임시 tokenID */}
-          <TextField
-            label="tokenID"
-            variant="outlined"
-            value={tokenID}
-            onChange={onChangeTokenID}
-            fullWidth
-            sx={{
-              bgcolor: 'gray',
-              margin: '1px',
-              width: '320px',
-            }}
-          />
-          <Button
-            variant="contained"
-            sx={{ bgcolor: 'gray' }}
-            onClick={onClickAuction}
-          >
-            경매 등록하기
-          </Button>
-        </Grid>
-      </Grid>
-    </NFTLayout>
+    <MainLayout value="nft">
+      <AuctionUploadPage />
+    </MainLayout>
   );
 };
 
@@ -99,4 +30,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default AuctionHome;
+export default AuctionUpload;

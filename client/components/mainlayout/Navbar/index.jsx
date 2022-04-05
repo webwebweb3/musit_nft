@@ -1,16 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
-import HeadsetIcon from '@mui/icons-material/Headset';
-import TokenIcon from '@mui/icons-material/Token';
-import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
+import Link from 'next/link';
+import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
+import { Gavel, Storefront, Token, Headset } from '@mui/icons-material';
 
 import RegisterModal from './Register/RegisterModal';
 import ProfileButton from './myMenu';
 import { metaMaskRequestAction } from '../../../_request/metamask_request';
 import MetamaskButton from './Register/button/metamaskButton';
 
-const Navbar = () => {
+const Navbar = ({ value }) => {
   const dispatch = useDispatch();
   const { userData } = useSelector(state => state.user);
   const metamask = useSelector(state => state.metamask);
@@ -62,27 +61,63 @@ const Navbar = () => {
           </Link>
 
           <Tabs textColor="inherit" value={false}>
-            <Link href="/streaming">
-              <Tab
-                icon={<HeadsetIcon />}
-                iconPosition="start"
-                label="STREAMING"
-                sx={{ fontSize: '18px', marginRight: '10px' }}
-              />
-            </Link>
+            {value === 'nft' ? (
+              <Link href="/streaming">
+                <Tab
+                  icon={<Headset />}
+                  iconPosition="start"
+                  label=""
+                  sx={{ fontSize: '0', marginRight: '-20px' }}
+                />
+              </Link>
+            ) : (
+              <Link href="/streaming">
+                <Tab
+                  icon={<Headset />}
+                  iconPosition="start"
+                  label="STREAMING"
+                  sx={{ fontSize: '18px', marginRight: '10px' }}
+                />
+              </Link>
+            )}
             <Link href="/nft">
               <Tab
-                icon={<TokenIcon />}
+                icon={<Token />}
                 iconPosition="start"
                 label="NFT"
                 sx={{ fontSize: '18px' }}
               />
             </Link>
+            {value === 'nft' && (
+              <>
+                <Link href="/nft/marketplace">
+                  <Tab
+                    icon={<Storefront />}
+                    iconPosition="start"
+                    label="MarketPlace"
+                    sx={{ fontSize: '18px' }}
+                  />
+                </Link>
+                <Link href="/auction">
+                  <Tab
+                    icon={<Gavel />}
+                    iconPosition="start"
+                    label="Auction"
+                    sx={{ fontSize: '18px' }}
+                  />
+                </Link>
+              </>
+            )}
           </Tabs>
           {userData ? (
-            <div style={{ marginLeft: 'auto', paddingRight: '20px' }}>
-              <ProfileButton />
-            </div>
+            <>
+              <div style={{ marginLeft: 'auto', paddingRight: '20px' }}>
+                <div>
+                  <ProfileButton value="notice" />
+                </div>
+                <ProfileButton value="img" />
+              </div>
+            </>
           ) : (
             <MetamaskButton
               metamaskLogin={metamaskLogin}
