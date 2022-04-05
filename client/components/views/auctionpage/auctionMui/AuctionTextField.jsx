@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { InputAdornment } from '@mui/material';
 import {
   GlobalTextField,
@@ -37,10 +37,10 @@ const AuctionTextField = ({ text, value, func, uint }) => {
 };
 
 AuctionTextField.propTypes = {
-  text: propTypes.string,
-  value: propTypes.string.isRequired,
-  func: propTypes.func.isRequired,
-  uint: propTypes.string,
+  text: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  func: PropTypes.func.isRequired,
+  uint: PropTypes.string,
 };
 
 export default AuctionTextField;

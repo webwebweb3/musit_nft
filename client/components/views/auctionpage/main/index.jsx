@@ -1,4 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import Link from 'next/link';
+
 import LeftSideBar from './leftSideBar/LeftSideBar';
 import AuctionCard from '../auctionCard';
 import {
@@ -9,8 +12,6 @@ import {
   AuctionWrapper,
   StyledNewAuctionButton,
 } from '../style';
-import { useSelector } from 'react-redux';
-import Link from 'next/link';
 
 const AuctionMainPage = () => {
   const { userData } = useSelector(state => state.user);
