@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { auctionAction } from '../../../../_request/auction_request';
@@ -14,7 +14,6 @@ import BidBox from './BidBox';
 import TitleBox from './TitleBox';
 import MyBidBox from './MyBidBox';
 import AuctionBidButton from './AuctionBidButton';
-import { useState } from 'react';
 
 const AuctionProductPage = () => {
   const dispatch = useDispatch();

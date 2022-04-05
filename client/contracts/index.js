@@ -908,11 +908,11 @@ export const auctionAbi = [
 ];
 
 export const mintMusicTokenAddress =
-  '0xFD95DCb153fbbDd93d27629dB5a218643d5Bb9c8';
+  '0x168FeB56A7Fd933460A6286a645F5374002E57A4';
 export const saleMusicTokenAddress =
-  '0x463f78b6386ffC3164f53167badBc8ce3175CB35';
+  '0x22D8AF97C0B59A028892D54Cd8Fc26ED7Ce587d9';
 export const auctionCreatorAddress =
-  '0x7D693555F8Fd59DE2ADfAAE2230f26C0eba4744d';
+  '0xf975FCCB7fa68403D8433DDb0a4be5624e405504';
 
 let web3;
 let mintMusicTokenContract;
