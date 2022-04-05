@@ -1,1 +1,21 @@
-{"title":"musit NFT","description":"This data is for minting a NFT.","type":"object","properties":{"dataToSubmit":{"userName":"안녕하세요","title":"test","artist":"안녕하세요","albumName":"test","genre":"balad","release":"2022","songwriter":"안녕하세요","lyricist":"안녕하세요","account":"0x75e3d83b91e05d60ab22e5513304a364b5b4f4a8","createdAt":1649135099493},"IPFSUrl":"QmYD4atzCZxvgBBuuC2zsLh6QhXPqD2cNkNxVJ3XPTtpTr","S3AlbumCover":"1649135124635_basic.png"}}
+{
+  "title": "musit NFT",
+  "description": "This data is for minting a NFT.",
+  "type": "object",
+  "properties": {
+    "dataToSubmit": {
+      "userName": "안녕하세요",
+      "title": "test",
+      "artist": "안녕하세요",
+      "albumName": "test",
+      "genre": "balad",
+      "release": "2022",
+      "songwriter": "안녕하세요",
+      "lyricist": "안녕하세요",
+      "account": "0x75e3d83b91e05d60ab22e5513304a364b5b4f4a8",
+      "createdAt": 1649135099493
+    },
+    "IPFSUrl": "QmYD4atzCZxvgBBuuC2zsLh6QhXPqD2cNkNxVJ3XPTtpTr",
+    "S3AlbumCover": "1649135124635_basic.png"
+  }
+}
