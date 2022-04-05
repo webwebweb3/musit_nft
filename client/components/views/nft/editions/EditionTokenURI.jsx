@@ -1,11 +1,13 @@
 import { Box } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
+import EditionDescription from './editionDescription/EditionDescription';
 import EditionImages from './editionImage/EditionImages';
 import { style } from './style';
 
 const EditionTokenURI = () => {
   const [musicData, setMusicData] = useState();
+  const [musicOwner, setMusicOwner] = useState();
   const router = useRouter();
   const getMusicTokenData = async () => {
     try {
@@ -13,6 +15,8 @@ const EditionTokenURI = () => {
         `https://ipfs.infura.io/ipfs/${router.query.editionIPFSUrl}`,
       );
       const data = await ipfsData.json();
+      console.log(data);
+      // const ownerOf = await
       setMusicData(data);
     } catch (error) {
       console.error(error);
@@ -34,7 +38,9 @@ const EditionTokenURI = () => {
                 music={musicData.properties.IPFSUrl}
               />
             </Box>
-            <Box sx={style.editionTopRightContainer}></Box>
+            <Box sx={style.editionTopRightContainer}>
+              <EditionDescription />
+            </Box>
           </Box>
           <Box></Box>
         </Box>

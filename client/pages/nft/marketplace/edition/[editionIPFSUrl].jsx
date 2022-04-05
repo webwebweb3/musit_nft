@@ -3,15 +3,15 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 import wrapper from '../../../../_store/configureStore';
 import { myInfoRequestAction } from '../../../../_request/user_request';
-import NFTLayout from '../../../../components/nftLayout/NFTLayout';
 
 import EditionTokenURI from '../../../../components/views/nft/editions/EditionTokenURI';
+import MainLayout from '../../../../components/mainlayout';
 
 const EditionIPFSUrlPage = () => {
   return (
-    <NFTLayout>
+    <MainLayout value="nft">
       <EditionTokenURI />
-    </NFTLayout>
+    </MainLayout>
   );
 };
 

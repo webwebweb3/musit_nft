@@ -25,7 +25,7 @@ const NFTCards = ({
   const theme = useTheme();
 
   return (
-    <Link href={`/nft/marketplace/edition/${musicTokenURI}`}>
+    <Link href={`/nft/marketplace/edition/${musicTokenIds}`}>
       <Card
         sx={{
           display: 'inline-block',
