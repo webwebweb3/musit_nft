@@ -10,6 +10,7 @@ import MyNotice from './MyNotice';
 const ProfileButton = ({ value }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [Notice, setNotice] = useState([]);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -18,7 +19,7 @@ const ProfileButton = ({ value }) => {
   return (
     <Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title="Account settings">
+        <Tooltip title={value}>
           <IconButton
             onClick={handleClick}
             size="small"
@@ -27,15 +28,24 @@ const ProfileButton = ({ value }) => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            {value === 'img' && <MyImg />}
-            {value === 'notice' && <NoticeIcon />}
+            {value === 'mypage' && <MyImg />}
+            {value === 'notice' && (
+              <NoticeIcon Notice={Notice} setNotice={setNotice} />
+            )}
           </IconButton>
         </Tooltip>
       </Box>
-      <MenuLayout anchorEl={anchorEl} open={open} setAnchorEl={setAnchorEl}>
-        {value === 'img' && <MyMenuItem />}
-        {value === 'notice' && <MyNotice />}
-      </MenuLayout>
+
+      {value === 'mypage' && (
+        <MenuLayout anchorEl={anchorEl} open={open} setAnchorEl={setAnchorEl}>
+          <MyMenuItem />
+        </MenuLayout>
+      )}
+      {value === 'notice' && Notice.length !== 0 && (
+        <MenuLayout anchorEl={anchorEl} open={open} setAnchorEl={setAnchorEl}>
+          <MyNotice Notice={Notice} />
+        </MenuLayout>
+      )}
     </Fragment>
   );
 };

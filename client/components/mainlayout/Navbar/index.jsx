@@ -115,7 +115,7 @@ const Navbar = ({ value }) => {
                 <div>
                   <ProfileButton value="notice" />
                 </div>
-                <ProfileButton value="img" />
+                <ProfileButton value="mypage" />
               </div>
             </>
           ) : (

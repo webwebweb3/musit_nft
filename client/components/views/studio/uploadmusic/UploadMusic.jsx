@@ -15,17 +15,12 @@ const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const UploadMusic = () => {
   const dispatch = useDispatch();
-
   const router = useRouter();
   const artist = router.query.artistName;
-
   const { userData } = useSelector(state => state.user);
-
   const [dataToSubmit, setDataToSubmit] = useState({});
-
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedIPFSFile, setSelectedIPFSFile] = useState(null);
-
   const account = userData.metamask;
 
   const ipfsredux = {

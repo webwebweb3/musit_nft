@@ -1,7 +1,13 @@
 import React from 'react';
 
-const MyNotice = () => {
-  return <div>MyNotice</div>;
+const MyNotice = ({ Notice }) => {
+  return (
+    <>
+      {Notice.map(test => (
+        <>{test}</>
+      ))}
+    </>
+  );
 };
 
 export default MyNotice;

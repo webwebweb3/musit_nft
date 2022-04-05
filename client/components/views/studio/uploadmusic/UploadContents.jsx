@@ -12,10 +12,8 @@ import { style } from './uploadMusicStyle';
 const UploadContents = ({ setData }) => {
   const { userData } = useSelector(state => state.user);
   const account = userData.metamask;
-
   const router = useRouter();
   const artist = router.query.artistName;
-
   const [title, onChangeTitle] = useInput('');
   const [albumName, onChangeAlbumName] = useInput('');
   const [genre, onChangeGenre] = useInput('balad');

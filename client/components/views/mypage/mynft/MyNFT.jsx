@@ -11,7 +11,7 @@ import { style } from './style';
 
 const MyNFT = () => {
   const [myNFT, setMyNFT] = useState();
-  const [saleStatus, setSaleStauts] = useState(false);
+  const [saleStatus, setSaleStatus] = useState(false);
 
   const { userData } = useSelector(state => state.user);
   if (userData === null) {
@@ -59,7 +59,7 @@ const MyNFT = () => {
         .isApprovedForAll(account, saleMusicTokenAddress)
         .call();
       if (response) {
-        setSaleStauts(response);
+        setSaleStatus(response);
       }
     } catch (error) {
       console.error(error);
@@ -77,7 +77,7 @@ const MyNFT = () => {
         .setApprovalForAll(saleMusicTokenAddress, true)
         .send({ from: account });
       if (response.status) {
-        setSaleStauts(true);
+        setSaleStatus(true);
       }
     } catch (error) {
       console.error(error);
