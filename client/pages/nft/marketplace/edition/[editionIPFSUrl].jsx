@@ -2,15 +2,16 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 import wrapper from '../../../../_store/configureStore';
-import { myInfoRequestAction } from '../../../../_actions/user_actions';
-import EditionIPFSUrl from '../../../../components/views/nft/editions/editionIPFSUrl';
-import MainLayout from '../../../../components/mainlayout';
+import { myInfoRequestAction } from '../../../../_request/user_request';
+import NFTLayout from '../../../../components/nftLayout/NFTLayout';
+
+import EditionTokenURI from '../../../../components/views/nft/editions/EditionTokenURI';
 
 const EditionIPFSUrlPage = () => {
   return (
-    <MainLayout value="nft">
-      <EditionIPFSUrl />
-    </MainLayout>
+    <NFTLayout>
+      <EditionTokenURI />
+    </NFTLayout>
   );
 };
 
