@@ -7,6 +7,9 @@ export const homeObjOne = {
   description:
     'WEBWEB의 NFT 음악플랫폼에서는 유저/아티스트 고객의 차별적 서비스 제공, 경매, 일반거래 등으로 음원에 대한 수익 창출이 가능합니다  ',
   buttonLabel: '지금 시작하기',
+  imgStart: 'end',
+  img: '280.svg',
+  alt: 'Vault',
 };
 
 export const homeObjTwo = {

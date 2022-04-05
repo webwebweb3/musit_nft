@@ -43,6 +43,7 @@ const Navbar = () => {
   return (
     <>
       <AppBar
+        color="primary"
         sx={{
           padding: '10px 20px ',
           background: 'transparent',
