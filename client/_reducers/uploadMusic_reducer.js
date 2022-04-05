@@ -29,7 +29,7 @@ export const initialState = {
   jsonData: null,
 };
 
-const UserReducer = (state = initialState, action) =>
+const UploadMusicReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case S3_ALBUMCOVER_REQUEST:
@@ -81,4 +81,4 @@ const UserReducer = (state = initialState, action) =>
     }
   });
 
-export default UserReducer;
+export default UploadMusicReducer;

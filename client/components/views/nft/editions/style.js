@@ -8,7 +8,6 @@ export const style = {
     width: '100%',
     height: '100%',
     color: 'white',
-    textAlign: 'center',
   },
   editionTopContents: {
     minWidth: '1200px',
