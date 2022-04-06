@@ -68,7 +68,6 @@ export default function EditionImages({ image, music }) {
         <CardContent style={{ padding: '0 0 10px 0' }}>
           <ReactAudioPlayer
             src={`https://ipfs.infura.io/ipfs/${music}`}
-            autoPlay
             controls
             style={{ width: '100%' }}
           />

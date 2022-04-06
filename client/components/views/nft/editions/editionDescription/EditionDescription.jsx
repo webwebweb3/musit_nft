@@ -8,7 +8,6 @@ import { marketPlaceGetOwnerAction } from '../../../../../_request/marketPlace_r
 const EditionDescription = ({ owner, musicData }) => {
   const data = musicData.properties.dataToSubmit;
   const marketplace = useSelector(state => state.market);
-  console.log(musicData);
 
   const dispatch = useDispatch();
   const [ownerName, setOwnerName] = useState();
@@ -23,11 +22,9 @@ const EditionDescription = ({ owner, musicData }) => {
   }, []);
 
   useEffect(() => {
-    console.log(marketplace);
     if (marketplace.getOwnerDone) {
       setOwnerName(marketplace.userData);
     }
-    console.log(ownerName);
   }, [marketplace.getOwnerDone, ownerName]);
   return (
     <Box sx={{ marginTop: '60px' }}>
