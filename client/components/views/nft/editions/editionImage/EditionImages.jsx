@@ -37,7 +37,7 @@ export default function EditionImages({ image, music }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
-    <Box sx={{ margin: '0 auto' }}>
+    <Box sx={{ margin: '20px auto' }}>
       <Card
         sx={{
           maxWidth: 450,

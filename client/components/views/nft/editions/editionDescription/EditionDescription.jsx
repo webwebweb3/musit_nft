@@ -27,9 +27,14 @@ const EditionDescription = ({ owner, musicData }) => {
     }
   }, [marketplace.getOwnerDone, ownerName]);
   return (
-    <Box sx={{ marginTop: '60px' }}>
-      <Box>{data.title}</Box>
-      <Box>{ownerName && ownerName}</Box>
+    <Box sx={{ marginTop: '30px' }}>
+      <Box sx={{ fontSize: '60px', fontWeight: 500 }}>{data.title}</Box>
+      <Box sx={{ fontSize: '20px', color: '#768fb5', fontWeight: 600 }}>
+        <Box sx={{ display: 'inline-block', paddingRight: '10px' }}>
+          소유자 :
+        </Box>
+        <Box sx={{ display: 'inline-block' }}>{ownerName && ownerName}</Box>
+      </Box>
     </Box>
   );
 };

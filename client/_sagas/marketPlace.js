@@ -8,6 +8,9 @@ import {
   MARKETPLACE_GETOWNER_FAILURE,
   MARKETPLACE_GETOWNER_REQUEST,
   MARKETPLACE_GETOWNER_SUCCESS,
+  MARKETPLACE_GET_EVENT_FAILURE,
+  MARKETPLACE_GET_EVENT_REQUEST,
+  MARKETPLACE_GET_EVENT_SUCCESS,
   MARKETPLACE_PURCHASE_FAILURE,
   MARKETPLACE_PURCHASE_REQUEST,
   MARKETPLACE_PURCHASE_SUCCESS,
@@ -81,6 +84,30 @@ function* purchaseNFT(action) {
   }
 }
 
+async function getEventFunc(data) {
+  return await saleMusicTokenContract.getPastEvents('PurchaseChart', {
+    filter: { tokenID: data },
+    fromBlock: 0,
+  });
+}
+
+function* getEvent(action) {
+  try {
+    const eventData = yield call(getEventFunc, action.data);
+    console.log(eventData);
+    yield put({
+      type: MARKETPLACE_GET_EVENT_SUCCESS,
+      data: eventData,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: MARKETPLACE_GET_EVENT_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
 function* watchGetOwnerName() {
   yield takeLatest(MARKETPLACE_GETOWNER_REQUEST, getOwner);
 }
@@ -90,11 +117,15 @@ function* watchPurchaseNFT() {
 function* watchCancelNFT() {
   yield takeLatest(MARKETPLACE_CANCEl_REQUEST, cancelNFT);
 }
+function* watchGetEvent() {
+  yield takeLatest(MARKETPLACE_GET_EVENT_REQUEST, getEvent);
+}
 
 export default function* marketplace() {
   yield all([
     fork(watchCancelNFT),
     fork(watchPurchaseNFT),
     fork(watchGetOwnerName),
+    fork(watchGetEvent),
   ]);
 }
