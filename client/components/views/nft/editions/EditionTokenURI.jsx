@@ -61,12 +61,6 @@ const EditionTokenURI = () => {
                 musicData={musicData}
                 musicPrice={musicPrice}
               />
-              <Box>
-                <EditionPurchase
-                  musicPrice={musicPrice}
-                  tokenId={router.query.editionIPFSUrl}
-                />
-              </Box>
               <Box sx={style.editionTopRightChart}>
                 <EditionChart tokenId={router.query.editionIPFSUrl} />
               </Box>

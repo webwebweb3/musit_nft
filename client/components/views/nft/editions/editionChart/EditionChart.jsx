@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { Scatter } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import { saleMusicTokenContract, web3 } from '../../../../../contracts';
 import { useState } from 'react';
@@ -33,40 +34,48 @@ const EditionChart = ({ tokenId }) => {
   let data;
   if (eventData) {
     if (eventData.length !== 0) {
-      const tempArray = [];
+      const tempXArray = [];
+      const tempYArray = [];
       for (let i = 0; i < eventData.length; i++) {
         const timeStamp = eventData[i].returnValues.timeStamp * 1000;
         const date = new Date(timeStamp);
-        console.log('날짜!', date);
-        console.log(Date.now());
+        console.log('날짜!', date.toLocaleDateString());
+
         const data = {
           buyer: eventData[i].returnValues.buyer,
           price: web3.utils.fromWei(eventData[i].returnValues.price),
         };
-        tempArray.push({ x: date, y: data.price });
+        tempXArray.push(date.toLocaleDateString());
+        tempYArray.push(data.price);
       }
       data = {
-        labels: ['Scatter', 'asdf', 'basdf'],
+        labels: tempXArray,
         datasets: [
           {
-            label: '구매 이력',
             fill: false,
+            lineTension: 0.1,
             backgroundColor: 'rgba(75,192,192,0.4)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
             pointBorderColor: 'rgba(75,192,192,1)',
             pointBackgroundColor: '#fff',
-            pointBorderWidth: 5,
-            pointHoverRadius: 10,
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
             pointHoverBackgroundColor: 'rgba(75,192,192,1)',
             pointHoverBorderColor: 'rgba(220,220,220,1)',
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: tempArray,
+            data: tempYArray,
           },
         ],
       };
 
-      console.log(tempArray);
+      console.log(tempXArray);
+      console.log(tempYArray);
     }
   }
   const getEvent = async () => {
@@ -81,7 +90,7 @@ const EditionChart = ({ tokenId }) => {
   return (
     <Box>
       {eventData && eventData.length !== 0 ? (
-        <Scatter data={data} width={400} height={400} options={chartOptions} />
+        <Line data={data} width={400} height={400} />
       ) : (
         <Box>이전 판매 기록이 없습니다</Box>
       )}
