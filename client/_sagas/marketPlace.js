@@ -94,7 +94,7 @@ async function getEventFunc(data) {
 function* getEvent(action) {
   try {
     const eventData = yield call(getEventFunc, action.data);
-    console.log(eventData);
+    console.log('event', eventData);
     yield put({
       type: MARKETPLACE_GET_EVENT_SUCCESS,
       data: eventData,

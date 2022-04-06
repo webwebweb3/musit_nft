@@ -12,48 +12,38 @@ const EditionChart = ({ tokenId }) => {
   const dispatch = useDispatch();
   const { eventData } = useSelector(state => state.market);
   const [purchaseHistory, setPurchaseHistory] = useState([]);
-  const options = {
-    legend: {
-      labels: {
-        fontColor: 'blue',
-        fontSize: 18,
-      },
-    },
+  const chartOptions = {
+    maintainAspectRatio: false,
+    showLine: false,
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            fontColor: 'green',
-            fontSize: 18,
-            stepSize: 1,
-            beginAtZero: true,
-          },
-        },
-      ],
       xAxes: [
         {
-          ticks: {
-            fontColor: 'purple',
-            fontSize: 14,
-            stepSize: 1,
-            beginAtZero: true,
-          },
+          display: true,
+          labelString: 'Frequency (Hz)',
+        },
+      ],
+      yAxes: [
+        {
+          display: true,
+          labelString: 'Frequency (Hz)',
         },
       ],
     },
   };
-
   let data;
   if (eventData) {
     if (eventData.length !== 0) {
       const tempArray = [];
       for (let i = 0; i < eventData.length; i++) {
-        const time = eventData[i].blockNumber;
+        const timeStamp = eventData[i].returnValues.timeStamp * 1000;
+        const date = new Date(timeStamp);
+        console.log('날짜!', date);
+        console.log(Date.now());
         const data = {
           buyer: eventData[i].returnValues.buyer,
           price: web3.utils.fromWei(eventData[i].returnValues.price),
         };
-        tempArray.push({ x: time, y: data.price });
+        tempArray.push({ x: date, y: data.price });
       }
       data = {
         labels: ['Scatter', 'asdf', 'basdf'],
@@ -75,6 +65,7 @@ const EditionChart = ({ tokenId }) => {
           },
         ],
       };
+
       console.log(tempArray);
     }
   }
@@ -90,7 +81,7 @@ const EditionChart = ({ tokenId }) => {
   return (
     <Box>
       {eventData && eventData.length !== 0 ? (
-        <Scatter data={data} width={400} height={400} options={options} />
+        <Scatter data={data} width={400} height={400} options={chartOptions} />
       ) : (
         <Box>이전 판매 기록이 없습니다</Box>
       )}
