@@ -37,7 +37,7 @@ export const Global = createGlobalStyle`
   }
   
   .home__hero-text-wrapper {
-    max-width: 540px;
+    max-width: 480px;
     padding-top: 0;
     padding-bottom: 60px;
     padding-left: 70px;

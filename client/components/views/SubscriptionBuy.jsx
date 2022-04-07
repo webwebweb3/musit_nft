@@ -4,89 +4,86 @@ import { FaFire } from 'react-icons/fa';
 import { GiCrystalize } from 'react-icons/gi';
 import { Global } from './SubscriptionBuyStyle';
 import { Button } from './homepage/Button';
-import { styled } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
-import MuiGrid from '@mui/material/Grid';
-
-const Grid = styled(MuiGrid)(({ theme }) => ({
-  width: '100%',
-  ...theme.typography.body2,
-  '& [role="separator"]': {
-    margin: theme.spacing(1, 3),
-  },
-}));
+import { IconContext } from 'react-icons/lib';
 
 const SubscriptionBuy = () => {
-  const content1 = <div>{`가입비 + 월 구독료 무료.`}</div>;
-  const content2 = (
-    <div>{`subscription (한 달 + 해지안하면 자동 갱신(약관?)) 지불.`}</div>
-  );
-  const content3 = (
-    <div>{`subscription (무제한) + 최초 가입시 가입비 지불`}</div>
-  );
   return (
     <>
       <Global />
-      <div className="buySection">
-        <h1 className="buyHeading">구독권 구매</h1>
-        <div className="buyWrapper">
-          <div className="buyContainer">
-            <div className="buyContainer-card buyContainer-cardInfo">
-              <div className="icon">
-                <Button buttonSize="btn--wide" buttonColor="primary">
-                  <FaFire /> Event Plan
-                </Button>
+      <IconContext.Provider value={{ size: 60 }}>
+        <div className="buySection">
+          <h1 className="buyHeading">구독권 구매</h1>
+          <div className="buyWrapper">
+            <div className="buyContainer">
+              <div className="buyContainer-card buyContainer-cardInfo">
+                <div className="icon">
+                  <Button buttonSize="btn--large" buttonColor="primary">
+                    <FaFire />{' '}
+                    <>
+                      <br />
+                    </>
+                    Event Plan
+                  </Button>
+                </div>
+                <div className="buyInfoContainer">
+                  <h1>0$</h1>
+                </div>
+                <div className="buyInfoText">
+                  <h2>
+                    런칭 후 3개월 이내 가입한 회원에 한하여 제공하는 가입비와 월
+                    구독료를 무료로 이용 가능 합니다.
+                  </h2>
+                  <h2>유저 + 아티스트 혜택</h2>
+                </div>
               </div>
-              <Divider orientation="vertical" flexItem>
-                {' '}
-                0${' '}
-              </Divider>
-              <Grid item xs>
-                {content1}
-              </Grid>
-              <p></p>
+            </div>
+          </div>
+          <div className="buyWrapper">
+            <div className="buyContainer">
+              <div className="buyContainer-card buyContainer-cardInfo">
+                <div className="icon">
+                  <Button buttonSize="btn--large" buttonColor="primary">
+                    <BsXDiamondFill />{' '}
+                    <>
+                      <br />
+                    </>
+                    User Plan
+                  </Button>
+                </div>
+                <div className="buyInfoContainer">
+                  <h1> 29.99$</h1>
+                </div>
+                <div className="buyInfoText">
+                  <h2>전세계 스트리밍 동시 청취 가능</h2>
+                  <h2>유저 혜택</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="buyWrapper">
+            <div className="buyContainer">
+              <div className="buyContainer-card buyContainer-cardInfo">
+                <div className="icon">
+                  <Button buttonSize="btn--large" buttonColor="primary">
+                    <GiCrystalize fontSize="large" />{' '}
+                    <>
+                      <br />
+                    </>
+                    Artist Plan
+                  </Button>
+                </div>
+                <div className="buyInfoContainer">
+                  <h1> 99.99$</h1>
+                </div>
+                <div className="buyInfoText">
+                  <h2>개인 음원 NFT 구매 및 판매 그리고 등록하여 경매까지 </h2>
+                  <h2>아티스트 혜택</h2>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="buyWrapper">
-          <div className="buyContainer">
-            <div className="buyContainer-card buyContainer-cardInfo">
-              <div className="icon">
-                <Button buttonSize="btn--wide" buttonColor="primary">
-                  <BsXDiamondFill /> User Plan
-                </Button>
-              </div>
-              <Divider orientation="vertical" flexItem>
-                {' '}
-                29.99${' '}
-              </Divider>
-              <Grid item xs>
-                {content2}
-              </Grid>
-              <p></p>
-            </div>
-          </div>
-        </div>
-        <div className="buyWrapper">
-          <div className="buyContainer">
-            <div className="buyContainer-card buyContainer-cardInfo">
-              <div className="icon">
-                <Button buttonSize="btn--wide" buttonColor="primary">
-                  <GiCrystalize /> Artist Plan
-                </Button>
-              </div>
-              <Divider orientation="vertical" flexItem>
-                {' '}
-                99.99${' '}
-              </Divider>
-              <Grid item xs>
-                {content3}
-              </Grid>
-              <p></p>
-            </div>
-          </div>
-        </div>
-      </div>
+      </IconContext.Provider>
     </>
   );
 };

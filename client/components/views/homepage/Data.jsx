@@ -3,7 +3,7 @@ export const homeObjOne = {
   lightText: true,
   lightTextDesc: true,
   topLine: '런칭 3개월 이내',
-  headline: '모든 신규료 고객에게 가입비/ 구독료 무료',
+  headline: '모든 신규 고객에게 가입비/ 구독료 무료',
   description:
     'WEBWEB의 NFT 음악플랫폼에서는 유저/아티스트 고객의 차별적 서비스 제공, 경매, 일반거래 등으로 음원에 대한 수익 창출이 가능합니다  ',
   buttonLabel: '지금 시작하기',

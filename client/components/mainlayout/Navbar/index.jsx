@@ -44,7 +44,7 @@ const Navbar = ({ value }) => {
       <AppBar
         sx={{
           padding: '10px 20px ',
-          background: 'transparent',
+          background: '#0d0f1a',
           height: '100px',
         }}
         elevation={0}

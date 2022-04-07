@@ -16,9 +16,9 @@ const MainLayout = ({ children, value }) => {
       {/* MyPage content */}
       <Box
         style={{
-          marginLeft: '20px',
+          marginLeft: '0',
           marginTop: '100px',
-          marginRight: '20px',
+          marginRight: '0',
         }}
       >
         {children}

@@ -47,16 +47,30 @@ export const Global = createGlobalStyle`
 }
 .icon {
     margin: 50px 0;
+    
 
+  }
+
+  .buyInfoContainer{
+padding: 90px
+  }
+  .buyInfoText{
+      
   }
 
 @media screen and (max-width: 960px) {
     .pricing__container {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: center;
       align-items: center;
       width: 100%;
+    }
+
+.buyContainer-card:hover {
+    transform: scale(1.06);
+    transition: all 0.3s ease-out;
+    color: #b8c7ff;
     }
 
 
