@@ -51,6 +51,14 @@ export const Global = createGlobalStyle`
 
   }
 
+.buyFooter{
+    padding: 100px ;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    color: #fff;
+}
+
   .buyInfoContainer{
 padding: 90px
   }

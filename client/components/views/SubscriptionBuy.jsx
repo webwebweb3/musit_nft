@@ -82,6 +82,15 @@ const SubscriptionBuy = () => {
               </div>
             </div>
           </div>
+          <div className="buyFooter">
+            {' '}
+            <h3>
+              서비스를 이용하려면 유저는 한 달 단위의 subscription 을 해야함{' '}
+              <br />
+              이용권을 구매한 유저에 한해 음원 청취기능을 제공하며 해지하지
+              않으면 subscription 은 자동으로 갱신된다.
+            </h3>
+          </div>
         </div>
       </IconContext.Provider>
     </>
