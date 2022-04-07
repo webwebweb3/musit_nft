@@ -65,7 +65,7 @@ const NFTCards = ({ musicTokenIds, musicTokenPrices, musicTokenDatas }) => {
             </Typography>
             <Box
               style={{ fontWeight: '600', color: '#18c99b' }}
-            >{`$${web3.utils.fromWei(musicTokenPrices)} ETH`}</Box>
+            >{`$ ${web3.utils.fromWei(musicTokenPrices)} ETH`}</Box>
           </CardContent>
         </Box>
       </Card>

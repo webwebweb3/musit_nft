@@ -4,6 +4,10 @@ import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { mintMusicTokenContract } from '../../../contracts';
+import { style } from './style';
+import StudioBackground from './myStudio/studioBackground/StudioBackground';
+import StudioProfile from './myStudio/studioProfile/StudioProfile';
+import StudioMyMusics from './myStudio/studioMyMusics/StudioMyMusics';
 
 const Studio = () => {
   const router = useRouter();
@@ -18,72 +22,26 @@ const Studio = () => {
   }
   const account = userData.metamask;
 
-  const onClickMint = async () => {
-    try {
-      if (!account) {
-        alert('Please connect account');
-        return;
-      }
-      const response = await mintMusicTokenContract.methods
-        .mintMusicToken('abc')
-        .send({ from: account });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
-    <Box
-      sx={{
-        marginTop: '10px',
-        justifyContent: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <Box sx={{ width: '100%', height: '150px', backgroundColor: 'red' }}>
-        profile background
+    <Box sx={style.studioContainer}>
+      <Box sx={style.studioBackground}>
+        <StudioBackground />
       </Box>
-      <Box
-        sx={{
-          width: '150px',
-          height: '150px',
-          backgroundColor: 'blue',
-          color: 'white',
-          margin: '0 auto',
-          position: 'relative',
-          top: '-60px',
-        }}
-      >
-        profile Image
+      <Box sx={style.studioProfile}>
+        <StudioProfile />
       </Box>
       <Box>
         {artistName === userData.name ? (
-          <Button
-            sx={{
-              position: 'relative',
-              top: '-150px',
-              float: 'right',
-            }}
-          >
+          <Button sx={style.studioUploadButton}>
             <Link href={`${artistName}/uploadmusic`}>+ Add Music NFT</Link>
           </Button>
         ) : (
           <div style={{ height: '36.5px' }}></div>
         )}
       </Box>
-      {/* TODO: height 값 100%  */}
-      <Box
-        sx={{
-          width: '100%',
-          height: '1000px',
-          backgroundColor: 'green',
-          position: 'relative',
-          top: '-60px',
-          color: 'white',
-        }}
-      >
-        Artist's Musics
+
+      <Box sx={style.studioMyMusics}>
+        <StudioMyMusics />
       </Box>
     </Box>
   );

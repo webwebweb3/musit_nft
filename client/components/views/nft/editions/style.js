@@ -41,7 +41,11 @@ export const style = {
   editionTopRightChart: {
     backgroundColor: '#202540',
     width: '500px',
-    height: '500px',
+    height: '400px',
+  },
+  editionChartTitle: {
+    marginTop: '20px',
+    fontSize: '20px',
   },
   editionMusicContainer: { backgroundColor: 'gray' },
   editionTitleContainer: { backgroundColor: 'white' },

@@ -57,14 +57,14 @@ export default function EditionImages({ image, music }) {
           }
           sx={{ padding: '10px' }}
         />
-        <Divider sx={{ background: 'white', margin: '0 0 10px 0' }} />
+        {/* <Divider sx={{ background: 'white', margin: '0 0 10px 0' }} /> */}
         <CardMedia
           component="img"
           height="100%"
           image={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${image}`}
           alt="image"
         />
-        <Divider sx={{ background: 'white', margin: '10px 0' }} />
+        {/* <Divider sx={{ background: 'white', margin: '10px 0' }} /> */}
         <CardContent style={{ padding: '0 0 10px 0' }}>
           <ReactAudioPlayer
             src={`https://ipfs.infura.io/ipfs/${music}`}

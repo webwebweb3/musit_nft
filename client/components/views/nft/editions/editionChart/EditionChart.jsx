@@ -88,13 +88,27 @@ const EditionChart = ({ tokenId }) => {
   }, [eventData]);
 
   return (
-    <Box>
-      {eventData && eventData.length !== 0 ? (
-        <Line data={data} width={400} height={400} />
-      ) : (
-        <Box>이전 판매 기록이 없습니다</Box>
-      )}
-    </Box>
+    <>
+      <Box sx={{ width: '100%', height: '100%' }}>
+        <Box sx={{ width: '100%', height: '100%' }}>
+          {eventData && eventData.length !== 0 ? (
+            <Line data={data} width={400} height={400} />
+          ) : (
+            <Box
+              sx={{
+                display: 'inline-block',
+                top: '50%',
+                left: '50%',
+                width: '100%',
+                height: '100%',
+              }}
+            >
+              이전 판매 기록이 없습니다
+            </Box>
+          )}
+        </Box>
+      </Box>
+    </>
   );
 };
 

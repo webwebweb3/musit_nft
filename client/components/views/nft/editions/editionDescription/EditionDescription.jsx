@@ -46,14 +46,21 @@ const EditionDescription = ({ owner, musicData, musicPrice }) => {
           }}
         >
           {artistName}
-          <img
-            src="/verify.png"
-            width={'25px'}
-            height={'25px'}
-            style={{ marginLeft: '4px' }}
-          />
         </Box>
       </Link>
+      <Box
+        sx={{
+          display: 'inline-block',
+        }}
+      >
+        <img
+          src="/verify.png"
+          width={'23px'}
+          height={'23px'}
+          style={{ marginLeft: '4px' }}
+        />
+      </Box>
+
       <Box sx={{ fontSize: '70px', fontWeight: 500 }}>{data.title}</Box>
       <Box sx={{ fontSize: '20px', color: '#768fb5', fontWeight: 600 }}>
         <Box sx={{ display: 'inline-block', paddingRight: '10px' }}>
