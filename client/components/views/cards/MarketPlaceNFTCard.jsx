@@ -5,12 +5,7 @@ import Link from 'next/link';
 import { web3 } from '../../../contracts';
 import { useState } from 'react';
 
-const NFTCards = ({
-  musicTokenIds,
-  musicTokenPrices,
-  musicTokenDatas,
-  musicTokenURI,
-}) => {
+const NFTCards = ({ musicTokenIds, musicTokenPrices, musicTokenDatas }) => {
   const [hover, setHover] = useState();
 
   const musicTokenInputData = musicTokenDatas.properties.dataToSubmit;
@@ -70,7 +65,7 @@ const NFTCards = ({
             </Typography>
             <Box
               style={{ fontWeight: '600', color: '#18c99b' }}
-            >{`$${web3.utils.fromWei(musicTokenPrices)} ETH`}</Box>
+            >{`$ ${web3.utils.fromWei(musicTokenPrices)} ETH`}</Box>
           </CardContent>
         </Box>
       </Card>

@@ -5,6 +5,7 @@ import {
   mintMusicTokenContract,
   saleMusicTokenContract,
 } from '../../../../contracts';
+import EditionChart from './editionChart/EditionChart';
 import EditionDescription from './editionDescription/EditionDescription';
 import EditionImages from './editionImage/EditionImages';
 import EditionPurchase from './editionPurchase/EditionPurchase';
@@ -60,8 +61,9 @@ const EditionTokenURI = () => {
                 musicData={musicData}
                 musicPrice={musicPrice}
               />
-              <Box>
-                <EditionPurchase tokenId={router.query.editionIPFSUrl} />
+              <Box sx={style.editionChartTitle}>이전 판매 기록</Box>
+              <Box sx={style.editionTopRightChart}>
+                <EditionChart tokenId={router.query.editionIPFSUrl} />
               </Box>
             </Box>
           </Box>

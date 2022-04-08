@@ -31,12 +31,21 @@ export const style = {
     flex: '7',
     width: '100%',
     height: '100%',
-    backgroundColor: 'gray',
+    paddingLeft: '20px',
   },
   editionImgContainer: {
     width: '100%',
     height: '100%',
     backgroundColor: 'yellow',
+  },
+  editionTopRightChart: {
+    backgroundColor: '#202540',
+    width: '500px',
+    height: '400px',
+  },
+  editionChartTitle: {
+    marginTop: '20px',
+    fontSize: '20px',
   },
   editionMusicContainer: { backgroundColor: 'gray' },
   editionTitleContainer: { backgroundColor: 'white' },
