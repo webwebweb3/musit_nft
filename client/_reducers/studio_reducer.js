@@ -9,6 +9,9 @@ import {
   STUDIO_GET_MYMUSICS_REQUEST,
   STUDIO_GET_MYMUSICS_SUCCESS,
   STUDIO_GET_MYMUSICS_FAILURE,
+  STUDIO_GET_USERIMAGES_REQUEST,
+  STUDIO_GET_USERIMAGES_SUCCESS,
+  STUDIO_GET_USERIMAGES_FAILURE,
 } from '../_request/types';
 
 export const initialState = {
@@ -22,12 +25,15 @@ export const initialState = {
   getMyMusicsDone: false,
   getMyMusicsError: null,
 
-  studioBackground: null,
-  studioProfile: null,
+  getUserImagesLoading: false,
+  getUserImagesDone: false,
+  getUserImagesError: null,
+
+  studioUserImages: null,
   studioMyMusics: null,
 };
 
-const marketPlaceReducer = (state = initialState, action) =>
+const studioReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case STUDIO_UPLOAD_BACKGROUND_REQUEST:
@@ -37,7 +43,6 @@ const marketPlaceReducer = (state = initialState, action) =>
         break;
       case STUDIO_UPLOAD_BACKGROUND_SUCCESS:
         draft.uploadBackgroundLoading = false;
-        draft.studioBackground = action.data;
         draft.uploadBackgroundDone = true;
         break;
       case STUDIO_UPLOAD_BACKGROUND_FAILURE:
@@ -51,7 +56,6 @@ const marketPlaceReducer = (state = initialState, action) =>
         break;
       case STUDIO_UPLOAD_PROFILE_SUCCESS:
         draft.uploadProfileLoading = false;
-        draft.studioProfile = action.data;
         draft.uploadProfileDone = true;
         break;
       case STUDIO_UPLOAD_PROFILE_FAILURE:
@@ -72,9 +76,23 @@ const marketPlaceReducer = (state = initialState, action) =>
         draft.getMyMusicsLoading = false;
         draft.getMyMusicsError = action.error;
         break;
+      case STUDIO_GET_USERIMAGES_REQUEST:
+        draft.getUserImagesLoading = true;
+        draft.getUserImagesError = null;
+        draft.getUserImagesDone = false;
+        break;
+      case STUDIO_GET_USERIMAGES_SUCCESS:
+        draft.getUserImagesLoading = false;
+        draft.studioUserImages = action.data;
+        draft.getUserImagesDone = true;
+        break;
+      case STUDIO_GET_USERIMAGES_FAILURE:
+        draft.getUserImagesLoading = false;
+        draft.getUserImagesError = action.error;
+        break;
       default:
         return state;
     }
   });
 
-export default marketPlaceReducer;
+export default studioReducer;

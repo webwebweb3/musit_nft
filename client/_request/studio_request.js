@@ -2,6 +2,7 @@ import {
   STUDIO_UPLOAD_BACKGROUND_REQUEST,
   STUDIO_UPLOAD_PROFILE_REQUEST,
   STUDIO_GET_MYMUSICS_REQUEST,
+  STUDIO_GET_USERIMAGES_REQUEST,
 } from './types';
 
 export const studioUploadBackground = data => ({
@@ -14,5 +15,9 @@ export const studioUploadProfile = data => ({
 });
 export const studioGetMyMusics = data => ({
   type: STUDIO_GET_MYMUSICS_REQUEST,
+  data,
+});
+export const studioGetUserImages = data => ({
+  type: STUDIO_GET_USERIMAGES_REQUEST,
   data,
 });

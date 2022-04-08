@@ -37,6 +37,7 @@ const StudioBackground = () => {
       studioUploadBackground({
         selectedFile: backgroundImg,
         artistName: userData.name,
+        metamask: userData.metamask,
       }),
     );
   };
@@ -46,8 +47,6 @@ const StudioBackground = () => {
       uploadStudioBackground();
       console.log('???');
     }
-    console.log('?');
-    console.log('bg?', backgroundImg);
   }, [backgroundImg]);
 
   const uploadStudioCoverBtn = () => {
@@ -55,9 +54,6 @@ const StudioBackground = () => {
   };
   return (
     <Box>
-      {/* <img
-        src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${studioOwner}`}
-      ></img> */}
       <input
         id="uploadBtn"
         type="file"
