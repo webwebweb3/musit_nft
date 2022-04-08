@@ -65,7 +65,6 @@ const MarketPlaceContents = () => {
                   musicTokenIds={v.musicTokenId}
                   musicTokenPrices={v.musicTokenPrice}
                   musicTokenDatas={v.musicTokenData}
-                  musicTokenURI={v.musicTokenURI}
                 />
               </Grid>
             );
