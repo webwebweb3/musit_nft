@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Box, TextField, MenuItem } from '@mui/material';
 import { useSelector } from 'react-redux';
 
-import * as Util from './utils';
+import { utilCurrencies } from './utils';
 import { useInput } from '../../../../hooks/useInput';
 import TextFieldInput from './inputmusicdata/TextFieldInput';
 import { withStyles } from '@mui/styles';
@@ -82,7 +82,7 @@ const UploadContents = ({ setData }) => {
           fontSize: '40px',
         }}
       >
-        {currencies.map(option => (
+        {utilCurrencies.map(option => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>
@@ -134,4 +134,3 @@ const CssTextField = withStyles({
     },
   },
 })(TextField);
-const currencies = Util.utilCurrencies;
