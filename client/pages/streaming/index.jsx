@@ -3,7 +3,7 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '../../_store/configureStore';
-import Streaming from '../../components/views/streaming/Streaming';
+import Streaming from '../../components/views/streaming/Streamingg';
 import { myInfoRequestAction } from '../../_request/user_request';
 import MainLayout from '../../components/mainlayout';
 

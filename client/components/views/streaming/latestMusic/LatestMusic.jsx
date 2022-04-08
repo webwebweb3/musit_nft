@@ -4,9 +4,8 @@ import { mintMusicTokenContract } from '../../../../contracts';
 import MusicCard from '../../cards/MusicCard';
 import { style } from './style';
 
-const LatestMusic = () => {
+const LatestMusic = ({ func }) => {
   const [musics, setMusics] = useState([]);
-
   const getMusic = async () => {
     try {
       const getLatestMusicToken = await mintMusicTokenContract.methods
@@ -54,6 +53,7 @@ const LatestMusic = () => {
                     albumCover={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.properties.S3AlbumCover}`}
                     artistName={`${v.properties.dataToSubmit.artist}`}
                     key={i}
+                    func={func}
                   />
                 );
               })}

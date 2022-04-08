@@ -47,6 +47,7 @@
     "passport-local": "^1.0.0",
     "prop-types": "^15.8.1",
     "react-chartjs-2": "^4.0.1",
+    "react-h5-audio-player": "^3.8.3",
     "sequelize": "^6.17.0",
     "sequelize-cli": "^6.4.1"
   },
