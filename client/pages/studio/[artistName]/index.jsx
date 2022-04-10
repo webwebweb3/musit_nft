@@ -2,7 +2,6 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 import wrapper from '../../../_reduxsaga/store/configureStore';
-import MainLayout from '../../../components/mainlayout';
 import { myInfoRequestAction } from '../../../_reduxsaga/request/user_request';
 import dynamic from 'next/dynamic';
 const Studio = dynamic(
@@ -14,9 +13,9 @@ const Studio = dynamic(
 
 const Home = () => {
   return (
-    <MainLayout>
+    <>
       <Studio />
-    </MainLayout>
+    </>
   );
 };
 

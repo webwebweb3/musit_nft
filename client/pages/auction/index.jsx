@@ -18,9 +18,9 @@ const AuctionHome = () => {
   }, [dispatch]);
 
   return (
-    <MainLayout value="nft">
+    <>
       <AuctionMainPage />
-    </MainLayout>
+    </>
   );
 };
 
@@ -37,6 +37,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(END);
       await store.sagaTask.toPromise();
     },
+);
+
+AuctionHome.Layout = ({ children }) => (
+  <MainLayout value="nft">{children}</MainLayout>
 );
 
 export default AuctionHome;

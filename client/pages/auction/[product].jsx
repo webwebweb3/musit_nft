@@ -9,9 +9,9 @@ import MainLayout from '../../components/mainlayout';
 
 const AuctionProduct = () => {
   return (
-    <MainLayout value="nft">
+    <>
       <AuctionProductPage />
-    </MainLayout>
+    </>
   );
 };
 
@@ -29,6 +29,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(END);
       await store.sagaTask.toPromise();
     },
+);
+
+AuctionProduct.Layout = ({ children }) => (
+  <MainLayout value="nft">{children}</MainLayout>
 );
 
 export default AuctionProduct;

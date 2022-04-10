@@ -2,16 +2,15 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../_reduxsaga/store/configureStore';
-import MainLayout from '../components/mainlayout';
-import SubscriptionBuy from '../components/views/SubscriptionBuy';
-import { myInfoRequestAction } from '../_reduxsaga/request/user_request';
+import wrapper from '../../_reduxsaga/store/configureStore';
+import PurchaseInfo from '../../components/views/PurchaseInfo';
+import { myInfoRequestAction } from '../../_reduxsaga/request/user_request';
 
-const SubscriptionBuyPage = () => {
+const purchaseinfo = () => {
   return (
-    <MainLayout>
-      <SubscriptionBuy />
-    </MainLayout>
+    <>
+      <PurchaseInfo />
+    </>
   );
 };
 
@@ -23,11 +22,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (req && cookie) {
         axios.defaults.headers.Cookie = cookie;
       }
+
+      ///
       store.dispatch(myInfoRequestAction());
+      ///
 
       store.dispatch(END);
       await store.sagaTask.toPromise();
     },
 );
 
-export default SubscriptionBuyPage;
+export default purchaseinfo;

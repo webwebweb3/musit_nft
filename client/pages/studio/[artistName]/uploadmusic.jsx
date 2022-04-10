@@ -3,7 +3,6 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '../../../_reduxsaga/store/configureStore';
-import MainLayout from '../../../components/mainlayout';
 // import UploadMusic from '../../../components/views/studio/uploadmusic/UploadMusic';
 import { myInfoRequestAction } from '../../../_reduxsaga/request/user_request';
 import dynamic from 'next/dynamic';
@@ -16,9 +15,9 @@ const UploadMusic = dynamic(
 
 const Home = () => {
   return (
-    <MainLayout>
+    <>
       <UploadMusic />
-    </MainLayout>
+    </>
   );
 };
 

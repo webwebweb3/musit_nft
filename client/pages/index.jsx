@@ -3,15 +3,14 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '../_reduxsaga/store/configureStore';
-import MainLayout from '../components/mainlayout';
 import HomePage from '../components/views/homepage/Home';
 import { myInfoRequestAction } from '../_reduxsaga/request/user_request';
 
 const Home = () => {
   return (
-    <MainLayout>
+    <>
       <HomePage />
-    </MainLayout>
+    </>
   );
 };
 
@@ -24,9 +23,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         axios.defaults.headers.Cookie = cookie;
       }
 
-      ///
       store.dispatch(myInfoRequestAction());
-      ///
 
       store.dispatch(END);
       await store.sagaTask.toPromise();

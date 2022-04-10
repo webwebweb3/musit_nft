@@ -3,18 +3,17 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '../../_reduxsaga/store/configureStore';
-import MainLayout from '../../components/mainlayout';
 import MyPageLayout from '../../components/views/mypage/layout';
 import { myInfoRequestAction } from '../../_reduxsaga/request/user_request';
 import MyNFT from '../../components/views/mypage/mynft/MyNFT';
 
 const MyNFTPage = () => {
   return (
-    <MainLayout>
+    <>
       <MyPageLayout>
         <MyNFT />
       </MyPageLayout>
-    </MainLayout>
+    </>
   );
 };
 

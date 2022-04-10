@@ -9,9 +9,9 @@ import MainLayout from '../../../../components/mainlayout';
 
 const EditionIPFSUrlPage = () => {
   return (
-    <MainLayout value="nft">
+    <>
       <EditionTokenURI />
-    </MainLayout>
+    </>
   );
 };
 
@@ -28,6 +28,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(END);
       await store.sagaTask.toPromise();
     },
+);
+
+EditionIPFSUrlPage.Layout = ({ children }) => (
+  <MainLayout value="nft">{children}</MainLayout>
 );
 
 export default EditionIPFSUrlPage;

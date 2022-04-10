@@ -5,13 +5,12 @@ import axios from 'axios';
 import wrapper from '../../_reduxsaga/store/configureStore';
 import Streaming from '../../components/views/streaming/Streaming';
 import { myInfoRequestAction } from '../../_reduxsaga/request/user_request';
-import MainLayout from '../../components/mainlayout';
 
 const StreamingHome = () => {
   return (
-    <MainLayout>
+    <>
       <Streaming />
-    </MainLayout>
+    </>
   );
 };
 

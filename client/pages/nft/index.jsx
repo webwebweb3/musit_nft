@@ -9,9 +9,9 @@ import MainLayout from '../../components/mainlayout';
 
 const NFTHome = () => {
   return (
-    <MainLayout value="nft">
+    <>
       <NFT />
-    </MainLayout>
+    </>
   );
 };
 
@@ -28,6 +28,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(END);
       await store.sagaTask.toPromise();
     },
+);
+
+NFTHome.Layout = ({ children }) => (
+  <MainLayout value="nft">{children}</MainLayout>
 );
 
 export default NFTHome;

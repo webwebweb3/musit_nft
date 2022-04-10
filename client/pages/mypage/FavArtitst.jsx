@@ -3,18 +3,17 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '../../_reduxsaga/store/configureStore';
-import MainLayout from '../../components/mainlayout';
 import MyPageLayout from '../../components/views/mypage/layout';
 import FavArtists from '../../components/views/mypage/FavArtists';
 import { myInfoRequestAction } from '../../_reduxsaga/request/user_request';
 
 const FavArtistsPage = () => {
   return (
-    <MainLayout>
+    <>
       <MyPageLayout>
         <FavArtists />
       </MyPageLayout>
-    </MainLayout>
+    </>
   );
 };
 

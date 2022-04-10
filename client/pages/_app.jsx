@@ -1,34 +1,22 @@
+import '../styles/globals.css';
 import React from 'react';
-import PropTypes from 'prop-types';
 import Head from 'next/head';
 
 import wrapper from '../_reduxsaga/store/configureStore';
-import { createGlobalStyle } from 'styled-components';
+import MainLayout from '../components/mainlayout';
 
-export const Global = createGlobalStyle`
-  body {
-    background-color: #0d0f1a;
-    margin:0;
-  }
-`;
+const App = ({ Component, pageProps }) => {
+  const Layout = Component.Layout ?? MainLayout;
 
-const App = ({ Component }) => (
-  <>
-    <Global />
-    <Head>
-      <meta charSet="utf-8" />
-      <title>WebWebWeb3</title>
-    </Head>
-    <Component />
-  </>
-);
-
-App.propTypes = {
-  Component: PropTypes.elementType.isRequired,
+  return (
+    <Layout>
+      <Head>
+        <meta charSet="utf-8" />
+        <title>WebWebWeb3</title>
+      </Head>
+      <Component {...pageProps} />
+    </Layout>
+  );
 };
-
-export function reportWebVitals(metric) {
-  // console.log(metric);
-}
 
 export default wrapper.withRedux(App);

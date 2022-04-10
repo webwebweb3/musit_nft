@@ -9,9 +9,9 @@ import MainLayout from '../../../components/mainlayout';
 
 const MarketPlacePage = () => {
   return (
-    <MainLayout value="nft">
+    <>
       <MarketPlace />
-    </MainLayout>
+    </>
   );
 };
 
@@ -28,6 +28,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(END);
       await store.sagaTask.toPromise();
     },
+);
+
+MarketPlacePage.Layout = ({ children }) => (
+  <MainLayout value="nft">{children}</MainLayout>
 );
 
 export default MarketPlacePage;
