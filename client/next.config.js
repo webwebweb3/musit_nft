@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: [
+      '', // 예정
+    ],
+  },
   env: {
     BASE_URL: process.env.BASE_URL,
   },

@@ -10,7 +10,9 @@ import {
   AuctionHeader,
   AuctionLeftSideBar,
   AuctionWrapper,
+  AuctionMainContainer,
   StyledNewAuctionButton,
+  AuctionMainContentsContainer,
 } from '../style';
 
 const AuctionMainPage = () => {
@@ -18,32 +20,32 @@ const AuctionMainPage = () => {
 
   return (
     <AuctionAllContainer>
-      {/* Header */}
-      <AuctionHeader>
-        <h1 style={{ margin: '0 0 0 40px' }}>AUCTION</h1>
-        {userData.role === 1 && (
-          <div style={{ marginLeft: '1000px' }}>
+      <AuctionMainContainer>
+        {/* Header */}
+        <AuctionHeader>
+          <h1 style={{ margin: '0 0 0 40px' }}>AUCTION</h1>
+          {userData.role === 1 && (
             <Link href={`/auction/upload`}>
               <StyledNewAuctionButton variant="contained">
                 새 경매 등록하기
               </StyledNewAuctionButton>
             </Link>
-          </div>
-        )}
-      </AuctionHeader>
+          )}
+        </AuctionHeader>
 
-      {/* Body */}
-      <AuctionContainer>
-        {/* Menu */}
-        <AuctionLeftSideBar>
-          <LeftSideBar />
-        </AuctionLeftSideBar>
+        {/* Body */}
+        <AuctionMainContentsContainer>
+          {/* Menu */}
+          <AuctionLeftSideBar>
+            <LeftSideBar />
+          </AuctionLeftSideBar>
 
-        {/* Contents */}
-        <AuctionWrapper>
-          <AuctionCard />
-        </AuctionWrapper>
-      </AuctionContainer>
+          {/* Contents */}
+          <AuctionWrapper>
+            <AuctionCard />
+          </AuctionWrapper>
+        </AuctionMainContentsContainer>
+      </AuctionMainContainer>
     </AuctionAllContainer>
   );
 };
