@@ -11,7 +11,7 @@ const LogoutButton = () => {
 
   const onClickLogout = useCallback(() => {
     dispatch(logoutRequestAction());
-  }, [dispatch]);
+  }, []);
 
   return (
     <MenuItem onClick={onClickLogout}>

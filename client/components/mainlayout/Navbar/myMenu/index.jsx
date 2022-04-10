@@ -2,11 +2,8 @@ import React, { Fragment, useState } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import PropTypes from 'prop-types';
 
-import MyMenuItem from './MyMenuItem';
-import MyImg from './MyImg';
+import { MenuLayout, MyMenuItem, MyNotice, MyImg } from './section';
 import NoticeIcon from '../myNotice/NoticeIcon';
-import MenuLayout from './MenuLayout';
-import MyNotice from './MyNotice';
 
 const ProfileButton = ({ value }) => {
   const [anchorEl, setAnchorEl] = useState(null);
