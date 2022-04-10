@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import React from 'react';
 import Head from 'next/head';
 
-import wrapper from '../_reduxsaga/store/configureStore';
+import wrapper from '$reduxsaga/store/configureStore';
 import MainLayout from '../components/mainlayout';
 
 const App = ({ Component, pageProps }) => {

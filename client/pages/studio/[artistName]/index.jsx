@@ -1,8 +1,8 @@
 import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
-import wrapper from '../../../_reduxsaga/store/configureStore';
-import { myInfoRequestAction } from '../../../_reduxsaga/request/user_request';
+import wrapper from '$reduxsaga/store/configureStore';
+import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 import dynamic from 'next/dynamic';
 const Studio = dynamic(
   () => import('../../../components/views/studio/Studio'),

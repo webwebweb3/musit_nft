@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { auctionCancelAction } from '../../../../_reduxsaga/request/auction_request';
+import { auctionCancelAction } from '$reduxsaga/request/auction_request';
 import { StyledCancelButton } from '../style';
 
 const CancelButton = () => {

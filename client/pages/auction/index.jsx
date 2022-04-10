@@ -4,9 +4,9 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import wrapper from '../../_reduxsaga/store/configureStore';
-import { myInfoRequestAction } from '../../_reduxsaga/request/user_request';
-import { allAuctionsAction } from '../../_reduxsaga/request/auction_request';
+import wrapper from '$reduxsaga/store/configureStore';
+import { myInfoRequestAction } from '$reduxsaga/request/user_request';
+import { allAuctionsAction } from '$reduxsaga/request/auction_request';
 import AuctionMainPage from '../../components/views/auctionpage/main';
 import MainLayout from '../../components/mainlayout';
 

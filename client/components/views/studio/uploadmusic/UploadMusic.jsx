@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
-import { mintMusicNFTRequestAction } from '../../../../_reduxsaga/request/uploadMusic_request';
+import { mintMusicNFTRequestAction } from '$reduxsaga/request/uploadMusic_request';
 import { create } from 'ipfs-http-client';
 import styled from 'styled-components';
 import { style } from './uploadMusicStyle';

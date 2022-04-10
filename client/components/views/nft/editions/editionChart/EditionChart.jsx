@@ -5,7 +5,7 @@ import { Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import { saleMusicTokenContract, web3 } from '../../../../../contracts';
 import { useState } from 'react';
-import { marketPlaceGetEventAction } from '../../../../../_reduxsaga/request/marketPlace_request';
+import { marketPlaceGetEventAction } from '$reduxsaga/request/marketPlace_request';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@mui/material';
 

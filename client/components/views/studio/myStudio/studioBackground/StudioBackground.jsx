@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styled from 'styled-components';
-import { studioUploadBackground } from '../../../../../_reduxsaga/request/studio_request';
+import { studioUploadBackground } from '$reduxsaga/request/studio_request';
 
 const StudioBackground = () => {
   const dispatch = useDispatch();

@@ -2,10 +2,10 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../../_reduxsaga/store/configureStore';
+import wrapper from '$reduxsaga/store/configureStore';
 import MyPageLayout from '../../components/views/mypage/layout';
 import MyInfo from '../../components/views/mypage/MyInfo';
-import { myInfoRequestAction } from '../../_reduxsaga/request/user_request';
+import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
 const InfoEdit = () => {
   return (

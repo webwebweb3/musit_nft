@@ -2,7 +2,7 @@ import { Avatar, Box, Button, InputLabel } from '@mui/material';
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInput } from '../../../hooks/useInput';
-import { userEditRequestAction } from '../../../_reduxsaga/request/user_request';
+import { userEditRequestAction } from '$reduxsaga/request/user_request';
 import CustomizedInputs from '../../mui/CustomizedInputs';
 import UnstyledSelectsMultiple from '../../mui/SelectNationality';
 // import MyGenre from './MyGenre';

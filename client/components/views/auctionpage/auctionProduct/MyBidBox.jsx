@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {
   auctionFinalizeAction,
   auctionMyBidAction,
-} from '../../../../_reduxsaga/request/auction_request';
+} from '$reduxsaga/request/auction_request';
 import { AuctionDivider, AuctionStyledButton } from '../style';
 
 const MyBidBox = ({ gapTime }) => {

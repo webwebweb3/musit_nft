@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
 import { Gavel, Storefront, Token, Headset } from '@mui/icons-material';
 
+import { metaMaskRequestAction } from '$reduxsaga/request/metamask_request';
 import RegisterModal from './Register/RegisterModal';
 import ProfileButton from './myMenu';
-import { metaMaskRequestAction } from '../../../_reduxsaga/request/metamask_request';
 import MetamaskButton from './Register/button/metamaskButton';
 
 const Navbar = ({ value }) => {
