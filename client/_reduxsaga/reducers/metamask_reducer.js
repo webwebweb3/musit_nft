@@ -1,4 +1,4 @@
-import produce from '../util/produce';
+import produce from '../../util/produce';
 import {
   METAMASK_FAILURE,
   METAMASK_LOGIN_FAILURE,
@@ -6,7 +6,7 @@ import {
   METAMASK_LOGIN_SUCCESS,
   METAMASK_REQUEST,
   METAMASK_SUCCESS,
-} from '../_request/types';
+} from '../request/types';
 
 export const initialState = {
   metamaskLoading: false,

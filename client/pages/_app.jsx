@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 
-import wrapper from '../_store/configureStore';
+import wrapper from '../_reduxsaga/store/configureStore';
 import { createGlobalStyle } from 'styled-components';
 
 export const Global = createGlobalStyle`

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
 
-import { metaMaskLoginRequestAction } from '../../../../../_request/metamask_request';
+import { metaMaskLoginRequestAction } from '../../../../../_reduxsaga/request/metamask_request';
 import NavButton from './NavButton';
 
 const MetamaskButton = ({ metamaskLogin, setMetamaskLogin, metaopenfunc }) => {

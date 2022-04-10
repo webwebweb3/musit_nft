@@ -1,7 +1,7 @@
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
-import { mintMusicTokenContract } from '../contracts';
+import { mintMusicTokenContract } from '../../contracts';
 import Router from 'next/router';
 
 import {
@@ -12,7 +12,7 @@ import {
   MINT_MUSIC_NFT_SUCCESS,
   S3_ALBUMCOVER_FAILURE,
   S3_ALBUMCOVER_SUCCESS,
-} from '../_request/types';
+} from '../request/types';
 import axios from 'axios';
 
 function uploadS3AlbumCover(data) {

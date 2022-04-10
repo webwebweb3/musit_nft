@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   marketPlaceCancelAction,
   marketPlacePurchaseAction,
-} from '../../../../../_request/marketPlace_request';
+} from '../../../../../_reduxsaga/request/marketPlace_request';
 
 const PurchaseButton = styled(Button)(() => ({
   color: '#fff',

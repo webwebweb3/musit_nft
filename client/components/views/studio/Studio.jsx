@@ -7,7 +7,7 @@ import { style } from './style';
 import StudioBackground from './myStudio/studioBackground/StudioBackground';
 import StudioProfile from './myStudio/studioProfile/StudioProfile';
 import StudioMyMusics from './myStudio/studioMyMusics/StudioMyMusics';
-import { studioGetUserImages } from '../../../_request/studio_request';
+import { studioGetUserImages } from '../../../_reduxsaga/request/studio_request';
 
 const Studio = () => {
   const router = useRouter();

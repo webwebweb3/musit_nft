@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^12.1.0",
+    "add": "^2.0.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.10.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -60,11 +61,12 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.3",
-    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react-hooks": "^4.5.0-next-5b2e7253f-20220408",
     "husky": "^7.0.0",
     "lint-staged": "^12.3.5",
     "nodemon": "^2.0.15",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "yarn": "^1.22.18"
   },
   "lint-staged": {
     "*.{js,jsx}": [

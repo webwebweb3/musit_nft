@@ -7,7 +7,7 @@ import { Gavel, Storefront, Token, Headset } from '@mui/icons-material';
 
 import RegisterModal from './Register/RegisterModal';
 import ProfileButton from './myMenu';
-import { metaMaskRequestAction } from '../../../_request/metamask_request';
+import { metaMaskRequestAction } from '../../../_reduxsaga/request/metamask_request';
 import MetamaskButton from './Register/button/metamaskButton';
 
 const Navbar = ({ value }) => {

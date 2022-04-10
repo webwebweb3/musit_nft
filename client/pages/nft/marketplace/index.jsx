@@ -2,8 +2,8 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../../../_store/configureStore';
-import { myInfoRequestAction } from '../../../_request/user_request';
+import wrapper from '../../../_reduxsaga/store/configureStore';
+import { myInfoRequestAction } from '../../../_reduxsaga/request/user_request';
 import MarketPlace from '../../../components/views/nft/marketplace/MarketPlace';
 import MainLayout from '../../../components/mainlayout';
 

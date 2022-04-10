@@ -1,4 +1,4 @@
-import produce from '../util/produce';
+import produce from '../../util/produce';
 import {
   MARKETPLACE_CANCEl_FAILURE,
   MARKETPLACE_CANCEl_REQUEST,
@@ -12,7 +12,7 @@ import {
   MARKETPLACE_PURCHASE_FAILURE,
   MARKETPLACE_PURCHASE_REQUEST,
   MARKETPLACE_PURCHASE_SUCCESS,
-} from '../_request/types';
+} from '../request/types';
 
 export const initialState = {
   getOwnerLoading: false,

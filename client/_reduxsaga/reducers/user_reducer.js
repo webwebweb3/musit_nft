@@ -1,4 +1,4 @@
-import produce from '../util/produce';
+import produce from '../../util/produce';
 
 import {
   LOGOUT_USER_REQUEST,
@@ -19,7 +19,7 @@ import {
   MY_INFO_REQUEST,
   MY_INFO_SUCCESS,
   MY_INFO_FAILURE,
-} from '../_request/types';
+} from '../request/types';
 
 export const initialState = {
   logInUserLoading: false,

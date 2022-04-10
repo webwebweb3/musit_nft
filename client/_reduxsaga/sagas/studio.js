@@ -16,7 +16,7 @@ import {
   STUDIO_GET_USERIMAGES_REQUEST,
   STUDIO_GET_USERIMAGES_SUCCESS,
   STUDIO_GET_USERIMAGES_FAILURE,
-} from '../_request/types';
+} from '../request/types';
 
 async function uploadBackground(data) {
   const myFile = data.selectedFile;

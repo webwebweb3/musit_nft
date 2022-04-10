@@ -6,7 +6,7 @@ import { CircularProgress } from '@mui/material';
 import { AuctionStyledButton } from '../style';
 import { useInput } from '../../../../hooks/useInput';
 import AuctionTextField from '../auctionMui/AuctionTextField';
-import { auctionBidAction } from '../../../../_request/auction_request';
+import { auctionBidAction } from '../../../../_reduxsaga/request/auction_request';
 
 const AuctionBidButton = () => {
   const dispatch = useDispatch();

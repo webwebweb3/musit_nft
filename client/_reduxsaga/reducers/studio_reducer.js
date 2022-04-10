@@ -1,4 +1,4 @@
-import produce from '../util/produce';
+import produce from '../../util/produce';
 import {
   STUDIO_UPLOAD_BACKGROUND_REQUEST,
   STUDIO_UPLOAD_BACKGROUND_SUCCESS,
@@ -12,7 +12,7 @@ import {
   STUDIO_GET_USERIMAGES_REQUEST,
   STUDIO_GET_USERIMAGES_SUCCESS,
   STUDIO_GET_USERIMAGES_FAILURE,
-} from '../_request/types';
+} from '../request/types';
 
 export const initialState = {
   uploadBackgroundLoading: false,

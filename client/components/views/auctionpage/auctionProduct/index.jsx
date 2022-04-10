@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { auctionAction } from '../../../../_request/auction_request';
+import { auctionAction } from '../../../../_reduxsaga/request/auction_request';
 import {
   AuctionAllContainer,
   AuctionContentImg,
