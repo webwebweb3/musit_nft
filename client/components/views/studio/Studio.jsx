@@ -15,8 +15,9 @@ const Studio = () => {
   let { artistName } = router.query;
   const studio = useSelector(state => state.studio);
 
-  // const [backgroundImg, setBackgroundImg] = useState('defaultBackground');
-  // const [profileImg, setProfileImg] = useState('defaultProfile');
+  const [backgroundImg, setBackgroundImg] = useState();
+  const [profileImg, setProfileImg] = useState();
+  const [loading, setLoading] = useState(false);
 
   const { userData } = useSelector(state => state.user);
 
@@ -26,43 +27,48 @@ const Studio = () => {
     return null;
   }
 
-  // const setImages = () => {
-  //   if (studio.studioUserImages) {
-  //     if (studio.studioUserImages.userProfile) {
-  //       setProfileImg(studio.studioUserImages.userProfile);
-  //     }
-  //     if (studio.studioUserImages.userBackground) {
-  //       setProfileImg(studio.studioUserImages.userBackground);
-  //     }
-  //   }
-  // };
+  const setImages = () => {
+    if (studio.studioUserImages) {
+      if (studio.studioUserImages.userProfile) {
+        setProfileImg(studio.studioUserImages.userProfile);
+      }
+      if (studio.studioUserImages.userBackground) {
+        setBackgroundImg(studio.studioUserImages.userBackground);
+      }
+    }
+  };
 
   const getUserImages = async () => {
     dispatch(studioGetUserImages(artistName));
   };
 
   // useEffect(() => {
-  //   console.log('1');
-  //   if (!studio.getMyMusicsLoading) {
-  //     console.log('2');
-  //     getUserImages();
-  //   }
+  //   getUserImages();
+  // }, []);
 
-  //   if (studio.getUserImagesError) {
-  //     alert(studio.getUserImagesError);
-  //     Router.push('/');
+  // useEffect(() => {
+  //   if (studio.getUserImagesDone) {
+  //     if (studio.studioUserImages.userProfile === null) {
+  //       setProfileImg('defaultProfile');
+  //     } else {
+  //       setProfileImg(studio.studioUserImages.userProfile);
+  //     }
+  //     if (studio.studioUserImages.userBackground === null) {
+  //       setBackgroundImg('defaultBackground');
+  //     } else {
+  //       setBackgroundImg(studio.studioUserImages.userBackground);
+  //     }
   //   }
-  //   setImages();
-  //   console.log('3', backgroundImg, profileImg);
-  // }, [studio.getMyMusicsLoading, backgroundImg, profileImg]);
+  //   console.log(backgroundImg, profileImg);
+  // }, [studio.getUserImagesDone, profileImg]);
 
   return (
     <Box sx={style.studioContainer}>
       <Box sx={style.studioBackground}>
-        <StudioBackground />
+        {backgroundImg && <StudioBackground background={backgroundImg} />}
       </Box>
       <Box sx={style.studioProfile}>
-        <StudioProfile />
+        {profileImg && <StudioProfile profile={profileImg} />}
       </Box>
       <Box>
         {artistName === userData.name ? (
