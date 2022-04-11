@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router';
+import PropTypes from 'prop-types';
 
 import { metaMaskLoginRequestAction } from '../../../../../_request/metamask_request';
 import NavButton from './NavButton';
@@ -59,6 +60,12 @@ const MetamaskButton = ({ metamaskLogin, setMetamaskLogin, metaopenfunc }) => {
       )}
     </>
   );
+};
+
+MetamaskButton.prototype = {
+  metamaskLogin: PropTypes.bool.isRequired,
+  setMetamaskLogin: PropTypes.func.isRequired,
+  metaopenfunc: PropTypes.func.isRequired,
 };
 
 export default MetamaskButton;

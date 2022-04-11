@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Button } from '@mui/material';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useHover } from '../../../../../hooks/useHover';
 
 const NavButton = ({ value, func }) => {
@@ -36,8 +36,8 @@ const NavButton = ({ value, func }) => {
 };
 
 NavButton.propTypes = {
-  value: propTypes.string.isRequired,
-  func: propTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  func: PropTypes.func.isRequired,
 };
 
 export default NavButton;

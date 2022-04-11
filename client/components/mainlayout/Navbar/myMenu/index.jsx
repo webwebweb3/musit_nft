@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
+import PropTypes from 'prop-types';
 
 import MyMenuItem from './MyMenuItem';
 import MyImg from './MyImg';
@@ -10,6 +11,7 @@ import MyNotice from './MyNotice';
 const ProfileButton = ({ value }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  // 알림
   const [Notice, setNotice] = useState([]);
 
   const handleClick = event => {
@@ -29,8 +31,8 @@ const ProfileButton = ({ value }) => {
             aria-expanded={open ? 'true' : undefined}
           >
             {value === 'mypage' && <MyImg />}
-            {value === 'notice' && (
-              <NoticeIcon Notice={Notice} setNotice={setNotice} />
+            {Notice && value === 'notice' && (
+              <NoticeIcon NoticeArray={Notice} setNotice={setNotice} />
             )}
           </IconButton>
         </Tooltip>
@@ -48,6 +50,10 @@ const ProfileButton = ({ value }) => {
       )}
     </Fragment>
   );
+};
+
+ProfileButton.propTypes = {
+  value: PropTypes.string.isRequired,
 };
 
 export default ProfileButton;

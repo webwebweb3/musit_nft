@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Dialog, Tab, Tabs } from '@mui/material';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@emotion/react';
@@ -125,9 +125,9 @@ const RegisterModal = ({ open, setOpen, id }) => {
 };
 
 RegisterModal.propTypes = {
-  open: propTypes.bool.isRequired,
-  setOpen: propTypes.func.isRequired,
-  id: propTypes.string,
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  id: PropTypes.string,
 };
 
 export default RegisterModal;

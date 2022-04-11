@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Clock from 'react-live-clock';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 
 import { AuctionGray, AuctionTime } from '../style';
 import CancelButton from './CancelButton';
 
-const TimeBox = ({ product, gapTime, gapTimeFunc, owner, ownerFunc }) => {
+const TimeBox = ({ gapTime, gapTimeFunc, owner, ownerFunc }) => {
+  const router = useRouter();
+  let { product } = router.query;
+
   const { auctionData } = useSelector(state => state.auction);
   const { userData } = useSelector(state => state.user);
   const [auctionState, setAuctionState] = useState('');
@@ -75,6 +80,13 @@ const TimeBox = ({ product, gapTime, gapTimeFunc, owner, ownerFunc }) => {
       </AuctionTime>
     </>
   );
+};
+
+TimeBox.prototype = {
+  gapTime: PropTypes.bool.isRequired,
+  gapTimeFunc: PropTypes.func.isRequired,
+  owner: PropTypes.string.isRequired,
+  ownerFunc: PropTypes.func.isRequired,
 };
 
 export default TimeBox;

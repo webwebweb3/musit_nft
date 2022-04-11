@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { AuctionBox, AuctionGray, EthereumImg } from '../style';
 
 const BidBox = ({ gapTime }) => {
@@ -44,6 +45,10 @@ const BidBox = ({ gapTime }) => {
       )}
     </>
   );
+};
+
+BidBox.propTypes = {
+  gapTime: PropTypes.bool.isRequired,
 };
 
 export default BidBox;
