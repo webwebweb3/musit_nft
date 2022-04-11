@@ -6,7 +6,6 @@ import LeftSideBar from './leftSideBar/LeftSideBar';
 import AuctionCard from '../auctionCard';
 import {
   AuctionAllContainer,
-  AuctionContainer,
   AuctionHeader,
   AuctionLeftSideBar,
   AuctionWrapper,

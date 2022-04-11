@@ -26,14 +26,13 @@ const Navbar = ({ value }) => {
     // 메타마스크 비로그인 상태
     if (metamask.metamaskData !== null && metamask.metamaskDone) {
       setMetamaskLogin(false);
-      setOpen(true);
     }
   }, [metamask]);
 
   // 메타 마스크 회원가입 모달창
   const handleMetaMaskOpen = useCallback(() => {
     try {
-      dispatch(metaMaskRequestAction());
+      dispatch(metaMaskRequestAction({ text: 'register' }));
       return;
     } catch (error) {
       console.error(error);
@@ -112,10 +111,10 @@ const Navbar = ({ value }) => {
           </Tabs>
           {userData ? (
             <>
-              <div style={{ marginLeft: 'auto', paddingRight: '20px' }}>
-                <div>
-                  <ProfileButton value="notice" />
-                </div>
+              <div style={{ marginLeft: 'auto' }}>
+                <ProfileButton value="notice" />
+              </div>
+              <div style={{ paddingRight: '20px' }}>
                 <ProfileButton value="mypage" />
               </div>
             </>
@@ -123,6 +122,7 @@ const Navbar = ({ value }) => {
             <MetamaskButton
               metamaskLogin={metamaskLogin}
               setMetamaskLogin={setMetamaskLogin}
+              setOpen={setOpen}
               metaopenfunc={handleMetaMaskOpen}
             />
           )}

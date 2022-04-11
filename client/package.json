@@ -13,6 +13,7 @@
     "@aws-sdk/lib-storage": "^3.54.0",
     "@emotion/react": "11.8.1",
     "@emotion/styled": "11.8.1",
+    "@metamask/detect-provider": "^1.2.0",
     "@mui/icons-material": "^5.5.0",
     "@mui/material": "5.4.4",
     "@mui/styles": "5.5.1",

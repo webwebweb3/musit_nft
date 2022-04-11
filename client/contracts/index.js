@@ -513,50 +513,6 @@ const saleMusicTokenAbi = [
     type: 'constructor',
   },
   {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'uint256',
-        name: 'tokenID',
-        type: 'uint256',
-      },
-      {
-        indexed: true,
-        internalType: 'uint256',
-        name: 'price',
-        type: 'uint256',
-      },
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'buyer',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'timeStamp',
-        type: 'uint256',
-      },
-    ],
-    name: 'PurchaseChart',
-    type: 'event',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '_musicTokenId',
-        type: 'uint256',
-      },
-    ],
-    name: 'cancelSaleMusicToken',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
     inputs: [
       {
         internalType: 'uint256',
@@ -952,11 +908,11 @@ export const auctionAbi = [
 ];
 
 export const mintMusicTokenAddress =
-  '0x0c8A6F16Ec60C147b46d38c67af6658fDA6350ED';
+  '0xD735d5D224a4321ED1B7719D61f77b44B341e685';
 export const saleMusicTokenAddress =
-  '0x9E607C6c439610d0C469A145f26d8f35E7df458A';
+  '0x630834BAd4ca9264C38Ec7807a2BB4d17005B214';
 export const auctionCreatorAddress =
-  '0xf975FCCB7fa68403D8433DDb0a4be5624e405504';
+  '0xD09AF90b3A2De310b662FCa8756AA6d1816e9d77';
 
 let web3;
 let mintMusicTokenContract;

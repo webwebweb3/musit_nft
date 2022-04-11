@@ -3,10 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
 
-import { metaMaskLoginRequestAction } from '$reduxsaga/request/metamask_request';
+import { metaMaskRequestAction } from '$reduxsaga/request/metamask_request';
 import NavButton from './NavButton';
 
-const MetamaskButton = ({ metamaskLogin, setMetamaskLogin, metaopenfunc }) => {
+const MetamaskButton = ({
+  metamaskLogin,
+  setMetamaskLogin,
+  setOpen,
+  metaopenfunc,
+}) => {
   const dispatch = useDispatch();
   const metamask = useSelector(state => state.metamask);
   const user = useSelector(state => state.user);
@@ -24,6 +29,7 @@ const MetamaskButton = ({ metamaskLogin, setMetamaskLogin, metaopenfunc }) => {
     // 메타마스크 비로그인 상태
     if (metamask.metamaskData !== null && metamask.metamaskLoginDone) {
       setMetamaskLogin(false);
+      setOpen(true);
     }
   }, [metamask, setMetamaskLogin]);
 
@@ -35,7 +41,7 @@ const MetamaskButton = ({ metamaskLogin, setMetamaskLogin, metaopenfunc }) => {
 
   const onClickLogin = useCallback(() => {
     try {
-      dispatch(metaMaskLoginRequestAction());
+      dispatch(metaMaskRequestAction({ text: 'login' }));
     } catch (error) {
       console.error(error);
     }

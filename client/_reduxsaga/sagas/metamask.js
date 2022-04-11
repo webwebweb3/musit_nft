@@ -1,3 +1,4 @@
+import detectEthereumProvider from '@metamask/detect-provider';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import {
   LOGIN_USER_REQUEST,
@@ -9,51 +10,62 @@ import {
   METAMASK_SUCCESS,
 } from '../request/types';
 
-function metamaskAPI() {
-  let request = window.ethereum.request({
-    method: 'eth_requestAccounts',
-  });
+async function metamaskAPI() {
+  const provider = await detectEthereumProvider();
 
-  return request;
+  return provider;
 }
 
-function* metamask() {
+function* metamask({ text }) {
   try {
     const result = yield call(metamaskAPI);
 
     yield put({
       type: METAMASK_SUCCESS,
-      data: result[0],
+    });
+    yield put({
+      type: METAMASK_LOGIN_REQUEST,
+      provider: result,
+      text,
     });
   } catch (err) {
     console.error(err);
     yield put({
       type: METAMASK_FAILURE,
-      error: err.response.data,
+      error: '메타마스크를 설치해주세요.',
     });
   }
 }
 
-function metamaskloginAPI() {
-  let request = window.ethereum.request({
+function metamaskloginAPI(provider) {
+  let request = provider.request({
     method: 'eth_requestAccounts',
   });
 
   return request;
 }
 
-function* metamasklogin() {
+function* metamasklogin({ provider, text }) {
   try {
-    const result = yield call(metamaskloginAPI);
+    const result = yield call(metamaskloginAPI, provider);
 
     yield put({
       type: METAMASK_LOGIN_SUCCESS,
       data: result[0],
     });
-    yield put({
-      type: LOGIN_USER_REQUEST,
-      data: result[0],
-    });
+
+    switch (text) {
+      case 'register':
+        break;
+      case 'login':
+        yield put({
+          type: LOGIN_USER_REQUEST,
+          data: result[0],
+        });
+        break;
+      default:
+        break;
+    }
   } catch (err) {
     console.error(err);
     yield put({
