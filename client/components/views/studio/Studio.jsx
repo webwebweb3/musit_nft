@@ -46,16 +46,18 @@ const Studio = () => {
   // }, []);
 
   // useEffect(() => {
-  //   if (studio.getUserImagesDone) {
-  //     if (studio.studioUserImages.userProfile === null) {
-  //       setProfileImg('defaultProfile');
-  //     } else {
-  //       setProfileImg(studio.studioUserImages.userProfile);
-  //     }
-  //     if (studio.studioUserImages.userBackground === null) {
-  //       setBackgroundImg('defaultBackground');
-  //     } else {
-  //       setBackgroundImg(studio.studioUserImages.userBackground);
+  //   if (studio) {
+  //     if (studio.getUserImagesDone) {
+  //       if (studio.studioUserImages.userProfile === null) {
+  //         setProfileImg('defaultProfile');
+  //       } else {
+  //         setProfileImg(studio.studioUserImages.userProfile);
+  //       }
+  //       if (studio.studioUserImages.userBackground === null) {
+  //         setBackgroundImg('defaultBackground');
+  //       } else {
+  //         setBackgroundImg(studio.studioUserImages.userBackground);
+  //       }
   //     }
   //   }
   //   console.log(backgroundImg, profileImg);
