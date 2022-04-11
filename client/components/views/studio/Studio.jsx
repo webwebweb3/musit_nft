@@ -17,7 +17,6 @@ const Studio = () => {
 
   const [backgroundImg, setBackgroundImg] = useState();
   const [profileImg, setProfileImg] = useState();
-  const [loading, setLoading] = useState(false);
 
   const { userData } = useSelector(state => state.user);
 
