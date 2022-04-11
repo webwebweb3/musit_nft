@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,12 +7,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { studioUploadBackground } from '$reduxsaga/request/studio_request';
 
-const StudioBackground = () => {
+const StudioBackground = ({ background }) => {
+  console.log('back컴포', background);
+  const router = useRouter();
+  let { artistName } = router.query;
   const dispatch = useDispatch();
   const hiddenFileInput = useRef(null);
   const studioOwner = Router.query.artistName;
   const { userData } = useSelector(state => state.user);
-  const [backgroundImg, setBackgroundImg] = useState('default');
+  const studio = useSelector(state => state.studio);
+  const [backgroundImg, setBackgroundImg] = useState(background);
+  const [isSelected, setIsSelected] = useState(false);
 
   const handleFileInput = e => {
     const file = e.target.files[0];
@@ -26,6 +31,7 @@ const StudioBackground = () => {
       fileExt === 'png'
     ) {
       setBackgroundImg(file);
+      setIsSelected(true);
       return;
     } else {
       alert('이미지 파일만 업로드 가능합니다.');
@@ -43,17 +49,29 @@ const StudioBackground = () => {
   };
 
   useEffect(() => {
-    if (backgroundImg !== 'default') {
+    if (isSelected) {
       uploadStudioBackground();
-      console.log('???');
     }
-  }, [backgroundImg]);
+    if (studio.uploadBackgroundDone) {
+      Router.replace(`/studio/${artistName}`);
+    }
+    console.log('back', backgroundImg);
+  }, [isSelected]);
 
   const uploadStudioCoverBtn = () => {
     hiddenFileInput.current.click();
   };
   return (
     <Box>
+      {backgroundImg === 'defaultProfile' ? (
+        <img src="/defaultBackground.jpg" alt="default Background" />
+      ) : (
+        <img
+          src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/background/${artistName}_${background}`}
+          width={'100%'}
+        />
+      )}
+
       <input
         id="uploadBtn"
         type="file"

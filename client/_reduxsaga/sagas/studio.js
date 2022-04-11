@@ -2,6 +2,7 @@ import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
 import Axios from 'axios';
+import Router from 'next/router';
 
 import {
   STUDIO_UPLOAD_BACKGROUND_REQUEST,
@@ -47,7 +48,7 @@ async function uploadBackground(data) {
       console.log('saga progress', progress);
     });
     parallelUploads3.done();
-    return fileName;
+    return { fileName, uploadFileName: myFile.name };
   } catch (e) {
     console.error(e);
   }
@@ -70,6 +71,8 @@ function* yieldUploadBackground(action) {
       type: STUDIO_UPLOAD_BACKGROUND_SUCCESS,
       data: backgroundFileName,
     });
+
+    Router.replace(`/studio/${action.data.artistName}`);
   } catch (err) {
     console.error(err);
     yield put({

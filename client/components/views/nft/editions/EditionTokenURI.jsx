@@ -1,5 +1,5 @@
 import { Box } from '@material-ui/core';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import {
   mintMusicTokenContract,
@@ -8,6 +8,7 @@ import {
 import EditionChart from './editionChart/EditionChart';
 import EditionDescription from './editionDescription/EditionDescription';
 import EditionImages from './editionImage/EditionImages';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditionPurchase from './editionPurchase/EditionPurchase';
 import { style } from './style';
 
@@ -48,6 +49,10 @@ const EditionTokenURI = () => {
     <>
       {musicData && (
         <Box sx={style.editionContainer}>
+          <Box sx={style.editionBackContainer} onClick={() => Router.back()}>
+            <ArrowBackIcon sx={{ fontSize: '20px', marginRight: '10px' }} />
+            뒤로
+          </Box>
           <Box sx={style.editionTopContents}>
             <Box sx={style.editionTopLeftContainer}>
               <EditionImages

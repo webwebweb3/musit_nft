@@ -7,10 +7,11 @@ export const style = {
   },
   studioBackground: {
     width: '100%',
-    height: '150px',
+    height: '350px',
     color: 'white',
-    backgroundColor: 'red',
+
     position: 'relative',
+    overflow: 'hidden',
   },
   studioProfile: {
     width: '150px',

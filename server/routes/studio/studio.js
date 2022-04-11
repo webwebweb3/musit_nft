@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const { User, UserCover } = require('../../models');
 
@@ -29,7 +30,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { backgroundFileName, userMetamask } = req.body;
-    console.log('데이타 확인', backgroundFileName, userMetamask);
+    const fileName = backgroundFileName.uploadFileName;
 
     const userId = await User.findOne({
       where: { metamask: userMetamask },
@@ -41,11 +42,11 @@ router.post('/', async (req, res) => {
     if (isExist === null) {
       await UserCover.create({
         user: userId.id,
-        backgroundImg: backgroundFileName,
+        backgroundImg: fileName,
       });
     } else {
       await UserCover.update(
-        { backgroundImg: backgroundFileName },
+        { backgroundImg: fileName },
         { where: { user: userId.id } },
       );
     }

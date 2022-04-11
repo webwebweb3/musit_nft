@@ -1,4 +1,4 @@
-import { Box, Button, Input, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React from 'react';
 import { useState } from 'react';
@@ -25,7 +25,7 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     width: '60%',
-    height: '50%',
+    height: '70%',
     borderRadius: '20px',
     background: '#0d0f1a',
   },

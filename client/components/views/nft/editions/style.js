@@ -9,6 +9,12 @@ export const style = {
     height: '100%',
     color: 'white',
   },
+  editionBackContainer: {
+    color: '#768fb5',
+    paddingTop: '30px',
+    cursor: 'pointer',
+    fontSize: '20px',
+  },
   editionTopContents: {
     minWidth: '1200px',
     maxWidth: '1200px',
@@ -21,14 +27,15 @@ export const style = {
   editionTopLeftContainer: {
     display: 'flex',
     flexDirection: 'column',
-    flex: '5',
+    flex: '24',
     width: '100%',
     height: '100%',
+    paddingTop: '100px',
   },
   editionTopRightContainer: {
     display: 'flex',
     flexDirection: 'column',
-    flex: '7',
+    flex: '10',
     width: '100%',
     height: '100%',
     paddingLeft: '20px',
