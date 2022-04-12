@@ -1,13 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Gavel, Headset, Storefront, Token } from '@mui/icons-material';
 import { Tab } from '@mui/material';
 
 const NavbarLink = ({ value }) => {
+  const router = useRouter();
+  let { pathname } = router;
+
   return (
     <>
-      {value === 'nft' ? (
+      {pathname.includes('/nft') ? (
         <Link href="/streaming">
           <Tab
             icon={<Headset />}
@@ -34,7 +38,7 @@ const NavbarLink = ({ value }) => {
           sx={{ fontSize: '18px' }}
         />
       </Link>
-      {value === 'nft' && (
+      {pathname.includes('/nft') && (
         <>
           <Link href="/nft/marketplace">
             <Tab
