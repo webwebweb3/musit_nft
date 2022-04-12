@@ -104,7 +104,10 @@ const Studio = () => {
       <Box>
         {artistName === userData.name ? (
           <Button sx={style.studioUploadButton}>
-            <Link href={`${artistName}/uploadmusic`}>
+            <Link
+              href="[artistName]/uploadmusic"
+              as={`${artistName}/uploadmusic`}
+            >
               <AddMusicButton>+ Add Music NFT</AddMusicButton>
             </Link>
           </Button>

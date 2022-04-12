@@ -10,7 +10,9 @@ const AuctionCard = () => {
       {allAuctionData &&
         allAuctionData.map(auction => (
           <div key={auction}>
-            <Link href={`/auction/${auction}`}>{auction}</Link>
+            <Link href="/auction/[product]" as={`/auction/${auction}`}>
+              {auction}
+            </Link>
           </div>
         ))}
     </>

@@ -35,7 +35,7 @@ const EditionDescription = ({ owner, musicData, musicPrice }) => {
   }, [marketplace.getOwnerDone, ownerName]);
   return (
     <Box sx={{ marginTop: '30px' }}>
-      <Link href={`/studio/${artistName}`}>
+      <Link href="/studio/[artistName]" as={`/studio/${artistName}`}>
         <Box
           sx={{
             fontSize: '25px',
