@@ -32,16 +32,16 @@ const Navbar = ({ value }) => {
     }
   };
 
-  useEffect(() => {
-    if (userData && userData.metamask !== account.data) {
-      let confirmAction = window.confirm('계정을 전환하시겠습니까?');
-      if (confirmAction) {
-        console.log(1111);
-      } else {
-        console.log(2222);
-      }
-    }
-  }, [account.data]);
+  // useEffect(() => {
+  //   if (userData && userData.metamask !== account.data) {
+  //     let confirmAction = window.confirm('계정을 전환하시겠습니까?');
+  //     if (confirmAction) {
+  //       console.log(1111);
+  //     } else {
+  //       console.log(2222);
+  //     }
+  //   }
+  // }, [account.data]);
 
   return (
     <>

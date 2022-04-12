@@ -8,7 +8,7 @@ import AuctionAppointment from '../auctionMui/AuctionAppointment';
 import { timeFunction } from '../../../../util/timefunc';
 import UploadButton from './UploadButton';
 import AuctionButton from '../auctionMui/AuctionButton';
-import MyNFT from 'components/views/mypage/mynft/MyNFT';
+import MyNFT from '$components/views/mypage/mynft/MyNFT';
 
 const AuctionUploadPage = () => {
   const auction = useSelector(state => state.auction);
