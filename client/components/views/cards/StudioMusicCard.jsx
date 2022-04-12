@@ -1,21 +1,23 @@
+// import { styled } from '@mui/material/styles';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 
 const StudioMusicCard = ({ musics, albumCovers, datas }) => {
-  const [hover, setHover] = useState();
-  console.log('카드', musics, albumCovers, datas);
+  // const [hover, setHover] = useState();
+  // console.log('카드', musics, albumCovers, datas);
 
-  const handleMouseIn = () => {
-    setHover(true);
-  };
+  // const handleMouseIn = () => {
+  //   setHover(true);
+  // };
 
-  const handleMouseOut = () => {
-    setHover(false);
-  };
+  // const handleMouseOut = () => {
+  //   setHover(false);
+  // };
+
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <Link href={`/nft/marketplace/edition`}>
         <Card
           sx={{
@@ -24,21 +26,22 @@ const StudioMusicCard = ({ musics, albumCovers, datas }) => {
             backgroundColor: '#2c3352',
             color: 'white',
             borderRadius: '1rem',
+            cursor: 'pointer',
           }}
-          onMouseOver={handleMouseIn}
-          onMouseOut={handleMouseOut}
-          style={
-            hover ? { opacity: '0.8', cursor: 'pointer' } : { opacity: '1' }
-          }
+          // onMouseOver={handleMouseIn}
+          // onMouseOut={handleMouseOut}
+          // style={
+          //   hover ? { opacity: '0.8', cursor: 'pointer' } : { opacity: '1' }
+          // }
         >
           {/* TODO: hover animation!!! */}
-          <div style={hover ? { marginLeft: '-10px' } : {}}>
+          <div>
             <Image
               src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${albumCovers}`}
               alt={`${datas.title} album Cover`}
               layout="fixed"
-              width={hover ? '320px' : '300px'}
-              height={hover ? '300px' : '300px'}
+              width={'300px'}
+              height={'300px'}
             />
           </div>
 
@@ -66,3 +69,11 @@ const StudioMusicCard = ({ musics, albumCovers, datas }) => {
 };
 
 export default StudioMusicCard;
+
+// const SaleButton = styled(Button)(() => ({
+//   color: '#fff',
+//   backgroundColor: '#274eff',
+//   '&:hover': {
+//     backgroundColor: '#1b36b2',
+//   },
+// }));

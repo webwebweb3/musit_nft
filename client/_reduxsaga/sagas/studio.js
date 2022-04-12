@@ -8,15 +8,18 @@ import {
   STUDIO_UPLOAD_BACKGROUND_REQUEST,
   STUDIO_UPLOAD_BACKGROUND_SUCCESS,
   STUDIO_UPLOAD_BACKGROUND_FAILURE,
-  STUDIO_UPLOAD_PROFILE_REQUEST,
-  STUDIO_UPLOAD_PROFILE_SUCCESS,
-  STUDIO_UPLOAD_PROFILE_FAILURE,
   STUDIO_GET_MYMUSICS_REQUEST,
   STUDIO_GET_MYMUSICS_SUCCESS,
   STUDIO_GET_MYMUSICS_FAILURE,
   STUDIO_GET_USERIMAGES_REQUEST,
   STUDIO_GET_USERIMAGES_SUCCESS,
   STUDIO_GET_USERIMAGES_FAILURE,
+  STUDIO_SUBSCRIBE_REQUEST,
+  STUDIO_SUBSCRIBE_SUCCESS,
+  STUDIO_SUBSCRIBE_FAILURE,
+  STUDIO_ISSUBSCRIBING_REQUEST,
+  STUDIO_ISSUBSCRIBING_SUCCESS,
+  STUDIO_ISSUBSCRIBING_FAILURE,
 } from '../request/types';
 import { mintMusicTokenContract } from 'contracts';
 
@@ -72,32 +75,10 @@ function* yieldUploadBackground(action) {
       type: STUDIO_UPLOAD_BACKGROUND_SUCCESS,
       data: backgroundFileName,
     });
-
-    Router.replace(`/studio/${action.data.artistName}`);
   } catch (err) {
     console.error(err);
     yield put({
       type: STUDIO_UPLOAD_BACKGROUND_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-async function uploadProfile(data) {
-  console.log('uploadProfile');
-}
-
-function* yieldUploadProfile(action) {
-  try {
-    yield call(uploadProfile, action.data);
-    yield put({
-      type: STUDIO_UPLOAD_PROFILE_SUCCESS,
-      data: 'success',
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: STUDIO_UPLOAD_PROFILE_FAILURE,
       error: err.response.data,
     });
   }
@@ -111,8 +92,9 @@ function getUserMetamask(data) {
   });
 }
 async function getMyMusic(data) {
+  console.log('getMyMusic 안', data);
   return await mintMusicTokenContract.getPastEvents('Minter', {
-    filter: { Minter: data.user },
+    filter: { Minter: data.data.user },
     fromBlock: 0,
   });
 }
@@ -133,10 +115,12 @@ async function mapMyMusic(data) {
 function* yieldGetMymusics(action) {
   try {
     const userMetamask = yield call(getUserMetamask, action.data);
-
+    console.log('usermetamask', userMetamask);
     const getMyMusics = yield call(getMyMusic, userMetamask);
+    console.log('getMyMusics', getMyMusics);
 
     const mapMyMusics = yield call(mapMyMusic, getMyMusics);
+    console.log('mapMyMusics', mapMyMusics);
 
     yield put({
       type: STUDIO_GET_MYMUSICS_SUCCESS,
@@ -167,9 +151,52 @@ function* yieldGetUserImages(action) {
       data: userImages.data,
     });
   } catch (err) {
-    console.error(err);
+    alert(err.response.data);
     yield put({
       type: STUDIO_GET_USERIMAGES_FAILURE,
+      error: err.response.data,
+    });
+    Router.replace('/');
+  }
+}
+
+async function isSubscribing(data) {
+  console.log('서브스크라이빙?', data);
+  return Axios.get('/studio/isSubscribe', {
+    params: {
+      paramsData: data,
+    },
+  });
+}
+
+function* yieldIsSubscribing(action) {
+  try {
+    const isSub = yield call(isSubscribing, action.data);
+    yield put({
+      type: STUDIO_ISSUBSCRIBING_SUCCESS,
+      data: isSub.data,
+    });
+  } catch (err) {
+    yield put({
+      type: STUDIO_ISSUBSCRIBING_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+async function subscribeArtist(data) {
+  console.log('데이타 보자', data);
+}
+
+function* yieldSubscribeArtist(action) {
+  try {
+    yield call(subscribeArtist, action.data);
+    yield put({
+      type: STUDIO_SUBSCRIBE_SUCCESS,
+      data: 'success',
+    });
+  } catch (err) {
+    yield put({
+      type: STUDIO_SUBSCRIBE_FAILURE,
       error: err.response.data,
     });
   }
@@ -178,21 +205,26 @@ function* yieldGetUserImages(action) {
 function* watchUploadBackground() {
   yield takeLatest(STUDIO_UPLOAD_BACKGROUND_REQUEST, yieldUploadBackground);
 }
-function* watchUploadProfile() {
-  yield takeLatest(STUDIO_UPLOAD_PROFILE_REQUEST, yieldUploadProfile);
-}
+
 function* watchGetMyMusics() {
   yield takeLatest(STUDIO_GET_MYMUSICS_REQUEST, yieldGetMymusics);
 }
 function* watchGetUserImages() {
   yield takeLatest(STUDIO_GET_USERIMAGES_REQUEST, yieldGetUserImages);
 }
+function* watchIsSubscribing() {
+  yield takeLatest(STUDIO_ISSUBSCRIBING_REQUEST, yieldIsSubscribing);
+}
+function* watchSubscribeArtist() {
+  yield takeLatest(STUDIO_SUBSCRIBE_REQUEST, yieldSubscribeArtist);
+}
 
 export default function* studio() {
   yield all([
     fork(watchUploadBackground),
-    fork(watchUploadProfile),
     fork(watchGetMyMusics),
     fork(watchGetUserImages),
+    fork(watchSubscribeArtist),
+    fork(watchIsSubscribing),
   ]);
 }

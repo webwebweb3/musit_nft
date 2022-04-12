@@ -15,6 +15,7 @@ const StudioBackground = ({ background }) => {
   const studioOwner = Router.query.artistName;
   const { userData } = useSelector(state => state.user);
   const studio = useSelector(state => state.studio);
+
   const [backgroundImg, setBackgroundImg] = useState(background);
   const [isSelected, setIsSelected] = useState(false);
 
@@ -61,7 +62,7 @@ const StudioBackground = ({ background }) => {
   };
   return (
     <Box>
-      {backgroundImg === 'defaultProfile' ? (
+      {backgroundImg === 'defaultBackground' ? (
         <img src="/defaultBackground.jpg" alt="default Background" />
       ) : (
         <img
@@ -105,4 +106,7 @@ const StudioCoverButton = styled.button`
   position: absolute;
   right: 10px;
   top: 0px;
+  &:hover {
+    background-color: '#1b36b2',
+  },
 `;

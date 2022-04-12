@@ -3,6 +3,8 @@ import {
   STUDIO_UPLOAD_PROFILE_REQUEST,
   STUDIO_GET_MYMUSICS_REQUEST,
   STUDIO_GET_USERIMAGES_REQUEST,
+  STUDIO_SUBSCRIBE_REQUEST,
+  STUDIO_ISSUBSCRIBING_REQUEST,
 } from './types';
 
 export const studioUploadBackground = data => ({
@@ -19,5 +21,13 @@ export const studioGetMyMusics = data => ({
 });
 export const studioGetUserImages = data => ({
   type: STUDIO_GET_USERIMAGES_REQUEST,
+  data,
+});
+export const studioIsSubscribing = data => ({
+  type: STUDIO_ISSUBSCRIBING_REQUEST,
+  data,
+});
+export const studioSubscribe = data => ({
+  type: STUDIO_SUBSCRIBE_REQUEST,
   data,
 });
