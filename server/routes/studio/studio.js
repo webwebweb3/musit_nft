@@ -64,4 +64,25 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/getMusics', async (req, res) => {
+  try {
+    const { userName } = req.query;
+
+    console.log('유저 네임', userName);
+
+    const userId = await User.findOne({
+      where: { name: userName },
+    });
+    console.log('userId', userId);
+    if (userId === null) {
+      res.status(404).send('없는 페이지입니다.');
+    }
+    const userMetamask = userId.metamask;
+
+    res.json({ user: userMetamask });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 module.exports = router;

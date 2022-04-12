@@ -8,6 +8,7 @@ import StudioBackground from './myStudio/studioBackground/StudioBackground';
 import StudioProfile from './myStudio/studioProfile/StudioProfile';
 import StudioMyMusics from './myStudio/studioMyMusics/StudioMyMusics';
 import { studioGetUserImages } from '$reduxsaga/request/studio_request';
+import { studioGetMyMusics } from '$reduxsaga/request/studio_request';
 
 const Studio = () => {
   const router = useRouter();
@@ -37,30 +38,34 @@ const Studio = () => {
     }
   };
 
+  const getMyMusics = () => {
+    dispatch(studioGetMyMusics(artistName));
+  };
+
   const getUserImages = async () => {
     dispatch(studioGetUserImages(artistName));
   };
 
-  // useEffect(() => {
-  //   getUserImages();
+  //useEffect(() => {
+  //  getUserImages();
+  // getMyMusics();
   // }, []);
 
-  // useEffect(() => {
-  //   if (studio) {
-  //     if (studio.getUserImagesDone) {
-  //       if (studio.studioUserImages.userProfile === null) {
-  //         setProfileImg('defaultProfile');
-  //       } else {
-  //         setProfileImg(studio.studioUserImages.userProfile);
-  //       }
-  //       if (studio.studioUserImages.userBackground === null) {
-  //         setBackgroundImg('defaultBackground');
-  //       } else {
-  //         setBackgroundImg(studio.studioUserImages.userBackground);
-  //       }
-  //     }
+  //useEffect(() => {
+  //if (studio) {
+  // if (studio.getUserImagesDone) {
+  //  if (studio.studioUserImages.userProfile === null) {
+  //   setProfileImg('defaultProfile');
+  //  } else {
+  //    setProfileImg(studio.studioUserImages.userProfile);
+  //  }
+  //   if (studio.studioUserImages.userBackground === null) {
+  //     setBackgroundImg('defaultBackground');
+  //   } else {
+  //     setBackgroundImg(studio.studioUserImages.userBackground);
   //   }
-  //   console.log(backgroundImg, profileImg);
+  //  }
+  //  }
   // }, [studio.getUserImagesDone, profileImg]);
 
   return (
@@ -82,7 +87,11 @@ const Studio = () => {
       </Box>
 
       <Box sx={style.studioMyMusics}>
-        <StudioMyMusics />
+        {studio.studioMyMusics ? (
+          <StudioMyMusics myMusics={studio.studioMyMusics} />
+        ) : (
+          <Box>없음</Box>
+        )}
       </Box>
     </Box>
   );

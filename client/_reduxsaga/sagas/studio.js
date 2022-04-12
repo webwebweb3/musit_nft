@@ -18,6 +18,7 @@ import {
   STUDIO_GET_USERIMAGES_SUCCESS,
   STUDIO_GET_USERIMAGES_FAILURE,
 } from '../request/types';
+import { mintMusicTokenContract } from 'contracts';
 
 async function uploadBackground(data) {
   const myFile = data.selectedFile;
@@ -102,16 +103,44 @@ function* yieldUploadProfile(action) {
   }
 }
 
-async function getMyMusics(data) {
-  console.log('getmymusics');
+function getUserMetamask(data) {
+  return Axios.get('/studio/getMusics', {
+    params: {
+      userName: data,
+    },
+  });
+}
+async function getMyMusic(data) {
+  return await mintMusicTokenContract.getPastEvents('Minter', {
+    filter: { Minter: data.user },
+    fromBlock: 0,
+  });
+}
+
+async function mapMyMusic(data) {
+  const tempArray = [];
+  for (let i = 0; i < data.length; i++) {
+    const ipfsData = await fetch(
+      `https://ipfs.infura.io/ipfs/${data[i].returnValues.tokenURI}`,
+    );
+    const returnData = await ipfsData.json();
+    tempArray.push(returnData.properties);
+  }
+
+  return tempArray;
 }
 
 function* yieldGetMymusics(action) {
   try {
-    yield call(getMyMusics, action.data);
+    const userMetamask = yield call(getUserMetamask, action.data);
+
+    const getMyMusics = yield call(getMyMusic, userMetamask);
+
+    const mapMyMusics = yield call(mapMyMusic, getMyMusics);
+
     yield put({
       type: STUDIO_GET_MYMUSICS_SUCCESS,
-      data: 'success',
+      data: mapMyMusics,
     });
   } catch (err) {
     console.error(err);

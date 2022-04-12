@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import { studioUploadBackground } from '$reduxsaga/request/studio_request';
 
 const StudioBackground = ({ background }) => {
-  console.log('back컴포', background);
   const router = useRouter();
   let { artistName } = router.query;
   const dispatch = useDispatch();
@@ -55,7 +54,6 @@ const StudioBackground = ({ background }) => {
     if (studio.uploadBackgroundDone) {
       Router.replace(`/studio/${artistName}`);
     }
-    console.log('back', backgroundImg);
   }, [isSelected]);
 
   const uploadStudioCoverBtn = () => {
