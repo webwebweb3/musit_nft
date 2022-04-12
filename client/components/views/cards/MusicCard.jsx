@@ -27,7 +27,9 @@ const MusicCard = ({ musicTitle, albumCover, artistName }) => {
             component="div"
             style={{ cursor: 'pointer' }}
           >
-            <Link href={`/studio/${artistName}`}>{artistName}</Link>
+            <Link href="/studio/[artistName]" as={`/studio/${artistName}`}>
+              {artistName}
+            </Link>
           </Typography>
         </CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>

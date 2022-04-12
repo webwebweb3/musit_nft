@@ -18,7 +18,8 @@ const StudioMusicCard = ({ musics, albumCovers, datas }) => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <Link href={`/nft/marketplace/edition`}>
+      //TODO: 해당 음악으로 가게끔
+      <Link href="/streaming">
         <Card
           sx={{
             display: 'inline-block',
