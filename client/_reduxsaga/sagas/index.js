@@ -2,7 +2,6 @@ import { all, fork } from 'redux-saga/effects';
 import Axios from 'axios';
 
 import userRegisterSaga from './userRegister';
-import metamaskSaga from './metamask';
 import auctionSaga from './auction';
 import uploadMusic from './uploadMusic';
 import marketPlace from './marketPlace';
@@ -14,7 +13,6 @@ Axios.defaults.withCredentials = true;
 export default function* rootSaga() {
   yield all([
     fork(userRegisterSaga),
-    fork(metamaskSaga),
     fork(auctionSaga),
     fork(uploadMusic),
     fork(marketPlace),

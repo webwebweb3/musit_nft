@@ -3,7 +3,7 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
-import HomePage from '../components/views/homepage/Home';
+import HomePage from '$components/views/homepage/Home';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
 const Home = () => {

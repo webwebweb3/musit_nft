@@ -6,14 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@emotion/react';
 
 import { registerRequestAction } from '$reduxsaga/request/user_request';
-import { useGenreInput, useInput } from '../../../../hooks/useInput';
-import RegisterButton from './button/RegisterButton';
-import UnstyledSelectsMultiple from '../../../mui/SelectNationality';
-import MultipleSelectChip from '../../../mui/ChipGenre';
-import TabPanel from '../../../mui/TanPanel';
-import TextFieldInput from '../../../mui/TextFieldInput';
+import { useGenreInput, useInput } from '$hooks/useInput';
+import { useWalletInfo } from '$hooks/web3';
+import TabPanel from '$components/mui/TanPanel';
+import UnstyledSelectsMultiple from '$components/mui/SelectNationality';
+import MultipleSelectChip from '$components/mui/ChipGenre';
+import TextFieldInput from '$components/mui/TextFieldInput';
+import RegisterButton from '../button/RegisterButton';
 
-const RegisterModal = ({ open, setOpen, id }) => {
+const RegisterModal = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const theme = useTheme();
@@ -21,6 +22,7 @@ const RegisterModal = ({ open, setOpen, id }) => {
   const [genre, onChangeGenre, setGenre] = useGenreInput([]);
   const [nationality, onChangeNationality] = useState(0);
   const [value, setValue] = useState(0);
+  const { account } = useWalletInfo();
 
   useEffect(() => {
     if (user.registerUserError) {
@@ -50,7 +52,7 @@ const RegisterModal = ({ open, setOpen, id }) => {
     e => {
       e.preventDefault();
       let dataToSubmit = {
-        metamask: id,
+        metamask: account.data,
         genre,
         nationality,
       };
@@ -65,7 +67,7 @@ const RegisterModal = ({ open, setOpen, id }) => {
 
       dispatch(registerRequestAction(dataToSubmit));
     },
-    [dispatch, artist, genre, nationality, id],
+    [dispatch, artist, genre, nationality, account],
   );
 
   return (

@@ -4,8 +4,8 @@ import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
-import NFT from '../../components/views/nft/NFT';
-import MainLayout from '../../components/mainlayout';
+import NFT from '$components/views/nft/NFT';
+import MainLayout from '$components/layout';
 
 const NFTHome = () => {
   return (

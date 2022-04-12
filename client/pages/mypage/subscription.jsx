@@ -3,10 +3,10 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
-import MyPageLayout from '../../components/views/mypage/layout';
+import MyPageLayout from '$components/views/mypage/layout';
 
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
-import Subscription from '../../components/views/mypage/Subscription';
+import Subscription from '$components/views/mypage/Subscription';
 
 const SubscriptionPage = () => {
   return (

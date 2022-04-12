@@ -72,9 +72,9 @@ function registerAPI(data) {
   return Axios.post('/register', data);
 }
 
-function* register(action) {
+function* register({ data }) {
   try {
-    yield call(registerAPI, action.data);
+    yield call(registerAPI, data);
     yield put({
       type: REGISTER_USER_SUCCESS,
     });

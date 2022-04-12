@@ -4,12 +4,9 @@ import axios from 'axios';
 import wrapper from '$reduxsaga/store/configureStore';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 import dynamic from 'next/dynamic';
-const Studio = dynamic(
-  () => import('../../../components/views/studio/Studio'),
-  {
-    ssr: false,
-  },
-);
+const Studio = dynamic(() => import('$components/views/studio/Studio'), {
+  ssr: false,
+});
 
 const Home = () => {
   return (

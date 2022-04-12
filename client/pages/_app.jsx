@@ -3,7 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 
 import wrapper from '$reduxsaga/store/configureStore';
-import MainLayout from '../components/mainlayout';
+import MainLayout from '$components/layout';
 
 const App = ({ Component, pageProps }) => {
   const Layout = Component.Layout ?? MainLayout;

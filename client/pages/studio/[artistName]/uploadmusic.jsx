@@ -3,11 +3,11 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
-// import UploadMusic from '../../../components/views/studio/uploadmusic/UploadMusic';
+// import UploadMusic from '$components/views/studio/uploadmusic/UploadMusic';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 import dynamic from 'next/dynamic';
 const UploadMusic = dynamic(
-  () => import('../../../components/views/studio/uploadmusic/UploadMusic'),
+  () => import('$components/views/studio/uploadmusic/UploadMusic'),
   {
     ssr: false,
   },

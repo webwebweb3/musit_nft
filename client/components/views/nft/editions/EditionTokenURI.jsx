@@ -9,7 +9,7 @@ import EditionChart from './editionChart/EditionChart';
 import EditionDescription from './editionDescription/EditionDescription';
 import EditionImages from './editionImage/EditionImages';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import EditionPurchase from './editionPurchase/EditionPurchase';
+// import EditionPurchase from './editionPurchase/EditionPurchase';
 import { style } from './style';
 
 const EditionTokenURI = () => {
@@ -33,7 +33,7 @@ const EditionTokenURI = () => {
 
       const ipfsData = await fetch(`https://ipfs.infura.io/ipfs/${tokenURI}`);
       const data = await ipfsData.json();
-
+      console.log(data);
       setMusicOwner(ownerOf);
       setMusicPrice(tokenPrice);
       setMusicData(data);

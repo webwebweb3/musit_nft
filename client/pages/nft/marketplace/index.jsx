@@ -4,8 +4,8 @@ import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
-import MarketPlace from '../../../components/views/nft/marketplace/MarketPlace';
-import MainLayout from '../../../components/mainlayout';
+import MarketPlace from '$components/views/nft/marketplace/MarketPlace';
+import MainLayout from '$components/layout';
 
 const MarketPlacePage = () => {
   return (

@@ -4,8 +4,8 @@ import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
-import AuctionProductPage from '../../components/views/auctionpage/auctionProduct';
-import MainLayout from '../../components/mainlayout';
+import AuctionProductPage from '$components/views/auctionpage/auctionProduct';
+import MainLayout from '$components/layout';
 
 const AuctionProduct = () => {
   return (

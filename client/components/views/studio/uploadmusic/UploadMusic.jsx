@@ -38,14 +38,16 @@ const UploadMusic = () => {
       selectedIPFSFile,
       account,
     };
-
+    console.log(mintToData);
     dispatch(mintMusicNFTRequestAction(mintToData));
     if (userData.name !== artist) {
       alert('This user is not that artist');
       return;
     }
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(selectedIPFSFile);
+  }, [selectedIPFSFile]);
 
   return (
     <form onSubmit={minting}>

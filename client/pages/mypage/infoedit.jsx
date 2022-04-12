@@ -3,8 +3,8 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
-import MyPageLayout from '../../components/views/mypage/layout';
-import MyInfo from '../../components/views/mypage/MyInfo';
+import MyPageLayout from '$components/views/mypage/layout';
+import MyInfo from '$components/views/mypage/MyInfo';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
 const InfoEdit = () => {

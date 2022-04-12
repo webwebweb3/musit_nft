@@ -3,7 +3,7 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
-import MyFavoriteTracks from '../../components/views/mypage/MyFavoriteTracks';
+import MyFavoriteTracks from '$components/views/mypage/MyFavoriteTracks';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
 const MyFavoriteTracksPage = () => {

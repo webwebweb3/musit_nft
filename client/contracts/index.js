@@ -504,6 +504,19 @@ const saleMusicTokenAbi = [
   {
     inputs: [
       {
+        internalType: 'uint256',
+        name: '_musicTokenId',
+        type: 'uint256',
+      },
+    ],
+    name: 'cancelSaleMusicToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'address',
         name: '_mintMusicTokenAddress',
         type: 'address',
@@ -511,6 +524,68 @@ const saleMusicTokenAbi = [
     ],
     stateMutability: 'nonpayable',
     type: 'constructor',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'uint256',
+        name: 'tokenID',
+        type: 'uint256',
+      },
+      {
+        indexed: true,
+        internalType: 'uint256',
+        name: 'price',
+        type: 'uint256',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'buyer',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'timeStamp',
+        type: 'uint256',
+      },
+    ],
+    name: 'PurchaseChart',
+    type: 'event',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_musicTokenId',
+        type: 'uint256',
+      },
+    ],
+    name: 'purchaseMusicToken',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_musicTokenId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: '_price',
+        type: 'uint256',
+      },
+    ],
+    name: 'setForSaleMusicToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
     inputs: [
@@ -623,37 +698,6 @@ const saleMusicTokenAbi = [
       },
     ],
     stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '_musicTokenId',
-        type: 'uint256',
-      },
-    ],
-    name: 'purchaseMusicToken',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '_musicTokenId',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: '_price',
-        type: 'uint256',
-      },
-    ],
-    name: 'setForSaleMusicToken',
-    outputs: [],
-    stateMutability: 'nonpayable',
     type: 'function',
   },
 ];

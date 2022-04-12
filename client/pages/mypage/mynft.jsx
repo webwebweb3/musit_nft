@@ -3,9 +3,9 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
-import MyPageLayout from '../../components/views/mypage/layout';
+import MyPageLayout from '$components/views/mypage/layout';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
-import MyNFT from '../../components/views/mypage/mynft/MyNFT';
+import MyNFT from '$components/views/mypage/mynft/MyNFT';
 
 const MyNFTPage = () => {
   return (

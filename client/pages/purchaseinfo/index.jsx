@@ -3,7 +3,7 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
-import PurchaseInfo from '../../components/views/PurchaseInfo';
+import PurchaseInfo from '$components/views/PurchaseInfo';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
 const purchaseinfo = () => {
