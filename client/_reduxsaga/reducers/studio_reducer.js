@@ -12,6 +12,12 @@ import {
   STUDIO_GET_USERIMAGES_REQUEST,
   STUDIO_GET_USERIMAGES_SUCCESS,
   STUDIO_GET_USERIMAGES_FAILURE,
+  STUDIO_SUBSCRIBE_REQUEST,
+  STUDIO_SUBSCRIBE_SUCCESS,
+  STUDIO_SUBSCRIBE_FAILURE,
+  STUDIO_ISSUBSCRIBING_REQUEST,
+  STUDIO_ISSUBSCRIBING_SUCCESS,
+  STUDIO_ISSUBSCRIBING_FAILURE,
 } from '../request/types';
 
 export const initialState = {
@@ -24,6 +30,12 @@ export const initialState = {
   getMyMusicsLoading: false,
   getMyMusicsDone: false,
   getMyMusicsError: null,
+  subscribeArtistLoading: false,
+  subscribeArtistDone: false,
+  subscribeArtistError: null,
+  isSubscribingLoading: false,
+  isSubscribingDone: false,
+  isSubscribingError: null,
 
   getUserImagesLoading: false,
   getUserImagesDone: false,
@@ -31,6 +43,7 @@ export const initialState = {
 
   studioUserImages: null,
   studioMyMusics: null,
+  isSubscribingArtist: null,
 };
 
 const studioReducer = (state = initialState, action) =>
@@ -89,6 +102,33 @@ const studioReducer = (state = initialState, action) =>
       case STUDIO_GET_USERIMAGES_FAILURE:
         draft.getUserImagesLoading = false;
         draft.getUserImagesError = action.error;
+        break;
+      case STUDIO_SUBSCRIBE_REQUEST:
+        draft.subscribeArtistLoading = true;
+        draft.subscribeArtistError = null;
+        draft.subscribeArtistDone = false;
+        break;
+      case STUDIO_SUBSCRIBE_SUCCESS:
+        draft.subscribeArtistLoading = false;
+        draft.subscribeArtistDone = true;
+        break;
+      case STUDIO_SUBSCRIBE_FAILURE:
+        draft.subscribeArtistLoading = false;
+        draft.subscribeArtistError = action.error;
+        break;
+      case STUDIO_ISSUBSCRIBING_REQUEST:
+        draft.isSubscribingLoading = true;
+        draft.isSubscribingError = null;
+        draft.isSubscribingDone = false;
+        break;
+      case STUDIO_ISSUBSCRIBING_SUCCESS:
+        draft.isSubscribingLoading = false;
+        draft.isSubscribingArtist = action.data;
+        draft.isSubscribingDone = true;
+        break;
+      case STUDIO_ISSUBSCRIBING_FAILURE:
+        draft.isSubscribingLoading = false;
+        draft.isSubscribingError = action.error;
         break;
       default:
         return state;

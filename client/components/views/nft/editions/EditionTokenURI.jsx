@@ -49,7 +49,10 @@ const EditionTokenURI = () => {
     <>
       {musicData && (
         <Box sx={style.editionContainer}>
-          <Box sx={style.editionBackContainer} onClick={() => Router.back()}>
+          <Box
+            sx={style.editionBackContainer}
+            onClick={() => Router.replace('/nft/marketplace')}
+          >
             <ArrowBackIcon sx={{ fontSize: '20px', marginRight: '10px' }} />
             뒤로
           </Box>

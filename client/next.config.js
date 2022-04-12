@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
-      '', // 예정
+      'webwebweb3.s3.ap-northeast-2.amazonaws.com', // 예정
     ],
   },
   env: {

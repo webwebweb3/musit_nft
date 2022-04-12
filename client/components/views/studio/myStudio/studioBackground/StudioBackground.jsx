@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import { studioUploadBackground } from '$reduxsaga/request/studio_request';
 
 const StudioBackground = ({ background }) => {
-  console.log('back컴포', background);
   const router = useRouter();
   let { artistName } = router.query;
   const dispatch = useDispatch();
@@ -16,6 +15,7 @@ const StudioBackground = ({ background }) => {
   const studioOwner = Router.query.artistName;
   const { userData } = useSelector(state => state.user);
   const studio = useSelector(state => state.studio);
+
   const [backgroundImg, setBackgroundImg] = useState(background);
   const [isSelected, setIsSelected] = useState(false);
 
@@ -55,7 +55,6 @@ const StudioBackground = ({ background }) => {
     if (studio.uploadBackgroundDone) {
       Router.replace(`/studio/${artistName}`);
     }
-    console.log('back', backgroundImg);
   }, [isSelected]);
 
   const uploadStudioCoverBtn = () => {
@@ -63,7 +62,7 @@ const StudioBackground = ({ background }) => {
   };
   return (
     <Box>
-      {backgroundImg === 'defaultProfile' ? (
+      {backgroundImg === 'defaultBackground' ? (
         <img src="/defaultBackground.jpg" alt="default Background" />
       ) : (
         <img
@@ -107,4 +106,7 @@ const StudioCoverButton = styled.button`
   position: absolute;
   right: 10px;
   top: 0px;
+  &:hover {
+    background-color: '#1b36b2',
+  },
 `;

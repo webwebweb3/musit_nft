@@ -4,6 +4,7 @@ import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material/';
 import Link from 'next/link';
 import { web3 } from '../../../contracts';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const NFTCards = ({ musicTokenIds, musicTokenPrices, musicTokenDatas }) => {
   const [hover, setHover] = useState();
@@ -34,23 +35,17 @@ const NFTCards = ({ musicTokenIds, musicTokenPrices, musicTokenDatas }) => {
         onMouseOut={handleMouseOut}
         style={hover ? { opacity: '0.8', cursor: 'pointer' } : { opacity: '1' }}
       >
-        <CardMedia
-          component="img"
-          sx={
-            hover
-              ? {
-                  width: '320px',
-                  height: '300px',
-                  marginLeft: '-10px',
-                }
-              : {
-                  width: '300px',
-                  height: '300px',
-                }
-          }
-          image={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenDatas.properties.S3AlbumCover}`}
-          alt={`${musicTokenInputData.title} album Cover`}
-        />
+        {/* TODO: hover animation!!! */}
+        <div style={hover ? { marginLeft: '-10px' } : {}}>
+          <Image
+            src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenDatas.properties.S3AlbumCover}`}
+            alt={`${musicTokenInputData.title} album Cover`}
+            layout="fixed"
+            width={hover ? '320px' : '300px'}
+            height={hover ? '300px' : '300px'}
+          />
+        </div>
+
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flex: '1 0 auto' }}>
             <Typography component="div" variant="h5">
