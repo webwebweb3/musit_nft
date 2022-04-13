@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
-import { Box, Checkbox, CircularProgress } from '@mui/material';
+import { Box, Checkbox, CircularProgress, Pagination } from '@mui/material';
 
 import { useInput } from '$hooks/useInput';
 import {
@@ -13,15 +13,16 @@ import { timeFunction } from '$util/timefunc';
 import UploadButton from './UploadButton';
 import { useWalletInfo } from '$hooks/web3';
 import { mintMusicTokenContract } from '$contracts';
+import { StyledMyNFTText } from '../style';
 
 const AuctionUploadPage = () => {
   const auction = useSelector(state => state.auction);
   const [loading, setLoading] = useState(false);
   const [startingBid, onChangeStartingBid] = useInput('');
   const [endAt, onChangeEndAt, setEndAt] = useInput('');
-  const [tokenID, setTokenID] = useState();
+  const [tokenID, setTokenID] = useState('');
   const [myNFT, setMyNFT] = useState();
-  const [checked, setChecked] = useState(false);
+  const [testPage, setTestPage] = useState(1);
 
   const { network, account } = useWalletInfo();
 
@@ -35,6 +36,10 @@ const AuctionUploadPage = () => {
   useEffect(() => {
     setLoading(auction.createAuctionLoading);
   }, [auction]);
+
+  useEffect(() => {
+    console.log(myNFT);
+  }, [myNFT]);
 
   const getMyMusicTokens = useCallback(async () => {
     try {
@@ -50,7 +55,13 @@ const AuctionUploadPage = () => {
         .getMusicTokens(account.data)
         .call();
 
-      for (let i = 0; i < response.length; i++) {
+      let totalPage = Math.ceil(response.length / 1); // 숫자 1 보고 싶은 페이지로 수정
+      setTestPage(totalPage);
+
+      let startView = (response.length / totalPage) * page - 1; // 숫자 1 보고 싶은 페이지로 수정
+      let endView = (response.length / totalPage) * page;
+
+      for (let i = startView; i < endView; i++) {
         const ipfsData = await fetch(
           `https://ipfs.infura.io/ipfs/${response[i].musicTokenURI}`,
         );
@@ -69,17 +80,23 @@ const AuctionUploadPage = () => {
 
   const onClickHandler = useCallback(
     data => {
-      setTokenID(data);
-      setChecked(prev => !prev);
+      if (tokenID === data) {
+        setTokenID('');
+      } else {
+        setTokenID(data);
+      }
     },
     [tokenID],
   );
 
+  const [page, setPage] = useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   useEffect(() => {
-    if (!myNFT) {
-      getMyMusicTokens();
-    }
-  }, [network.isSupported]);
+    getMyMusicTokens();
+  }, [page, network.isSupported]);
 
   return (
     <Box style={{ color: '#dada', marginTop: '130px', textAlign: 'center' }}>
@@ -96,35 +113,70 @@ const AuctionUploadPage = () => {
 
       {myNFT ? (
         <>
-          {myNFT.map((v, i) => {
-            return (
-              <div
-                key={v.musicTokenId}
-                style={{
-                  display: `${v.musicTokenPrice === 0 ? 'none' : 'block'}`,
-                }}
-              >
-                <Checkbox
-                  checked={checked}
+          <StyledMyNFTText id="outlined-weight-helper-text">
+            판매 가능 NFT 목록
+          </StyledMyNFTText>
+          <Box
+            style={{
+              border: 'solid 3px #dada',
+              borderRadius: '7px',
+              width: '453px',
+              padding: '20px',
+              margin: '0 auto',
+            }}
+          >
+            {myNFT.map((v, i) => {
+              return (
+                <Box
+                  key={v.musicTokenId}
+                  style={{
+                    display: `${v.musicTokenPrice === 0 ? 'none' : 'block'}`,
+                    textAlign: 'start',
+                  }}
                   onChange={() => onClickHandler(v.musicTokenId)}
-                  inputProps={{ 'aria-label': 'controlled' }}
-                />
-                <Image
-                  src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.musicTokenData.properties.S3AlbumCover}`}
-                  alt="Album Cover"
-                  width={'250px'}
-                  height={'250px'}
-                />
-              </div>
-            );
-          })}
+                >
+                  <Checkbox
+                    checked={v.musicTokenId === tokenID && true}
+                    inputProps={{
+                      'aria-label': 'controlled',
+                    }}
+                    style={{
+                      marginRight: '10px',
+                    }}
+                  />
+                  <Image
+                    src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.musicTokenData.properties.S3AlbumCover}`}
+                    alt="Album Cover"
+                    width="60px"
+                    height="60px"
+                  />
+                  <span style={{ marginLeft: '15px' }}>
+                    {v.musicTokenData.properties.dataToSubmit.title}
+                  </span>
+                </Box>
+              );
+            })}
+            <div
+              style={{
+                alignItems: 'center',
+                margin: '0 auto',
+              }}
+            >
+              <Pagination
+                onChange={handleChange}
+                count={testPage}
+                page={page}
+                showLastButton
+                showFirstButton
+                color="primary"
+                variant="outlined"
+              />
+            </div>
+          </Box>
         </>
       ) : (
         <CircularProgress color="inherit" />
       )}
-
-      {/* 임시 tokenID */}
-
       {loading ? (
         <>
           <CircularProgress color="inherit" />

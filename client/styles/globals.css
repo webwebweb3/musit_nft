@@ -15,3 +15,16 @@ button[role='tab']:hover {
 button[disabled] {
   color: #ffbbec;
 }
+
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
+  color: #dada;
+}
+
+.css-1y7coo4-MuiButtonBase-root-MuiPaginationItem-root {
+  color: rgb(66 97 139 / 87%);
+}
+
+.css-wjh20t-MuiPagination-ul {
+  margin-top: 25px;
+  justify-content: center;
+}

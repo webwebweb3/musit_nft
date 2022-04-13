@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { timeFunction } from '$util/timefunc';
 import AuctionButton from '../auctionMui/AuctionButton';
 import { createAuctionAction } from '$reduxsaga/request/auction_request';
+import { web3 } from '$contracts';
 
 const UploadButton = ({ endAt, startingBid, tokenID }) => {
   const { userData } = useSelector(state => state.user);
@@ -25,9 +26,9 @@ const UploadButton = ({ endAt, startingBid, tokenID }) => {
     let endTimestamp = Math.round(new Date(endAt).getTime() / 1000);
 
     let auctionData = {
-      startingBid: startingBid * '1000000000000000000',
+      startingBid: web3.utils.toWei(startingBid, 'ether'),
       endTimestamp,
-      tokenID,
+      tokenID: parseInt(tokenID),
       account,
     };
 
@@ -45,7 +46,7 @@ const UploadButton = ({ endAt, startingBid, tokenID }) => {
 UploadButton.propTypes = {
   endAt: PropTypes.string.isRequired,
   startingBid: PropTypes.string.isRequired,
-  tokenID: PropTypes.number.isRequired,
+  tokenID: PropTypes.string,
 };
 
 export default UploadButton;
