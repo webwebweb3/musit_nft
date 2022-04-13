@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -8,12 +8,19 @@ import { Tab } from '@mui/material';
 const NavbarLink = ({ value }) => {
   const router = useRouter();
   let { pathname } = router;
+  const [linkDisabled, setLinkDisabled] = useState('');
+
+  useEffect(() => {
+    let pathArray = `${pathname}`.split('/');
+    setLinkDisabled(pathArray[pathArray.length - 1]);
+  }, [pathname]);
 
   return (
     <>
       {pathname.includes('/nft') ? (
         <Link href="/streaming">
           <Tab
+            disabled={linkDisabled.includes('streaming')}
             icon={<Headset />}
             iconPosition="start"
             label=""
@@ -23,6 +30,7 @@ const NavbarLink = ({ value }) => {
       ) : (
         <Link href="/streaming">
           <Tab
+            disabled={linkDisabled.includes('streaming')}
             icon={<Headset />}
             iconPosition="start"
             label="STREAMING"
@@ -32,6 +40,7 @@ const NavbarLink = ({ value }) => {
       )}
       <Link href="/nft">
         <Tab
+          disabled={linkDisabled.includes('nft')}
           icon={<Token />}
           iconPosition="start"
           label="NFT"
@@ -42,14 +51,16 @@ const NavbarLink = ({ value }) => {
         <>
           <Link href="/nft/marketplace">
             <Tab
+              disabled={linkDisabled.includes('marketplace')}
               icon={<Storefront />}
               iconPosition="start"
               label="MarketPlace"
               sx={{ fontSize: '18px' }}
             />
           </Link>
-          <Link href="/auction">
+          <Link href="/nft/auction">
             <Tab
+              disabled={linkDisabled.includes('auction')}
               icon={<Gavel />}
               iconPosition="start"
               label="Auction"

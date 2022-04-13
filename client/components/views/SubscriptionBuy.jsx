@@ -1,74 +1,98 @@
-import { Box } from '@mui/material';
 import React from 'react';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
 import { BsXDiamondFill } from 'react-icons/bs';
 import { FaFire } from 'react-icons/fa';
 import { GiCrystalize } from 'react-icons/gi';
-import Button from '@mui/material/Button';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(6),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+import { Global } from './SubscriptionBuyStyle';
+import { Button } from './homepage/Button';
+import { IconContext } from 'react-icons/lib';
 
 const SubscriptionBuy = () => {
   return (
     <>
-      <Box
-        sx={{
-          marginTop: '100px',
-          justifyContent: 'center',
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <h1>구독권 구매</h1>
-        <Box>구독권 구매</Box>
-      </Box>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={3}>
-          <Grid item xs={4}>
-            <Item>
-              {' '}
-              <Button
-                variant="contained"
-                startIcon={<BsXDiamondFill />}
-                size="large"
-              >
-                청취자
-              </Button>
-            </Item>
-          </Grid>
-          <Grid item xs={8}>
-            <Item>subscription (한 달 + 해지안하면 자동 갱신(약관?)) 지불</Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              {' '}
-              <GiCrystalize />
-              아티스트
-            </Item>
-          </Grid>
-          <Grid item xs={8}>
-            <Item>subscription (무제한) + 최초 가입시 가입비 지불</Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>
-              {' '}
-              <FaFire /> 이벤트
-            </Item>
-          </Grid>
-          <Grid item xs={8}>
-            <Item>가입비 + 월 구독료 무료</Item>
-          </Grid>
-        </Grid>
-      </Box>
+      <Global />
+      <IconContext.Provider value={{ size: 60 }}>
+        <div className="buySection">
+          <h1 className="buyHeading">구독권 구매</h1>
+          <div className="buyWrapper">
+            <div className="buyContainer">
+              <div className="buyContainer-card buyContainer-cardInfo">
+                <div className="icon">
+                  <Button buttonSize="btn--large" buttonColor="primary">
+                    <FaFire />{' '}
+                    <>
+                      <br />
+                    </>
+                    Event Plan
+                  </Button>
+                </div>
+                <div className="buyInfoContainer">
+                  <h1>0$</h1>
+                </div>
+                <div className="buyInfoText">
+                  <h2>
+                    런칭 후 3개월 이내 가입한 회원에 한하여 제공하는 가입비와 월
+                    구독료를 무료로 이용 가능 합니다.
+                  </h2>
+                  <h2>유저 + 아티스트 혜택</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="buyWrapper">
+            <div className="buyContainer">
+              <div className="buyContainer-card buyContainer-cardInfo">
+                <div className="icon">
+                  <Button buttonSize="btn--large" buttonColor="primary">
+                    <BsXDiamondFill />{' '}
+                    <>
+                      <br />
+                    </>
+                    User Plan
+                  </Button>
+                </div>
+                <div className="buyInfoContainer">
+                  <h1> 29.99$</h1>
+                </div>
+                <div className="buyInfoText">
+                  <h2>전세계 스트리밍 동시 청취 가능</h2>
+                  <h2>유저 혜택</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="buyWrapper">
+            <div className="buyContainer">
+              <div className="buyContainer-card buyContainer-cardInfo">
+                <div className="icon">
+                  <Button buttonSize="btn--large" buttonColor="primary">
+                    <GiCrystalize fontSize="large" />{' '}
+                    <>
+                      <br />
+                    </>
+                    Artist Plan
+                  </Button>
+                </div>
+                <div className="buyInfoContainer">
+                  <h1> 99.99$</h1>
+                </div>
+                <div className="buyInfoText">
+                  <h2>개인 음원 NFT 구매 및 판매 그리고 등록하여 경매까지 </h2>
+                  <h2>아티스트 혜택</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="buyFooter">
+            {' '}
+            <h3>
+              각 서비스 비용은 한달 단위이며 서비스를 이용하려면 유저는 한 달
+              단위의 subscription 을 해야함 <br />
+              이용권을 구매한 유저에 한해 음원 청취기능을 제공하며 해지하지
+              않으면 subscription 은 자동으로 갱신된다.
+            </h3>
+          </div>
+        </div>
+      </IconContext.Provider>
     </>
   );
 };

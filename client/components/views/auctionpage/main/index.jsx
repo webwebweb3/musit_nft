@@ -23,7 +23,7 @@ const AuctionMainPage = () => {
         {/* Header */}
         <AuctionHeader>
           <h1 style={{ margin: '0 0 0 40px' }}>AUCTION</h1>
-          {userData.role === 1 && (
+          {userData && userData.role === 1 && (
             <Link href={`/auction/upload`}>
               <StyledNewAuctionButton variant="contained">
                 새 경매 등록하기

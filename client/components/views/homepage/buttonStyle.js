@@ -34,8 +34,8 @@ export const Global = createGlobalStyle`
   }
   
   .btn--large {
-    padding: 12px 26px;
-    font-size: 20px;
+    padding: 50px 50px;
+    font-size: 23px;
   }
   
   .btn--mobile {
@@ -60,6 +60,7 @@ export const Global = createGlobalStyle`
   .btn--medium:hover,
   .btn--mobile:hover {
     transition: all 0.3s ease-out;
+    transform: scale(1.1);
     background: #fff;
     color: #242424;
   }

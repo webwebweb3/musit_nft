@@ -1,20 +1,28 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const Global = createGlobalStyle`
+
   .home__hero-section {
     color: #fff;
-    padding: 100px 0;
+    padding: 70px 0;
   }
   
   .home__hero-row {
     align-items: center;
+    width:100%;
   }
   
+  .home_hero_img{
+    width:50%;
+    justify-content: center;
+
+  }
+
   .row {
     display: flex;
     margin-right: -15px;
     margin-bottom: -15px;
-    margin-left: -15px;
+    margin-left: -5px;
     flex-wrap: wrap;
     align-content: stretch;
   }
@@ -29,7 +37,7 @@ export const Global = createGlobalStyle`
   }
   
   .home__hero-text-wrapper {
-    max-width: 540px;
+    max-width: 480px;
     padding-top: 0;
     padding-bottom: 60px;
     padding-left: 70px;
@@ -69,6 +77,7 @@ export const Global = createGlobalStyle`
   }
   
   .home__hero-img-wrapper {
+    
     max-width: 555px;
   }
   
@@ -84,7 +93,7 @@ export const Global = createGlobalStyle`
     border: 0;
     max-width: 100%;
     vertical-align: middle;
-    display: flex;
+    display: inline-block;
   }
   
   @media screen and (max-width: 991px) {
@@ -103,9 +112,6 @@ export const Global = createGlobalStyle`
       max-width: 100%;
       flex-basis: 100%;
     }
-    .col2 {
-      max-width: 100%;
-      flex-basis: 100%;
-    }
+
   }
-`;
+  `;

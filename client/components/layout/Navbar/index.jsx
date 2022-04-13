@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
@@ -10,9 +10,14 @@ import ProfileButton from './myMenu';
 import { useWalletInfo } from 'hooks/web3';
 import { useWeb3 } from '$providers/hooks/index';
 import { NavbarLink, RegisterModal, MetamaskButton } from './contents';
+import {
+  loginRequestAction,
+  logoutRequestAction,
+} from '$reduxsaga/request/user_request';
 
 const Navbar = ({ value }) => {
   const { userData } = useSelector(state => state.user);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   const { network, account } = useWalletInfo();
@@ -24,24 +29,21 @@ const Navbar = ({ value }) => {
 
   useEffect(() => {}, [requireInstall, account.data]);
 
-  const Asg = () => {
-    if (true) {
-      return <div>1</div>;
-    } else {
-      return <div>2</div>;
+  useEffect(() => {
+    if (userData) {
+      console.log(userData.metamask !== account.data);
+      if (userData.metamask !== account.data) {
+        let confirmAction = window.confirm('계정을 전환하시겠습니까?');
+        if (confirmAction) {
+          dispatch(loginRequestAction(account.data));
+        } else {
+          dispatch(logoutRequestAction());
+        }
+      }
     }
-  };
-
-  // useEffect(() => {
-  //   if (userData && userData.metamask !== account.data) {
-  //     let confirmAction = window.confirm('계정을 전환하시겠습니까?');
-  //     if (confirmAction) {
-  //       console.log(1111);
-  //     } else {
-  //       console.log(2222);
-  //     }
-  //   }
-  // }, [account.data]);
+    console.log(userData);
+    console.log(account);
+  }, [account.data]);
 
   return (
     <>
