@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
 import { Gavel, Storefront, Token, Headset } from '@mui/icons-material';
 
@@ -115,7 +116,7 @@ const Navbar = ({ value }) => {
                 <div>
                   <ProfileButton value="notice" />
                 </div>
-                <ProfileButton value="img" />
+                <ProfileButton value="mypage" />
               </div>
             </>
           ) : (
@@ -134,6 +135,10 @@ const Navbar = ({ value }) => {
       </AppBar>
     </>
   );
+};
+
+Navbar.prototype = {
+  value: PropTypes.string.isRequired,
 };
 
 export default Navbar;

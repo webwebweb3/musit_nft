@@ -1,5 +1,6 @@
 import { Menu } from '@mui/material';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const MenuLayout = ({ children, anchorEl, open, setAnchorEl }) => {
   const handleClose = () => {
@@ -45,6 +46,13 @@ const MenuLayout = ({ children, anchorEl, open, setAnchorEl }) => {
       {children}
     </Menu>
   );
+};
+
+MenuLayout.prototype = {
+  children: PropTypes.element.isRequired,
+  anchorEl: PropTypes.object.isRequired,
+  open: PropTypes.bool.isRequired,
+  setAnchorEl: PropTypes.func.isRequired,
 };
 
 export default MenuLayout;

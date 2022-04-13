@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
+import PropTypes from 'prop-types';
 
 import MyMenuItem from './MyMenuItem';
 import MyImg from './MyImg';
@@ -10,6 +11,8 @@ import MyNotice from './MyNotice';
 const ProfileButton = ({ value }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  // 알림
+  const [Notice, setNotice] = useState([]);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -18,7 +21,7 @@ const ProfileButton = ({ value }) => {
   return (
     <Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title="Account settings">
+        <Tooltip title={value}>
           <IconButton
             onClick={handleClick}
             size="small"
@@ -27,17 +30,30 @@ const ProfileButton = ({ value }) => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            {value === 'img' && <MyImg />}
-            {value === 'notice' && <NoticeIcon />}
+            {value === 'mypage' && <MyImg />}
+            {Notice && value === 'notice' && (
+              <NoticeIcon NoticeArray={Notice} setNotice={setNotice} />
+            )}
           </IconButton>
         </Tooltip>
       </Box>
-      <MenuLayout anchorEl={anchorEl} open={open} setAnchorEl={setAnchorEl}>
-        {value === 'img' && <MyMenuItem />}
-        {value === 'notice' && <MyNotice />}
-      </MenuLayout>
+
+      {value === 'mypage' && (
+        <MenuLayout anchorEl={anchorEl} open={open} setAnchorEl={setAnchorEl}>
+          <MyMenuItem />
+        </MenuLayout>
+      )}
+      {value === 'notice' && Notice.length !== 0 && (
+        <MenuLayout anchorEl={anchorEl} open={open} setAnchorEl={setAnchorEl}>
+          <MyNotice Notice={Notice} />
+        </MenuLayout>
+      )}
     </Fragment>
   );
+};
+
+ProfileButton.propTypes = {
+  value: PropTypes.string.isRequired,
 };
 
 export default ProfileButton;
