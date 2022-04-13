@@ -11,22 +11,26 @@ import {
 import { createGlobalStyle } from 'styled-components';
 
 export const AuctionAllContainer = styled(Box)`
-  margin: 0 80px;
+  width: 100%;
 `;
 
 export const AuctionHeader = styled(Box)`
-  width: 100%;
-  min-width: 1600px;
-  max-width: 1600px;
   color: white;
   line-height: 72px;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 53px;
+  padding-bottom: 100px;
+  flex: 0 1 auto;
   font-size: 30px;
   font-weight: 700;
-  h1 {
-    margin: 0;
-  }
+  margin: 0 80px;
+`;
+
+export const AuctionMainContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  color: white;
+  flex: 0 1 auto;
+  margin: 146px 0px;
 `;
 
 export const AuctionContainer = styled(Box)`
@@ -40,11 +44,11 @@ export const AuctionContainer = styled(Box)`
 `;
 
 export const AuctionLeftSideBar = styled(Box)`
-  flex: 2;
+  flex: 0 1 auto;
 `;
 
 export const AuctionWrapper = styled(Box)`
-  flex: 10;
+  flex: 0 2 auto;
   padding-right: 100px;
 `;
 
@@ -62,8 +66,8 @@ export const StyledButton = styled(Button)`
 `;
 
 export const StyledNewAuctionButton = styled(StyledButton)`
-  width: 150px;
-  margin: 0;
+  width: auto;
+  margin: 0 0 0 auto;
   &:hover {
     color: #fff;
     background-color: transparent;
@@ -91,8 +95,13 @@ export const AuctionContents = styled.div`
 `;
 
 export const AuctionContentsContainer = styled(AuctionContainer)`
-  margin: 150px 40px 0 40px;
-  width: 100%;
+  margin: 145px auto 0;
+`;
+
+export const AuctionMainContentsContainer = styled(AuctionContentsContainer)`
+  display: flex;
+  color: white;
+  margin: 0 auto;
 `;
 
 export const AuctionDivider = styled(Divider)`

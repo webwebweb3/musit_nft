@@ -8,6 +8,7 @@ import AuctionAppointment from '../auctionMui/AuctionAppointment';
 import { timeFunction } from '../../../../util/timefunc';
 import UploadButton from './UploadButton';
 import AuctionButton from '../auctionMui/AuctionButton';
+import MyNFT from '$components/views/mypage/mynft/MyNFT';
 
 const AuctionUploadPage = () => {
   const auction = useSelector(state => state.auction);
@@ -39,7 +40,7 @@ const AuctionUploadPage = () => {
       />
 
       <AuctionAppointment text="종료 시간" value={endAt} func={onChangeEndAt} />
-
+      <MyNFT />
       {/* 임시 tokenID */}
       <AuctionTextField value={tokenID} func={onChangeTokenID} text="tokenID" />
 

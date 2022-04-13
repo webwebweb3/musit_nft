@@ -2,20 +2,19 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../../_store/configureStore';
-import MainLayout from '../../components/mainlayout';
-import MyPageLayout from '../../components/views/mypage/layout';
+import wrapper from '$reduxsaga/store/configureStore';
+import MyPageLayout from '$components/views/mypage/layout';
 
-import { myInfoRequestAction } from '../../_request/user_request';
-import Subscription from '../../components/views/mypage/Subscription';
+import { myInfoRequestAction } from '$reduxsaga/request/user_request';
+import Subscription from '$components/views/mypage/Subscription';
 
 const SubscriptionPage = () => {
   return (
-    <MainLayout>
+    <>
       <MyPageLayout>
         <Subscription />
       </MyPageLayout>
-    </MainLayout>
+    </>
   );
 };
 

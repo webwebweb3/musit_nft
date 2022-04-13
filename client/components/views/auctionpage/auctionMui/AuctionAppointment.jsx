@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { TextField } from '@mui/material';
 import {
   GlobalAppointment,
@@ -7,7 +7,7 @@ import {
   StyledFormHelperText,
 } from '../style';
 
-const AuctionAppointment = ({ text, value, func, uint }) => {
+const AuctionAppointment = ({ text, value, func }) => {
   return (
     <>
       <GlobalAppointment />
@@ -33,10 +33,9 @@ const AuctionAppointment = ({ text, value, func, uint }) => {
 };
 
 AuctionAppointment.propTypes = {
-  text: propTypes.string.isRequired,
-  value: propTypes.string,
-  func: propTypes.func,
-  uint: propTypes.string,
+  text: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  func: PropTypes.func,
 };
 
 export default AuctionAppointment;

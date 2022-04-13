@@ -1,17 +1,17 @@
 import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
-import wrapper from '../../../../_store/configureStore';
-import { myInfoRequestAction } from '../../../../_request/user_request';
+import wrapper from '$reduxsaga/store/configureStore';
+import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
-import EditionTokenURI from '../../../../components/views/nft/editions/EditionTokenURI';
-import MainLayout from '../../../../components/mainlayout';
+import EditionTokenURI from '$components/views/nft/editions/EditionTokenURI';
+import MainLayout from '$components/layout';
 
 const EditionIPFSUrlPage = () => {
   return (
-    <MainLayout value="nft">
+    <>
       <EditionTokenURI />
-    </MainLayout>
+    </>
   );
 };
 
@@ -28,6 +28,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(END);
       await store.sagaTask.toPromise();
     },
+);
+
+EditionIPFSUrlPage.Layout = ({ children }) => (
+  <MainLayout value="nft">{children}</MainLayout>
 );
 
 export default EditionIPFSUrlPage;

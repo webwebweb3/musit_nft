@@ -1,22 +1,18 @@
 import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
-import wrapper from '../../../_store/configureStore';
-import MainLayout from '../../../components/mainlayout';
-import { myInfoRequestAction } from '../../../_request/user_request';
+import wrapper from '$reduxsaga/store/configureStore';
+import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 import dynamic from 'next/dynamic';
-const Studio = dynamic(
-  () => import('../../../components/views/studio/Studio'),
-  {
-    ssr: false,
-  },
-);
+const Studio = dynamic(() => import('$components/views/studio/Studio'), {
+  ssr: false,
+});
 
 const Home = () => {
   return (
-    <MainLayout>
+    <>
       <Studio />
-    </MainLayout>
+    </>
   );
 };
 

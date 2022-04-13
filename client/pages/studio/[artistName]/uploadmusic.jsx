@@ -2,13 +2,12 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../../../_store/configureStore';
-import MainLayout from '../../../components/mainlayout';
-// import UploadMusic from '../../../components/views/studio/uploadmusic/UploadMusic';
-import { myInfoRequestAction } from '../../../_request/user_request';
+import wrapper from '$reduxsaga/store/configureStore';
+// import UploadMusic from '$components/views/studio/uploadmusic/UploadMusic';
+import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 import dynamic from 'next/dynamic';
 const UploadMusic = dynamic(
-  () => import('../../../components/views/studio/uploadmusic/UploadMusic'),
+  () => import('$components/views/studio/uploadmusic/UploadMusic'),
   {
     ssr: false,
   },
@@ -16,9 +15,9 @@ const UploadMusic = dynamic(
 
 const Home = () => {
   return (
-    <MainLayout>
+    <>
       <UploadMusic />
-    </MainLayout>
+    </>
   );
 };
 

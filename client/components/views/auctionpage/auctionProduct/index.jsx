@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { auctionAction } from '../../../../_request/auction_request';
+import Image from 'next/image';
+
+import { auctionAction } from '$reduxsaga/request/auction_request';
 import {
   AuctionAllContainer,
   AuctionContentImg,
@@ -32,7 +34,13 @@ const AuctionProductPage = () => {
       <AuctionContentsContainer>
         {/* 상품 이미지 */}
         <AuctionContentImg>
-          <img src="/bgimg.jpg" alt="img" width={'550px'} height={'550px'} />
+          <Image
+            src="/bgimg.jpg"
+            alt="img"
+            layout="fixed"
+            width="550px"
+            height="550px"
+          />
         </AuctionContentImg>
         <AuctionContents>
           {/* 상품 이름 */}

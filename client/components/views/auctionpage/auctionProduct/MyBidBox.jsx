@@ -1,14 +1,19 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 
 import {
   auctionFinalizeAction,
   auctionMyBidAction,
-} from '../../../../_request/auction_request';
+} from '$reduxsaga/request/auction_request';
 import { AuctionDivider, AuctionStyledButton } from '../style';
 
-const MyBidBox = ({ product, gapTime }) => {
+const MyBidBox = ({ gapTime }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  let { product } = router.query;
+
   const { userData } = useSelector(state => state.user);
   const { myBidData } = useSelector(state => state.auction);
 
@@ -46,6 +51,10 @@ const MyBidBox = ({ product, gapTime }) => {
       )}
     </>
   );
+};
+
+MyBidBox.prototype = {
+  gapTime: PropTypes.bool.isRequired,
 };
 
 export default MyBidBox;

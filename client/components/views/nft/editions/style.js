@@ -9,6 +9,12 @@ export const style = {
     height: '100%',
     color: 'white',
   },
+  editionBackContainer: {
+    color: '#768fb5',
+    paddingTop: '30px',
+    cursor: 'pointer',
+    fontSize: '20px',
+  },
   editionTopContents: {
     minWidth: '1200px',
     maxWidth: '1200px',
@@ -21,22 +27,32 @@ export const style = {
   editionTopLeftContainer: {
     display: 'flex',
     flexDirection: 'column',
-    flex: '5',
+    flex: '24',
     width: '100%',
     height: '100%',
+    paddingTop: '100px',
   },
   editionTopRightContainer: {
     display: 'flex',
     flexDirection: 'column',
-    flex: '7',
+    flex: '10',
     width: '100%',
     height: '100%',
-    backgroundColor: 'gray',
+    paddingLeft: '20px',
   },
   editionImgContainer: {
     width: '100%',
     height: '100%',
     backgroundColor: 'yellow',
+  },
+  editionTopRightChart: {
+    backgroundColor: '#202540',
+    width: '500px',
+    height: '400px',
+  },
+  editionChartTitle: {
+    marginTop: '20px',
+    fontSize: '20px',
   },
   editionMusicContainer: { backgroundColor: 'gray' },
   editionTitleContainer: { backgroundColor: 'white' },

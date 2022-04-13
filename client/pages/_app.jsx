@@ -1,34 +1,23 @@
+import '../styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
-import PropTypes from 'prop-types';
 import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
 
-import wrapper from '../_store/configureStore';
-import { createGlobalStyle } from 'styled-components';
+import wrapper from '$reduxsaga/store/configureStore';
+import Layout from '$components/layout';
 
-export const Global = createGlobalStyle`
-  body {
-    background-color: #0d0f1a;
-    margin:0;
-  }
-`;
-
-const App = ({ Component }) => (
-  <>
-    <Global />
-    <Head>
-      <meta charSet="utf-8" />
-      <title>WebWebWeb3</title>
-    </Head>
-    <Component />
-  </>
-);
-
-App.propTypes = {
-  Component: PropTypes.elementType.isRequired,
+const App = ({ Component, pageProps }) => {
+  return (
+    <Layout>
+      <Head>
+        <meta charSet="utf-8" />
+        <title>WebWebWeb3</title>
+      </Head>
+      <ToastContainer pauseOnFocusLoss={false} />
+      <Component {...pageProps} />
+    </Layout>
+  );
 };
-
-export function reportWebVitals(metric) {
-  // console.log(metric);
-}
 
 export default wrapper.withRedux(App);

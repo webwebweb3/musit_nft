@@ -2,19 +2,18 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../../_store/configureStore';
-import MainLayout from '../../components/mainlayout';
-import MyPageLayout from '../../components/views/mypage/layout';
-import { myInfoRequestAction } from '../../_request/user_request';
-import MyNFT from '../../components/views/mypage/mynft/MyNFT';
+import wrapper from '$reduxsaga/store/configureStore';
+import MyPageLayout from '$components/views/mypage/layout';
+import { myInfoRequestAction } from '$reduxsaga/request/user_request';
+import MyNFT from '$components/views/mypage/mynft/MyNFT';
 
 const MyNFTPage = () => {
   return (
-    <MainLayout>
+    <>
       <MyPageLayout>
         <MyNFT />
       </MyPageLayout>
-    </MainLayout>
+    </>
   );
 };
 

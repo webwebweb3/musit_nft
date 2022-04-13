@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
-import { mintMusicNFTRequestAction } from '../../../../_request/uploadMusic_request';
+import { mintMusicNFTRequestAction } from '$reduxsaga/request/uploadMusic_request';
 import { create } from 'ipfs-http-client';
 import styled from 'styled-components';
 import { style } from './uploadMusicStyle';
@@ -15,17 +15,12 @@ const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const UploadMusic = () => {
   const dispatch = useDispatch();
-
   const router = useRouter();
   const artist = router.query.artistName;
-
   const { userData } = useSelector(state => state.user);
-
   const [dataToSubmit, setDataToSubmit] = useState({});
-
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedIPFSFile, setSelectedIPFSFile] = useState(null);
-
   const account = userData.metamask;
 
   const ipfsredux = {
@@ -43,14 +38,16 @@ const UploadMusic = () => {
       selectedIPFSFile,
       account,
     };
-
+    console.log(mintToData);
     dispatch(mintMusicNFTRequestAction(mintToData));
     if (userData.name !== artist) {
       alert('This user is not that artist');
       return;
     }
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(selectedIPFSFile);
+  }, [selectedIPFSFile]);
 
   return (
     <form onSubmit={minting}>

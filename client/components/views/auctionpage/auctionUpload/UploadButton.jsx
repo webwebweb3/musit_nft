@@ -1,11 +1,10 @@
-import React from 'react';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { timeFunction } from '../../../../util/timefunc';
 import AuctionButton from '../auctionMui/AuctionButton';
-import { createAuctionAction } from '../../../../_request/auction_request';
+import { createAuctionAction } from '$reduxsaga/request/auction_request';
 
 const UploadButton = ({ endAt, startingBid, tokenID }) => {
   const { userData } = useSelector(state => state.user);
@@ -43,9 +42,9 @@ const UploadButton = ({ endAt, startingBid, tokenID }) => {
 };
 
 UploadButton.propTypes = {
-  endAt: propTypes.string.isRequired,
-  startingBid: propTypes.string.isRequired,
-  tokenID: propTypes.string.isRequired,
+  endAt: PropTypes.string.isRequired,
+  startingBid: PropTypes.string.isRequired,
+  tokenID: PropTypes.string.isRequired,
 };
 
 export default UploadButton;

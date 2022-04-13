@@ -1,13 +1,20 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { CircularProgress } from '@mui/material';
+
 import { AuctionStyledButton } from '../style';
 import { useInput } from '../../../../hooks/useInput';
 import AuctionTextField from '../auctionMui/AuctionTextField';
-import { auctionBidAction } from '../../../../_request/auction_request';
-import { CircularProgress } from '@mui/material';
+import { auctionBidAction } from '$reduxsaga/request/auction_request';
+import { web3 } from '$contracts/index';
+import { auctionAbi } from '$contracts/index';
+import { withToast } from '$util/toast';
 
-const AuctionBidButton = ({ product }) => {
+const AuctionBidButton = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  let { product } = router.query;
 
   const { userData } = useSelector(state => state.user);
   const { bidAuctionLoading } = useSelector(state => state.auction);
@@ -18,6 +25,17 @@ const AuctionBidButton = ({ product }) => {
     setLoading(bidAuctionLoading);
   }, [bidAuctionLoading]);
 
+  const test = async data => {
+    let auctionContract = await new web3.eth.Contract(auctionAbi, data.product);
+
+    let txData = await auctionContract.methods.placeBid().send({
+      from: data.metamask,
+      value: web3.utils.toWei(`${data.bid}`, 'ether'),
+    });
+
+    return txData;
+  };
+
   const onClickAuction = useCallback(async () => {
     let data = {
       product,
@@ -25,7 +43,8 @@ const AuctionBidButton = ({ product }) => {
       bid,
     };
 
-    dispatch(auctionBidAction(data));
+    withToast(test(data));
+    // dispatch(auctionBidAction(data));
   }, [dispatch, product, userData, bid]);
 
   return (
