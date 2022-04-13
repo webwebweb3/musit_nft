@@ -6,19 +6,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const StudioSubscribe = ({ artist, sub, func }) => {
   const studio = useSelector(state => state.studio);
-  console.log('서브', sub);
-  console.log('펑크', func);
   const dispatch = useDispatch();
   // TODO: 구독한 사람이 NFT 업로드 하면 알림
-  const onClickSubscribeButton = input => {
-    dispatch(studioSubscribe({ artist, inputData: input }));
+  const onClickSubscribeButton = action => {
+    dispatch(studioSubscribe({ artist, actionData: action }));
   };
 
   return (
     <>
       {studio.isSubscribingArtist ? (
         studio.isSubscribingArtist.isSubscribing ? (
-          <UnSubscribeButton onClick={() => onClickSubscribeButton('cancel')}>
+          <UnSubscribeButton
+            onClick={() => onClickSubscribeButton('cancelSubscribe')}
+          >
             구독 취소
           </UnSubscribeButton>
         ) : (

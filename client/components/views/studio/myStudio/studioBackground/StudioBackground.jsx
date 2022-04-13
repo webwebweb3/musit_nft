@@ -63,7 +63,11 @@ const StudioBackground = ({ background }) => {
   return (
     <Box>
       {backgroundImg === 'defaultBackground' ? (
-        <img src="/defaultBackground.jpg" alt="default Background" />
+        <img
+          src="/defaultBackground.jpg"
+          alt="default Background"
+          width={'100%'}
+        />
       ) : (
         <img
           src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/background/${artistName}_${background}`}

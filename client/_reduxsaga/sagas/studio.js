@@ -184,6 +184,9 @@ function* yieldIsSubscribing(action) {
   }
 }
 async function subscribeArtist(data) {
+  if (data.inputData === 'subscribe') {
+  } else if (data.inputData === 'cancelSubscribe') {
+  }
   console.log('데이타 보자', data);
 }
 
