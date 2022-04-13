@@ -31,7 +31,6 @@ const Studio = () => {
   if (userData === null) {
     alert('로그인 해주세요');
     Router.push('/');
-    return null;
   }
 
   const getMyMusics = () => {
@@ -45,28 +44,28 @@ const Studio = () => {
     dispatch(studioIsSubscribing({ artistName, metamask: userData.metamask }));
   };
 
-  // useEffect(() => {
-  //   getUserImages();
-  //   getMyMusics();
-  //   getIsSubscribing();
-  // }, []);
+  useEffect(() => {
+    getUserImages();
+    getMyMusics();
+    getIsSubscribing();
+  }, []);
 
-  // useEffect(() => {
-  //   if (studio) {
-  //     if (studio.getUserImagesDone) {
-  //       if (studio.studioUserImages.userProfile === null) {
-  //         setProfileImg('defaultProfile');
-  //       } else {
-  //         setProfileImg(studio.studioUserImages.userProfile);
-  //       }
-  //       if (studio.studioUserImages.userBackground === null) {
-  //         setBackgroundImg('defaultBackground');
-  //       } else {
-  //         setBackgroundImg(studio.studioUserImages.userBackground);
-  //       }
-  //     }
-  //   }
-  // }, [studio.getUserImagesDone, profileImg]);
+  useEffect(() => {
+    if (studio) {
+      if (studio.getUserImagesDone) {
+        if (studio.studioUserImages.userProfile === null) {
+          setProfileImg('defaultProfile');
+        } else {
+          setProfileImg(studio.studioUserImages.userProfile);
+        }
+        if (studio.studioUserImages.userBackground === null) {
+          setBackgroundImg('defaultBackground');
+        } else {
+          setBackgroundImg(studio.studioUserImages.userBackground);
+        }
+      }
+    }
+  }, [studio.getUserImagesDone, profileImg]);
 
   return (
     <Box sx={style.studioContainer}>
