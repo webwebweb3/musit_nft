@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
-import { saleMusicTokenContract, web3 } from '../../contracts';
+import { saleMusicTokenContract } from '$contracts';
 import {
   MARKETPLACE_CANCEl_FAILURE,
   MARKETPLACE_CANCEl_REQUEST,
@@ -14,7 +14,7 @@ import {
   MARKETPLACE_PURCHASE_FAILURE,
   MARKETPLACE_PURCHASE_REQUEST,
   MARKETPLACE_PURCHASE_SUCCESS,
-} from '../request/types';
+} from '$reduxsaga/request/types';
 
 function getNFTOwner(data) {
   return Axios.get('/marketplace', {

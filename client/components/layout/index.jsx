@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import Navbar from './Navbar';
-import Web3provider from '../../providers/hooks';
+import Web3provider from '$providers/hooks';
 
 const MainLayout = ({ children, value }) => {
   return (

@@ -1,4 +1,4 @@
-import produce from '../../util/produce';
+import produce from '$util/produce';
 import {
   IPFS_MUSIC_FAILURE,
   IPFS_MUSIC_REQUEST,
@@ -9,7 +9,7 @@ import {
   S3_ALBUMCOVER_FAILURE,
   S3_ALBUMCOVER_REQUEST,
   S3_ALBUMCOVER_SUCCESS,
-} from '../request/types';
+} from '$reduxsaga/request/types';
 
 export const initialState = {
   S3UploadLoading: false,

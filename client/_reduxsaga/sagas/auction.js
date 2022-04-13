@@ -1,5 +1,5 @@
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
-import { auctionAbi, auctionCreatorContract, web3 } from '../../contracts';
+import { auctionAbi, auctionCreatorContract, web3 } from '$contracts';
 import {
   AUCTION_CREATE_REQUEST,
   AUCTION_CREATE_SUCCESS,
@@ -25,7 +25,7 @@ import {
   AUCTION_FINALIZE_REQUEST,
   AUCTION_FINALIZE_SUCCESS,
   AUCTION_FINALIZE_FAILURE,
-} from '../request/types';
+} from '$reduxsaga/request/types';
 
 async function createauctionAPI(data) {
   let { startingBid, endTimestamp, tokenID, account } = data;

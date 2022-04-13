@@ -6,7 +6,7 @@ import {
   AUCTION_BID_REQUEST,
   AUCTION_MYBID_REQUEST,
   AUCTION_FINALIZE_REQUEST,
-} from './types';
+} from '$reduxsaga/request/types';
 
 export const createAuctionAction = data => ({
   type: AUCTION_CREATE_REQUEST,

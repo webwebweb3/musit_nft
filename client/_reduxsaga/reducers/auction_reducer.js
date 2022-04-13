@@ -1,4 +1,4 @@
-import produce from '../../util/produce';
+import produce from '$util/produce';
 import {
   AUCTION_CREATE_REQUEST,
   AUCTION_CREATE_SUCCESS,
@@ -24,7 +24,7 @@ import {
   AUCTION_FINALIZE_REQUEST,
   AUCTION_FINALIZE_SUCCESS,
   AUCTION_FINALIZE_FAILURE,
-} from '../request/types';
+} from '$reduxsaga/request/types';
 
 export const initialState = {
   createAuctionLoading: false,

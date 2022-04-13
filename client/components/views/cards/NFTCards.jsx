@@ -12,7 +12,7 @@
 // import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 // import SkipNextIcon from '@mui/icons-material/SkipNext';
 // import Link from 'next/link';
-// import { web3 } from '../../../contracts';
+// import { web3 } from '$contracts';
 // import { useState } from 'react';
 
 // const NFTCards = ({ musicTokenIds, musicTokenPrices, musicTokenDatas }) => {

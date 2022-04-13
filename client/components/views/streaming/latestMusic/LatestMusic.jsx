@@ -1,6 +1,6 @@
 import { Box, Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { mintMusicTokenContract } from '../../../../contracts';
+import { mintMusicTokenContract } from '$contracts';
 import MusicCard from '../../cards/MusicCard';
 import { style } from './style';
 

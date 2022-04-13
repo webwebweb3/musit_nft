@@ -1,7 +1,7 @@
 import { Box, Grid } from '@mui/material';
 import React, { useState } from 'react';
 import { style } from './style.js';
-import { saleMusicTokenContract } from '../../../../../contracts';
+import { saleMusicTokenContract } from '$contracts';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import MarketPlaceNFTCard from '../../../cards/MarketPlaceNFTCard.jsx';

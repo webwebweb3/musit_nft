@@ -2,7 +2,7 @@ import {
   IPFS_MUSIC_REQUEST,
   MINT_MUSIC_NFT_REQUEST,
   S3_ALBUMCOVER_REQUEST,
-} from './types';
+} from '$reduxsaga/request/types';
 
 export const s3AlbumCoverRequestAction = data => ({
   type: S3_ALBUMCOVER_REQUEST,

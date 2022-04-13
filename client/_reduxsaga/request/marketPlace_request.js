@@ -3,7 +3,7 @@ import {
   MARKETPLACE_GETOWNER_REQUEST,
   MARKETPLACE_GET_EVENT_REQUEST,
   MARKETPLACE_PURCHASE_REQUEST,
-} from './types';
+} from '$reduxsaga/request/types';
 
 export const marketPlacePurchaseAction = data => ({
   type: MARKETPLACE_PURCHASE_REQUEST,

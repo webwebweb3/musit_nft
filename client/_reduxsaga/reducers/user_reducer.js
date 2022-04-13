@@ -1,5 +1,4 @@
-import produce from '../../util/produce';
-
+import produce from '$util/produce';
 import {
   LOGOUT_USER_REQUEST,
   LOGOUT_USER_SUCCESS,
@@ -19,7 +18,7 @@ import {
   MY_INFO_REQUEST,
   MY_INFO_SUCCESS,
   MY_INFO_FAILURE,
-} from '../request/types';
+} from '$reduxsaga/request/types';
 
 export const initialState = {
   logInUserLoading: false,

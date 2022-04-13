@@ -7,7 +7,7 @@ import { AppBar, Toolbar, Button, CircularProgress, Tabs } from '@mui/material';
 import { ErrorOutline } from '@mui/icons-material';
 
 import ProfileButton from './myMenu';
-import { useWalletInfo } from 'hooks/web3';
+import { useWalletInfo } from '$hooks/web3';
 import { useWeb3 } from '$providers/hooks/index';
 import { NavbarLink, RegisterModal, MetamaskButton } from './contents';
 import {
@@ -21,7 +21,7 @@ const Navbar = ({ value }) => {
   const [open, setOpen] = useState(false);
 
   const { network, account } = useWalletInfo();
-  const { connect, isLoading, requireInstall } = useWeb3();
+  const { isLoading, requireInstall } = useWeb3();
 
   const handleMetaMaskOpen = useCallback(() => {
     setOpen(true);

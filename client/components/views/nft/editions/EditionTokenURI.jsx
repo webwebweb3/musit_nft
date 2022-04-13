@@ -1,10 +1,7 @@
 import { Box } from '@material-ui/core';
 import Router, { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import {
-  mintMusicTokenContract,
-  saleMusicTokenContract,
-} from '../../../../contracts';
+import { mintMusicTokenContract, saleMusicTokenContract } from '$contracts';
 import EditionChart from './editionChart/EditionChart';
 import EditionDescription from './editionDescription/EditionDescription';
 import EditionImages from './editionImage/EditionImages';

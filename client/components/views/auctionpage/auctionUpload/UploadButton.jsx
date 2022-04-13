@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { timeFunction } from '../../../../util/timefunc';
+import { timeFunction } from '$util/timefunc';
 import AuctionButton from '../auctionMui/AuctionButton';
 import { createAuctionAction } from '$reduxsaga/request/auction_request';
 
@@ -25,12 +25,13 @@ const UploadButton = ({ endAt, startingBid, tokenID }) => {
     let endTimestamp = Math.round(new Date(endAt).getTime() / 1000);
 
     let auctionData = {
-      startingBid: startingBid * 1000000000000000000,
+      startingBid: startingBid * '1000000000000000000',
       endTimestamp,
       tokenID,
       account,
     };
 
+    console.log(auctionData);
     dispatch(createAuctionAction(auctionData));
   }, [dispatch, startingBid, endAt, tokenID, account]);
 
@@ -44,7 +45,7 @@ const UploadButton = ({ endAt, startingBid, tokenID }) => {
 UploadButton.propTypes = {
   endAt: PropTypes.string.isRequired,
   startingBid: PropTypes.string.isRequired,
-  tokenID: PropTypes.string.isRequired,
+  tokenID: PropTypes.number.isRequired,
 };
 
 export default UploadButton;

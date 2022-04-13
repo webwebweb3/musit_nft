@@ -5,7 +5,7 @@ import {
   STUDIO_GET_USERIMAGES_REQUEST,
   STUDIO_SUBSCRIBE_REQUEST,
   STUDIO_ISSUBSCRIBING_REQUEST,
-} from './types';
+} from '$reduxsaga/request/types';
 
 export const studioUploadBackground = data => ({
   type: STUDIO_UPLOAD_BACKGROUND_REQUEST,

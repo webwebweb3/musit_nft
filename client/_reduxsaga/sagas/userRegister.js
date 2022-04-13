@@ -20,7 +20,7 @@ import {
   MY_INFO_SUCCESS,
   MY_INFO_FAILURE,
   MY_INFO_REQUEST,
-} from '../request/types';
+} from '$reduxsaga/request/types';
 
 function logInAPI(data) {
   let loginData = {

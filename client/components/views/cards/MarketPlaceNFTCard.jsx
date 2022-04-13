@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material/';
 import Link from 'next/link';
-import { web3 } from '../../../contracts';
+import { web3 } from '$contracts';
 import { useState } from 'react';
 import Image from 'next/image';
 

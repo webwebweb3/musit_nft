@@ -4,7 +4,7 @@
     "paths": {
       "$reduxsaga/*": ["_reduxsaga/*"],
       "$components/*": ["components/*"],
-      "$contracts/*": ["contracts/*"],
+      "$contracts": ["contracts/index"],
       "$hooks/*": ["hooks/*"],
       "$providers/*": ["providers/*"],
       "$util/*": ["util/*"]

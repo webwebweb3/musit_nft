@@ -20,8 +20,8 @@ import {
   STUDIO_ISSUBSCRIBING_REQUEST,
   STUDIO_ISSUBSCRIBING_SUCCESS,
   STUDIO_ISSUBSCRIBING_FAILURE,
-} from '../request/types';
-import { mintMusicTokenContract } from 'contracts';
+} from '$reduxsaga/request/types';
+import { mintMusicTokenContract } from '$contracts';
 
 async function uploadBackground(data) {
   const myFile = data.selectedFile;
