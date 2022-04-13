@@ -3,7 +3,7 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
-import Streaming from '$components/views/streaming/Streaming';
+import Streaming from '$components/views/streaming';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
 const StreamingHome = () => {

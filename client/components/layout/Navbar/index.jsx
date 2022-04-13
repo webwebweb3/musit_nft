@@ -30,9 +30,11 @@ const Navbar = ({ value }) => {
   useEffect(() => {}, [requireInstall, account.data]);
 
   useEffect(() => {
+    if (account.data === undefined) {
+      return;
+    }
     if (userData) {
-      console.log(userData.metamask !== account.data);
-      if (userData.metamask !== account.data) {
+      if (userData.metamask.toUpperCase() !== account.data.toUpperCase()) {
         let confirmAction = window.confirm('계정을 전환하시겠습니까?');
         if (confirmAction) {
           dispatch(loginRequestAction(account.data));
@@ -50,14 +52,14 @@ const Navbar = ({ value }) => {
       <AppBar
         sx={{
           padding: '10px 20px ',
-          background: 'transparent',
+          background: '#0d0f1a',
           height: '100px',
         }}
         elevation={0}
       >
         <Toolbar sx={{ paddingRight: '20px' }}>
           <Link href="/">
-            <span style={{ marginRight: '30px' }}>
+            <span style={{ marginRight: '30px', cursor: 'pointer' }}>
               <Image
                 width="80px"
                 height="80px"

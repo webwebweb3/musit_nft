@@ -4,7 +4,7 @@ import { style } from './style';
 import StreamingSideBar from './streamingSideBar/SteamingSideBar';
 import LatestMusic from './latestMusic/LatestMusic';
 import { useSelector } from 'react-redux';
-import FooterMusicPlayer from '../../Player';
+import Player from '../../Player';
 import { Global } from './Streaming';
 import { useState } from 'react';
 
@@ -25,7 +25,7 @@ const Streaming = () => {
           </Box>
           <Box sx={{ flexDirection: '' }}></Box>
         </Box>
-        <FooterMusicPlayer isVisible={visible} />
+        <Player isVisible={visible} />
       </div>
     </>
   );
