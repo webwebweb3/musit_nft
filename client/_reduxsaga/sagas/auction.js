@@ -28,10 +28,10 @@ import {
 } from '$reduxsaga/request/types';
 
 async function createauctionAPI(data) {
-  let { startingBid, endTimestamp, tokenID, account } = data;
+  let { startingBid, endTimestamp, tokenID, minimumBid, account } = data;
 
   await auctionCreatorContract.methods
-    .createAuction(startingBid, endTimestamp, tokenID)
+    .createAuction(startingBid, endTimestamp, tokenID, minimumBid)
     .send({ from: account });
 
   return;

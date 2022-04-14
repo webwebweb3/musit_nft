@@ -22,7 +22,7 @@ const AuctionMainPage = () => {
       <AuctionMainContainer>
         {/* Header */}
         <AuctionHeader>
-          <h1 style={{ margin: '0 0 0 40px' }}>AUCTION</h1>
+          <h1 style={{ margin: '0 0 0 40px' }}>Auction</h1>
           {userData && userData.role === 1 && (
             <Link href={`/nft/auction/upload`}>
               <StyledNewAuctionButton variant="contained">

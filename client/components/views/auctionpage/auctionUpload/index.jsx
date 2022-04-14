@@ -19,6 +19,7 @@ const AuctionUploadPage = () => {
   const auction = useSelector(state => state.auction);
   const [loading, setLoading] = useState(false);
   const [startingBid, onChangeStartingBid] = useInput('');
+  const [minimumBid, onChangeMinimumBid] = useInput('');
   const [endAt, onChangeEndAt, setEndAt] = useInput('');
   const [tokenID, setTokenID] = useState('');
   const [myNFT, setMyNFT] = useState();
@@ -105,8 +106,14 @@ const AuctionUploadPage = () => {
       <AuctionTextField
         text="시작 금액"
         value={startingBid}
-        func={onChangeStartingBid}
+        onChange={onChangeStartingBid}
         uint="ETH"
+      />
+
+      <AuctionTextField
+        text="최저 입찰"
+        value={minimumBid}
+        onChange={onChangeMinimumBid}
       />
 
       <AuctionAppointment text="종료 시간" value={endAt} func={onChangeEndAt} />
@@ -173,22 +180,23 @@ const AuctionUploadPage = () => {
               />
             </div>
           </Box>
+          {loading ? (
+            <>
+              <CircularProgress color="inherit" />
+            </>
+          ) : (
+            <UploadButton
+              endAt={endAt}
+              startingBid={startingBid}
+              minimumBid={minimumBid}
+              tokenID={tokenID}
+            />
+          )}
         </>
       ) : (
         <CircularProgress color="inherit" />
       )}
-      {loading ? (
-        <>
-          <CircularProgress color="inherit" />
-        </>
-      ) : (
-        <UploadButton
-          endAt={endAt}
-          startingBid={startingBid}
-          tokenID={tokenID}
-        />
-      )}
-      <AuctionButton text="경매 메인으로 가기" link={'auction'} />
+      <AuctionButton text="경매 메인으로 가기" link={'nft/auction'} />
     </Box>
   );
 };

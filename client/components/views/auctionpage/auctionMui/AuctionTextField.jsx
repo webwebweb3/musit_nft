@@ -8,7 +8,7 @@ import {
   StyledOutlinedInput,
 } from '../style';
 
-const AuctionTextField = ({ text, value, func, uint }) => {
+const AuctionTextField = ({ text, uint, ...rest }) => {
   return (
     <>
       <GlobalTextField />
@@ -18,8 +18,7 @@ const AuctionTextField = ({ text, value, func, uint }) => {
         </StyledFormHelperText>
         <StyledOutlinedInput
           id="outlined-adornment-weight"
-          value={value}
-          onChange={func}
+          {...rest}
           endAdornment={
             <InputAdornment position="end">
               <span style={{ color: '#dada' }}>{uint}</span>
@@ -38,8 +37,6 @@ const AuctionTextField = ({ text, value, func, uint }) => {
 
 AuctionTextField.propTypes = {
   text: PropTypes.string,
-  value: PropTypes.string.isRequired,
-  func: PropTypes.func.isRequired,
   uint: PropTypes.string,
 };
 

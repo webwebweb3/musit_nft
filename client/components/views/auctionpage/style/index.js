@@ -175,6 +175,7 @@ export const StyledFormHelperText = styled(FormHelperText)`
 `;
 
 export const StyledMyNFTText = styled(StyledFormHelperText)`
+  margin-top: 30px;
   margin-left: 80px;
   margin-bottom: 10px;
 `;
