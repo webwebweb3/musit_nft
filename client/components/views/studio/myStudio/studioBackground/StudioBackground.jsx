@@ -55,6 +55,8 @@ const StudioBackground = ({ background }) => {
     if (studio.uploadBackgroundDone) {
       Router.replace(`/studio/${artistName}`);
     }
+    console.log('이것도 확인좀', background);
+    console.log('이거 확인 부탁', backgroundImg);
   }, [isSelected]);
 
   const uploadStudioCoverBtn = () => {

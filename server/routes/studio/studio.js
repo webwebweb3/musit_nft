@@ -1,7 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
-const { User, UserCover } = require('../../models');
+const { QueryTypes } = require('sequelize');
+const { User, UserCover, sequelize } = require('../../models');
 
 //------------------------------------------------
 //               /api/studio
@@ -25,9 +26,12 @@ router.get('/', async (req, res) => {
 
     if (userCover === null) {
       res.json({ userProfile, userCover });
+    } else {
+      console.log('유저카버 널?', userCover);
+      const userBackground = userCover.backgroundImg;
+      console.log('유저 백그라운드?', userBackground);
+      res.json({ userProfile, userBackground });
     }
-    const userBackground = userCover.backgroundImg;
-    res.json({ userProfile, userBackground });
   } catch (error) {
     console.error(error);
   }
@@ -112,21 +116,93 @@ router.get('/isSubscribe', async (req, res) => {
       attributes: ['id', 'name', 'metamask'],
     });
     console.log('갯수 체크 한번 해라', userId.subscribers.length);
-    if (userId.subscribers.length === 0) {
-      console.log('여기로 들어옴??');
-      res.json({ isSubscribing: false });
-    }
+    // if (userId.subscribers.length === 0) {
+    //   console.log('여기로 들어옴??');
+    //   res.json({ isSubscribing: false, artistId: artistId.id });
+    // }
     let tempData = { isSubscribing: false };
     for (let i = 0; i < userId.subscribers.length; i += 1) {
       console.log(i, '번째 체크', userId.subscribers[i].dataValues);
       if (userId.subscribers[i].dataValues.id === artistId.id) {
-        tempData = { isSubscribing: true };
-        return;
+        tempData = { isSubscribing: true, artistId: artistId.id };
+        break;
       }
     }
     console.log('여기까지 오는가??', tempData);
-    res.json(tempData);
-    res.json({ isSubscribing: false });
+    if (tempData.isSubscribing === true) {
+      res.json(tempData);
+    }
+
+    if (tempData.isSubscribing === false) {
+      res.json({ isSubscribing: false, artistId: artistId.id });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.post('/subscribe', async (req, res) => {
+  try {
+    const { artistId, myMetamask } = req.body;
+
+    const myId = await User.findOne({
+      where: { metamask: myMetamask },
+    });
+
+    const isExistSql = `SELECT * FROM subscribe WHERE subscribers=${myId.id} AND subscribing=${artistId};`;
+    const isExistResult = await sequelize.query(isExistSql, {
+      type: QueryTypes.DELETE,
+    });
+    console.log('쿼리 결과 한번 봅시다', isExistResult);
+    if (isExistResult) {
+      res.json({ message: '이미 구독중입니다.' });
+    }
+
+    const insertSql = `INSERT INTO subscribe (subscribers, subscribing) VALUE (${myId.id}, ${artistId});`;
+    const inserting = await sequelize.query(insertSql, {
+      type: QueryTypes.INSERT,
+    });
+    console.log('인설팅', inserting);
+    res.json({ insert: true });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+router.delete('/subscribe', async (req, res) => {
+  try {
+    const { paramsData } = req.query;
+    const jsonData = JSON.parse(paramsData);
+    const { artistId } = jsonData;
+    const { myMetamask } = jsonData;
+    console.log('앝아이디', artistId);
+    console.log('내멭아이디', myMetamask);
+
+    const myId = await User.findOne({
+      where: { metamask: myMetamask },
+    });
+    console.log('내 아이디', myId.id);
+    const sql = `DELETE FROM subscribe WHERE subscribers =${myId.id} AND subscribing = ${artistId};`;
+    const deletequery = await sequelize.query(sql, {
+      type: QueryTypes.DELETE,
+    });
+    console.log('딜리트 쿼리', deletequery);
+
+    // await User.destroy({
+    //   include: [
+    //     {
+    //       model: User,
+    //       as: 'subscribers',
+    //       through: {
+    //         where: {
+    //           subscribing: artistId,
+    //         },
+    //       },
+    //     },
+    //   ],
+    //   where: { metamask: myMetamask },
+    // });
+    res.json({ delete: true });
   } catch (error) {
     console.error(error);
   }
