@@ -3,19 +3,31 @@ import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { studioSubscribe } from '$reduxsaga/request/studio_request';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-const StudioSubscribe = ({ artist, sub, func }) => {
+const StudioSubscribe = ({ artist, sub, func, myMetamask }) => {
   const studio = useSelector(state => state.studio);
+  console.log('mymeta', myMetamask);
   const dispatch = useDispatch();
   // TODO: 구독한 사람이 NFT 업로드 하면 알림
   const onClickSubscribeButton = action => {
-    dispatch(studioSubscribe({ artist, actionData: action }));
+    dispatch(
+      studioSubscribe({
+        artistId: studio.isSubscribingArtist.artistId,
+        actionData: action,
+        myMetamask,
+      }),
+    );
   };
+
+  useEffect(() => {
+    console.log('ㅇㅇ?', sub);
+  }, [studio && studio.subscribeArtistDone]);
 
   return (
     <>
       {studio.isSubscribingArtist ? (
-        studio.isSubscribingArtist.isSubscribing ? (
+        sub ? (
           <UnSubscribeButton
             onClick={() => onClickSubscribeButton('cancelSubscribe')}
           >

@@ -65,7 +65,8 @@ const Studio = () => {
         }
       }
     }
-  }, [studio.getUserImagesDone, profileImg]);
+    console.log('이미지들 확인', profileImg, backgroundImg);
+  }, [studio.getUserImagesDone, profileImg, backgroundImg]);
 
   return (
     <Box sx={style.studioContainer}>
@@ -116,6 +117,7 @@ const Studio = () => {
               artist={artistName}
               sub={isSubscribe}
               func={setIsSubscribe}
+              myMetamask={userData.metamask}
             />
           </Box>
         )}
