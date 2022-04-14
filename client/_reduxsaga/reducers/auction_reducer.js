@@ -24,6 +24,12 @@ import {
   AUCTION_FINALIZE_REQUEST,
   AUCTION_FINALIZE_SUCCESS,
   AUCTION_FINALIZE_FAILURE,
+  AUCTION_APPROVE_CHECK_REQUEST,
+  AUCTION_APPROVE_CHECK_SUCCESS,
+  AUCTION_APPROVE_CHECK_FAILURE,
+  AUCTION_APPROVE_REQUEST,
+  AUCTION_APPROVE_SUCCESS,
+  AUCTION_APPROVE_FAILURE,
 } from '$reduxsaga/request/types';
 
 export const initialState = {
@@ -51,9 +57,16 @@ export const initialState = {
   finalizeAuctionLoading: false,
   finalizeAuctionDone: false,
   finalizeAuctionError: null,
+  approveAuctionLoading: false,
+  approveAuctionDone: false,
+  approveAuctionError: null,
+  approveCheckAuctionLoading: false,
+  approveCheckAuctionDone: false,
+  approveCheckAuctionError: null,
   myBidData: null,
   allAuctionData: null,
   auctionData: null,
+  approveAuctionData: null,
 };
 
 const MetamaskReducer = (state = initialState, action) =>
@@ -99,6 +112,34 @@ const MetamaskReducer = (state = initialState, action) =>
       case AUCTION_FAILURE:
         draft.auctionLoading = false;
         draft.auctionError = action.error;
+        break;
+      case AUCTION_APPROVE_CHECK_REQUEST:
+        draft.approveCheckAuctionLoading = true;
+        draft.approveCheckAuctionError = null;
+        draft.approveCheckAuctionDone = false;
+        draft.approveAuctionData = null;
+        break;
+      case AUCTION_APPROVE_CHECK_SUCCESS:
+        draft.approveCheckAuctionLoading = false;
+        draft.approveAuctionData = action.data;
+        draft.approveAuctionDone = true;
+        break;
+      case AUCTION_APPROVE_CHECK_FAILURE:
+        draft.approveCheckAuctionLoading = false;
+        draft.approveCheckAuctionError = action.error;
+        break;
+      case AUCTION_APPROVE_REQUEST:
+        draft.approveAuctionLoading = true;
+        draft.approveAuctionError = null;
+        draft.approveAuctionDone = false;
+        break;
+      case AUCTION_APPROVE_SUCCESS:
+        draft.approveAuctionLoading = false;
+        draft.approveAuctionDone = true;
+        break;
+      case AUCTION_APPROVE_FAILURE:
+        draft.approveAuctionLoading = false;
+        draft.approveAuctionError = action.error;
         break;
       case AUCTION_INFO_REQUEST:
         draft.infoAuctionLoading = true;

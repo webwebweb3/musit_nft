@@ -28,3 +28,18 @@ button[disabled] {
   margin-top: 25px;
   justify-content: center;
 }
+
+.auctionBlur {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  position: fixed;
+  display: flex;
+  z-index: 5;
+  width: 85%;
+  height: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 2px 7px 15px 8px rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
