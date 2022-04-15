@@ -124,6 +124,7 @@ async function auctionInfoAPI(data) {
   let highestBidder = await data.methods.highestBidder().call();
   let owner = await data.methods.owner().call();
   let auctionState = await data.methods.auctionState().call();
+  let tokenID = await data.methods.tokenID().call();
   let highestBindingBid = highestBindingBidWei / 1000000000000000000;
 
   let infoData = {
@@ -132,6 +133,7 @@ async function auctionInfoAPI(data) {
     highestBidder,
     owner,
     auctionState,
+    tokenID,
   };
 
   return infoData;
