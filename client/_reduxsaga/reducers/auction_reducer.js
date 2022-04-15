@@ -30,6 +30,9 @@ import {
   AUCTION_APPROVE_REQUEST,
   AUCTION_APPROVE_SUCCESS,
   AUCTION_APPROVE_FAILURE,
+  AUCTION_TOKEN_INFO_REQUEST,
+  AUCTION_TOKEN_INFO_SUCCESS,
+  AUCTION_TOKEN_INFO_FAILURE,
 } from '$reduxsaga/request/types';
 
 export const initialState = {
@@ -63,10 +66,14 @@ export const initialState = {
   approveCheckAuctionLoading: false,
   approveCheckAuctionDone: false,
   approveCheckAuctionError: null,
+  auctionTokenInfoLoading: false,
+  auctionTokenInfoDone: false,
+  auctionTokenInfoError: null,
   myBidData: null,
   allAuctionData: null,
   auctionData: null,
   approveAuctionData: null,
+  auctionTokenData: null,
 };
 
 const MetamaskReducer = (state = initialState, action) =>
@@ -112,6 +119,21 @@ const MetamaskReducer = (state = initialState, action) =>
       case AUCTION_FAILURE:
         draft.auctionLoading = false;
         draft.auctionError = action.error;
+        break;
+      case AUCTION_TOKEN_INFO_REQUEST:
+        draft.auctionTokenInfoLoading = true;
+        draft.auctionTokenInfoError = null;
+        draft.auctionTokenInfoDone = false;
+        draft.auctionTokenData = null;
+        break;
+      case AUCTION_TOKEN_INFO_SUCCESS:
+        draft.auctionTokenInfoLoading = false;
+        draft.auctionTokenData = action.data;
+        draft.auctionTokenInfoDone = true;
+        break;
+      case AUCTION_TOKEN_INFO_FAILURE:
+        draft.auctionTokenInfoLoading = false;
+        draft.auctionTokenInfoError = action.error;
         break;
       case AUCTION_APPROVE_CHECK_REQUEST:
         draft.approveCheckAuctionLoading = true;

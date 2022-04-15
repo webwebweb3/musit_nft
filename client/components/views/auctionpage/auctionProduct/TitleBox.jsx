@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-const TitleBox = () => {
+const TitleBox = ({ text }) => {
   return (
     <>
       <Box
@@ -12,7 +12,7 @@ const TitleBox = () => {
           fontWeight: 'bold',
         }}
       >
-        Title
+        {text}
       </Box>
     </>
   );
