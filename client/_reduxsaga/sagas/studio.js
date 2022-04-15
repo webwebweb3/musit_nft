@@ -93,6 +93,10 @@ function getUserMetamask(data) {
 }
 async function getMyMusic(data) {
   console.log('getMyMusic 안', data);
+  // const mintOwner = await mintMusicTokenContract.getPastEvents('Minter', {
+  //   filter: { Minter: data.data.user },
+  //   fromBlock: 0,
+  // });
   return await mintMusicTokenContract.getPastEvents('Minter', {
     filter: { Minter: data.data.user },
     fromBlock: 0,
