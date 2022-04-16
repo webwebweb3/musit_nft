@@ -35,6 +35,7 @@ import { Box, Divider } from '@mui/material';
 export default function EditionImages({ image, music }) {
   const [expanded, setExpanded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  console.log(music);
 
   return (
     <Box sx={{ margin: '20px auto' }}>
