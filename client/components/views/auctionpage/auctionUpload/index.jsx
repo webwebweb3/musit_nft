@@ -17,12 +17,12 @@ import { StyledMyNFTText } from '../style';
 
 const AuctionUploadPage = () => {
   const auction = useSelector(state => state.auction);
-  const [loading, setLoading] = useState(false);
   const [startingBid, onChangeStartingBid] = useInput('');
   const [minimumBid, onChangeMinimumBid] = useInput('');
   const [endAt, onChangeEndAt, setEndAt] = useInput('');
   const [tokenID, setTokenID] = useState('');
   const [myNFT, setMyNFT] = useState();
+  const [loading, setLoading] = useState(false);
   const [testPage, setTestPage] = useState(1);
 
   const { network, account } = useWalletInfo();
@@ -35,15 +35,12 @@ const AuctionUploadPage = () => {
   }, [setEndAt]);
 
   useEffect(() => {
-    setLoading(auction.createAuctionLoading);
-  }, [auction]);
-
-  useEffect(() => {
     console.log(myNFT);
   }, [myNFT]);
 
   const getMyMusicTokens = useCallback(async () => {
     try {
+      setLoading(false);
       const balanceLength = await mintMusicTokenContract.methods
         .balanceOf(account.data)
         .call();
@@ -74,6 +71,7 @@ const AuctionUploadPage = () => {
         });
       }
       setMyNFT(tempMusicCardArray);
+      setLoading(true);
     } catch (error) {
       console.error(error);
     }
@@ -118,7 +116,9 @@ const AuctionUploadPage = () => {
 
       <AuctionAppointment text="종료 시간" value={endAt} func={onChangeEndAt} />
 
-      {myNFT ? (
+      {loading ? (
+        <CircularProgress color="inherit" />
+      ) : myNFT ? (
         <>
           <StyledMyNFTText id="outlined-weight-helper-text">
             판매 가능 NFT 목록
@@ -180,7 +180,7 @@ const AuctionUploadPage = () => {
               />
             </div>
           </Box>
-          {loading ? (
+          {auction.createAuctionLoading ? (
             <>
               <CircularProgress color="inherit" />
             </>
@@ -194,7 +194,7 @@ const AuctionUploadPage = () => {
           )}
         </>
       ) : (
-        <CircularProgress color="inherit" />
+        <>zzzzzz</>
       )}
       <AuctionButton text="경매 메인으로 가기" link={'nft/auction'} />
     </Box>

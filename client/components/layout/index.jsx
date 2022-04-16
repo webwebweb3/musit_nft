@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import Navbar from './Navbar';
+import Navbar from '$components/layout/Navbar';
 import Web3provider from '$providers/hooks';
 
-const MainLayout = ({ children, value }) => {
+const MainLayout = ({ children }) => {
   return (
     <Web3provider>
       <Box
@@ -13,7 +13,7 @@ const MainLayout = ({ children, value }) => {
         }}
       >
         {/* sidebar */}
-        <Navbar value={value} />
+        <Navbar />
 
         {/* MyPage content */}
         <Box
