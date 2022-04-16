@@ -116,7 +116,7 @@ const AuctionUploadPage = () => {
 
       <AuctionAppointment text="종료 시간" value={endAt} func={onChangeEndAt} />
 
-      {loading ? (
+      {!loading ? (
         <CircularProgress color="inherit" />
       ) : myNFT ? (
         <>
@@ -194,7 +194,7 @@ const AuctionUploadPage = () => {
           )}
         </>
       ) : (
-        <>zzzzzz</>
+        <>현재 판매 가능한 NFT 가 없습니다!</>
       )}
       <AuctionButton text="경매 메인으로 가기" link={'nft/auction'} />
     </Box>

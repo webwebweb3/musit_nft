@@ -9,7 +9,7 @@ import {
 } from '$reduxsaga/request/user_request';
 import { useWalletInfo } from '$hooks/web3';
 import { NavbarLink } from '$components/layout/Navbar/contents';
-import { MainLogo, RegisterAlert } from '$components/layout/Navbar/base';
+import { MainLogo, RegisterCheck } from '$components/layout/Navbar/base';
 
 const Navbar = () => {
   const { userData } = useSelector(state => state.user);
@@ -52,7 +52,7 @@ const Navbar = () => {
             <NavbarLink />
           </Tabs>
 
-          <RegisterAlert />
+          <RegisterCheck />
         </Toolbar>
       </AppBar>
     </>

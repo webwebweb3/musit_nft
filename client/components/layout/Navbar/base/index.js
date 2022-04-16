@@ -1,2 +1,2 @@
 export { default as MainLogo } from './mainLogo';
-export { default as RegisterAlert } from './register';
+export { default as RegisterCheck } from './register';

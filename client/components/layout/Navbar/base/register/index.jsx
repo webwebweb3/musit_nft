@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ErrorOutline } from '@mui/icons-material';
 import { Button, CircularProgress } from '@mui/material';
@@ -9,10 +9,10 @@ import { MetamaskButton, RegisterModal } from '../../contents';
 import ProfileButton from '../myMenu';
 import NetworkCheck from './NetworkCheck';
 
-const RegisterAlert = () => {
+const RegisterCheck = () => {
   const { userData } = useSelector(state => state.user);
 
-  const { network } = useWalletInfo();
+  const { network, account } = useWalletInfo();
   const { hasInitialResponse, isSupported, target } = network;
   const { isLoading, requireInstall } = useWeb3();
 
@@ -21,6 +21,12 @@ const RegisterAlert = () => {
   const handleMetaMaskOpen = useCallback(() => {
     setOpen(true);
   }, []);
+
+  // useEffect(() => {
+  //   // 수정 예정
+  //   if (!account.data) return;
+  //   console.log('Ok!');
+  // }, [network]);
 
   return (
     <>
@@ -56,10 +62,8 @@ const RegisterAlert = () => {
             <ProfileButton value="mypage" />
           </div>
         </>
-      ) : hasInitialResponse ? (
-        <>
-          <MetamaskButton metaopenfunc={handleMetaMaskOpen} />
-        </>
+      ) : account.data ? (
+        <MetamaskButton metaopenfunc={handleMetaMaskOpen} />
       ) : (
         <div style={{ marginLeft: 'auto', color: 'yellow' }}>
           <div>
@@ -75,4 +79,4 @@ const RegisterAlert = () => {
   );
 };
 
-export default RegisterAlert;
+export default RegisterCheck;
