@@ -184,6 +184,25 @@ const mintMusicTokenAbi = [
   {
     inputs: [
       {
+        internalType: 'uint256',
+        name: '_musicTokenId',
+        type: 'uint256',
+      },
+    ],
+    name: 'getMusicTokenMinter',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'address',
         name: '_musicTokenOwner',
         type: 'address',
@@ -252,6 +271,25 @@ const mintMusicTokenAbi = [
     name: 'mintMusicToken',
     outputs: [],
     stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    name: 'musicTokenMinters',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
     type: 'function',
   },
   {
@@ -706,11 +744,6 @@ const saleMusicTokenAbi = [
         internalType: 'uint256',
         name: '_musicTokenId',
         type: 'uint256',
-      },
-      {
-        internalType: 'address',
-        name: '_mintOwner',
-        type: 'address',
       },
     ],
     name: 'purchaseMusicToken',
@@ -1176,13 +1209,266 @@ export const auctionAbi = [
     type: 'function',
   },
 ];
+const paymentAbi = [
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'to',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'planId',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'date',
+        type: 'uint256',
+      },
+    ],
+    name: 'PaymentSent',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'musit',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'planId',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'date',
+        type: 'uint256',
+      },
+    ],
+    name: 'PlanCreated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'subscriber',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'planId',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'date',
+        type: 'uint256',
+      },
+    ],
+    name: 'SubscriptionCancelled',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'subscriber',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'planId',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'date',
+        type: 'uint256',
+      },
+    ],
+    name: 'SubscriptionCreated',
+    type: 'event',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'planId',
+        type: 'uint256',
+      },
+    ],
+    name: 'cancel',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'frequency',
+        type: 'uint256',
+      },
+    ],
+    name: 'createPlan',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'nextPlanId',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'subscriber',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'planId',
+        type: 'uint256',
+      },
+    ],
+    name: 'pay',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    name: 'plans',
+    outputs: [
+      {
+        internalType: 'address',
+        name: 'musit',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'frequency',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'planId',
+        type: 'uint256',
+      },
+    ],
+    name: 'subscribe',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    name: 'subscriptions',
+    outputs: [
+      {
+        internalType: 'address',
+        name: 'subscriber',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'start',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'nextPayment',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+];
 
 export const mintMusicTokenAddress =
-  '0x481D7109A4A4164283a4eD1Ef1c746aB95618BCf';
+  '0x2e4007304bCd8d7FC9e657Ea7f17B56e4359D964';
 export const saleMusicTokenAddress =
-  '0xE9663714fB1aA2a369Fc8B3208C6555dDb53BBe5';
+  '0xaECfB26b87140A851c0F73477aCf5dB7F0127C7e';
 export const auctionCreatorAddress =
-  '0xc13711F5229E04B0bC7d9bA4Af1d2d48054e0fB0';
+  '0xE11B11D9aA8eD442dA1f4260939A5A6E99106Ed2';
+export const paymentAddress = '0xC0b0891EFBd83c0ca257199E9E5AEeb21bF558DF';
 
 let web3;
 let mintMusicTokenContract;

@@ -31,10 +31,10 @@ import ReactAudioPlayer from 'react-audio-player';
 
 import { useState } from 'react';
 import { Box, Divider } from '@mui/material';
+import MusicLikes from '$components/views/musicLikes/MusicLikes';
 
 export default function EditionImages({ image, music }) {
   const [expanded, setExpanded] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <Box sx={{ margin: '20px auto' }}>
@@ -47,13 +47,14 @@ export default function EditionImages({ image, music }) {
       >
         <CardHeader
           action={
-            <IconButton aria-label="favoriteButton">
-              {isFavorite ? (
-                <FavoriteIcon sx={{ color: 'white' }} />
-              ) : (
-                <FavoriteBorderIcon sx={{ color: 'white' }} />
-              )}
-            </IconButton>
+            <MusicLikes />
+            // <IconButton aria-label="favoriteButton">
+            //   {isFavorite ? (
+            //     <FavoriteIcon sx={{ color: 'white' }} />
+            //   ) : (
+            //     <FavoriteBorderIcon sx={{ color: 'white' }} />
+            //   )}
+            // </IconButton>
           }
           sx={{ padding: '10px' }}
         />

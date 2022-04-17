@@ -58,6 +58,23 @@ async function uploadIPFSMusic(data) {
   return url.path;
 }
 
+async function uploadToServer(data) {
+  console.log('업로드 데이따', data);
+  await axios.post(`/uploadmusic`, data).then(res => {
+    if (res.data.uploadSuccess === 'true') {
+      Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
+    } else if (res.data.uploadSuccess === 'empty') {
+      alert(res.data.message);
+    } else if (res.data.uploadSuccess === 'emptyIPFS') {
+      alert(res.data.message);
+    } else if (res.data.uploadSuccess === 'emptyS3AlbumCover') {
+      alert(res.data.message);
+    } else {
+      alert(res.data.message);
+    }
+  });
+}
+
 async function mintNFTMusic(data) {
   try {
     console.log('data', data);
@@ -87,26 +104,6 @@ async function mintNFTMusic(data) {
     console.log('res', response);
 
     if (response.status) {
-      const uploadToServer = async e => {
-        try {
-          await axios.post(`/uploadmusic`, data.data.dataToSubmit).then(res => {
-            if (res.data.uploadSuccess === 'true') {
-              Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
-            } else if (res.data.uploadSuccess !== 'empty') {
-              alert(res.data.message);
-            } else if (res.data.uploadSuccess !== 'emptyIPFS') {
-              alert(res.data.message);
-            } else if (res.data.uploadSuccess !== 'emptyS3AlbumCover') {
-              alert(res.data.message);
-            } else {
-              alert(res.data.message);
-            }
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      uploadToServer();
     }
   } catch (error) {
     console.error(error);
@@ -131,8 +128,9 @@ function* mintNFT(action) {
       S3AlbumUrl,
       IPFSurl,
     };
+    yield call(uploadToServer, newActionData);
 
-    yield call(mintNFTMusic, newActionData);
+    // yield call(mintNFTMusic, newActionData);
 
     yield put({
       type: MINT_MUSIC_NFT_SUCCESS,
