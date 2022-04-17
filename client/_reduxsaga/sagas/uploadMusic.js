@@ -91,7 +91,8 @@ async function mintNFTMusic(data) {
         try {
           await axios.post(`/uploadmusic`, data.data.dataToSubmit).then(res => {
             if (res.data.uploadSuccess === 'true') {
-              Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
+              // TODO: studio/artistname/uploadmusic 일 시 아래 실행
+              // Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
             } else if (res.data.uploadSuccess !== 'empty') {
               alert(res.data.message);
             } else if (res.data.uploadSuccess !== 'emptyIPFS') {
