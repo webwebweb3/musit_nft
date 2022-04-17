@@ -92,8 +92,8 @@ router.post('/', async (req, res) => {
       songwriter,
       lyricist,
       genre,
-      S3AlbumUrl,
-      IPFSurl,
+      albumCover: S3AlbumUrl,
+      IPFSUrl: IPFSurl,
     });
 
     await MusicLike.create({

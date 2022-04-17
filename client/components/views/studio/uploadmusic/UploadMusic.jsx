@@ -16,6 +16,8 @@ const client = create('https://ipfs.infura.io:5001/api/v0');
 const UploadMusic = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  console.log('라우터', router.asPath.split('/').reverse()[0]);
+
   const artist = router.query.artistName;
   const { userData } = useSelector(state => state.user);
   const [dataToSubmit, setDataToSubmit] = useState({});
@@ -38,7 +40,6 @@ const UploadMusic = () => {
       selectedIPFSFile,
       account,
     };
-    console.log(mintToData);
     dispatch(mintMusicNFTRequestAction(mintToData));
     if (userData.name !== artist) {
       alert('This user is not that artist');

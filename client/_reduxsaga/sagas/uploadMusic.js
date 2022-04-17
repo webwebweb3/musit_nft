@@ -1,7 +1,7 @@
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import axios from 'axios';
 
 import {
@@ -16,6 +16,11 @@ import {
 import { mintMusicTokenContract } from '$contracts';
 
 function uploadS3AlbumCover(data) {
+  console.log('s3data', data);
+  if (data.selectedFile === null) {
+    alert('앨범 카버를 선택해주세요!');
+    Router.reload();
+  }
   const myFile = data.selectedFile;
   const fileName = `${Date.now()}_${myFile.name}`;
   console.log('s3F', fileName);
@@ -52,15 +57,51 @@ function uploadS3AlbumCover(data) {
 }
 
 async function uploadIPFSMusic(data) {
-  console.log('ipfs data', data.ipfsredux.file);
+  console.log('ipfsdata', data);
+  if (data.selectedIPFSFile === null) {
+    alert('음악을 업로드해주세요!');
+    Router.reload();
+  }
   const url = await data.ipfsredux.client.add(data.ipfsredux.file);
 
   return url.path;
 }
 
+async function uploadToServer(data) {
+  console.log('datatoserver', data);
+  await axios.post(`/uploadmusic`, data).then(res => {
+    if (res.data.uploadSuccess === 'true') {
+      // TODO: studio/artistname/uploadmusic 일 시 아래 실행
+      // Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
+    } else if (res.data.uploadSuccess !== 'empty') {
+      alert(res.data.message);
+    } else if (res.data.uploadSuccess !== 'emptyIPFS') {
+      alert(res.data.message);
+    } else if (res.data.uploadSuccess !== 'emptyS3AlbumCover') {
+      alert(res.data.message);
+    } else {
+      alert(res.data.message);
+    }
+  });
+}
+
 async function mintNFTMusic(data) {
   try {
-    console.log('data', data);
+    // const router = useRouter();
+    console.log('11');
+    console.log('타이틀', data.data.dataToSubmit.title);
+    console.log('2', data.IPFSurl);
+    console.log('3', data.S3AlbumUrl);
+    if (data.data.dataToSubmit.title === '' || null) {
+      throw new Error('a');
+    }
+    if (data.IPFSurl === '' || null) {
+      throw new Error('b');
+    }
+    if (data.S3AlbumUrl === '' || null) {
+      throw new Error('c');
+    }
+    console.log('mint data', data);
     let jsonData = {
       title: 'musit NFT',
       description: 'This data is for minting a NFT.',
@@ -74,11 +115,6 @@ async function mintNFTMusic(data) {
 
     const mintIPFSurl = await axios.post('/uploadmusic/fs', jsonData);
 
-    // const NFTIPFSurl = await data.data.ipfsredux.client.add(MintData);
-
-    // console.log('nftipfs', NFTIPFSurl);
-    // const mintingData = JSON.stringify(jsonData);
-    // console.log('mintingdata', mintingData);
     console.log('account', data.data.account);
     const response = await mintMusicTokenContract.methods
       .mintMusicToken(mintIPFSurl.data.path)
@@ -86,29 +122,11 @@ async function mintNFTMusic(data) {
 
     console.log('res', response);
 
-    if (response.status) {
-      const uploadToServer = async e => {
-        try {
-          await axios.post(`/uploadmusic`, data.data.dataToSubmit).then(res => {
-            if (res.data.uploadSuccess === 'true') {
-              // TODO: studio/artistname/uploadmusic 일 시 아래 실행
-              // Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
-            } else if (res.data.uploadSuccess !== 'empty') {
-              alert(res.data.message);
-            } else if (res.data.uploadSuccess !== 'emptyIPFS') {
-              alert(res.data.message);
-            } else if (res.data.uploadSuccess !== 'emptyS3AlbumCover') {
-              alert(res.data.message);
-            } else {
-              alert(res.data.message);
-            }
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      uploadToServer();
-    }
+    // if (response.status) { 성공시
+    //   if (router.asPath.split('/').reverse()[0] === 'uploadmusic') {
+    //     Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
+    //   }
+    // } else {} 실패시
   } catch (error) {
     console.error(error);
     alert('error.. reload page please..');
@@ -123,6 +141,7 @@ function* mintNFT(action) {
       data: S3AlbumUrl,
     });
     const IPFSurl = yield call(uploadIPFSMusic, action.data);
+    console.log('IPFSurl', IPFSurl);
     yield put({
       type: IPFS_MUSIC_SUCCESS,
       data: IPFSurl,
@@ -134,6 +153,7 @@ function* mintNFT(action) {
     };
 
     yield call(mintNFTMusic, newActionData);
+    yield call(uploadToServer, newActionData);
 
     yield put({
       type: MINT_MUSIC_NFT_SUCCESS,
