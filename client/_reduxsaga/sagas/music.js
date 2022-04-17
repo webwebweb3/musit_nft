@@ -10,6 +10,7 @@ import {
 } from '$reduxsaga/request/types';
 
 async function musicLike(data) {
+  Axios.post('/music');
   console.log('musiclike', data);
 }
 

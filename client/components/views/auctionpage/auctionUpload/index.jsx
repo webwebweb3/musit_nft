@@ -12,7 +12,12 @@ import {
 import { timeFunction } from '$util/timefunc';
 import UploadButton from './UploadButton';
 import { useWalletInfo } from '$hooks/web3';
-import { auctionCreatorContract, mintMusicTokenContract } from '$contracts';
+import {
+  auctionAbi,
+  auctionCreatorContract,
+  mintMusicTokenContract,
+  web3,
+} from '$contracts';
 import { StyledMyNFTText } from '../style';
 
 const AuctionUploadPage = () => {
@@ -43,15 +48,21 @@ const AuctionUploadPage = () => {
       try {
         // 전체 생성된 컨트랙트를 구하고
         // 그 생성된 컨트랙트들을 전부 아래에 넣어서 호출?
-        const auctionContract = await auctionCreatorContract.methods
+        const auctionContractAddress = await auctionCreatorContract.methods
           .newAuctionContract(account.data)
           .call();
-        console.log(auctionContract);
-        const events = await auctionCreatorContract.getPastEvents(
-          'IsAuctionNFT',
-          { filter: { num: [2, 1] }, fromBlock: 1, toBlock: 'latest' },
+        const auctionContract = new web3.eth.Contract(
+          auctionAbi,
+          auctionContractAddress,
         );
-        console.log(events);
+
+        console.log('옥션컨트랙트', auctionContract);
+        const events = await auctionContract.getPastEvents('IsAuctionNFT', {
+          filter: { num: [2, 1] },
+          fromBlock: 1,
+          toBlock: 'latest',
+        });
+        console.log('옥션이벤트', events);
       } catch (error) {
         console.error(error);
       }
