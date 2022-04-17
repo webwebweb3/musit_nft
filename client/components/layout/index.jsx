@@ -32,10 +32,8 @@ const MainLayout = ({ children }) => {
           style={{
             position: 'fixed',
             bottom: '0px',
-            backgroundColor: '#fff',
             width: '100%',
-            height: '100px',
-            color: '#fff',
+            color: 'black',
           }}
         >
           <Footer />

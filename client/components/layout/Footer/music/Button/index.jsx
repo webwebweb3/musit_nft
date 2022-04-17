@@ -15,7 +15,7 @@ const ControlsToggleButton = ({ type, defaultIcon, changeIcon, onClicked }) => {
   }
 
   return (
-    <Button onClick={handleChange}>
+    <Button style={{ color: '#fff' }} onClick={handleChange}>
       {!buttonType ? defaultIcon : changeIcon}
     </Button>
   );

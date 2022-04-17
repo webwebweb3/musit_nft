@@ -33,3 +33,17 @@ body {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
 }
+
+.css-187mznn-MuiSlider-root:hover > .css-eg0mwd-MuiSlider-thumb {
+  display: flex;
+}
+.css-187mznn-MuiSlider-root:hover > .css-14pt78w-MuiSlider-rail {
+  height: 5px;
+}
+.css-187mznn-MuiSlider-root:hover {
+  height: 5px;
+}
+
+.css-eg0mwd-MuiSlider-thumb {
+  display: none;
+}

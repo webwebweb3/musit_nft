@@ -5,8 +5,16 @@ import {
   RepeatOne,
   SkipNext,
   SkipPrevious,
+  VolumeUp,
+  VolumeOff,
+  Favorite,
+  PlaylistAdd,
+  KeyboardArrowDown,
+  Headset,
+  KeyboardControlKey,
 } from '@mui/icons-material';
-import { Slider } from '@mui/material';
+import { Box, Button, Slider } from '@mui/material';
+import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
 
@@ -17,6 +25,7 @@ const Footer = () => {
   const [isPlaying, setPlayPauseClicked] = useState(false);
   const [isNextClicked, setNextClicked] = useState(false);
   const [isVolumeClicked, setVolumeClicked] = useState(false);
+  const [toggle, setToggle] = useState(true);
 
   const [volume, setVolume] = useState(50);
   const [seekTime, setSeekTime] = useState(0);
@@ -66,6 +75,10 @@ const Footer = () => {
   //   }
   // }, [dispatch, id, isNextClicked, isPrevClicked, playlists]);
 
+  const toggleAction = () => {
+    setToggle(!toggle);
+  };
+
   const handleToggle = (type, val) => {
     switch (type) {
       case 'repeat':
@@ -81,6 +94,7 @@ const Footer = () => {
         setNextClicked(val);
         break;
       case 'volume':
+        console.log(val);
         setVolumeClicked(val);
         break;
       default:
@@ -107,48 +121,161 @@ const Footer = () => {
   };
 
   return (
-    <div style={{ color: 'black' }}>
-      <div>
-        {!isNaN(seekTime) && (
-          <Slider
-            className={'playback-completed'}
-            value={seekTime}
-            onChange={handleSeekChange}
+    <>
+      <Box
+        style={{
+          position: 'fixed',
+          bottom: '35px',
+          right: '35px',
+          color: 'black',
+          borderRadius: '50%',
+          backgroundColor: 'rgb(33,33,33)',
+          display: `${toggle ? 'none' : 'block'}`,
+        }}
+      >
+        <Button onClick={toggleAction}>
+          <Headset
+            fontSize="medium"
+            sx={{
+              color: 'white',
+              width: '55px',
+              height: '55px',
+              marginLeft: '0px',
+              marginTop: '0px',
+            }}
           />
-        )}
-      </div>
-      <ControlsToggleButton
-        type={'prev'}
-        defaultIcon={<SkipPrevious fontSize={'large'} />}
-        changeIcon={<SkipPrevious fontSize={'large'} />}
-        onClicked={handleToggle}
-      />
-      <audio ref={audioElement} src={`1.mp3`} preload={'metadata'} />
-      <ControlsToggleButton
-        type={'play-pause'}
-        defaultIcon={<PlayArrow fontSize={'large'} />}
-        changeIcon={<Pause fontSize={'large'} />}
-        onClicked={handleToggle}
-      />
-      <ControlsToggleButton
-        type={'next'}
-        defaultIcon={<SkipNext fontSize={'large'} />}
-        changeIcon={<SkipNext fontSize={'large'} />}
-        onClicked={handleToggle}
-      />
-      <ControlsToggleButton
-        type={'repeat'}
-        defaultIcon={<Repeat fontSize={'large'} />}
-        changeIcon={<RepeatOne fontSize={'large'} />}
-        onClicked={handleToggle}
-      />
-      <span>{formatTime(currTime)}</span>/<span>{formatTime(duration)}</span>
-      <Slider
-        style={{ color: '#000' }}
-        value={volume}
-        onChange={handleVolumeChange}
-      />
-    </div>
+        </Button>
+      </Box>
+      {!isNaN(seekTime) && (
+        <Slider
+          className={'playback-completed'}
+          value={seekTime}
+          style={{
+            zIndex: '5',
+            bottom: '75px',
+            display: `${toggle ? 'block' : 'none'}`,
+          }}
+          onChange={handleSeekChange}
+        />
+      )}
+      <Box
+        style={{
+          position: 'fixed',
+          bottom: '0px',
+          width: '100%',
+          color: 'black',
+          backgroundColor: 'rgb(33,33,33)',
+          height: '90px',
+          display: `${toggle ? 'block' : 'none'}`,
+        }}
+      >
+        <Box
+          style={{
+            margin: '20px',
+            display: 'flex',
+          }}
+        >
+          <ControlsToggleButton
+            type={'prev'}
+            defaultIcon={<SkipPrevious fontSize={'large'} />}
+            changeIcon={<SkipPrevious fontSize={'large'} />}
+            onClicked={handleToggle}
+          />
+          {/* 음악 */}
+          <audio ref={audioElement} src={`3.mp3`} preload={'metadata'} />
+          <ControlsToggleButton
+            type={'play-pause'}
+            defaultIcon={<PlayArrow fontSize={'large'} />}
+            changeIcon={<Pause fontSize={'large'} />}
+            onClicked={handleToggle}
+          />
+          <ControlsToggleButton
+            type={'next'}
+            defaultIcon={<SkipNext fontSize={'large'} />}
+            changeIcon={<SkipNext fontSize={'large'} />}
+            onClicked={handleToggle}
+          />
+          <ControlsToggleButton
+            type={'repeat'}
+            defaultIcon={<Repeat fontSize={'large'} />}
+            changeIcon={<RepeatOne fontSize={'large'} />}
+            onClicked={handleToggle}
+          />
+          <div
+            style={{ marginTop: '11.5px', marginLeft: '10px', color: '#dada' }}
+          >
+            {formatTime(currTime)}
+            &nbsp;/&nbsp;
+            {formatTime(duration)}
+          </div>
+          <Slider
+            style={{
+              color: '#dada',
+              display: 'inline-block',
+              width: '120px',
+              marginLeft: 'auto',
+              marginRight: '10px',
+              marginTop: '9.5px',
+            }}
+            value={volume}
+            onChange={handleVolumeChange}
+          />
+          <div
+            style={{
+              display: 'inline-block',
+            }}
+          >
+            <ControlsToggleButton
+              type={'volume'}
+              defaultIcon={<VolumeUp fontSize={'large'} />}
+              changeIcon={<VolumeOff fontSize={'large'} />}
+              onClicked={handleToggle}
+            />
+          </div>
+          <div style={{ paddingRight: '20px', marginLeft: '24px' }}>
+            <Image
+              src={`/bgimg.jpg`}
+              alt={`album Cover`}
+              layout="fixed"
+              width="48px"
+              height="48px"
+            />
+          </div>
+          <div style={{ marginRight: '20px' }}>
+            <div
+              style={{ fontSize: '20px', fontWeight: 'bold', color: '#fff' }}
+            >
+              제목
+            </div>
+            <div style={{ color: '#ffffffa0' }}>아티스트</div>
+          </div>
+          <Button>
+            <Favorite
+              fontSize="medium"
+              sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
+            />
+          </Button>
+          <Button>
+            <PlaylistAdd
+              fontSize="medium"
+              sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
+            />
+          </Button>
+          <Button>
+            <KeyboardControlKey
+              fontSize="medium"
+              sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
+            />
+          </Button>
+          <Button onClick={toggleAction}>
+            <KeyboardArrowDown
+              fontSize="medium"
+              sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
+            />
+          </Button>
+        </Box>
+      </Box>
+    </>
   );
 };
 
