@@ -36,6 +36,9 @@ import {
   AUCTION_APPROVE_REQUEST,
   AUCTION_APPROVE_SUCCESS,
   AUCTION_APPROVE_FAILURE,
+  AUCTION_TOKEN_INFO_REQUEST,
+  AUCTION_TOKEN_INFO_SUCCESS,
+  AUCTION_TOKEN_INFO_FAILURE,
 } from '$reduxsaga/request/types';
 
 async function createauctionAPI(data) {
@@ -146,6 +149,10 @@ function* auctionInfo(action) {
     yield put({
       type: AUCTION_INFO_SUCCESS,
       data: result,
+    });
+    yield put({
+      type: AUCTION_TOKEN_INFO_REQUEST,
+      data: result.tokenID,
     });
   } catch (err) {
     console.error(err);
@@ -306,6 +313,34 @@ function* auctionapprove({ data }) {
   }
 }
 
+async function auctionTokenInfoAPI(tokenID) {
+  const tokenURI = await mintMusicTokenContract.methods
+    .tokenURI(tokenID)
+    .call();
+
+  const ipfsData = await fetch(`https://ipfs.infura.io/ipfs/${tokenURI}`);
+  const data = await ipfsData.json();
+
+  return data;
+}
+
+function* auctiontokeninfo({ data }) {
+  try {
+    let result = yield call(auctionTokenInfoAPI, data);
+
+    yield put({
+      type: AUCTION_TOKEN_INFO_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AUCTION_TOKEN_INFO_FAILURE,
+      error: 'err',
+    });
+  }
+}
+
 function* watchCreateAuction() {
   yield takeLatest(AUCTION_CREATE_REQUEST, createauction);
 }
@@ -346,6 +381,10 @@ function* watchAuctionApprove() {
   yield takeLatest(AUCTION_APPROVE_REQUEST, auctionapprove);
 }
 
+function* watchAuctionTokenInfo() {
+  yield takeLatest(AUCTION_TOKEN_INFO_REQUEST, auctiontokeninfo);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchCreateAuction),
@@ -358,5 +397,6 @@ export default function* userSaga() {
     fork(watchAuctionFinalize),
     fork(watchAuctionApproveCheck),
     fork(watchAuctionApprove),
+    fork(watchAuctionTokenInfo),
   ]);
 }

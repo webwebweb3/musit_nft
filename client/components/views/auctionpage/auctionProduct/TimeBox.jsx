@@ -37,7 +37,6 @@ const TimeBox = ({ gapTime, gapTimeFunc, owner, ownerFunc }) => {
     } else {
       gapTimeFunc(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gap && gap < 0]);
 
   useEffect(() => {

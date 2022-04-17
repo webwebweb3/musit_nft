@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Gavel, Headset, Storefront, Token } from '@mui/icons-material';
 import { Tab } from '@mui/material';
 
-const NavbarLink = ({ value }) => {
+const NavbarLink = () => {
   const router = useRouter();
   let { pathname } = router;
   const [linkDisabled, setLinkDisabled] = useState('');

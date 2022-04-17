@@ -29,6 +29,12 @@ const AuctionProductPage = () => {
     approveCheckAuctionLoading,
     approveAuctionLoading,
     approveAuctionData,
+    auctionTokenData,
+    auctionTokenInfoLoading,
+    infoAuctionDone,
+    auctionDone,
+    myBidAuctionDone,
+    auctionData,
   } = useSelector(state => state.auction);
   const router = useRouter();
   let { product } = router.query;
@@ -65,7 +71,11 @@ const AuctionProductPage = () => {
 
   return (
     <>
-      {approveCheckAuctionLoading ? (
+      {approveCheckAuctionLoading &&
+      auctionTokenInfoLoading &&
+      infoAuctionDone &&
+      auctionDone &&
+      myBidAuctionDone ? (
         <div style={{ display: 'flex' }}>
           <div style={{ margin: 'auto' }}>
             <CircularProgress color="inherit" />
@@ -73,51 +83,58 @@ const AuctionProductPage = () => {
         </div>
       ) : (
         <AuctionAllContainer>
-          {!approve && ( // 최상단 배치 및 경매 취소 버튼 추가
-            <div className="auctionBlur">
-              <div
-                style={{
-                  fontSize: '50px',
-                  color: '#8EC5FC',
-                  display: 'flex',
-                  margin: 'auto',
-                  flexDirection: 'column',
-                }}
-              >
-                <div>판매자 승인을 대기하고 있어요!</div>
-                <div style={{ margin: 'auto' }}>
-                  {/* 버튼은 소유자와 유저데이터가 같을때만 보이게 */}
-                  {userData && owner === userData.metamask && (
-                    <>
-                      <Button onClick={onClickApprove} variant="contained">
-                        경매 시작하기
-                      </Button>
-                      <Button
-                        onClick={onClickCancelAuction}
-                        variant="contained"
-                      >
-                        경매 취소
-                      </Button>
-                    </>
-                  )}
+          {!approve &&
+            auctionData &&
+            auctionData.auctionState !== '3' && ( // 최상단 배치 및 경매 취소 버튼 추가
+              <div className="auctionBlur">
+                <div
+                  style={{
+                    fontSize: '50px',
+                    color: '#8EC5FC',
+                    display: 'flex',
+                    margin: 'auto',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <div>판매자 승인을 대기하고 있어요!</div>
+                  <div style={{ margin: 'auto' }}>
+                    {userData && owner === userData.metamask && (
+                      <>
+                        <Button onClick={onClickApprove} variant="contained">
+                          경매 시작하기
+                        </Button>
+                        <Button
+                          onClick={onClickCancelAuction}
+                          variant="contained"
+                        >
+                          경매 취소
+                        </Button>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
           <AuctionContentsContainer>
             {/* 상품 이미지 */}
             <AuctionContentImg>
-              <Image
-                src="/bgimg.jpg"
-                alt="img"
-                layout="fixed"
-                width="550px"
-                height="550px"
-              />
+              {auctionTokenData && (
+                <Image
+                  src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${auctionTokenData.properties.S3AlbumCover}`}
+                  alt="img"
+                  layout="fixed"
+                  width="550px"
+                  height="550px"
+                />
+              )}
             </AuctionContentImg>
             <AuctionContents>
               {/* 상품 이름 */}
-              <TitleBox />
+              {auctionTokenData && (
+                <TitleBox
+                  text={auctionTokenData.properties.dataToSubmit.title}
+                />
+              )}
               <AuctionDivider />
 
               {/* 경매 시간 */}

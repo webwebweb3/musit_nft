@@ -1,19 +1,9 @@
+@import './navbar.css';
+
 html,
 body {
   background-color: #0d0f1a;
   margin: 0;
-}
-
-button[role='tab'] {
-  color: #fff;
-}
-
-button[role='tab']:hover {
-  color: #ffbbec;
-}
-
-button[disabled] {
-  color: #ffbbec;
 }
 
 .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {

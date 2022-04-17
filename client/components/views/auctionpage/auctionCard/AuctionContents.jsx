@@ -59,11 +59,6 @@ const AuctionContents = ({ auction }) => {
               tokenID={auctionData.tokenID}
             />
           )}
-          {/* <MarketPlaceNFTCard
-                  musicTokenIds={v.musicTokenId}
-                  musicTokenPrices={v.musicTokenPrice}
-                  musicTokenDatas={v.musicTokenData}
-                /> */}
         </Grid>
       </Grid>
     </Box>
