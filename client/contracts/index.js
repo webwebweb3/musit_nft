@@ -1463,12 +1463,12 @@ const paymentAbi = [
 ];
 
 export const mintMusicTokenAddress =
-  '0x2e4007304bCd8d7FC9e657Ea7f17B56e4359D964';
+  '0x2CB6c8f2EcA1142dbeD6E540A04AD6F87189007E';
 export const saleMusicTokenAddress =
-  '0xaECfB26b87140A851c0F73477aCf5dB7F0127C7e';
+  '0xB7fF897559EFC6025D94F28339C963e6ED8543F2';
 export const auctionCreatorAddress =
-  '0xE11B11D9aA8eD442dA1f4260939A5A6E99106Ed2';
-export const paymentAddress = '0xC0b0891EFBd83c0ca257199E9E5AEeb21bF558DF';
+  '0x25D90dDDf9371d95F9962CabD0523752b0cFbBD4';
+export const paymentAddress = '0x08CEB9260e5F95106133EDE3B398E3F33efE8208';
 
 let web3;
 let mintMusicTokenContract;
