@@ -9,7 +9,8 @@ import {
 } from '$reduxsaga/request/user_request';
 import { useWalletInfo } from '$hooks/web3';
 import { NavbarLink } from '$components/layout/Navbar/contents';
-import { MainLogo, RegisterCheck } from '$components/layout/Navbar/base';
+import { RegisterCheck } from '$components/layout/Navbar/base';
+import Image from 'next/image';
 
 const Navbar = () => {
   const { userData } = useSelector(state => state.user);
@@ -45,7 +46,15 @@ const Navbar = () => {
       >
         <Toolbar sx={{ paddingRight: '20px' }}>
           <Link href="/">
-            <MainLogo />
+            <span style={{ marginRight: '30px', cursor: 'pointer' }}>
+              <Image
+                width="80px"
+                height="80px"
+                src="/logoW.png"
+                alt="logo"
+                layout="fixed"
+              />
+            </span>
           </Link>
 
           <Tabs textColor="inherit" value={false}>

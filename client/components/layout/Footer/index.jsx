@@ -182,7 +182,7 @@ const Footer = () => {
             onClicked={handleToggle}
           />
           {/* 음악 */}
-          <audio ref={audioElement} src={`3.mp3`} preload={'metadata'} />
+          <audio ref={audioElement} src={`2.mp3`} preload={'metadata'} />
           <ControlsToggleButton
             type={'play-pause'}
             defaultIcon={<PlayArrow fontSize={'large'} />}

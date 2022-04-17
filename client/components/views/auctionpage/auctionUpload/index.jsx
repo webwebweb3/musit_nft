@@ -12,7 +12,7 @@ import {
 import { timeFunction } from '$util/timefunc';
 import UploadButton from './UploadButton';
 import { useWalletInfo } from '$hooks/web3';
-import { mintMusicTokenContract } from '$contracts';
+import { auctionCreatorContract, mintMusicTokenContract } from '$contracts';
 import { StyledMyNFTText } from '../style';
 
 const AuctionUploadPage = () => {
@@ -36,6 +36,28 @@ const AuctionUploadPage = () => {
 
   useEffect(() => {
     console.log(myNFT);
+  }, [myNFT]);
+
+  useEffect(() => {
+    let eventFunc = async () => {
+      try {
+        // 전체 생성된 컨트랙트를 구하고
+        // 그 생성된 컨트랙트들을 전부 아래에 넣어서 호출?
+        const auctionContract = await auctionCreatorContract.methods
+          .newAuctionContract(account.data)
+          .call();
+        console.log(auctionContract);
+        const events = await auctionCreatorContract.getPastEvents(
+          'IsAuctionNFT',
+          { filter: { num: [2, 1] }, fromBlock: 1, toBlock: 'latest' },
+        );
+        console.log(events);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    eventFunc();
   }, [myNFT]);
 
   const getMyMusicTokens = useCallback(async () => {
