@@ -51,7 +51,7 @@ const UploadMusic = () => {
   }, [selectedIPFSFile]);
 
   return (
-    <form onSubmit={minting}>
+    <form onSubmit={minting} style={style.uploadContainer}>
       <Box sx={style.uploadMusicContainer}>
         <UploadBox
           account={account}

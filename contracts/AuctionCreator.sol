@@ -10,7 +10,13 @@ contract AuctionCreator{
 
     MintMusicToken public mintMusicTokenAddress;
 
-    Auction[] public auctions;
+    AuctionInformation[] public auctions;
+
+    struct AuctionInformation {
+        uint256 tokenId;
+        address msgSender;
+        Auction newAuctionContract;
+    }
 
     mapping (address => Auction) public newAuctionContract; 
 
@@ -35,15 +41,36 @@ contract AuctionCreator{
         address tokenOwner = mintMusicTokenAddress.ownerOf(_tokenID);
         require(msg.sender == tokenOwner, "This user is not token Owner.");
         Auction newAuction = new Auction(msg.sender, _startingBid, _endAt, _tokenID, _minimumBid, mintMusicTokenAddress);
-        newAuctionContract[msg.sender] = newAuction;
-        auctions.push(newAuction);
+        auctions.push(AuctionInformation(_tokenID, msg.sender,newAuction));
     }
 
     function allAuctions() 
         public 
         view 
-        returns (Auction[] memory) 
+        returns (AuctionInformation[] memory) 
     {
         return auctions;
+    }
+
+    function getMyAuctions(address _myAddress)
+        view
+        public
+        returns(AuctionInformation[] memory)
+    {
+        uint256 j = 0;
+        for (uint256 i = 0; i < auctions.length; i++){
+            if(auctions[i].msgSender == _myAddress){
+                j++;
+            }
+        }
+        AuctionInformation[] memory auctionData = new AuctionInformation[](j);
+        for (uint256 i = 0; i < auctions.length; i++){
+            if(auctions[i].msgSender == _myAddress){
+                uint256 tokenId = auctions[i].tokenId;
+                Auction myAuctionContract = auctions[i].newAuctionContract;
+                auctionData[i] = AuctionInformation(tokenId, _myAddress, myAuctionContract);
+            }
+        }
+        return auctionData;
     }
 }

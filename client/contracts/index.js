@@ -787,9 +787,26 @@ const auctionCreatorAbi = [
     name: 'allAuctions',
     outputs: [
       {
-        internalType: 'contract Auction[]',
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'tokenId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'address',
+            name: 'msgSender',
+            type: 'address',
+          },
+          {
+            internalType: 'contract Auction',
+            name: 'newAuctionContract',
+            type: 'address',
+          },
+        ],
+        internalType: 'struct AuctionCreator.AuctionInformation[]',
         name: '',
-        type: 'address[]',
+        type: 'tuple[]',
       },
     ],
     stateMutability: 'view',
@@ -806,8 +823,18 @@ const auctionCreatorAbi = [
     name: 'auctions',
     outputs: [
       {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: 'msgSender',
+        type: 'address',
+      },
+      {
         internalType: 'contract Auction',
-        name: '',
+        name: 'newAuctionContract',
         type: 'address',
       },
     ],
@@ -840,6 +867,42 @@ const auctionCreatorAbi = [
     name: 'createAuction',
     outputs: [],
     stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_myAddress',
+        type: 'address',
+      },
+    ],
+    name: 'getMyAuctions',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'tokenId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'address',
+            name: 'msgSender',
+            type: 'address',
+          },
+          {
+            internalType: 'contract Auction',
+            name: 'newAuctionContract',
+            type: 'address',
+          },
+        ],
+        internalType: 'struct AuctionCreator.AuctionInformation[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
     type: 'function',
   },
   {
@@ -1467,7 +1530,7 @@ export const mintMusicTokenAddress =
 export const saleMusicTokenAddress =
   '0xB7fF897559EFC6025D94F28339C963e6ED8543F2';
 export const auctionCreatorAddress =
-  '0x25D90dDDf9371d95F9962CabD0523752b0cFbBD4';
+  '0x1337C910Bd9a9dF11559ADBDc69d86B100725f3f';
 export const paymentAddress = '0x08CEB9260e5F95106133EDE3B398E3F33efE8208';
 
 let web3;

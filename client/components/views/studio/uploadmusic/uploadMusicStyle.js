@@ -1,4 +1,9 @@
 export const style = {
+  uploadContainer: {
+    maxWidth: '960px',
+    minWidth: '960px',
+    margin: '0 auto',
+  },
   uploadMusicContainer: {
     margin: '100px',
     marginTop: '140px',
