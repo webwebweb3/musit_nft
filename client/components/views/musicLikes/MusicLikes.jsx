@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   musicDisLikeRequest,
+  musicIsLikeRequest,
   musicLikeRequest,
 } from '$reduxsaga/request/music_request';
 import { useRouter } from 'next/router';
@@ -23,10 +24,12 @@ const MusicLikes = () => {
   const onClickLike = () => {
     dispatch(musicLikeRequest({ editionNum, userMetamask }));
   };
-  // const getIsLike =() =>{
-  //   dispatch(musicIsLikeRequest({}))
-  // }
-  useEffect(() => {}, [music && music.isLike]);
+  const getIsLike = () => {
+    dispatch(musicIsLikeRequest({ editionNum, userMetamask }));
+  };
+  useEffect(() => {
+    getIsLike();
+  }, []); // 처음 렌더링
   useEffect(() => {
     if (music) {
       setIsFavorite(music.isLike);

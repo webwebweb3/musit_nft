@@ -20,9 +20,9 @@ export const initialState = {
   MusicDisLikeDone: false,
   MusicDisLikeError: null,
 
-  MusicDisLikeLoading: false,
-  MusicDisLikeDone: false,
-  MusicDisLikeError: null,
+  IsLikeLoading: false,
+  IsLikeDone: false,
+  IsLikeError: null,
 
   isLike: null,
 };
@@ -58,6 +58,19 @@ const MusicReducer = (state = initialState, action) =>
       case MUSICS_DISLIKE_FAILURE:
         draft.MusicDisLikeLoading = false;
         draft.MusicDisLikeError = action.error;
+      case MUSICS_ISLIKE_REQUEST:
+        draft.IsLikeLoading = true;
+        draft.IsLikeError = null;
+        draft.IsLikeDone = false;
+        break;
+      case MUSICS_ISLIKE_SUCCESS:
+        draft.IsLikeLoading = false;
+        draft.isLike = action.data;
+        draft.IsLikeDone = true;
+        break;
+      case MUSICS_ISLIKE_FAILURE:
+        draft.IsLikeLoading = false;
+        draft.IsLikeError = action.error;
         break;
       default:
         break;

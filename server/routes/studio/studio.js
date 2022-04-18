@@ -151,7 +151,7 @@ router.post('/subscribe', async (req, res) => {
 
     const isExistSql = `SELECT * FROM subscribe WHERE subscribers=${myId.id} AND subscribing=${artistId};`;
     const isExistResult = await sequelize.query(isExistSql, {
-      type: QueryTypes.DELETE,
+      type: QueryTypes.SELECT,
     });
     console.log('쿼리 결과 한번 봅시다', isExistResult);
     if (isExistResult) {
