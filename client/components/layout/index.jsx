@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import Navbar from './Navbar';
-import Web3provider from '../../providers/hooks';
+import Navbar from '$components/layout/Navbar';
+import Web3provider from '$providers/hooks';
+import Footer from './Footer';
 
-const MainLayout = ({ children, value }) => {
+const MainLayout = ({ children }) => {
   return (
     <Web3provider>
       <Box
@@ -13,7 +14,7 @@ const MainLayout = ({ children, value }) => {
         }}
       >
         {/* sidebar */}
-        <Navbar value={value} />
+        <Navbar />
 
         {/* MyPage content */}
         <Box
@@ -24,6 +25,18 @@ const MainLayout = ({ children, value }) => {
           }}
         >
           {children}
+        </Box>
+
+        {/* footer */}
+        <Box
+          style={{
+            position: 'fixed',
+            bottom: '0px',
+            width: '100%',
+            color: 'black',
+          }}
+        >
+          <Footer />
         </Box>
       </Box>
     </Web3provider>

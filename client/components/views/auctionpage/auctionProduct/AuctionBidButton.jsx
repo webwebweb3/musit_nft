@@ -4,11 +4,10 @@ import { useRouter } from 'next/router';
 import { CircularProgress } from '@mui/material';
 
 import { AuctionStyledButton } from '../style';
-import { useInput } from '../../../../hooks/useInput';
+import { useInput } from '$hooks/useInput';
 import AuctionTextField from '../auctionMui/AuctionTextField';
-import { auctionBidAction } from '$reduxsaga/request/auction_request';
-import { web3 } from '$contracts/index';
-import { auctionAbi } from '$contracts/index';
+// import { auctionBidAction } from '$reduxsaga/request/auction_request';
+import { web3, auctionAbi } from '$contracts';
 import { withToast } from '$util/toast';
 
 const AuctionBidButton = () => {

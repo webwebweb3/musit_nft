@@ -1,8 +1,8 @@
 import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 import { Upload } from '@aws-sdk/lib-storage';
 import { S3Client, S3 } from '@aws-sdk/client-s3';
-import { mintMusicTokenContract } from '../../contracts';
 import Router from 'next/router';
+import axios from 'axios';
 
 import {
   IPFS_MUSIC_FAILURE,
@@ -12,8 +12,8 @@ import {
   MINT_MUSIC_NFT_SUCCESS,
   S3_ALBUMCOVER_FAILURE,
   S3_ALBUMCOVER_SUCCESS,
-} from '../request/types';
-import axios from 'axios';
+} from '$reduxsaga/request/types';
+import { mintMusicTokenContract } from '$contracts';
 
 function uploadS3AlbumCover(data) {
   const myFile = data.selectedFile;
@@ -91,7 +91,8 @@ async function mintNFTMusic(data) {
         try {
           await axios.post(`/uploadmusic`, data.data.dataToSubmit).then(res => {
             if (res.data.uploadSuccess === 'true') {
-              Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
+              // TODO: studio/artistname/uploadmusic 일 시 아래 실행
+              // Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
             } else if (res.data.uploadSuccess !== 'empty') {
               alert(res.data.message);
             } else if (res.data.uploadSuccess !== 'emptyIPFS') {

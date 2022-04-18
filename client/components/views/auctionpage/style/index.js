@@ -174,6 +174,12 @@ export const StyledFormHelperText = styled(FormHelperText)`
   margin-right: 430px;
 `;
 
+export const StyledMyNFTText = styled(StyledFormHelperText)`
+  margin-top: 30px;
+  margin-left: 80px;
+  margin-bottom: 10px;
+`;
+
 export const GlobalAppointment = createGlobalStyle`
   .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
     color: #dada

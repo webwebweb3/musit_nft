@@ -1,4 +1,4 @@
-import produce from '../../util/produce';
+import produce from '$util/produce';
 import {
   AUCTION_CREATE_REQUEST,
   AUCTION_CREATE_SUCCESS,
@@ -24,7 +24,16 @@ import {
   AUCTION_FINALIZE_REQUEST,
   AUCTION_FINALIZE_SUCCESS,
   AUCTION_FINALIZE_FAILURE,
-} from '../request/types';
+  AUCTION_APPROVE_CHECK_REQUEST,
+  AUCTION_APPROVE_CHECK_SUCCESS,
+  AUCTION_APPROVE_CHECK_FAILURE,
+  AUCTION_APPROVE_REQUEST,
+  AUCTION_APPROVE_SUCCESS,
+  AUCTION_APPROVE_FAILURE,
+  AUCTION_TOKEN_INFO_REQUEST,
+  AUCTION_TOKEN_INFO_SUCCESS,
+  AUCTION_TOKEN_INFO_FAILURE,
+} from '$reduxsaga/request/types';
 
 export const initialState = {
   createAuctionLoading: false,
@@ -51,9 +60,20 @@ export const initialState = {
   finalizeAuctionLoading: false,
   finalizeAuctionDone: false,
   finalizeAuctionError: null,
+  approveAuctionLoading: false,
+  approveAuctionDone: false,
+  approveAuctionError: null,
+  approveCheckAuctionLoading: false,
+  approveCheckAuctionDone: false,
+  approveCheckAuctionError: null,
+  auctionTokenInfoLoading: false,
+  auctionTokenInfoDone: false,
+  auctionTokenInfoError: null,
   myBidData: null,
   allAuctionData: null,
   auctionData: null,
+  approveAuctionData: null,
+  auctionTokenData: null,
 };
 
 const MetamaskReducer = (state = initialState, action) =>
@@ -99,6 +119,49 @@ const MetamaskReducer = (state = initialState, action) =>
       case AUCTION_FAILURE:
         draft.auctionLoading = false;
         draft.auctionError = action.error;
+        break;
+      case AUCTION_TOKEN_INFO_REQUEST:
+        draft.auctionTokenInfoLoading = true;
+        draft.auctionTokenInfoError = null;
+        draft.auctionTokenInfoDone = false;
+        draft.auctionTokenData = null;
+        break;
+      case AUCTION_TOKEN_INFO_SUCCESS:
+        draft.auctionTokenInfoLoading = false;
+        draft.auctionTokenData = action.data;
+        draft.auctionTokenInfoDone = true;
+        break;
+      case AUCTION_TOKEN_INFO_FAILURE:
+        draft.auctionTokenInfoLoading = false;
+        draft.auctionTokenInfoError = action.error;
+        break;
+      case AUCTION_APPROVE_CHECK_REQUEST:
+        draft.approveCheckAuctionLoading = true;
+        draft.approveCheckAuctionError = null;
+        draft.approveCheckAuctionDone = false;
+        draft.approveAuctionData = null;
+        break;
+      case AUCTION_APPROVE_CHECK_SUCCESS:
+        draft.approveCheckAuctionLoading = false;
+        draft.approveAuctionData = action.data;
+        draft.approveAuctionDone = true;
+        break;
+      case AUCTION_APPROVE_CHECK_FAILURE:
+        draft.approveCheckAuctionLoading = false;
+        draft.approveCheckAuctionError = action.error;
+        break;
+      case AUCTION_APPROVE_REQUEST:
+        draft.approveAuctionLoading = true;
+        draft.approveAuctionError = null;
+        draft.approveAuctionDone = false;
+        break;
+      case AUCTION_APPROVE_SUCCESS:
+        draft.approveAuctionLoading = false;
+        draft.approveAuctionDone = true;
+        break;
+      case AUCTION_APPROVE_FAILURE:
+        draft.approveAuctionLoading = false;
+        draft.approveAuctionError = action.error;
         break;
       case AUCTION_INFO_REQUEST:
         draft.infoAuctionLoading = true;

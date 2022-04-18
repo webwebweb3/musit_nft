@@ -1,17 +1,49 @@
+@import './navbar.css';
+
 html,
 body {
   background-color: #0d0f1a;
   margin: 0;
 }
 
-button[role='tab'] {
-  color: #fff;
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
+  color: #dada;
 }
 
-button[role='tab']:hover {
-  color: #ffbbec;
+.css-1y7coo4-MuiButtonBase-root-MuiPaginationItem-root {
+  color: rgb(66 97 139 / 87%);
 }
 
-button[disabled] {
-  color: #ffbbec;
+.css-wjh20t-MuiPagination-ul {
+  margin-top: 25px;
+  justify-content: center;
+}
+
+.auctionBlur {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  position: fixed;
+  display: flex;
+  z-index: 5;
+  width: 85%;
+  height: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 2px 7px 15px 8px rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.css-187mznn-MuiSlider-root:hover > .css-eg0mwd-MuiSlider-thumb {
+  display: flex;
+}
+.css-187mznn-MuiSlider-root:hover > .css-14pt78w-MuiSlider-rail {
+  height: 5px;
+}
+.css-187mznn-MuiSlider-root:hover {
+  height: 5px;
+}
+
+.css-eg0mwd-MuiSlider-thumb {
+  display: none;
 }

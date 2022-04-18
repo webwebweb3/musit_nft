@@ -6,6 +6,7 @@ import auctionSaga from './auction';
 import uploadMusic from './uploadMusic';
 import marketPlace from './marketPlace';
 import studio from './studio';
+import music from './music';
 
 Axios.defaults.baseURL = 'http://localhost:8000/api';
 Axios.defaults.withCredentials = true;
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     fork(uploadMusic),
     fork(marketPlace),
     fork(studio),
+    fork(music),
   ]); // all 에 배열을 넣고 배열의 함수들을 한번에 전부 실행
 }
 

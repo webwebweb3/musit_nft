@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
-import {
-  mintMusicTokenContract,
-  saleMusicTokenAddress,
-} from '../../../../contracts';
+import { mintMusicTokenContract, saleMusicTokenAddress } from '$contracts';
 import { Box, Button, Grid } from '@mui/material';
 import MyNFTCards from '../../cards/MyNFTCards';
 import { style } from './style';

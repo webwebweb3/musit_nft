@@ -1,10 +1,10 @@
 import { Box, Button, TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React from 'react';
-import { useState } from 'react';
-import { saleMusicTokenContract, web3 } from '../../../contracts';
+import React, { useState } from 'react';
+import { saleMusicTokenContract, web3 } from '$contracts';
 import Modal from 'react-modal';
 import MarketPlaceNFTCard from './MarketPlaceNFTCard';
+import Image from 'next/image';
 import Router from 'next/router';
 import { withStyles } from '@mui/styles';
 
@@ -117,7 +117,7 @@ const NFTCards = ({
       </Box>
 
       <Box style={{ position: 'relative' }}>
-        <img
+        <Image
           src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenData.S3AlbumCover}`}
           alt="Album Cover"
           width={'250px'}

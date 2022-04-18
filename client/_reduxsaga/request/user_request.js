@@ -5,7 +5,7 @@ import {
   MY_INFO_REQUEST,
   REGISTER_USER_REQUEST,
   USER_IMAGES_REQUEST,
-} from './types';
+} from '$reduxsaga/request/types';
 
 export const loginRequestAction = data => ({
   type: LOGIN_USER_REQUEST,

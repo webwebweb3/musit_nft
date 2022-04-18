@@ -1,5 +1,5 @@
-const { Typography, Box } = require('@mui/material');
-const propTypes = require('prop-types');
+import propTypes from 'prop-types';
+import { Typography, Box } from '@mui/material';
 
 const TabPanel = props => {
   const { children, value, index, ...other } = props;

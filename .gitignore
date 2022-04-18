@@ -45,3 +45,5 @@ package-lock.json
 yarn.lock
 uploads
 json
+mymusic
+*.mp3

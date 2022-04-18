@@ -1,4 +1,4 @@
-import produce from '../../util/produce';
+import produce from '$util/produce';
 import {
   STUDIO_UPLOAD_BACKGROUND_REQUEST,
   STUDIO_UPLOAD_BACKGROUND_SUCCESS,
@@ -18,7 +18,7 @@ import {
   STUDIO_ISSUBSCRIBING_REQUEST,
   STUDIO_ISSUBSCRIBING_SUCCESS,
   STUDIO_ISSUBSCRIBING_FAILURE,
-} from '../request/types';
+} from '$reduxsaga/request/types';
 
 export const initialState = {
   uploadBackgroundLoading: false,

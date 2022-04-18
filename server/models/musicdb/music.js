@@ -24,6 +24,14 @@ module.exports = class Music extends Sequelize.Model {
           type: Sequelize.STRING(200),
           allowNull: true,
         },
+        albumCover: {
+          type: Sequelize.STRING(200),
+          allowNull: false,
+        },
+        IPFSUrl: {
+          type: Sequelize.STRING(200),
+          allowNull: false,
+        },
       },
       {
         sequelize,

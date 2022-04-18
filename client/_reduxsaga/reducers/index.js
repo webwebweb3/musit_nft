@@ -6,6 +6,7 @@ import auctionReducer from './auction_reducer';
 import uploadS3 from './uploadMusic_reducer';
 import marketPlaceReducer from './marketPlace_reducer';
 import studioReducer from './studio_reducer';
+import musicReducer from './music_reducer';
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -18,6 +19,7 @@ const rootReducer = (state, action) => {
         s3: uploadS3,
         market: marketPlaceReducer,
         studio: studioReducer,
+        music: musicReducer,
       });
       return combinedReducer(state, action);
     }

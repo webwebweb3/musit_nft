@@ -1,5 +1,10 @@
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
-import { auctionAbi, auctionCreatorContract, web3 } from '../../contracts';
+import {
+  auctionAbi,
+  auctionCreatorContract,
+  mintMusicTokenContract,
+  web3,
+} from '$contracts';
 import {
   AUCTION_CREATE_REQUEST,
   AUCTION_CREATE_SUCCESS,
@@ -25,13 +30,22 @@ import {
   AUCTION_FINALIZE_REQUEST,
   AUCTION_FINALIZE_SUCCESS,
   AUCTION_FINALIZE_FAILURE,
-} from '../request/types';
+  AUCTION_APPROVE_CHECK_REQUEST,
+  AUCTION_APPROVE_CHECK_SUCCESS,
+  AUCTION_APPROVE_CHECK_FAILURE,
+  AUCTION_APPROVE_REQUEST,
+  AUCTION_APPROVE_SUCCESS,
+  AUCTION_APPROVE_FAILURE,
+  AUCTION_TOKEN_INFO_REQUEST,
+  AUCTION_TOKEN_INFO_SUCCESS,
+  AUCTION_TOKEN_INFO_FAILURE,
+} from '$reduxsaga/request/types';
 
 async function createauctionAPI(data) {
-  let { startingBid, endTimestamp, tokenID, account } = data;
+  let { startingBid, endTimestamp, tokenID, minimumBid, account } = data;
 
   await auctionCreatorContract.methods
-    .createAuction(startingBid, endTimestamp, tokenID)
+    .createAuction(startingBid, endTimestamp, tokenID, minimumBid)
     .send({ from: account });
 
   return;
@@ -83,12 +97,16 @@ async function auctionAPI(data) {
   return auctionContract;
 }
 
-function* auction(action) {
+function* auction({ data }) {
   try {
-    let result = yield call(auctionAPI, action.data);
+    let result = yield call(auctionAPI, data);
 
     yield put({
       type: AUCTION_SUCCESS,
+    });
+    yield put({
+      type: AUCTION_APPROVE_CHECK_REQUEST,
+      data: { product: data, result },
     });
     yield put({
       type: AUCTION_INFO_REQUEST,
@@ -109,6 +127,7 @@ async function auctionInfoAPI(data) {
   let highestBidder = await data.methods.highestBidder().call();
   let owner = await data.methods.owner().call();
   let auctionState = await data.methods.auctionState().call();
+  let tokenID = await data.methods.tokenID().call();
   let highestBindingBid = highestBindingBidWei / 1000000000000000000;
 
   let infoData = {
@@ -117,6 +136,7 @@ async function auctionInfoAPI(data) {
     highestBidder,
     owner,
     auctionState,
+    tokenID,
   };
 
   return infoData;
@@ -129,6 +149,10 @@ function* auctionInfo(action) {
     yield put({
       type: AUCTION_INFO_SUCCESS,
       data: result,
+    });
+    yield put({
+      type: AUCTION_TOKEN_INFO_REQUEST,
+      data: result.tokenID,
     });
   } catch (err) {
     console.error(err);
@@ -238,6 +262,85 @@ function* auctionfinalize(action) {
   }
 }
 
+async function auctionCheckApproveAPI({ result, product }) {
+  let auctionOwner = await result.methods.owner().call();
+
+  let approve = await mintMusicTokenContract.methods
+    .isApprovedForAll(auctionOwner, product)
+    .call();
+
+  return approve;
+}
+
+function* auctioncheckapprove({ data }) {
+  try {
+    let result = yield call(auctionCheckApproveAPI, data);
+
+    yield put({
+      type: AUCTION_APPROVE_CHECK_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AUCTION_APPROVE_CHECK_FAILURE,
+      error: 'err',
+    });
+  }
+}
+
+async function auctionApproveAPI({ metamask, product }) {
+  await mintMusicTokenContract.methods
+    .setApprovalForAll(product, true)
+    .send({ from: metamask });
+
+  return;
+}
+
+function* auctionapprove({ data }) {
+  try {
+    yield call(auctionApproveAPI, data);
+
+    yield put({
+      type: AUCTION_APPROVE_SUCCESS,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AUCTION_APPROVE_FAILURE,
+      error: 'err',
+    });
+  }
+}
+
+async function auctionTokenInfoAPI(tokenID) {
+  const tokenURI = await mintMusicTokenContract.methods
+    .tokenURI(tokenID)
+    .call();
+
+  const ipfsData = await fetch(`https://ipfs.infura.io/ipfs/${tokenURI}`);
+  const data = await ipfsData.json();
+
+  return data;
+}
+
+function* auctiontokeninfo({ data }) {
+  try {
+    let result = yield call(auctionTokenInfoAPI, data);
+
+    yield put({
+      type: AUCTION_TOKEN_INFO_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AUCTION_TOKEN_INFO_FAILURE,
+      error: 'err',
+    });
+  }
+}
+
 function* watchCreateAuction() {
   yield takeLatest(AUCTION_CREATE_REQUEST, createauction);
 }
@@ -270,6 +373,18 @@ function* watchAuctionFinalize() {
   yield takeLatest(AUCTION_FINALIZE_REQUEST, auctionfinalize);
 }
 
+function* watchAuctionApproveCheck() {
+  yield takeLatest(AUCTION_APPROVE_CHECK_REQUEST, auctioncheckapprove);
+}
+
+function* watchAuctionApprove() {
+  yield takeLatest(AUCTION_APPROVE_REQUEST, auctionapprove);
+}
+
+function* watchAuctionTokenInfo() {
+  yield takeLatest(AUCTION_TOKEN_INFO_REQUEST, auctiontokeninfo);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchCreateAuction),
@@ -280,5 +395,8 @@ export default function* userSaga() {
     fork(watchAuctionBid),
     fork(watchAuctionMyBid),
     fork(watchAuctionFinalize),
+    fork(watchAuctionApproveCheck),
+    fork(watchAuctionApprove),
+    fork(watchAuctionTokenInfo),
   ]);
 }

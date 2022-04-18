@@ -20,8 +20,8 @@ import {
   STUDIO_ISSUBSCRIBING_REQUEST,
   STUDIO_ISSUBSCRIBING_SUCCESS,
   STUDIO_ISSUBSCRIBING_FAILURE,
-} from '../request/types';
-import { mintMusicTokenContract } from 'contracts';
+} from '$reduxsaga/request/types';
+import { mintMusicTokenContract } from '$contracts';
 
 async function uploadBackground(data) {
   const myFile = data.selectedFile;
@@ -93,6 +93,10 @@ function getUserMetamask(data) {
 }
 async function getMyMusic(data) {
   console.log('getMyMusic 안', data);
+  // const mintOwner = await mintMusicTokenContract.getPastEvents('Minter', {
+  //   filter: { Minter: data.data.user },
+  //   fromBlock: 0,
+  // });
   return await mintMusicTokenContract.getPastEvents('Minter', {
     filter: { Minter: data.data.user },
     fromBlock: 0,
@@ -172,6 +176,7 @@ async function isSubscribing(data) {
 function* yieldIsSubscribing(action) {
   try {
     const isSub = yield call(isSubscribing, action.data);
+    console.log('이즈서브?', isSub);
     yield put({
       type: STUDIO_ISSUBSCRIBING_SUCCESS,
       data: isSub.data,
@@ -183,16 +188,27 @@ function* yieldIsSubscribing(action) {
     });
   }
 }
+
 async function subscribeArtist(data) {
-  if (data.inputData === 'subscribe') {
-  } else if (data.inputData === 'cancelSubscribe') {
+  console.log(data.actionData === 'cancelSubscribe');
+  if (data.actionData === 'subscribe') {
+    Axios.post('/studio/subscribe', data);
+    return true;
+  } else if (data.actionData === 'cancelSubscribe') {
+    Axios.delete('/studio/subscribe', {
+      params: {
+        paramsData: data,
+      },
+    });
+    return false;
   }
   console.log('데이타 보자', data);
 }
 
 function* yieldSubscribeArtist(action) {
   try {
-    yield call(subscribeArtist, action.data);
+    const result = yield call(subscribeArtist, action.data);
+    console.log('리조뜨이즈에브리띵', result);
     yield put({
       type: STUDIO_SUBSCRIBE_SUCCESS,
       data: 'success',
