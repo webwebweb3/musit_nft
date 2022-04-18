@@ -1274,6 +1274,55 @@ export const auctionAbi = [
 ];
 const paymentAbi = [
   {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'planId',
+        type: 'uint256',
+      },
+    ],
+    name: 'cancel',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'frequency',
+        type: 'uint256',
+      },
+    ],
+    name: 'createPlan',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'subscriber',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'planId',
+        type: 'uint256',
+      },
+    ],
+    name: 'pay',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -1336,6 +1385,19 @@ const paymentAbi = [
     type: 'event',
   },
   {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'planId',
+        type: 'uint256',
+      },
+    ],
+    name: 'subscribe',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -1386,37 +1448,6 @@ const paymentAbi = [
     type: 'event',
   },
   {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'planId',
-        type: 'uint256',
-      },
-    ],
-    name: 'cancel',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'frequency',
-        type: 'uint256',
-      },
-    ],
-    name: 'createPlan',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
     inputs: [],
     name: 'nextPlanId',
     outputs: [
@@ -1427,24 +1458,6 @@ const paymentAbi = [
       },
     ],
     stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'subscriber',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'planId',
-        type: 'uint256',
-      },
-    ],
-    name: 'pay',
-    outputs: [],
-    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -1474,19 +1487,6 @@ const paymentAbi = [
       },
     ],
     stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'planId',
-        type: 'uint256',
-      },
-    ],
-    name: 'subscribe',
-    outputs: [],
-    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -1526,17 +1526,18 @@ const paymentAbi = [
 ];
 
 export const mintMusicTokenAddress =
-  '0x2CB6c8f2EcA1142dbeD6E540A04AD6F87189007E';
+  '0x58b097f8793620b8aa29a7a8675e7Fb8E8eA5FEA';
 export const saleMusicTokenAddress =
-  '0xB7fF897559EFC6025D94F28339C963e6ED8543F2';
+  '0xdae6456f9B33834766dCE6eDf557D582674C70B5';
 export const auctionCreatorAddress =
-  '0x46e8280F0cAa469204bC339eC471907fb52f4165';
-export const paymentAddress = '0x08CEB9260e5F95106133EDE3B398E3F33efE8208';
+  '0x964A7621258B9B044aD089272E5A8468f4A99C7a';
+export const paymentAddress = '0xA9710EfA464e7feD6F1a97393E4C3b733727F8a6';
 
 let web3;
 let mintMusicTokenContract;
 let saleMusicTokenContract;
 let auctionCreatorContract;
+let paymentContract;
 
 if (typeof window !== 'undefined') {
   web3 = new Web3(window.ethereum);
@@ -1554,6 +1555,8 @@ if (typeof window !== 'undefined') {
     auctionCreatorAbi,
     auctionCreatorAddress,
   );
+
+  paymentContract = new web3.eth.Contract(paymentAbi, paymentAddress);
 }
 
 export {
@@ -1561,4 +1564,5 @@ export {
   mintMusicTokenContract,
   saleMusicTokenContract,
   auctionCreatorContract,
+  paymentContract,
 };
