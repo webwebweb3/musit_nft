@@ -23,6 +23,9 @@ const MusicLikes = () => {
   const onClickLike = () => {
     dispatch(musicLikeRequest({ editionNum, userMetamask }));
   };
+  // const getIsLike =() =>{
+  //   dispatch(musicIsLikeRequest({}))
+  // }
   useEffect(() => {}, [music && music.isLike]);
   useEffect(() => {
     if (music) {
