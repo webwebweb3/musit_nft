@@ -51,14 +51,23 @@ const AuctionUploadPage = () => {
         const auctionContractAddress = await auctionCreatorContract.methods
           .newAuctionContract(account.data)
           .call();
+        const auctionContractAddress2 = await auctionCreatorContract.methods
+          .getMyAuctions(account.data)
+          .call();
+
+        console.log('1', auctionContractAddress);
+        console.log('2', auctionContractAddress2); // 내가 생성한 옥션들 []
+
         const auctionContract = new web3.eth.Contract(
           auctionAbi,
           auctionContractAddress,
         );
 
+        // 2. 내가 생성한 컨트랙트
         console.log('옥션컨트랙트', auctionContract);
+
         const events = await auctionContract.getPastEvents('IsAuctionNFT', {
-          filter: { num: [2, 1] },
+          filter: { myAddress: account.data },
           fromBlock: 1,
           toBlock: 'latest',
         });
@@ -85,6 +94,9 @@ const AuctionUploadPage = () => {
       const response = await mintMusicTokenContract.methods
         .getMusicTokens(account.data)
         .call();
+
+      // 1. 나의 모든 NFT
+      console.log(response);
 
       let totalPage = Math.ceil(response.length / 1); // 숫자 1 보고 싶은 페이지로 수정
       setTestPage(totalPage);
