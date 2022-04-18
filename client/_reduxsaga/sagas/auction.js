@@ -53,7 +53,6 @@ async function createauctionAPI(data) {
 
 function* createauction(action) {
   try {
-    console.log(action.data);
     yield call(createauctionAPI, action.data);
 
     yield put({

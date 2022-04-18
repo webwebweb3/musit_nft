@@ -20,7 +20,7 @@ const MyBidBox = ({ gapTime }) => {
   useEffect(() => {
     let data = {
       product,
-      metamask: userData.metamask,
+      metamask: userData?.metamask,
     };
     dispatch(auctionMyBidAction(data));
   }, [dispatch, product, userData]);

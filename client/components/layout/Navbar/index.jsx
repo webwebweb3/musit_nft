@@ -13,7 +13,7 @@ import { RegisterCheck } from '$components/layout/Navbar/base';
 import Image from 'next/image';
 
 const Navbar = () => {
-  const { userData } = useSelector(state => state.user);
+  const { userData, logInUserError } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const { account } = useWalletInfo();
 
@@ -33,6 +33,13 @@ const Navbar = () => {
       }
     }
   }, [account.data]);
+
+  useEffect(() => {
+    if (logInUserError) {
+      alert(logInUserError);
+      dispatch(logoutRequestAction());
+    }
+  }, [logInUserError]);
 
   return (
     <>

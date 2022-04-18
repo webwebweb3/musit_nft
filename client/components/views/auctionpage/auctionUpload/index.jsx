@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import { Box, Checkbox, CircularProgress, Pagination } from '@mui/material';
+import _ from 'lodash';
 
 import { useInput } from '$hooks/useInput';
 import {
@@ -12,16 +13,12 @@ import {
 import { timeFunction } from '$util/timefunc';
 import UploadButton from './UploadButton';
 import { useWalletInfo } from '$hooks/web3';
-import {
-  auctionAbi,
-  auctionCreatorContract,
-  mintMusicTokenContract,
-  web3,
-} from '$contracts';
+import { auctionCreatorContract, mintMusicTokenContract } from '$contracts';
 import { StyledMyNFTText } from '../style';
 
 const AuctionUploadPage = () => {
   const auction = useSelector(state => state.auction);
+  const { createAuctionLoading } = useSelector(state => state.auction);
   const [startingBid, onChangeStartingBid] = useInput('');
   const [minimumBid, onChangeMinimumBid] = useInput('');
   const [endAt, onChangeEndAt, setEndAt] = useInput('');
@@ -29,58 +26,66 @@ const AuctionUploadPage = () => {
   const [myNFT, setMyNFT] = useState();
   const [loading, setLoading] = useState(false);
   const [testPage, setTestPage] = useState(1);
+  const [auctionTokenId, setAuctionTokenId] = useState([]);
+  const [myTotalNFT, setMyTotalNFT] = useState([]);
 
   const { network, account } = useWalletInfo();
 
   useEffect(() => {
     let date = timeFunction();
 
-    // 형식: 2022-02-02T02:02:02
     setEndAt(date);
   }, [setEndAt]);
 
-  useEffect(() => {
-    console.log(myNFT);
-  }, [myNFT]);
-
-  useEffect(() => {
-    let eventFunc = async () => {
-      try {
-        // 전체 생성된 컨트랙트를 구하고
-        // 그 생성된 컨트랙트들을 전부 아래에 넣어서 호출?
-        const auctionContractAddress = await auctionCreatorContract.methods
-          .newAuctionContract(account.data)
-          .call();
-        const auctionContractAddress2 = await auctionCreatorContract.methods
-          .getMyAuctions(account.data)
-          .call();
-
-        console.log('1', auctionContractAddress);
-        console.log('2', auctionContractAddress2); // 내가 생성한 옥션들 []
-
-        const auctionContract = new web3.eth.Contract(
-          auctionAbi,
-          auctionContractAddress,
-        );
-
-        // 2. 내가 생성한 컨트랙트
-        console.log('옥션컨트랙트', auctionContract);
-
-        const events = await auctionContract.getPastEvents('IsAuctionNFT', {
-          filter: { myAddress: account.data },
-          fromBlock: 1,
-          toBlock: 'latest',
-        });
-        console.log('옥션이벤트', events);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    eventFunc();
-  }, [myNFT]);
-
   const getMyMusicTokens = useCallback(async () => {
+    try {
+      let myArray = [];
+      const tempMusicCardArray = [];
+
+      for (let i = 0; i < auctionTokenId.length; i++) {
+        myArray.push(
+          myTotalNFT.filter(
+            myTotalNFT => myTotalNFT.musicTokenId === auctionTokenId[i],
+          ),
+        );
+      }
+
+      let myNFTFlatten = _.flatten(myArray);
+
+      let myNFTArray = myTotalNFT.filter(
+        item => !myNFTFlatten.includes(item) || !myTotalNFT.includes(item),
+      );
+
+      let totalPage = Math.ceil(myNFTArray.length / 1); // 숫자 1 보고 싶은 페이지로 수정
+      setTestPage(totalPage);
+
+      let startView = (myNFTArray.length / totalPage) * page - 1; // 숫자 1 보고 싶은 페이지로 수정
+      let endView = (myNFTArray.length / totalPage) * page;
+
+      for (let i = startView; i < endView; i++) {
+        const ipfsData = await fetch(
+          `https://ipfs.infura.io/ipfs/${myNFTArray[i].musicTokenURI}`,
+        );
+        const data = await ipfsData.json();
+        tempMusicCardArray.push({
+          musicTokenId: myNFTArray[i].musicTokenId,
+          musicTokenData: data,
+          musicTokenPrice: myNFTArray[i].musicTokenPrice,
+        });
+      }
+      setMyNFT(tempMusicCardArray);
+
+      setLoading(true);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [auctionTokenId]);
+
+  useEffect(() => {
+    getMyMusicTokens();
+  }, [auctionTokenId]);
+
+  const getMyNFTInfo = useCallback(async () => {
     try {
       setLoading(false);
       const balanceLength = await mintMusicTokenContract.methods
@@ -89,34 +94,23 @@ const AuctionUploadPage = () => {
 
       if (balanceLength === '0') return;
 
-      const tempMusicCardArray = [];
-
-      const response = await mintMusicTokenContract.methods
+      const myTotalNFT = await mintMusicTokenContract.methods
         .getMusicTokens(account.data)
         .call();
 
-      // 1. 나의 모든 NFT
-      console.log(response);
+      setMyTotalNFT(myTotalNFT);
 
-      let totalPage = Math.ceil(response.length / 1); // 숫자 1 보고 싶은 페이지로 수정
-      setTestPage(totalPage);
+      const myAuctionToken = [];
 
-      let startView = (response.length / totalPage) * page - 1; // 숫자 1 보고 싶은 페이지로 수정
-      let endView = (response.length / totalPage) * page;
+      const auctionContractAddress = await auctionCreatorContract.methods
+        .getMyAuctions(account.data)
+        .call();
 
-      for (let i = startView; i < endView; i++) {
-        const ipfsData = await fetch(
-          `https://ipfs.infura.io/ipfs/${response[i].musicTokenURI}`,
-        );
-        const data = await ipfsData.json();
-        tempMusicCardArray.push({
-          musicTokenId: response[i].musicTokenId,
-          musicTokenData: data,
-          musicTokenPrice: response[i].musicTokenPrice,
-        });
+      for (let i = 0; i < auctionContractAddress.length; i++) {
+        myAuctionToken.push(auctionContractAddress[i].tokenId);
       }
-      setMyNFT(tempMusicCardArray);
-      setLoading(true);
+
+      setAuctionTokenId(myAuctionToken);
     } catch (error) {
       console.error(error);
     }
@@ -139,107 +133,117 @@ const AuctionUploadPage = () => {
   };
 
   useEffect(() => {
-    getMyMusicTokens();
+    getMyNFTInfo();
   }, [page, network.isSupported]);
 
   return (
     <Box style={{ color: '#dada', marginTop: '130px', textAlign: 'center' }}>
-      <h1>경매 등록 하기</h1>
-
-      <AuctionTextField
-        text="시작 금액"
-        value={startingBid}
-        onChange={onChangeStartingBid}
-        uint="ETH"
-      />
-
-      <AuctionTextField
-        text="최저 입찰"
-        value={minimumBid}
-        onChange={onChangeMinimumBid}
-      />
-
-      <AuctionAppointment text="종료 시간" value={endAt} func={onChangeEndAt} />
-
-      {!loading ? (
-        <CircularProgress color="inherit" />
-      ) : myNFT ? (
+      {!createAuctionLoading ? (
         <>
-          <StyledMyNFTText id="outlined-weight-helper-text">
-            판매 가능 NFT 목록
-          </StyledMyNFTText>
-          <Box
-            style={{
-              border: 'solid 3px #dada',
-              borderRadius: '7px',
-              width: '453px',
-              padding: '20px',
-              margin: '0 auto',
-            }}
-          >
-            {myNFT.map((v, i) => {
-              return (
-                <Box
-                  key={v.musicTokenId}
-                  style={{
-                    display: `${v.musicTokenPrice === 0 ? 'none' : 'block'}`,
-                    textAlign: 'start',
-                  }}
-                  onChange={() => onClickHandler(v.musicTokenId)}
-                >
-                  <Checkbox
-                    checked={v.musicTokenId === tokenID && true}
-                    inputProps={{
-                      'aria-label': 'controlled',
-                    }}
-                    style={{
-                      marginRight: '10px',
-                    }}
-                  />
-                  <Image
-                    src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.musicTokenData.properties.S3AlbumCover}`}
-                    alt="Album Cover"
-                    width="60px"
-                    height="60px"
-                  />
-                  <span style={{ marginLeft: '15px' }}>
-                    {v.musicTokenData.properties.dataToSubmit.title}
-                  </span>
-                </Box>
-              );
-            })}
-            <div
-              style={{
-                alignItems: 'center',
-                margin: '0 auto',
-              }}
-            >
-              <Pagination
-                onChange={handleChange}
-                count={testPage}
-                page={page}
-                showLastButton
-                showFirstButton
-                color="primary"
-                variant="outlined"
-              />
-            </div>
-          </Box>
-          {auction.createAuctionLoading ? (
+          <h1>경매 등록 하기</h1>
+
+          <AuctionTextField
+            text="시작 금액"
+            value={startingBid}
+            onChange={onChangeStartingBid}
+            uint="ETH"
+          />
+
+          <AuctionTextField
+            text="최저 입찰"
+            value={minimumBid}
+            onChange={onChangeMinimumBid}
+          />
+
+          <AuctionAppointment
+            text="종료 시간"
+            value={endAt}
+            func={onChangeEndAt}
+          />
+
+          {!loading ? (
+            <CircularProgress color="inherit" />
+          ) : myNFT ? (
             <>
-              <CircularProgress color="inherit" />
+              <StyledMyNFTText id="outlined-weight-helper-text">
+                판매 가능 NFT 목록
+              </StyledMyNFTText>
+              <Box
+                style={{
+                  border: 'solid 3px #dada',
+                  borderRadius: '7px',
+                  width: '453px',
+                  padding: '20px',
+                  margin: '0 auto',
+                }}
+              >
+                {myNFT.map((v, i) => {
+                  return (
+                    <Box
+                      key={v.musicTokenId}
+                      style={{
+                        display: `${
+                          v.musicTokenPrice === 0 ? 'none' : 'block'
+                        }`,
+                        textAlign: 'start',
+                      }}
+                      onChange={() => onClickHandler(v.musicTokenId)}
+                    >
+                      <Checkbox
+                        checked={v.musicTokenId === tokenID && true}
+                        inputProps={{
+                          'aria-label': 'controlled',
+                        }}
+                        style={{
+                          marginRight: '10px',
+                        }}
+                      />
+                      <Image
+                        src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.musicTokenData.properties.S3AlbumCover}`}
+                        alt="Album Cover"
+                        width="60px"
+                        height="60px"
+                      />
+                      <span style={{ marginLeft: '15px' }}>
+                        {v.musicTokenData.properties.dataToSubmit.title}
+                      </span>
+                    </Box>
+                  );
+                })}
+                <div
+                  style={{
+                    alignItems: 'center',
+                    margin: '0 auto',
+                  }}
+                >
+                  <Pagination
+                    onChange={handleChange}
+                    count={testPage}
+                    page={page}
+                    showLastButton
+                    showFirstButton
+                    color="primary"
+                    variant="outlined"
+                  />
+                </div>
+              </Box>
+              {auction.createAuctionLoading ? (
+                <CircularProgress color="inherit" />
+              ) : (
+                <UploadButton
+                  endAt={endAt}
+                  startingBid={startingBid}
+                  minimumBid={minimumBid}
+                  tokenID={tokenID}
+                />
+              )}
             </>
           ) : (
-            <UploadButton
-              endAt={endAt}
-              startingBid={startingBid}
-              minimumBid={minimumBid}
-              tokenID={tokenID}
-            />
+            <>현재 판매 가능한 NFT 가 없습니다!</>
           )}
         </>
       ) : (
-        <>현재 판매 가능한 NFT 가 없습니다!</>
+        <CircularProgress color="inherit" />
       )}
       <AuctionButton text="경매 메인으로 가기" link={'nft/auction'} />
     </Box>

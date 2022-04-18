@@ -28,7 +28,7 @@ const EditionPurchase = ({ tokenId, musicPrice }) => {
   const dispatch = useDispatch();
   const { userData } = useSelector(state => state.user);
   const tokenOwner = useSelector(state => state.market);
-  const account = userData.metamask;
+  const account = userData?.metamask;
 
   const onClickPurchase = async () => {
     dispatch(marketPlacePurchaseAction({ tokenId, account, musicPrice }));
@@ -39,7 +39,7 @@ const EditionPurchase = ({ tokenId, musicPrice }) => {
 
   return (
     <Box sx={{ display: 'inline-block', marginLeft: '20px' }}>
-      {tokenOwner.userData !== userData.name ? (
+      {tokenOwner.userData !== userData?.name ? (
         <PurchaseButton onClick={onClickPurchase} sx={{ fontSize: '18px' }}>
           Purchase
         </PurchaseButton>

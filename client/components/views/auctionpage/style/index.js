@@ -23,8 +23,6 @@ export const AuctionHeader = styled(Box)`
   font-size: 30px;
   font-weight: 700;
   margin: 0 190px;
-  max-width: 1400px;
-  min-width: 1400px;
 `;
 
 export const AuctionMainContainer = styled(Box)`
@@ -105,8 +103,6 @@ export const AuctionMainContentsContainer = styled(AuctionContentsContainer)`
   display: flex;
   color: white;
   margin: 0 230px;
-  max-width: 1400px;
-  min-width: 1400px;
 `;
 
 export const AuctionDivider = styled(Divider)`
