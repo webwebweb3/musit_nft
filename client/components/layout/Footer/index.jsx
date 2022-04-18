@@ -32,7 +32,7 @@ const Footer = () => {
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
 
-  useEffect(() => {
+  const playingMusic = () => {
     isPlaying
       ? audioElement.current
           .play()
@@ -53,7 +53,11 @@ const Footer = () => {
       if (audioElement.current !== null)
         setCurrTime(audioElement.current.currentTime);
     });
-  });
+  };
+
+  useEffect(() => {
+    playingMusic();
+  }, [isPlaying, volume, isVolumeClicked]);
 
   useEffect(() => {
     setSeekTime(currTime / (duration / 100));
@@ -94,7 +98,6 @@ const Footer = () => {
         setNextClicked(val);
         break;
       case 'volume':
-        console.log(val);
         setVolumeClicked(val);
         break;
       default:

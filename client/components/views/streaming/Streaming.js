@@ -7,7 +7,6 @@ export const Global = createGlobalStyle`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #1c2237;  
 }
 
 

@@ -35,7 +35,7 @@ const AuctionContents = ({ auction }) => {
       auctionState,
       tokenID,
     };
-
+    console.log(infoData);
     setAuctionData(infoData);
   }, [auction]);
 

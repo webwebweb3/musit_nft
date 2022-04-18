@@ -17,9 +17,9 @@ const Streaming = () => {
       <Global />
       <div className="sContainer">
         <Box sx={style.streamingContainer}>
-          <Box sx={style.streamingSideBarContainer}>
+          {/* <Box sx={style.streamingSideBarContainer}>
             <StreamingSideBar />
-          </Box>
+          </Box> */}
           <Box sx={style.streamingWrapper}>
             <LatestMusic userData={userData} func={setVisible} />
           </Box>
