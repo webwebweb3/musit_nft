@@ -58,10 +58,10 @@ module.exports = class Music extends Sequelize.Model {
       sourceKey: 'id',
     });
 
-    // 음악은 하나의 좋아요를 가진다.
-    db.Music.hasOne(db.MusicLike, {
-      foreignKey: 'musicId',
-      sourceKey: 'id',
+    db.Music.belongsToMany(db.User, {
+      foreignKey: 'music',
+      as: 'music',
+      through: 'musiclikes',
     });
   }
 };
