@@ -11,7 +11,7 @@ import {
   RadioGroup,
 } from '@mui/material';
 import React from 'react';
-import { StyledFormControl } from '../../style';
+import { StyledFormControl } from '$components/views/auctionpage/style';
 
 const LeftSideBar = () => {
   return (
