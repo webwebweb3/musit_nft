@@ -5,7 +5,7 @@ import StreamingSideBar from './streamingSideBar/SteamingSideBar';
 import LatestMusic from './latestMusic/LatestMusic';
 import { useSelector } from 'react-redux';
 import Player from '../../Player';
-import { Global } from './Streaming';
+
 import { useState } from 'react';
 
 const Streaming = () => {
@@ -14,19 +14,16 @@ const Streaming = () => {
 
   return (
     <>
-      <Global />
-      <div className="sContainer">
-        <Box sx={style.streamingContainer}>
-          <Box sx={style.streamingSideBarContainer}>
-            <StreamingSideBar />
-          </Box>
-          <Box sx={style.streamingWrapper}>
-            <LatestMusic userData={userData} func={setVisible} />
-          </Box>
-          <Box sx={{ flexDirection: '' }}></Box>
+      <Box sx={style.streamingContainer}>
+        <Box sx={style.streamingSideBarContainer}>
+          <StreamingSideBar />
         </Box>
-        <Player isVisible={visible} />
-      </div>
+        <Box sx={style.streamingWrapper}>
+          <LatestMusic userData={userData} func={setVisible} />
+        </Box>
+        <Box sx={{ flexDirection: '' }}></Box>
+      </Box>
+      <Player isVisible={visible} />
     </>
   );
 };

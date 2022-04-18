@@ -29,7 +29,14 @@ const MusicCard = ({ musicTitle, albumCover, artistName, func }) => {
   const theme = useTheme();
 
   return (
-    <Card sx={{ display: 'inline-block' }} onClick={onClickPlay}>
+    <Card
+      sx={{
+        display: 'inline-block',
+        padding: '25px',
+        background: 'transparent',
+      }}
+      onClick={onClickPlay}
+    >
       <StyledCard>
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <CardContent sx={{ flex: '1 0 auto' }}>
