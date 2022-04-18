@@ -11,12 +11,13 @@ import {
 
 async function musicLike(data) {
   console.log('musiclike', data);
-  await Axios.post('/music', data);
+  return await Axios.post('/music', data);
 }
 
 function* yieldMusicLike(action) {
   try {
     const eventData = yield call(musicLike, action.data);
+    console.log('이벤트~', eventData);
 
     yield put({
       type: MUSICS_LIKE_SUCCESS,
@@ -32,13 +33,18 @@ function* yieldMusicLike(action) {
 }
 
 async function musicDisLike(data) {
-  console.log('musicdislike', data);
+  console.log('musiclike', data);
+  return await Axios.delete('/music', {
+    params: {
+      paramsData: data,
+    },
+  });
 }
 
 function* yieldMusicDisLike(action) {
   try {
     const eventData = yield call(musicDisLike, action.data);
-
+    console.log('디스이벤트~', eventData);
     yield put({
       type: MUSICS_DISLIKE_SUCCESS,
       data: false,

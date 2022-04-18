@@ -6,12 +6,19 @@ import {
   MUSICS_DISLIKE_REQUEST,
   MUSICS_DISLIKE_SUCCESS,
   MUSICS_DISLIKE_FAILURE,
+  MUSICS_ISLIKE_REQUEST,
+  MUSICS_ISLIKE_SUCCESS,
+  MUSICS_ISLIKE_FAILURE,
 } from '$reduxsaga/request/types';
 
 export const initialState = {
   MusicLikeLoading: false,
   MusicLikeDone: false,
   MusicLikeError: null,
+
+  MusicDisLikeLoading: false,
+  MusicDisLikeDone: false,
+  MusicDisLikeError: null,
 
   MusicDisLikeLoading: false,
   MusicDisLikeDone: false,
