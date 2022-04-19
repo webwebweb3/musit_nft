@@ -54,7 +54,7 @@ const AuctionBidButton = () => {
         </div>
       ) : (
         <>
-          <AuctionTextField value={bid} func={onChangeBid} uint={'ETH'} />
+          <AuctionTextField value={bid} onChange={onChangeBid} uint={'ETH'} />
           <AuctionStyledButton onClick={onClickAuction}>
             추가 입찰하기
           </AuctionStyledButton>
