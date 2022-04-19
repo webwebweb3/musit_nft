@@ -7,6 +7,7 @@ import MarketPlaceNFTCard from './MarketPlaceNFTCard';
 import Image from 'next/image';
 import Router from 'next/router';
 import { withStyles } from '@mui/styles';
+import { CircularProgress } from '@mui/material';
 
 const SaleButton = styled(Button)(() => ({
   color: '#fff',
@@ -43,6 +44,7 @@ const NFTCards = ({
   const [myNFTPrice, setMyNFTPrice] = useState(musicTokenPrices);
   const [isOpen, setIsOpen] = useState(false);
   const [hover, setHover] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const openModal = () => {
     setIsOpen(true);
@@ -78,7 +80,7 @@ const NFTCards = ({
         alert('NFT 판매에 동의를 먼재 해주세요.');
         return;
       }
-
+      setIsLoading(true);
       const response = await saleMusicTokenContract.methods
         .setForSaleMusicToken(
           musicTokenIds,
@@ -87,6 +89,8 @@ const NFTCards = ({
         .send({ from: account });
       if (response.status) {
         setMyNFTPrice(web3.utils.toWei(sellPrice, 'ether'));
+        setIsLoading(false);
+        Router.push(`/nft/marketplace/edition/${musicTokenIds}`);
       }
     } catch (error) {
       console.error(error);
@@ -222,8 +226,12 @@ const NFTCards = ({
               {/* {web3.utils.fromWei(myNFTPrice)} */}
             </Box>
           </Box>
-          <Box sx={{ marginTop: '20px', textAlign: 'center' }}>
-            <SaleButton onClick={onClickSell}>판매</SaleButton>
+          <Box sx={{ marginTop: '20px', textAlign: 'center', color: 'white' }}>
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              <SaleButton onClick={onClickSell}>판매</SaleButton>
+            )}
           </Box>
         </Box>
       </Modal>

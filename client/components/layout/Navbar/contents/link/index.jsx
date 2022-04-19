@@ -44,7 +44,7 @@ const NavbarLink = () => {
           />
         </Link>
       )}
-      <Link href="/nft">
+      <Link href="/nft/marketplace">
         <Tab
           className="nftNavbar"
           disabled={linkDisabled.includes('nft')}

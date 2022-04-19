@@ -1,8 +1,10 @@
 import LoadingIcons from '$components/views/loadingicons/LoadingIcons';
+import { Button } from '@mui/material';
 import Image from 'next/image';
+import Router from 'next/router';
 import React from 'react';
 
-const UploadEnd = () => {
+const PurchasingError = () => {
   return (
     <div>
       <div>
@@ -25,15 +27,22 @@ const UploadEnd = () => {
             >
               <div>
                 <Image
-                  src="/completemint.png"
+                  src="/minterror.png"
                   alt="Complete Minting"
-                  width="360px"
-                  height="360px"
+                  width="460px"
+                  height="460px"
                 />
               </div>
-              <div style={{ fontSize: '30px' }}>NFT 생성 완료!</div>
+              <div style={{ fontSize: '30px' }}>
+                에러 발생.. 다시 시도해주세요..
+              </div>
+              <div>
+                <Button sx={{ color: 'white' }} onClick={() => Router.reload()}>
+                  새로고침
+                </Button>
+              </div>
+              <LoadingIcons />
             </div>
-            <LoadingIcons />
           </div>
         </div>
       </div>
@@ -41,4 +50,4 @@ const UploadEnd = () => {
   );
 };
 
-export default UploadEnd;
+export default PurchasingError;
