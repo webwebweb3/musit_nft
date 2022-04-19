@@ -1,12 +1,12 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import { style } from './style';
-import StreamingSideBar from './streamingSideBar/SteamingSideBar';
+//import StreamingSideBar from './streamingSideBar/SteamingSideBar';
 import LatestMusic from './latestMusic/LatestMusic';
 import { useSelector } from 'react-redux';
 import Player from '../../Player';
-import { Global } from './Streaming';
 import { useState } from 'react';
+import FavMusic from './latestMusic/FavMusic';
 
 const Streaming = () => {
   const { userData } = useSelector(state => state.user);
@@ -14,19 +14,17 @@ const Streaming = () => {
 
   return (
     <>
-      <Global />
-      <div className="sContainer">
-        <Box sx={style.streamingContainer}>
-          <Box sx={style.streamingSideBarContainer}>
-            <StreamingSideBar />
-          </Box>
-          <Box sx={style.streamingWrapper}>
-            <LatestMusic userData={userData} func={setVisible} />
-          </Box>
-          <Box sx={{ flexDirection: '' }}></Box>
+      <Box sx={style.streamingContainer}>
+        <Box sx={style.streamingWrapper}>
+          <LatestMusic userData={userData} func={setVisible} />
         </Box>
-        <Player isVisible={visible} />
-      </div>
+        <Box sx={style.streamingWrapper}>
+          <FavMusic userData={userData} func={setVisible} />
+        </Box>
+        <Box sx={{ flexDirection: '' }}></Box>
+      </Box>
+
+      <Player userData={userData} isVisible={visible} />
     </>
   );
 };
