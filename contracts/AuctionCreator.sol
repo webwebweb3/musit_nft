@@ -35,12 +35,14 @@ contract AuctionCreator{
     function createAuction(uint256 _startingBid, uint256 _endAt, uint256 _tokenID, uint256 _minimumBid) 
         public 
     {
+        require(mintMusicTokenAddress.getIsOnSale(_tokenID)==false, "This token is on sale.");
         require(block.timestamp <= _endAt);
         require(_startingBid > 0);
         require(_minimumBid > 0);
         address tokenOwner = mintMusicTokenAddress.ownerOf(_tokenID);
         require(msg.sender == tokenOwner, "This user is not token Owner.");
         Auction newAuction = new Auction(msg.sender, _startingBid, _endAt, _tokenID, _minimumBid, mintMusicTokenAddress);
+        mintMusicTokenAddress.setTokenState(_tokenID, true);
         auctions.push(AuctionInformation(_tokenID, msg.sender,newAuction));
     }
 
@@ -58,6 +60,7 @@ contract AuctionCreator{
         returns(AuctionInformation[] memory)
     {
         uint256 j = 0;
+        uint256 k = 0;
         for (uint256 i = 0; i < auctions.length; i++){
             if(auctions[i].msgSender == _myAddress){
                 j++;
@@ -68,7 +71,8 @@ contract AuctionCreator{
             if(auctions[i].msgSender == _myAddress){
                 uint256 tokenId = auctions[i].tokenId;
                 Auction myAuctionContract = auctions[i].newAuctionContract;
-                auctionData[i] = AuctionInformation(tokenId, _myAddress, myAuctionContract);
+                auctionData[k] = AuctionInformation(tokenId, _myAddress, myAuctionContract);
+                k++;
             }
         }
         return auctionData;

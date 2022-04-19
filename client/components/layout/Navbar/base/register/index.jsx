@@ -16,7 +16,6 @@ const RegisterCheck = () => {
   const { network, account } = useWalletInfo();
   const { hasInitialResponse, isSupported, target } = network;
   const { isLoading, requireInstall } = useWeb3();
-
   const [open, setOpen] = useState(false);
 
   const handleMetaMaskOpen = useCallback(() => {

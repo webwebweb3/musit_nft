@@ -44,6 +44,11 @@ contract MintMusicToken is  ERC721Enumerable, ERC721URIStorage  {
 
 
         mapping (uint256 => string) public musicTokens;
+        mapping (uint256 => bool) public isOnSaleToken;
+        mapping (uint256 => address) public musicTokenMinters;
+
+        event Minter(uint256 indexed tokenID, string tokenURI, address indexed Minter, uint256 timeStamp);
+
         struct MusicTokenData {
                 uint256 musicTokenId;
                 string musicTokenURI;
@@ -56,7 +61,10 @@ contract MintMusicToken is  ERC721Enumerable, ERC721URIStorage  {
                 uint256 musicTokenId = totalSupply() + 1;
                 string memory musicToken = _metadata;
                 musicTokens[musicTokenId] = musicToken;
+                musicTokenMinters[musicTokenId]=msg.sender;
                 _mint(msg.sender, musicTokenId);
+                emit Minter(musicTokenId, musicToken, msg.sender, block.timestamp);
+                isOnSaleToken[musicTokenId] = false;
                 _setTokenURI(musicTokenId, _metadata);
         }
 
@@ -113,10 +121,32 @@ contract MintMusicToken is  ERC721Enumerable, ERC721URIStorage  {
                 return musicTokenData;
         }
 
+        function getMusicTokenMinter(uint256 _musicTokenId)
+                view
+                public
+                returns(address)
+        {
+                return musicTokenMinters[_musicTokenId];
+        }
+
         function setSaleMusicToken(address _saleMusicToken) 
                 public
         {
                 saleMusicToken = SaleMusicToken(_saleMusicToken);
+        }
+
+        function getIsOnSale(uint256 _tokenId)
+                view
+                public
+                returns(bool)
+        {
+                return isOnSaleToken[_tokenId];
+        }
+
+        function setTokenState(uint256 _tokenId, bool _state)
+                external
+        {
+                isOnSaleToken[_tokenId] = _state;
         }
 
 }
