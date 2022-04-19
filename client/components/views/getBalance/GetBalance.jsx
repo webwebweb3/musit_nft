@@ -10,7 +10,6 @@ const GetBalance = ({ metamask }) => {
   };
   useEffect(() => {
     if (!balance) getMyBalance();
-    console.log('내 잔액', balance);
   }, [balance]);
   return (
     <div style={{ fontSize: '15px', color: '#9e9fa3', fontWeight: 600 }}>

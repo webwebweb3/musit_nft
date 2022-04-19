@@ -10,16 +10,19 @@ import { Box } from '@mui/material';
 
 import UploadBox from './UploadBox';
 import UploadContents from './UploadContents';
+import UploadingMusic from './uploadingmusic/UploadingMusic';
+import UploadEnd from './uploadingmusic/UploadEnd';
+import UploadError from './uploadingmusic/UploadError';
 
 const client = create('https://ipfs.infura.io:5001/api/v0');
 
 const UploadMusic = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log('라우터', router.asPath.split('/').reverse()[0]);
 
   const artist = router.query.artistName;
   const { userData } = useSelector(state => state.user);
+  const s3 = useSelector(state => state.s3);
   const [dataToSubmit, setDataToSubmit] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedIPFSFile, setSelectedIPFSFile] = useState(null);
@@ -52,6 +55,15 @@ const UploadMusic = () => {
 
   return (
     <form onSubmit={minting} style={style.uploadContainer}>
+      {
+        s3 && s3.MintMusicNFTLoading && <UploadingMusic /> // uploading 중
+      }
+      {
+        s3.MintMusicNFTDone && <UploadEnd /> // upload 끝난 후
+      }
+      {(s3.S3UploadError || s3.IPFSUploadError || s3.MintMusicNFTError) && (
+        <UploadError /> // upload 중 error 발생 시
+      )}
       <Box sx={style.uploadMusicContainer}>
         <UploadBox
           account={account}

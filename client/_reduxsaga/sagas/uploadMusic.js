@@ -36,28 +36,25 @@ function uploadS3AlbumCover(data) {
   };
   console.log('?', creds);
 
-  try {
-    const parallelUploads3 = new Upload({
-      client:
-        new S3({ region: 'ap-northeast-2', credentials: creds }) ||
-        new S3Client({}),
-      partSize: 10485760,
-      leavePartsOnError: false,
-      params: target,
-    });
+  const parallelUploads3 = new Upload({
+    client:
+      new S3({ region: 'ap-northeast-2', credentials: creds }) ||
+      new S3Client({}),
+    partSize: 10485760,
+    leavePartsOnError: false,
+    params: target,
+  });
 
-    parallelUploads3.on('httpUploadProgress', progress => {
-      console.log('saga progress', progress);
-    });
-    parallelUploads3.done();
-    return fileName;
-  } catch (e) {
-    console.error(e);
-  }
+  parallelUploads3.on('httpUploadProgress', progress => {
+    console.log('saga progress', progress);
+  });
+  parallelUploads3.done();
+  return fileName;
 }
 
 async function uploadIPFSMusic(data) {
   console.log('ipfsdata', data);
+
   if (data.selectedIPFSFile === null) {
     alert('음악을 업로드해주세요!');
     Router.reload();
@@ -86,54 +83,50 @@ async function uploadToServer(data) {
 }
 
 async function mintNFTMusic(data) {
-  try {
-    // const router = useRouter();
-    console.log('11');
-    console.log('타이틀', data.data.dataToSubmit.title);
-    console.log('2', data.IPFSurl);
-    console.log('3', data.S3AlbumUrl);
-    if (data.data.dataToSubmit.title === '' || null) {
-      throw new Error('a');
-    }
-    if (data.IPFSurl === '' || null) {
-      throw new Error('b');
-    }
-    if (data.S3AlbumUrl === '' || null) {
-      throw new Error('c');
-    }
-    console.log('mint data', data);
-    let jsonData = {
-      title: 'musit NFT',
-      description: 'This data is for minting a NFT.',
-      type: 'object',
-      properties: {
-        dataToSubmit: data.data.dataToSubmit,
-        IPFSUrl: data.IPFSurl,
-        S3AlbumCover: data.S3AlbumUrl,
-      },
-    };
+  // const router = useRouter();
+  console.log('11');
+  console.log('타이틀', data.data.dataToSubmit.title);
+  console.log('2', data.IPFSurl);
+  console.log('3', data.S3AlbumUrl);
 
-    const mintIPFSurl = await axios.post('/uploadmusic/fs', jsonData);
-    console.log('민트 ipfs', mintIPFSurl);
-    const accounts = await web3.eth.getAccounts();
-    console.log('어카운트', accounts);
-
-    console.log('account', data.data.account);
-    const response = await mintMusicTokenContract.methods
-      .mintMusicToken(mintIPFSurl.data.path)
-      .send({ from: data.data.account });
-
-    console.log('res', response);
-
-    // if (response.status) { 성공시
-    //   if (router.asPath.split('/').reverse()[0] === 'uploadmusic') {
-    //     Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
-    //   }
-    // } else {} 실패시
-  } catch (error) {
-    console.error(error);
-    alert('error.. reload page please..');
+  if (data.data.dataToSubmit.title === '' || null) {
+    throw new Error('a');
   }
+  if (data.IPFSurl === '' || null) {
+    throw new Error('b');
+  }
+  if (data.S3AlbumUrl === '' || null) {
+    throw new Error('c');
+  }
+  console.log('mint data', data);
+  let jsonData = {
+    title: 'musit NFT',
+    description: 'This data is for minting a NFT.',
+    type: 'object',
+    properties: {
+      dataToSubmit: data.data.dataToSubmit,
+      IPFSUrl: data.IPFSurl,
+      S3AlbumCover: data.S3AlbumUrl,
+    },
+  };
+
+  const mintIPFSurl = await axios.post('/uploadmusic/fs', jsonData);
+  console.log('민트 ipfs', mintIPFSurl);
+  const accounts = await web3.eth.getAccounts();
+  console.log('어카운트', accounts);
+
+  console.log('account', data.data.account);
+  const response = await mintMusicTokenContract.methods
+    .mintMusicToken(mintIPFSurl.data.path)
+    .send({ from: data.data.account });
+
+  console.log('res', response);
+
+  // if (response.status) { 성공시
+  //   if (router.asPath.split('/').reverse()[0] === 'uploadmusic') {
+  //     Router.replace(`/studio/${data.data.dataToSubmit.artist}`);
+  //   }
+  // } else {} 실패시
 }
 
 function* mintNFT(action) {
@@ -166,15 +159,15 @@ function* mintNFT(action) {
     console.error(err);
     yield put({
       type: S3_ALBUMCOVER_FAILURE,
-      error: err.response.data,
+      error: err,
     });
     yield put({
       type: IPFS_MUSIC_FAILURE,
-      error: err.response.data,
+      error: err,
     });
     yield put({
       type: MINT_MUSIC_NFT_FAILURE,
-      error: err.response.data,
+      error: err,
     });
   }
 }
