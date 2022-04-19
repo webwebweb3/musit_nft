@@ -13,7 +13,7 @@ import {
   S3_ALBUMCOVER_FAILURE,
   S3_ALBUMCOVER_SUCCESS,
 } from '$reduxsaga/request/types';
-import { mintMusicTokenContract } from '$contracts';
+import { mintMusicTokenContract, web3 } from '$contracts';
 
 function uploadS3AlbumCover(data) {
   console.log('s3data', data);
@@ -114,6 +114,9 @@ async function mintNFTMusic(data) {
     };
 
     const mintIPFSurl = await axios.post('/uploadmusic/fs', jsonData);
+    console.log('민트 ipfs', mintIPFSurl);
+    const accounts = await web3.eth.getAccounts();
+    console.log('어카운트', accounts);
 
     console.log('account', data.data.account);
     const response = await mintMusicTokenContract.methods

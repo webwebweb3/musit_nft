@@ -16,7 +16,10 @@ contract Auction{
 
     MintMusicToken public mintMusicTokenAddress;
 
-    event MyAuctionHistory (address indexed myAddress, uint256 tokenId, uint256 myBid);
+    event MyAuctionHistory (address indexed myAddress, uint256 indexed tokenId, uint256 myBid);
+    event IsAuctionNFT (address indexed myAddress, uint256 indexed tokenId);
+    event CancelAuctionNFT (address indexed myAddress, uint256 indexed tokenId);
+    event FinishAuctionNFT (address indexed seller, address indexed buyer, uint256 indexed tokenId, uint256 price);
 
     enum State {
         Started,
@@ -34,8 +37,6 @@ contract Auction{
         require(block.timestamp <= _endAt, "End time is shorter than now");
         require(_startingBid > 0, "Auction start value is not set.");
         require(_minimumBid > 0, "We haven't set a minimum bid price.");
-        // require(_startAt < _endAt);
-        // require(_startAt >= block.number);
         owner = payable(_eoa); 
         auctionState = State.Running;
         highestBindingBid = _startingBid;
@@ -44,6 +45,7 @@ contract Auction{
         minimumBid = _minimumBid;
         tokenID = _tokenID;
         mintMusicTokenAddress = _mintMusicTokenAddress;
+        emit IsAuctionNFT(_eoa,_tokenID);
         thisContractAddress = address(this);
     }
 
@@ -77,25 +79,6 @@ contract Auction{
         _;
     }
 
-    modifier afterRunning() {
-        if(block.timestamp >= endAt){
-            auctionState == State.Ended;
-        }
-        require(auctionState == State.Ended || auctionState == State.Canceled, "The auction is over.");
-        _;
-    }
-
-    // function auctionStart() 
-    //     public
-    //     onlyOwner
-    //     beforeRunning
-    // {
-    //     (bool success, ) = address(mintMusicTokenAddress).delegatecall(abi.encodeWithSignature("setApprovalForAll(address, bool)",thisContractAddress, true));
-    //     // mintMusicTokenAddress.setApprovalForAll.(msg.sender,thisContractAddress, true);
-    //     if(success){
-    //         auctionState = State.Running;
-    //     }
-    // }
 
     function placeBid() 
         public 
@@ -116,10 +99,25 @@ contract Auction{
     function cancelAuction() 
         public 
         onlyOwner 
-        afterRunning
+        runningState
     {
         auctionState = State.Canceled;
+        emit CancelAuctionNFT(owner, tokenID);
+        mintMusicTokenAddress.setTokenState(tokenID, false);
         // NFT 반환
+    }
+
+    function getMyMoney()
+        public
+        notOwner
+        runningState
+    {
+        require(msg.sender != highestBidder, "You are highest bidder. Can not get your money.");
+        address payable recipient = payable(msg.sender);
+        uint256 value = bids[msg.sender];
+        bids[recipient] = 0;
+        recipient.transfer(value);
+
     }
 
     function finalizeAuction() 
@@ -128,6 +126,7 @@ contract Auction{
     {
         require(block.timestamp >= endAt, "Auction is now running.");
         require(msg.sender == owner || bids[msg.sender] > 0, "");
+        
 
         address payable recipient;
         uint256 value;
@@ -149,7 +148,8 @@ contract Auction{
                 }
             }
         }
-
+        mintMusicTokenAddress.setTokenState(tokenID, false);
+        emit FinishAuctionNFT(owner,recipient,tokenID,value);
         bids[recipient] = 0;
         recipient.transfer(value);
     }

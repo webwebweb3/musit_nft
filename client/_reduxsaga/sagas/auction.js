@@ -44,9 +44,11 @@ import {
 async function createauctionAPI(data) {
   let { startingBid, endTimestamp, tokenID, minimumBid, account } = data;
 
-  await auctionCreatorContract.methods
+  const a = await auctionCreatorContract.methods
     .createAuction(startingBid, endTimestamp, tokenID, minimumBid)
     .send({ from: account });
+
+  console.log('실패해야함', a);
 
   return;
 }

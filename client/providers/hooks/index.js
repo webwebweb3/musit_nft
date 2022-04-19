@@ -34,6 +34,7 @@ export default function Web3provider({ children }) {
     };
 
     loadProvider();
+    _web3Api.connect();
   }, []);
 
   const _web3Api = useMemo(() => {

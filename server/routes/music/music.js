@@ -8,9 +8,30 @@ const { User, sequelize } = require('../../models');
 //               /api/music
 // //------------------------------------------------
 
-// router.get('/', async(req,res)=>{
+router.get('/', async (req, res) => {
+  try {
+    const { paramsData } = req.query;
+    const jsonData = JSON.parse(paramsData);
+    const { editionNum, userMetamask } = jsonData;
 
-// })
+    const userId = await User.findOne({
+      where: { metamask: userMetamask },
+    });
+
+    const isExistSql = `SELECT * FROM musiclikes WHERE user=${userId.id} AND music=${editionNum};`;
+    const isExistResult = await sequelize.query(isExistSql, {
+      type: QueryTypes.SELECT,
+    });
+    console.log('isExistResult', isExistResult);
+    if (isExistResult.length !== 0) {
+      res.json({ exist: true });
+    } else {
+      res.json({ exist: false });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
 router.post('/', async (req, res) => {
   try {
     const { editionNum, userMetamask } = req.body;
