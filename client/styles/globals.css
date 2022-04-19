@@ -1,5 +1,6 @@
 @import './navbar.css';
 @import './streaming.css';
+@import './mypage.css';
 
 html,
 body {
@@ -45,7 +46,6 @@ body:hover {
 .auctionBlurAni {
   width: 100px;
   height: 100px;
-
 }
 
 .css-187mznn-MuiSlider-root:hover > .css-eg0mwd-MuiSlider-thumb {

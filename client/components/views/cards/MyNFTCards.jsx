@@ -116,16 +116,25 @@ const NFTCards = ({
         {musicTokenData.dataToSubmit.title}
       </Box>
 
-      <Box style={{ position: 'relative' }}>
-        <Image
-          src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenData.S3AlbumCover}`}
-          alt="Album Cover"
-          width={'250px'}
-          height={'250px'}
-          onMouseOver={handleMouseIn}
-          onMouseOut={handleMouseOut}
-          style={hover ? { opacity: '0.5' } : { opacity: '1' }}
-        />
+      <Box
+        style={{
+          position: 'relative',
+          borderRadius: '100px',
+          margin: '10px',
+        }}
+      >
+        <Box style={{ borderRadius: '10px', overflow: 'hidden' }}>
+          <Image
+            src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenData.S3AlbumCover}`}
+            alt="Album Cover"
+            width="250px"
+            height="250px"
+            borderRadius="100px"
+            onMouseOver={handleMouseIn}
+            onMouseOut={handleMouseOut}
+            style={hover ? { opacity: '0.5' } : { opacity: '1' }}
+          />
+        </Box>
         <Button
           onMouseOver={handleMouseIn}
           onMouseOut={handleMouseOut}

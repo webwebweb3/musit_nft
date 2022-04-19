@@ -84,7 +84,7 @@ const StudioBackground = ({ background }) => {
         ref={hiddenFileInput}
         style={{ display: 'none' }}
       />
-      {userData.name === studioOwner && (
+      {userData?.name === studioOwner && (
         <StudioCoverButton type="button" onClick={uploadStudioCoverBtn}>
           Upload Cover
         </StudioCoverButton>

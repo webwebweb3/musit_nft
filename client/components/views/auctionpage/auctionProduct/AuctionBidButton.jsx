@@ -6,9 +6,9 @@ import { CircularProgress } from '@mui/material';
 import { AuctionStyledButton } from '../style';
 import { useInput } from '$hooks/useInput';
 import AuctionTextField from '../auctionMui/AuctionTextField';
-// import { auctionBidAction } from '$reduxsaga/request/auction_request';
+import { auctionBidAction } from '$reduxsaga/request/auction_request';
 import { web3, auctionAbi } from '$contracts';
-import { withToast } from '$util/toast';
+// import { withToast } from '$util/toast';
 
 const AuctionBidButton = () => {
   const dispatch = useDispatch();
@@ -24,16 +24,16 @@ const AuctionBidButton = () => {
     setLoading(bidAuctionLoading);
   }, [bidAuctionLoading]);
 
-  const test = async data => {
-    let auctionContract = await new web3.eth.Contract(auctionAbi, data.product);
+  // const test = async data => {
+  //   let auctionContract = await new web3.eth.Contract(auctionAbi, data.product);
 
-    let txData = await auctionContract.methods.placeBid().send({
-      from: data.metamask,
-      value: web3.utils.toWei(`${data.bid}`, 'ether'),
-    });
+  //   let txData = await auctionContract.methods.placeBid().send({
+  //     from: data.metamask,
+  //     value: web3.utils.toWei(`${data.bid}`, 'ether'),
+  //   });
 
-    return txData;
-  };
+  //   return txData;
+  // };
 
   const onClickAuction = useCallback(async () => {
     let data = {
@@ -42,8 +42,8 @@ const AuctionBidButton = () => {
       bid,
     };
 
-    withToast(test(data));
-    // dispatch(auctionBidAction(data));
+    // withToast(test(data));
+    dispatch(auctionBidAction(data));
   }, [dispatch, product, userData, bid]);
 
   return (
@@ -54,7 +54,7 @@ const AuctionBidButton = () => {
         </div>
       ) : (
         <>
-          <AuctionTextField value={bid} func={onChangeBid} uint={'ETH'} />
+          <AuctionTextField value={bid} onChange={onChangeBid} uint={'ETH'} />
           <AuctionStyledButton onClick={onClickAuction}>
             추가 입찰하기
           </AuctionStyledButton>

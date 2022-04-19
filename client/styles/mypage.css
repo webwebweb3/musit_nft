@@ -1,0 +1,23 @@
+.approveBox {
+  margin: 20px auto;
+  width: 100%;
+  background-color: #8ec5fc;
+  box-radius: 10px;
+}
+
+.approveText {
+  color: #fff;
+}
+.approveText:hover {
+  text-decoration: underline;
+}
+
+.approveGrid {
+  margin-top: 18px;
+}
+
+.myNFTContainer {
+  width: 100%;
+  color: white;
+  margin: 0;
+}

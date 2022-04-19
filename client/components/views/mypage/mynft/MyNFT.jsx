@@ -4,7 +4,6 @@ import Router from 'next/router';
 import { mintMusicTokenContract, saleMusicTokenAddress } from '$contracts';
 import { Box, Button, Grid } from '@mui/material';
 import MyNFTCards from '../../cards/MyNFTCards';
-import { style } from './style';
 
 const MyNFT = () => {
   const [myNFT, setMyNFT] = useState();
@@ -12,7 +11,6 @@ const MyNFT = () => {
 
   const { userData } = useSelector(state => state.user);
   if (userData === null) {
-    alert('로그인 해주세요');
     Router.push('/');
   }
   const account = userData.metamask;
@@ -90,13 +88,16 @@ const MyNFT = () => {
   }, [myNFT, saleStatus]);
 
   return (
-    <Box style={style.myNFTContainer}>
-      <Box style={style.myNFTSaleApprovalButton}>
-        <Button onClick={onClickSalesApproval}>
-          {!saleStatus && '판매동의'}
-        </Button>
-      </Box>
+    <Box className="myNFTContainer">
+      {!saleStatus && (
+        <Box className="approveBox">
+          <Button onClick={onClickSalesApproval}>
+            <span className="approveText">판매동의를 해주세요!</span>
+          </Button>
+        </Box>
+      )}
       <Grid
+        className="approveGrid"
         container
         spacing={{ xs: 2, md: 4 }}
         columns={{ xs: 3, sm: 8, md: 12 }}
@@ -104,15 +105,13 @@ const MyNFT = () => {
         {myNFT &&
           myNFT.map((v, i) => {
             return (
-              <Grid item xs={2} sm={3} md={3} key={i}>
-                <MyNFTCards
-                  account={account}
-                  musicTokenIds={v.musicTokenId}
-                  musicTokenDatas={v.musicTokenData}
-                  musicTokenPrices={v.musicTokenPrice}
-                  saleStatus={saleStatus}
-                />
-              </Grid>
+              <MyNFTCards
+                account={account}
+                musicTokenIds={v.musicTokenId}
+                musicTokenDatas={v.musicTokenData}
+                musicTokenPrices={v.musicTokenPrice}
+                saleStatus={saleStatus}
+              />
             );
           })}
       </Grid>
