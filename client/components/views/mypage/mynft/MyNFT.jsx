@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { mintMusicTokenContract, saleMusicTokenAddress } from '$contracts';
 import { Box, Button, Grid } from '@mui/material';
 import MyNFTCards from '../../cards/MyNFTCards';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 
 const MyNFT = () => {
   const [myNFT, setMyNFT] = useState();
@@ -92,7 +93,8 @@ const MyNFT = () => {
       {!saleStatus && (
         <Box className="approveBox">
           <Button onClick={onClickSalesApproval}>
-            <span className="approveText">판매동의를 해주세요!</span>
+            <AddTaskIcon className="approveTextIcon" />
+            <span className="approveText">판매동의를 먼저 해주세요!</span>
           </Button>
         </Box>
       )}

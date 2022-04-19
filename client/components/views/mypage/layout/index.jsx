@@ -15,7 +15,7 @@ const MyPageLayout = ({ children }) => {
   }, [userData]);
 
   return (
-    <div style={{ marginTop: '140px', display: 'flex' }}>
+    <div style={{ marginTop: '120px', display: 'flex' }}>
       <Box
         sx={{
           margin: '0 auto',

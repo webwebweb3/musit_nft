@@ -1,15 +1,21 @@
 .approveBox {
-  margin: 20px auto;
+  margin: 10px auto;
   width: 100%;
-  background-color: #8ec5fc;
+  background-color: #e2ebf030;
   box-radius: 10px;
 }
 
 .approveText {
   color: #fff;
 }
+
 .approveText:hover {
   text-decoration: underline;
+}
+
+svg[data-testid='AddTaskIcon'] {
+  color: white;
+  margin-right: 5px;
 }
 
 .approveGrid {
