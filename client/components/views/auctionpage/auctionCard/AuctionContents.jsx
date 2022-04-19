@@ -44,23 +44,14 @@ const AuctionContents = ({ auction }) => {
   }, []);
 
   return (
-    <Box>
-      <Grid
-        container
-        spacing={{ xs: 2, md: 4 }}
-        columns={{ xs: 3, sm: 8, md: 12 }}
-        style={{ width: '1050px' }}
-      >
-        <Grid item xs={2} sm={4} md={4}>
-          {auctionData && (
-            <AuctionCard
-              highestBindingBid={auctionData.highestBindingBid}
-              auctionState={auctionData.auctionState}
-              tokenID={auctionData.tokenID}
-            />
-          )}
-        </Grid>
-      </Grid>
+    <Box sx={{ margin: '0 10px' }}>
+      {auctionData && (
+        <AuctionCard
+          highestBindingBid={auctionData.highestBindingBid}
+          auctionState={auctionData.auctionState}
+          tokenID={auctionData.tokenID}
+        />
+      )}
     </Box>
   );
 };

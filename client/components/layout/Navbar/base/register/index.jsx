@@ -8,6 +8,7 @@ import { useWeb3 } from '$providers/hooks';
 import { MetamaskButton, RegisterModal } from '../../contents';
 import ProfileButton from '../myMenu';
 import NetworkCheck from './NetworkCheck';
+import GetBalance from '$components/views/getBalance/GetBalance';
 
 const RegisterCheck = () => {
   const { userData } = useSelector(state => state.user);
@@ -15,7 +16,6 @@ const RegisterCheck = () => {
   const { network, account } = useWalletInfo();
   const { hasInitialResponse, isSupported, target } = network;
   const { isLoading, requireInstall } = useWeb3();
-
   const [open, setOpen] = useState(false);
 
   const handleMetaMaskOpen = useCallback(() => {
@@ -56,6 +56,9 @@ const RegisterCheck = () => {
       ) : userData ? (
         <>
           <div style={{ marginLeft: 'auto' }}>
+            {account.data && <GetBalance metamask={account.data} />}
+          </div>
+          <div style={{ paddingRight: '20px' }}>
             <ProfileButton value="notice" />
           </div>
           <div style={{ paddingRight: '20px' }}>

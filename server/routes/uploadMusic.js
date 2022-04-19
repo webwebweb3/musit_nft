@@ -4,7 +4,7 @@ const router = express.Router();
 const ipfsHttpClient = require('ipfs-http-client');
 
 const fs = require('fs');
-const { User, Music, MusicLike, MusicPlayTime } = require('../models');
+const { User, Music, MusicPlayTime } = require('../models');
 
 //------------------------------------------------
 //               /api/uploadmusic
@@ -92,14 +92,10 @@ router.post('/', async (req, res) => {
       songwriter,
       lyricist,
       genre,
-      S3AlbumUrl,
-      IPFSurl,
+      albumCover: S3AlbumUrl,
+      IPFSUrl: IPFSurl,
     });
 
-    await MusicLike.create({
-      likes: 0,
-      musicId: postMusic.dataValues.id,
-    });
     await MusicPlayTime.create({
       playtime: 0,
       musicId: postMusic.dataValues.id,

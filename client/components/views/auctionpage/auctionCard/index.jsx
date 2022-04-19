@@ -11,9 +11,12 @@ const AuctionCard = () => {
       {allAuctionData &&
         allAuctionData.map(auction => (
           <div key={auction}>
-            <Link href="/nft/auction/[product]" as={`/nft/auction/${auction}`}>
+            <Link
+              href="/nft/auction/[product]"
+              as={`/nft/auction/${auction.newAuctionContract}`}
+            >
               <a>
-                <AuctionContents auction={auction} />
+                <AuctionContents auction={auction.newAuctionContract} />
               </a>
             </Link>
           </div>
