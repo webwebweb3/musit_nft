@@ -43,9 +43,18 @@ body:hover {
   backdrop-filter: blur(5px);
 }
 .auctionBlurAni {
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
 
+}
+.svgContainer{
+  width: 300px;
+  height: 300px;
+margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
 }
 
 .css-187mznn-MuiSlider-root:hover > .css-eg0mwd-MuiSlider-thumb {

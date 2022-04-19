@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
 import lottie from 'lottie-web';
+import GavelIcon from '@mui/icons-material/Gavel';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 import {
   auctionAction,
@@ -24,17 +26,6 @@ import AuctionBidButton from './AuctionBidButton';
 import { Button, CircularProgress } from '@mui/material';
 
 const AuctionProductPage = () => {
-  const agreecontainer = useRef();
-  useEffect(() => {
-    lottie.loadAnimation({
-      container: agreecontainer.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: require('./approval.json'),
-    });
-  }, []);
-
   const dispatch = useDispatch();
   const { userData } = useSelector(state => state.user);
   const {
@@ -101,26 +92,48 @@ const AuctionProductPage = () => {
               <div className="auctionBlur">
                 <div
                   style={{
-                    fontSize: '100px',
-                    color: '#8EC5FC',
+                    fontSize: '55px',
+                    color: '#173142',
                     display: 'flex',
                     margin: 'auto',
                     flexDirection: 'column',
                   }}
                 >
-                  <div>판매자 승인대기중</div>
-                  <div className="auctionBlurAni" ref={agreecontainer}></div>
-                  <div style={{ margin: 'auto' }}>
-                    {/* {userData && owner === userData.metamask && ( */}
-                    <>
-                      <Button onClick={onClickApprove} variant="text">
-                        경매 시작하기
-                      </Button>
-                      <Button onClick={onClickCancelAuction} variant="text">
-                        경매 취소
-                      </Button>
-                    </>
-                    {/* )} */}
+                  <div className="svgContainer">
+                    <div>
+                      <Image
+                        src="/apgifus.gif"
+                        alt="종이"
+                        width="300px"
+                        height="300px"
+                      ></Image>
+                    </div>
+                  </div>
+                  <div>판매자 승인 대기중</div>
+
+                  <div style={{ margin: 'auto', padding: '30px' }}>
+                    {userData && owner === userData.metamask && (
+                      <>
+                        <Button
+                          startIcon={<GavelIcon />}
+                          style={{ fontSize: '20px', padding: '10px' }}
+                          onClick={onClickApprove}
+                          variant="text"
+                        >
+                          <span style={{ color: '#6bc4ff' }}>
+                            경매 시작하기
+                          </span>
+                        </Button>
+                        <Button
+                          startIcon={<CancelIcon />}
+                          style={{ fontSize: '20px', padding: '10px' }}
+                          onClick={onClickCancelAuction}
+                          variant="text"
+                        >
+                          <span style={{ color: '#6bc4ff' }}>경매 취소</span>
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
