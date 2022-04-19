@@ -48,8 +48,6 @@ async function createauctionAPI(data) {
     .createAuction(startingBid, endTimestamp, tokenID, minimumBid)
     .send({ from: account });
 
-  console.log('실패해야함', a);
-
   return;
 }
 
