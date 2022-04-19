@@ -101,6 +101,7 @@ const NFTCards = ({
           fontSize: '15px',
           color: `${myNFTPrice === '0' ? '#cc0000' : '#1976ae'}`,
           fontWeight: 600,
+          marginLeft: '10px',
         }}
       >
         {myNFTPrice === '0' ? '미판매중' : '판매중'}
@@ -108,24 +109,34 @@ const NFTCards = ({
       <Box
         sx={{
           width: '65%',
-          fontSize: '35px',
+          fontSize: '30px',
           textOverflow: 'ellipsis',
           display: 'inline-block',
+          marginLeft: '10px',
         }}
       >
         {musicTokenData.dataToSubmit.title}
       </Box>
 
-      <Box style={{ position: 'relative' }}>
-        <Image
-          src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenData.S3AlbumCover}`}
-          alt="Album Cover"
-          width={'250px'}
-          height={'250px'}
-          onMouseOver={handleMouseIn}
-          onMouseOut={handleMouseOut}
-          style={hover ? { opacity: '0.5' } : { opacity: '1' }}
-        />
+      <Box
+        style={{
+          position: 'relative',
+          borderRadius: '100px',
+          margin: '10px',
+        }}
+      >
+        <Box style={{ borderRadius: '10px', overflow: 'hidden' }}>
+          <Image
+            src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${musicTokenData.S3AlbumCover}`}
+            alt="Album Cover"
+            width="220px"
+            height="220px"
+            borderRadius="100px"
+            onMouseOver={handleMouseIn}
+            onMouseOut={handleMouseOut}
+            style={hover ? { opacity: '0.5' } : { opacity: '1' }}
+          />
+        </Box>
         <Button
           onMouseOver={handleMouseIn}
           onMouseOut={handleMouseOut}

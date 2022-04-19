@@ -29,7 +29,6 @@ const Studio = () => {
   const { userData } = useSelector(state => state.user);
 
   if (userData === null) {
-    alert('로그인 해주세요');
     Router.push('/');
   }
 
@@ -102,7 +101,7 @@ const Studio = () => {
       </Box>
 
       <Box>
-        {artistName === userData.name ? (
+        {artistName === userData?.name ? (
           <Button sx={style.studioUploadButton}>
             <Link
               href="[artistName]/uploadmusic"
@@ -117,7 +116,7 @@ const Studio = () => {
               artist={artistName}
               sub={isSubscribe}
               func={setIsSubscribe}
-              myMetamask={userData.metamask}
+              myMetamask={userData?.metamask}
             />
           </Box>
         )}

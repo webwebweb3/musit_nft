@@ -9,42 +9,50 @@ const MyPageLayout = ({ children }) => {
   const { userData } = useSelector(state => state.user);
 
   useEffect(() => {
-    console.log(1111);
     if (!userData) {
       Router.push('/');
     }
   }, [userData]);
 
   return (
-    <div style={{ minWidth: '1300px', display: 'flex' }}>
+    <div style={{ marginTop: '120px', display: 'flex' }}>
       <Box
         sx={{
-          display: 'inline-block',
-          verticalAlign: 'top',
+          margin: '0 auto',
+          minWidth: '1200px',
+          maxWidth: '1200px',
         }}
       >
-        <Sidebar userData={userData} />
-      </Box>
-      <Box
-        sx={{
-          display: 'inline-block',
-          width: '1px',
-          height: '650px',
-          backgroundColor: 'gray',
-        }}
-      />
-      <Box
-        sx={{
-          display: 'inline-block',
-          marginLeft: '70px',
-          marginRight: '70px',
-          verticalAlign: 'top',
-          minWidth: '1159px',
-          maxWidth: '1159px',
-          width: '1159px',
-        }}
-      >
-        {children}
+        <Box
+          sx={{
+            display: 'inline-block',
+            verticalAlign: 'top',
+            margin: '0 auto',
+          }}
+        >
+          <Sidebar userData={userData} />
+        </Box>
+        <Box
+          sx={{
+            display: 'inline-block',
+            width: '1px',
+            height: '650px',
+            backgroundColor: 'gray',
+          }}
+        />
+        <Box
+          sx={{
+            display: 'inline-block',
+            marginLeft: '70px',
+            marginRight: '70px',
+            verticalAlign: 'top',
+            minWidth: '700px',
+            maxWidth: '700px',
+            width: '700px',
+          }}
+        >
+          {children}
+        </Box>
       </Box>
     </div>
   );

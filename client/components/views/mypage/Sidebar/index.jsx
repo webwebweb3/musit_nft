@@ -61,16 +61,6 @@ const Sidebar = ({ userData }) => {
               </Link>
             </ListItem>
             <ListItem disablePadding>
-              <Link href="/studio/[artistName]" as={`/studio/${userData.name}`}>
-                <ListItemButton>
-                  <ListItemIcon sx={{ color: '#fff' }}>
-                    <AutoAwesomeIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="내 스튜디오" />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-            <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon sx={{ color: '#fff' }}>
                   <AudiotrackIcon />

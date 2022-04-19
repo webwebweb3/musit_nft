@@ -14,6 +14,7 @@ import { timeFunction } from '$util/timefunc';
 import UploadButton from './UploadButton';
 import { useWalletInfo } from '$hooks/web3';
 import { auctionCreatorContract, mintMusicTokenContract } from '$contracts';
+import LoadingPage from '$components/views/LoadingPage';
 import { StyledMyNFTText } from '../style';
 
 const AuctionUploadPage = () => {
@@ -237,15 +238,15 @@ const AuctionUploadPage = () => {
                   tokenID={tokenID}
                 />
               )}
+              <AuctionButton text="경매 메인으로 가기" link={'nft/auction'} />
             </>
           ) : (
             <>현재 판매 가능한 NFT 가 없습니다!</>
           )}
         </>
       ) : (
-        <CircularProgress color="inherit" />
+        <LoadingPage />
       )}
-      <AuctionButton text="경매 메인으로 가기" link={'nft/auction'} />
     </Box>
   );
 };
