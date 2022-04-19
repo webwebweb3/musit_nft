@@ -10,7 +10,6 @@ import GenreMusic from './genreMusic';
 const Streaming = () => {
   const { userData } = useSelector(state => state.user);
   const [visible, setVisible] = useState('none');
-
   return (
     <>
       <div className="streamingContainer">

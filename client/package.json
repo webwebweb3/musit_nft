@@ -27,7 +27,7 @@
     "fs": "0.0.1-security",
     "immer": "^9.0.12",
     "ipfs-http-client": "^56.0.1",
-    "lodash": "^4.17.21",
+    "lottie-web": "^5.9.2",
     "material-ui-audio-player": "^1.7.1",
     "next": "^12.1.0",
     "next-redux-wrapper": "^7.0.5",

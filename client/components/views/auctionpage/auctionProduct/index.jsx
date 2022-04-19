@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
+import lottie from 'lottie-web';
 
 import {
   auctionAction,
@@ -23,6 +24,17 @@ import AuctionBidButton from './AuctionBidButton';
 import { Button, CircularProgress } from '@mui/material';
 
 const AuctionProductPage = () => {
+  const agreecontainer = useRef();
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: agreecontainer.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: require('./approval.json'),
+    });
+  }, []);
+
   const dispatch = useDispatch();
   const { userData } = useSelector(state => state.user);
   const {
@@ -89,28 +101,26 @@ const AuctionProductPage = () => {
               <div className="auctionBlur">
                 <div
                   style={{
-                    fontSize: '50px',
+                    fontSize: '100px',
                     color: '#8EC5FC',
                     display: 'flex',
                     margin: 'auto',
                     flexDirection: 'column',
                   }}
                 >
-                  <div>판매자 승인을 대기하고 있어요!</div>
+                  <div>판매자 승인대기중</div>
+                  <div className="auctionBlurAni" ref={agreecontainer}></div>
                   <div style={{ margin: 'auto' }}>
-                    {userData && owner === userData.metamask && (
-                      <>
-                        <Button onClick={onClickApprove} variant="contained">
-                          경매 시작하기
-                        </Button>
-                        <Button
-                          onClick={onClickCancelAuction}
-                          variant="contained"
-                        >
-                          경매 취소
-                        </Button>
-                      </>
-                    )}
+                    {/* {userData && owner === userData.metamask && ( */}
+                    <>
+                      <Button onClick={onClickApprove} variant="text">
+                        경매 시작하기
+                      </Button>
+                      <Button onClick={onClickCancelAuction} variant="text">
+                        경매 취소
+                      </Button>
+                    </>
+                    {/* )} */}
                   </div>
                 </div>
               </div>
