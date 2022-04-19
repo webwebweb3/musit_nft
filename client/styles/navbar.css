@@ -18,3 +18,24 @@ button[role='tab']:hover {
 button[disabled] {
   color: #ffbbec;
 }
+
+@keyframes navbar {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.streamingNavbar:hover ~ .nftNavbar {
+  animation: navbar 1 1s forwards;
+  /* animation-play-state: paused; */
+}
+
+.streamingNavbar:hover ~ .nftNavbar {
+  animation: navbar 1 1s forwards;
+  display: block;
+  /* animation-play-state: paused; */
+}

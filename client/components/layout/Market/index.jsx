@@ -22,7 +22,7 @@ const MarketLayout = ({ children, value }) => {
       <AuctionMainContainer>
         {/* Header */}
         <AuctionHeader>
-          <h1 style={{ margin: '0 0 0 40px' }}>{value}</h1>
+          <h1>{value}</h1>
           {userData && userData.role === 1 && (
             <>
               {value === 'Auction' ? (

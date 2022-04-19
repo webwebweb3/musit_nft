@@ -4,7 +4,7 @@ import { mintMusicTokenContract } from '$contracts';
 import MusicCard from '../../cards/MusicCard';
 import Link from 'next/link';
 
-const LatestMusic = ({ func }) => {
+const ChartMusic = ({ func }) => {
   const [musics, setMusics] = useState([]);
   const getMusic = async () => {
     try {
@@ -40,7 +40,7 @@ const LatestMusic = ({ func }) => {
     <Box className="streamingBox">
       <Box>
         <Box className="streamingTitle">
-          최신 등록 음악
+          인기 음악
           <Link href={`/streaming/latestMusic`}>
             <span className="latestMusic">모두 보기</span>
           </Link>
@@ -70,4 +70,4 @@ const LatestMusic = ({ func }) => {
   );
 };
 
-export default LatestMusic;
+export default ChartMusic;

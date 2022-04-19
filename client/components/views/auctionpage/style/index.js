@@ -16,13 +16,12 @@ export const AuctionAllContainer = styled(Box)`
 
 export const AuctionHeader = styled(Box)`
   color: white;
-  line-height: 72px;
-  padding-top: 20px;
-  padding-bottom: 40px;
+  line-height: 52px;
+  padding: 5px 0 15px 0;
   flex: 0 1 auto;
   font-size: 30px;
   font-weight: 700;
-  margin: 0 190px;
+  margin: 0 auto 0 0;
 `;
 
 export const AuctionMainContainer = styled(Box)`
@@ -30,6 +29,9 @@ export const AuctionMainContainer = styled(Box)`
   flex-direction: column;
   color: white;
   flex: 0 1 auto;
+  min-width: 1200px;
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 
 export const AuctionContainer = styled(Box)`
@@ -43,6 +45,8 @@ export const AuctionContainer = styled(Box)`
 `;
 
 export const AuctionLeftSideBar = styled(Box)`
+  min-width: 170px;
+  max-width: 170px;
   flex: 0 1 auto;
 `;
 
@@ -102,7 +106,7 @@ export const AuctionContentsContainer = styled(AuctionContainer)`
 export const AuctionMainContentsContainer = styled(AuctionContentsContainer)`
   display: flex;
   color: white;
-  margin: 0 230px;
+  margin: 0 auto;
 `;
 
 export const AuctionDivider = styled(Divider)`
