@@ -11,7 +11,7 @@ import {
   RadioGroup,
 } from '@mui/material';
 import React from 'react';
-import { StyledFormControl } from '../../style';
+import { StyledFormControl } from '$components/views/auctionpage/style';
 
 const LeftSideBar = () => {
   return (
@@ -33,7 +33,7 @@ const LeftSideBar = () => {
           />
         </StyledFormControl>
       </Box>
-      <Box>
+      <Box style={{ marginLeft: '20px' }}>
         <FormControl>
           <FormLabel
             id="demo-radio-buttons-group-label"
@@ -56,7 +56,7 @@ const LeftSideBar = () => {
           </RadioGroup>
         </FormControl>
       </Box>
-      <Box sx={{ marginTop: '10px' }}>
+      <Box sx={{ marginTop: '10px', marginLeft: '20px' }}>
         <FormControl>
           <FormLabel
             id="demo-radio-buttons-group-label"

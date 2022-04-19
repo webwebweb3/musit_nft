@@ -18,15 +18,21 @@ const NavbarLink = () => {
   return (
     <>
       {pathname.includes('/nft') ? (
-        <Link href="/streaming">
-          <Tab
-            disabled={linkDisabled.includes('streaming')}
-            icon={<Headset />}
-            iconPosition="start"
-            label=""
-            sx={{ fontSize: '0', marginRight: '-20px' }}
-          />
-        </Link>
+        <>
+          <Link href="/streaming">
+            <Tab
+              className="streamingNavbar"
+              disabled={linkDisabled.includes('streaming')}
+              icon={<Headset />}
+              iconPosition="start"
+              label=""
+              sx={{ fontSize: '0', marginRight: '-20px' }}
+            />
+          </Link>
+          <span className="nftNavbar" style={{ display: 'none' }}>
+            STREAMING
+          </span>
+        </>
       ) : (
         <Link href="/streaming">
           <Tab
@@ -40,6 +46,7 @@ const NavbarLink = () => {
       )}
       <Link href="/nft">
         <Tab
+          className="nftNavbar"
           disabled={linkDisabled.includes('nft')}
           icon={<Token />}
           iconPosition="start"
@@ -51,6 +58,7 @@ const NavbarLink = () => {
         <>
           <Link href="/nft/marketplace">
             <Tab
+              className="marketPlaceNavbar nftNavbar"
               disabled={linkDisabled.includes('marketplace')}
               icon={<Storefront />}
               iconPosition="start"
@@ -60,6 +68,7 @@ const NavbarLink = () => {
           </Link>
           <Link href="/nft/auction">
             <Tab
+              className="auctionNavbar nftNavbar"
               disabled={linkDisabled.includes('auction')}
               icon={<Gavel />}
               iconPosition="start"

@@ -1,10 +1,19 @@
 @import './navbar.css';
+@import './streaming.css';
 
 html,
 body {
   background-color: #0d0f1a;
   margin: 0;
 }
+
+/* body {
+  mix-blend-mode: luminosity;
+}
+
+body:hover {
+  mix-blend-mode: normal;
+} */
 
 .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
   color: #dada;

@@ -154,7 +154,7 @@ const AuctionProductPage = () => {
               {/* 나의 경매 금액 */}
               <MyBidBox product={product} gapTime={gapTime} />
               {!gapTime &&
-                owner.toLowerCase() !== userData.metamask.toLowerCase() && (
+                owner.toLowerCase() !== userData?.metamask.toLowerCase() && (
                   <>
                     {/* 입찰하기 */}
                     <AuctionBidButton product={product} />
