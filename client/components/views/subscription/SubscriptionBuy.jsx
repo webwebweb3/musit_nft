@@ -1,14 +1,30 @@
-import React from 'react';
-import { BsXDiamondFill } from 'react-icons/bs';
-import { FaFire } from 'react-icons/fa';
-import { GiCrystalize } from 'react-icons/gi';
+import React, { useEffect, useState } from 'react';
+import { FaFire, FaFireAlt, FaCoffee, FaMusic, FaFaucet } from 'react-icons/fa';
 import { Global } from './SubscriptionBuyStyle';
 import { Button } from '../homepage/Button';
 import { IconContext } from 'react-icons/lib';
 import FreeSubscription from './freesubscription/FreeSubscription';
 import SubscriptionLayout from './subscriptionLayout/SubscriptionLayout';
+import { paymentContract } from '$contracts';
+import { utils } from 'web3';
 
 const SubscriptionBuy = () => {
+  const [plans, setPlans] = useState();
+
+  const getAllPlans = async () => {
+    const plans = await paymentContract.methods.getAllPlans().call();
+    // for (let i = 0; i < plans.length; i++) {
+    //   plans[i] = plans[i].concat('1');
+    //   index;
+    // }
+    setPlans(plans);
+  };
+
+  useEffect(() => {
+    if (!plans) getAllPlans();
+    console.log('플랜들', plans);
+  }, [plans]);
+
   return (
     <>
       <Global />
@@ -17,14 +33,26 @@ const SubscriptionBuy = () => {
           <div>
             <h1 className="buyHeading">구독권 구매</h1>
           </div>
-          <SubscriptionLayout />
+          {plans &&
+            plans.map((v, i) => {
+              return (
+                <SubscriptionLayout
+                  Icons={FaFire}
+                  subIconTitle={'Event Plan'}
+                  subPrice={utils.fromWei(v.amount)}
+                  subText={'asdf'}
+                  subTarget={'유저'}
+                />
+              );
+            })}
+
           <FreeSubscription />
           <div className="buyWrapper">
             <div className="buyContainer">
               <div className="buyContainer-card buyContainer-cardInfo">
                 <div className="buyIcon">
                   <Button buttonSize="btn--large" buttonColor="primary">
-                    <BsXDiamondFill />{' '}
+                    <FaFireAlt />
                     <>
                       <br />
                     </>
@@ -46,7 +74,7 @@ const SubscriptionBuy = () => {
               <div className="buyContainer-card buyContainer-cardInfo">
                 <div className="buyIcon">
                   <Button buttonSize="btn--large" buttonColor="primary">
-                    <GiCrystalize fontSize="large" />{' '}
+                    <FaFaucet fontSize="large" />
                     <>
                       <br />
                     </>
@@ -64,7 +92,6 @@ const SubscriptionBuy = () => {
             </div>
           </div>
           <div className="buyFooter">
-            {' '}
             <h3>
               각 서비스 비용은 한달 단위이며 서비스를 이용하려면 유저는 한 달
               단위의 subscription 을 해야함 <br />
