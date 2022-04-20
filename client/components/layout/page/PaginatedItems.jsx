@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import Items from '$components/layout/page/Items';
 import { Box, MenuItem, Select } from '@mui/material';
 
-const PaginatedItems = ({ items, type }) => {
+const PaginatedItems = ({ items, saleStatus, type }) => {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -29,7 +29,7 @@ const PaginatedItems = ({ items, type }) => {
 
   return (
     <>
-      <Items currentItems={currentItems} type={type} />
+      <Items currentItems={currentItems} saleStatus={saleStatus} type={type} />
       <Box className="pageList">
         <ReactPaginate
           breakLabel="..."

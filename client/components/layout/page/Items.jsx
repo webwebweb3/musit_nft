@@ -26,6 +26,7 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
                   musicTokenIds={v.musicTokenId}
                   musicTokenDatas={v.musicTokenData}
                   musicTokenPrices={v.musicTokenPrice}
+                  saleStatus={saleStatus}
                   {...rest}
                 />
               ))}
