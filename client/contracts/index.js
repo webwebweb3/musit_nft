@@ -1654,13 +1654,13 @@ const streamingAbi = [
 ];
 
 export const mintMusicTokenAddress =
-  '0xc31b2868A1ae13d12A78401862D53A91A893628c';
+  '0x70CD02cfE16d2B71a6AC295f83615994e49cc694';
 export const saleMusicTokenAddress =
-  '0xA8fCc2eE62d35883947a30B59EF87d963cF224ab';
+  '0x449BE2a4c8EB110F46525aC8F4f74fD7fCc87e26';
 export const auctionCreatorAddress =
-  '0x2C860183E057229C771141Ab9484BEDF9dF30443';
-export const paymentAddress = '0xb0E43C9344dFDf9d88b42F88832c7D94DD9521D0';
-export const streamingAddress = '0xF4e8c5Cb0B6686185f3780dDd70d0bca6a4d8fd1';
+  '0xA136BfAe8634748960bccFFa99D42c1b8b20928D';
+export const paymentAddress = '0x3158F87596f5C37a5BA9F7BB3038dF524EeF3313';
+export const streamingAddress = '0x69440A9dFa8c06fF81C799506Ad4ca9D4314b3e4';
 
 let web3;
 let mintMusicTokenContract;

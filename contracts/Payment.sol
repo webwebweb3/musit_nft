@@ -36,6 +36,7 @@ contract Payment {
         require(amount > 0, "amount needs to be > 0");
         require(frequency > 0, "frequency needs to be > 0");
         plans[nextPlanId] = Plan(msg.sender, amount, frequency);
+        emit PlanCreated(msg.sender, nextPlanId, block.timestamp);
         nextPlanId++;
     }
 

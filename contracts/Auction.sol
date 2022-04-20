@@ -113,8 +113,10 @@ contract Auction{
         runningState
     {
         require(msg.sender != highestBidder, "You are highest bidder. Can not get your money.");
-        address payable recipient = payable(msg.sender);
-        uint256 value = bids[msg.sender];
+        address payable recipient;
+        uint256 value;
+        recipient = payable(msg.sender);
+        value = bids[msg.sender];
         bids[recipient] = 0;
         recipient.transfer(value);
 
