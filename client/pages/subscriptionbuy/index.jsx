@@ -3,7 +3,7 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 
 import wrapper from '$reduxsaga/store/configureStore';
-import SubscriptionBuy from '$components/views/SubscriptionBuy';
+import SubscriptionBuy from '$components/views/subscription/SubscriptionBuy';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
 const SubscriptionBuyPage = () => {

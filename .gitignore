@@ -48,6 +48,8 @@ json
 mymusic
 *.mp3
 
+client/package-lock.json
+
 #hardhat
 hardhat/artifacts
 hardhat/cache

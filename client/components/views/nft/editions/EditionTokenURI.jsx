@@ -67,7 +67,7 @@ const EditionTokenURI = () => {
                     <Box sx={style.editionContainer}>
                       <Box
                         sx={style.editionBackContainer}
-                        onClick={() => Router.replace('/nft/marketplace')}
+                        onClick={() => Router.push('/nft/marketplace')}
                       >
                         <ArrowBackIcon
                           sx={{ fontSize: '20px', marginRight: '10px' }}
