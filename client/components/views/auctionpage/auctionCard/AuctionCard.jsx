@@ -41,19 +41,9 @@ const AuctionCard = ({ highestBindingBid, auctionState, tokenID }) => {
     <>
       {auctionData.description && (
         <Card
-          sx={{
-            display: 'inline-block',
-            width: '300px',
-
-            backgroundColor: '#2c3352',
-            color: 'white',
-            borderRadius: '1rem',
-          }}
+          className="cardContract"
           onMouseOver={handleMouseIn}
           onMouseOut={handleMouseOut}
-          style={
-            hover ? { opacity: '0.8', cursor: 'pointer' } : { opacity: '1' }
-          }
         >
           {/* TODO: hover animation!!! */}
           <div style={hover ? { marginLeft: '-10px' } : {}}>
@@ -62,25 +52,23 @@ const AuctionCard = ({ highestBindingBid, auctionState, tokenID }) => {
               alt={`${auctionData.properties.dataToSubmit.title} album Cover`}
               layout="fixed"
               width={hover ? '320px' : '300px'}
-              height={hover ? '300px' : '300px'}
+              height="300px"
             />
           </div>
 
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flex: '1 0 auto' }}>
+          <Box className="cardBottom">
+            <CardContent className="cardContent">
               <Typography component="div" variant="h5">
                 {auctionData.properties.dataToSubmit.title}
               </Typography>
               <Typography
+                className="cardTitle"
                 variant="subtitle1"
                 component="div"
-                style={{ color: '#768fb5' }}
               >
                 {auctionData.properties.dataToSubmit.artist}
               </Typography>
-              <Box
-                style={{ fontWeight: '600', color: '#18c99b' }}
-              >{`현재 최고가 : ${highestBindingBid} ETH`}</Box>
+              <Box className="cardETH">{`현재 최고가 : ${highestBindingBid} ETH`}</Box>
             </CardContent>
           </Box>
         </Card>

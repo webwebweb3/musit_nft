@@ -26,9 +26,10 @@ const AuctionUploadPage = () => {
   const [tokenID, setTokenID] = useState('');
   const [myNFT, setMyNFT] = useState();
   const [loading, setLoading] = useState(false);
-  const [testPage, setTestPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
   const [auctionTokenId, setAuctionTokenId] = useState([]);
   const [myTotalNFT, setMyTotalNFT] = useState([]);
+  const [page, setPage] = useState(1);
 
   const { network, account } = useWalletInfo();
 
@@ -58,7 +59,7 @@ const AuctionUploadPage = () => {
       );
 
       let totalPage = Math.ceil(myNFTArray.length / 1); // 숫자 1 보고 싶은 페이지로 수정
-      setTestPage(totalPage);
+      setTotalPage(totalPage);
 
       let startView = (myNFTArray.length / totalPage) * page - 1; // 숫자 1 보고 싶은 페이지로 수정
       let endView = (myNFTArray.length / totalPage) * page;
@@ -128,7 +129,6 @@ const AuctionUploadPage = () => {
     [tokenID],
   );
 
-  const [page, setPage] = useState(1);
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -219,7 +219,7 @@ const AuctionUploadPage = () => {
                 >
                   <Pagination
                     onChange={handleChange}
-                    count={testPage}
+                    count={totalPage}
                     page={page}
                     showLastButton
                     showFirstButton

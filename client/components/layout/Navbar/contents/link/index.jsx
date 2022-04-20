@@ -44,14 +44,13 @@ const NavbarLink = () => {
           />
         </Link>
       )}
-      <Link href="/nft">
+      <Link href="/nft/marketplace">
         <Tab
           className="nftNavbar"
-          disabled={linkDisabled.includes('nft')}
           icon={<Token />}
           iconPosition="start"
           label="NFT"
-          sx={{ fontSize: '18px' }}
+          sx={{ fontSize: '18px', color: '#fff' }}
         />
       </Link>
       {pathname.includes('/nft') && (

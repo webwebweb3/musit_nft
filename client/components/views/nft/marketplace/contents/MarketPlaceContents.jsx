@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import MarketPlaceNFTCard from '../../../cards/MarketPlaceNFTCard.jsx';
 import Router from 'next/router';
 import NFTCards from '../../../cards/NFTCards.jsx';
+import PageList from '$components/layout/page/index.jsx';
 
 const MarketPlaceContents = () => {
   const [saleMusicTokens, setSaleMusicTokens] = useState();
@@ -51,25 +52,7 @@ const MarketPlaceContents = () => {
 
   return (
     <Box sx={style.ContentsContainer}>
-      <Grid
-        container
-        spacing={{ xs: 2, md: 4 }}
-        columns={{ xs: 3, sm: 8, md: 12 }}
-        style={{ width: '1050px' }}
-      >
-        {saleMusicTokens &&
-          saleMusicTokens.map((v, i) => {
-            return (
-              <Grid item xs={2} sm={4} md={4} key={i}>
-                <MarketPlaceNFTCard
-                  musicTokenIds={v.musicTokenId}
-                  musicTokenPrices={v.musicTokenPrice}
-                  musicTokenDatas={v.musicTokenData}
-                />
-              </Grid>
-            );
-          })}
-      </Grid>
+      <PageList items={saleMusicTokens} type="market" />
     </Box>
   );
 };

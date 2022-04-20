@@ -15,7 +15,7 @@ import { StyledFormControl } from '$components/views/auctionpage/style';
 
 const LeftSideBar = () => {
   return (
-    <Box>
+    <Box sx={{ width: '180px' }}>
       <Box>
         <StyledFormControl focused variant="outlined">
           <Input

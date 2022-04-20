@@ -1,14 +1,15 @@
 @import './navbar.css';
 @import './streaming.css';
 @import './mypage.css';
+@import './auction.css';
 
 html,
 body {
   background-color: #0d0f1a;
   margin: 0;
 }
-
-/* body {
+/* 
+body {
   mix-blend-mode: luminosity;
 }
 
@@ -46,6 +47,7 @@ body:hover {
 .auctionBlurAni {
   width: 300px;
   height: 300px;
+}
 
 .uploadBlur {
   background-color: rgba(70, 70, 70, 0.95);
@@ -62,14 +64,13 @@ body:hover {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
 }
-.svgContainer{
+.svgContainer {
   width: 300px;
   height: 300px;
-margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .css-187mznn-MuiSlider-root:hover > .css-eg0mwd-MuiSlider-thumb {
@@ -84,4 +85,64 @@ margin: auto;
 
 .css-eg0mwd-MuiSlider-thumb {
   display: none;
+}
+
+.css-12lvs33 .css-0 .page .pageList.css-0 {
+  width: 732px;
+  text-align: center;
+  margin-left: 70px;
+}
+
+.pageList {
+  width: 933px;
+  text-align: center;
+  margin-left: 70px;
+}
+
+.pageList > ul {
+  list-style: none;
+  display: inline-block;
+  margin: 0 auto;
+  align-items: center;
+  padding: 0;
+}
+
+.pageList > ul li {
+  list-style: none;
+  display: inline-block;
+  width: 20px;
+  margin: 0 auto;
+}
+
+/* Card */
+.cardContract {
+  display: inline-block;
+  width: 300px;
+  opacity: 1;
+  background-color: #2c3352;
+  color: white;
+  border-radius: 1rem;
+}
+
+.cardContract:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.cardBottom {
+  display: flex;
+  flexdirection: column;
+}
+
+.cardContent {
+  flex: 1 0 auto;
+}
+
+.cardTitle {
+  color: #768fb5;
+}
+
+.cardETH {
+  fontweight: 600;
+  color: #18c99b;
 }

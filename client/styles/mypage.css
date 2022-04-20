@@ -1,5 +1,5 @@
 .approveBox {
-  margin: 10px auto;
+  margin: 10px auto 10px 70px;
   width: 100%;
   background-color: #e2ebf030;
   box-radius: 10px;
@@ -20,10 +20,19 @@ svg[data-testid='AddTaskIcon'] {
 
 .approveGrid {
   margin-top: 18px;
+  margin-left: 60px;
+}
+
+.approveGrid > div {
+  margin-bottom: 20px;
 }
 
 .myNFTContainer {
   width: 100%;
   color: white;
   margin: 0;
+}
+
+.css-12lvs33 {
+  margin-left: -20px;
 }

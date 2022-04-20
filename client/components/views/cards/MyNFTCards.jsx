@@ -38,6 +38,8 @@ const NFTCards = ({
   musicTokenPrices,
   saleStatus,
 }) => {
+  console.log(musicTokenDatas);
+
   const musicTokenData = musicTokenDatas.properties;
   const [sellPrice, setSellPrice] = useState('');
   const [myNFTPrice, setMyNFTPrice] = useState(musicTokenPrices);
