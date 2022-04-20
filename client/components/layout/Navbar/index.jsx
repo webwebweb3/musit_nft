@@ -22,6 +22,7 @@ const Navbar = () => {
     if (account.data === undefined) {
       return;
     }
+
     if (userData) {
       if (userData.metamask.toUpperCase() !== account.data.toUpperCase()) {
         let confirmAction = window.confirm('계정을 전환하시겠습니까?');

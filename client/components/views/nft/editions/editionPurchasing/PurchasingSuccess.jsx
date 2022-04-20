@@ -1,8 +1,10 @@
 import LoadingIcons from '$components/views/loadingicons/LoadingIcons';
+import { ListItemIcon } from '@mui/material';
+import { LibraryMusic } from '@mui/icons-material';
 import Image from 'next/image';
 import React from 'react';
 
-const UploadEnd = () => {
+const PurchasingSuccess = () => {
   return (
     <div>
       <div>
@@ -31,7 +33,11 @@ const UploadEnd = () => {
                   height="360px"
                 />
               </div>
-              <div style={{ fontSize: '30px' }}>NFT 생성 완료!</div>
+              <div style={{ fontSize: '30px' }}>구매 완료!</div>
+              <ListItemIcon>
+                <LibraryMusic fontSize="small" />
+              </ListItemIcon>
+              My NFT
             </div>
             <LoadingIcons />
           </div>
@@ -41,4 +47,4 @@ const UploadEnd = () => {
   );
 };
 
-export default UploadEnd;
+export default PurchasingSuccess;

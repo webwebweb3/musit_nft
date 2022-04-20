@@ -37,7 +37,7 @@ const LoadingIcons = () => {
         </ButtonGroup>
 
         <ButtonGroup variant="text" aria-label="text button group">
-          <Link href="/nft">
+          <Link href="/nft/marketplace">
             <Button
               sx={{
                 '&.MuiButton-text': { color: '#fff' },
