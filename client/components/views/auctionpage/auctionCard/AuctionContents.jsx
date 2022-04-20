@@ -17,25 +17,19 @@ const AuctionContents = ({ auction }) => {
 
   const contents = useCallback(async () => {
     let auctionContract = await new web3.eth.Contract(auctionAbi, auction);
-    let time = await auctionContract.methods.endAt().call();
     let highestBindingBidWei = await auctionContract.methods
       .highestBindingBid()
       .call();
-    let highestBidder = await auctionContract.methods.highestBidder().call();
-    let owner = await auctionContract.methods.owner().call();
     let auctionState = await auctionContract.methods.auctionState().call();
     let tokenID = await auctionContract.methods.tokenID().call();
     let highestBindingBid = highestBindingBidWei / 1000000000000000000;
 
     let infoData = {
-      time,
       highestBindingBid,
-      highestBidder,
-      owner,
       auctionState,
       tokenID,
     };
-    console.log(infoData);
+
     setAuctionData(infoData);
   }, [auction]);
 
@@ -48,7 +42,6 @@ const AuctionContents = ({ auction }) => {
       {auctionData && (
         <AuctionCard
           highestBindingBid={auctionData.highestBindingBid}
-          auctionState={auctionData.auctionState}
           tokenID={auctionData.tokenID}
         />
       )}
