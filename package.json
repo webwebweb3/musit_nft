@@ -26,6 +26,7 @@
   "homepage": "https://github.com/webwebweb3/musit_nft#readme",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
+    "@openzeppelin/contracts": "4.5.0",
     "aws-sdk": "^2.1095.0",
     "chart.js": "^3.7.1",
     "concurrently": "^7.0.0",
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^12.1.0",
+    "@openzeppelin/hardhat-upgrades": "1.17.0",
     "babel-eslint": "^10.1.0",
     "babel-plugin-styled-components": "^2.0.6",
     "eslint": "^8.10.0",

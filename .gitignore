@@ -47,3 +47,9 @@ uploads
 json
 mymusic
 *.mp3
+
+#hardhat
+hardhat/artifacts
+hardhat/cache
+hardhat/node_modules
+hardhat/package-lock.json
