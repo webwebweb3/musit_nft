@@ -1,4 +1,5 @@
 require('@nomiclabs/hardhat-waffle');
+require('@nomiclabs/hardhat-etherscan');
 require('dotenv').config();
 
 // Go to https://www.alchemyapi.io, sign up, create
@@ -34,4 +35,7 @@ module.exports = {
       accounts: [`${ROPSTEN_PRIVATE_KEY}`],
     },
   },
+  // etherscan:{
+  //   apiKey:
+  // }
 };

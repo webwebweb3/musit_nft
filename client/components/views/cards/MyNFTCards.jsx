@@ -51,7 +51,7 @@ const NFTCards = ({
   };
 
   const goToEdition = () => {
-    Router.replace(`/nft/marketplace/edition/${musicTokenIds}`);
+    Router.push(`/nft/marketplace/edition/${musicTokenIds}`);
   };
 
   const closeModal = () => {
