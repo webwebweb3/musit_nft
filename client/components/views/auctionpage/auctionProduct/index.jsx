@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
-import lottie from 'lottie-web';
 import GavelIcon from '@mui/icons-material/Gavel';
 import CancelIcon from '@mui/icons-material/Cancel';
 
@@ -74,11 +73,7 @@ const AuctionProductPage = () => {
 
   return (
     <>
-      {approveCheckAuctionLoading &&
-      auctionTokenInfoLoading &&
-      infoAuctionDone &&
-      auctionDone &&
-      myBidAuctionDone ? (
+      {!userData && !owner && !auctionTokenData && !gapTime ? (
         <div style={{ display: 'flex' }}>
           <div style={{ margin: 'auto' }}>
             <CircularProgress color="inherit" />
@@ -106,7 +101,7 @@ const AuctionProductPage = () => {
                         alt="종이"
                         width="300px"
                         height="300px"
-                      ></Image>
+                      />
                     </div>
                   </div>
                   <div>판매자 승인 대기중</div>

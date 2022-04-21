@@ -45,7 +45,7 @@ export const Global = createGlobalStyle`
     align-items: center;
     color: #fff;
 }
-.icon {
+.buyIcon {
     margin: 50px 0;
     
 

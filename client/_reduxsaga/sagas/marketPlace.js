@@ -63,7 +63,7 @@ function* cancelNFT(action) {
 }
 
 async function purchase(data) {
-  await saleMusicTokenContract.methods
+  return await saleMusicTokenContract.methods
     .purchaseMusicToken(data.tokenId)
     .send({ from: data.account, value: data.musicPrice });
 }
@@ -79,7 +79,7 @@ function* purchaseNFT(action) {
     console.error(err);
     yield put({
       type: MARKETPLACE_PURCHASE_FAILURE,
-      error: err.response.data,
+      error: err,
     });
   }
 }

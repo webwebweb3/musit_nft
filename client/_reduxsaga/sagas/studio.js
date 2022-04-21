@@ -160,7 +160,7 @@ function* yieldGetUserImages(action) {
       type: STUDIO_GET_USERIMAGES_FAILURE,
       error: err.response.data,
     });
-    Router.replace('/');
+    Router.push('/');
   }
 }
 

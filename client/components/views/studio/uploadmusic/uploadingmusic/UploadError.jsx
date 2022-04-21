@@ -1,5 +1,7 @@
 import LoadingIcons from '$components/views/loadingicons/LoadingIcons';
+import { Button } from '@mui/material';
 import Image from 'next/image';
+import Router from 'next/router';
 import React from 'react';
 
 const UploadError = () => {
@@ -34,8 +36,13 @@ const UploadError = () => {
               <div style={{ fontSize: '30px' }}>
                 에러 발생.. 다시 시도해주세요..
               </div>
+              <div>
+                <Button sx={{ color: 'white' }} onClick={() => Router.reload()}>
+                  새로고침
+                </Button>
+              </div>
+              <LoadingIcons />
             </div>
-            <LoadingIcons />
           </div>
         </div>
       </div>

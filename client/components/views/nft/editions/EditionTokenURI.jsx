@@ -8,11 +8,16 @@ import EditionImages from './editionImage/EditionImages';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // import EditionPurchase from './editionPurchase/EditionPurchase';
 import { style } from './style';
+import { useSelector } from 'react-redux';
+import PurchasingMusic from './editionPurchasing/PurchasingMusic';
+import PurchasingError from './editionPurchasing/PurchasingError';
+import PurchasingSuccess from './editionPurchasing/PurchasingSuccess';
 
 const EditionTokenURI = () => {
   const [musicData, setMusicData] = useState();
   const [musicOwner, setMusicOwner] = useState();
   const [musicPrice, setMusicPrice] = useState();
+  const market = useSelector(state => state.market);
   const router = useRouter();
   const getMusicTokenData = async () => {
     try {
@@ -45,35 +50,59 @@ const EditionTokenURI = () => {
   return (
     <>
       {musicData && (
-        <Box sx={style.editionContainer}>
-          <Box
-            sx={style.editionBackContainer}
-            onClick={() => Router.replace('/nft/marketplace')}
-          >
-            <ArrowBackIcon sx={{ fontSize: '20px', marginRight: '10px' }} />
-            뒤로
-          </Box>
-          <Box sx={style.editionTopContents}>
-            <Box sx={style.editionTopLeftContainer}>
-              <EditionImages
-                image={musicData.properties.S3AlbumCover}
-                music={musicData.properties.IPFSUrl}
-              />
-            </Box>
-            <Box sx={style.editionTopRightContainer}>
-              <EditionDescription
-                owner={musicOwner}
-                musicData={musicData}
-                musicPrice={musicPrice}
-              />
-              <Box sx={style.editionChartTitle}>이전 판매 기록</Box>
-              <Box sx={style.editionTopRightChart}>
-                <EditionChart tokenId={router.query.editionIPFSUrl} />
-              </Box>
-            </Box>
-          </Box>
-          <Box></Box>
-        </Box>
+        <>
+          {market?.purchaseNFTLoading ? (
+            <PurchasingMusic />
+          ) : (
+            <>
+              {market?.purchaseNFTError ? (
+                <PurchasingError />
+              ) : (
+                <>
+                  {market?.purchaseNFTDone ? (
+                    <>
+                      <PurchasingSuccess />
+                    </>
+                  ) : (
+                    <Box sx={style.editionContainer}>
+                      <Box
+                        sx={style.editionBackContainer}
+                        onClick={() => Router.push('/nft/marketplace')}
+                      >
+                        <ArrowBackIcon
+                          sx={{ fontSize: '20px', marginRight: '10px' }}
+                        />
+                        뒤로
+                      </Box>
+                      <Box sx={style.editionTopContents}>
+                        <Box sx={style.editionTopLeftContainer}>
+                          <EditionImages
+                            image={musicData.properties.S3AlbumCover}
+                            music={musicData.properties.IPFSUrl}
+                          />
+                        </Box>
+                        <Box sx={style.editionTopRightContainer}>
+                          <EditionDescription
+                            owner={musicOwner}
+                            musicData={musicData}
+                            musicPrice={musicPrice}
+                          />
+                          <Box sx={style.editionChartTitle}>이전 판매 기록</Box>
+                          <Box sx={style.editionTopRightChart}>
+                            <EditionChart
+                              tokenId={router.query.editionIPFSUrl}
+                            />
+                          </Box>
+                        </Box>
+                      </Box>
+                      <Box></Box>
+                    </Box>
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </>
       )}
     </>
   );

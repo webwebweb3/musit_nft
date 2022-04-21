@@ -3,8 +3,10 @@ import { BsXDiamondFill } from 'react-icons/bs';
 import { FaFire } from 'react-icons/fa';
 import { GiCrystalize } from 'react-icons/gi';
 import { Global } from './SubscriptionBuyStyle';
-import { Button } from './homepage/Button';
+import { Button } from '../homepage/Button';
 import { IconContext } from 'react-icons/lib';
+import FreeSubscription from './freesubscription/FreeSubscription';
+import SubscriptionLayout from './subscriptionLayout/SubscriptionLayout';
 
 const SubscriptionBuy = () => {
   return (
@@ -12,36 +14,15 @@ const SubscriptionBuy = () => {
       <Global />
       <IconContext.Provider value={{ size: 60 }}>
         <div className="buySection">
-          <h1 className="buyHeading">구독권 구매</h1>
-          <div className="buyWrapper">
-            <div className="buyContainer">
-              <div className="buyContainer-card buyContainer-cardInfo">
-                <div className="icon">
-                  <Button buttonSize="btn--large" buttonColor="primary">
-                    <FaFire />{' '}
-                    <>
-                      <br />
-                    </>
-                    Event Plan
-                  </Button>
-                </div>
-                <div className="buyInfoContainer">
-                  <h1>0$</h1>
-                </div>
-                <div className="buyInfoText">
-                  <h2>
-                    런칭 후 3개월 이내 가입한 회원에 한하여 제공하는 가입비와 월
-                    구독료를 무료로 이용 가능 합니다.
-                  </h2>
-                  <h2>유저 + 아티스트 혜택</h2>
-                </div>
-              </div>
-            </div>
+          <div>
+            <h1 className="buyHeading">구독권 구매</h1>
           </div>
+          <SubscriptionLayout />
+          <FreeSubscription />
           <div className="buyWrapper">
             <div className="buyContainer">
               <div className="buyContainer-card buyContainer-cardInfo">
-                <div className="icon">
+                <div className="buyIcon">
                   <Button buttonSize="btn--large" buttonColor="primary">
                     <BsXDiamondFill />{' '}
                     <>
@@ -63,7 +44,7 @@ const SubscriptionBuy = () => {
           <div className="buyWrapper">
             <div className="buyContainer">
               <div className="buyContainer-card buyContainer-cardInfo">
-                <div className="icon">
+                <div className="buyIcon">
                   <Button buttonSize="btn--large" buttonColor="primary">
                     <GiCrystalize fontSize="large" />{' '}
                     <>

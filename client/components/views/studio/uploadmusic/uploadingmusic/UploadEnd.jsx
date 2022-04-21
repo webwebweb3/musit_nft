@@ -2,7 +2,7 @@ import LoadingIcons from '$components/views/loadingicons/LoadingIcons';
 import Image from 'next/image';
 import React from 'react';
 
-const UploadError = () => {
+const UploadEnd = () => {
   return (
     <div>
       <div>
@@ -41,4 +41,4 @@ const UploadError = () => {
   );
 };
 
-export default UploadError;
+export default UploadEnd;

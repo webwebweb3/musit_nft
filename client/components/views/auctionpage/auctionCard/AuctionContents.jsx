@@ -1,5 +1,5 @@
 import { auctionAbi, web3 } from '$contracts';
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';

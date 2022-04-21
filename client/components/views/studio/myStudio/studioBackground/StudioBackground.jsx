@@ -53,7 +53,7 @@ const StudioBackground = ({ background }) => {
       uploadStudioBackground();
     }
     if (studio.uploadBackgroundDone) {
-      Router.replace(`/studio/${artistName}`);
+      Router.push(`/studio/${artistName}`);
     }
     console.log('이것도 확인좀', background);
     console.log('이거 확인 부탁', backgroundImg);

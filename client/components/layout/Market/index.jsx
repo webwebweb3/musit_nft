@@ -5,42 +5,45 @@ import Link from 'next/link';
 import LeftSideBar from './leftSideBar/LeftSideBar';
 
 import {
-  AuctionAllContainer,
-  AuctionHeader,
   AuctionLeftSideBar,
   AuctionWrapper,
-  AuctionMainContainer,
-  StyledNewAuctionButton,
   AuctionMainContentsContainer,
 } from '$components/views/auctionpage/style';
+import { Box, Button } from '@mui/material';
 
 const MarketLayout = ({ children, value }) => {
   const { userData } = useSelector(state => state.user);
 
   return (
-    <AuctionAllContainer>
-      <AuctionMainContainer>
+    <Box className="auctionAllContainer">
+      <Box className="auctionMainContainer">
         {/* Header */}
-        <AuctionHeader>
+        <Box className="auctionHeader">
           <h1>{value}</h1>
           {userData && userData.role === 1 && (
             <>
               {value === 'Auction' ? (
                 <Link href={`/nft/auction/upload`}>
-                  <StyledNewAuctionButton variant="contained">
+                  <Button
+                    className="styledNewAuctionButton"
+                    variant="contained"
+                  >
                     새 경매 등록하기
-                  </StyledNewAuctionButton>
+                  </Button>
                 </Link>
               ) : (
-                <Link href={`/`}>
-                  <StyledNewAuctionButton variant="contained">
+                <Link href={`/mypage/mynft`}>
+                  <Button
+                    className="styledNewAuctionButton"
+                    variant="contained"
+                  >
                     새 판매 등록하기
-                  </StyledNewAuctionButton>
+                  </Button>
                 </Link>
               )}
             </>
           )}
-        </AuctionHeader>
+        </Box>
 
         {/* Body */}
         <AuctionMainContentsContainer>
@@ -52,8 +55,8 @@ const MarketLayout = ({ children, value }) => {
           {/* Contents */}
           <AuctionWrapper>{children}</AuctionWrapper>
         </AuctionMainContentsContainer>
-      </AuctionMainContainer>
-    </AuctionAllContainer>
+      </Box>
+    </Box>
   );
 };
 
