@@ -115,11 +115,7 @@ router.get('/isSubscribe', async (req, res) => {
 
       attributes: ['id', 'name', 'metamask'],
     });
-    console.log('갯수 체크 한번 해라', userId.subscribers.length);
-    // if (userId.subscribers.length === 0) {
-    //   console.log('여기로 들어옴??');
-    //   res.json({ isSubscribing: false, artistId: artistId.id });
-    // }
+
     let tempData = { isSubscribing: false };
     for (let i = 0; i < userId.subscribers.length; i += 1) {
       console.log(i, '번째 체크', userId.subscribers[i].dataValues);
@@ -128,7 +124,7 @@ router.get('/isSubscribe', async (req, res) => {
         break;
       }
     }
-    console.log('여기까지 오는가??', tempData);
+
     if (tempData.isSubscribing === true) {
       res.json(tempData);
     }

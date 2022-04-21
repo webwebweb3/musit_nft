@@ -37,17 +37,8 @@ async function main() {
   console.log('Account balance:', (await deployer.getBalance()).toString());
 
   /// ///////////////////////////////////////////////////////////////////////////
-  const Payment = await ethers.getContractFactory('Payment', {
-    gasLimit: 10000000,
-  });
-  const payment = await (await Payment.deploy()).deployed();
-  console.log('payment address:', payment.address);
-
-  /// ///////////////////////////////////////////////////////////////////////////
-
-  /// ///////////////////////////////////////////////////////////////////////////
   const MintMusicToken = await ethers.getContractFactory('MintMusicToken', {
-    gasLimit: 10000000,
+    gasLimit: 100000000,
   });
   const mintMusicToken = await MintMusicToken.deploy();
   console.log('mintMusicToken address:', mintMusicToken.address);
@@ -55,7 +46,7 @@ async function main() {
 
   /// ///////////////////////////////////////////////////////////////////////////
   const SaleMusicToken = await ethers.getContractFactory('SaleMusicToken', {
-    gasLimit: 10000000,
+    gasLimit: 100000000,
   });
   const saleMusicToken = await (
     await SaleMusicToken.deploy(mintMusicToken.address)
@@ -66,7 +57,7 @@ async function main() {
 
   /// ///////////////////////////////////////////////////////////////////////////
   const AuctionCreator = await ethers.getContractFactory('AuctionCreator', {
-    gasLimit: 10000000,
+    gasLimit: 100000000,
   });
   const auctionCreator = await AuctionCreator.deploy(mintMusicToken.address);
   console.log('auctionCreator address:', auctionCreator.address);
@@ -74,21 +65,43 @@ async function main() {
 
   /// ///////////////////////////////////////////////////////////////////////////
   const Streaming = await ethers.getContractFactory('Streaming', {
-    gasLimit: 10000000,
+    gasLimit: 100000000,
   });
   const streaming = await Streaming.deploy(mintMusicToken.address);
   console.log('streaming address:', streaming.address);
   /// ///////////////////////////////////////////////////////////////////////////
 
+  /// ///////////////////////////////////////////////////////////////////////////
+  console.log('Paymenting....');
+  const Payment = await ethers.getContractFactory('Payment', {
+    gasLimit: 100000000,
+  });
+  console.log('deploying....');
+  const payment = await (await Payment.deploy()).deployed();
+  console.log('payment address:', payment.address);
+  /// ///////////////////////////////////////////////////////////////////////////
+
+  console.log('creating plan event 1...');
   await payment.createPlan('1', 7889230, 0);
-  console.log('creating plan 1...');
+  console.log('creating plan test 1...');
+  await payment.createPlan('10000000000000000', 120, 0);
+  console.log('creating plan artist 1...');
   await payment.createPlan('100000000000000000', 2629743, 2);
-  console.log('creating plan 2 ...');
+  console.log('creating plan artist 2 ...');
   await payment.createPlan('200000000000000000', 7889230, 2);
-  console.log('creating plan 3 ...');
+  console.log('creating plan artist 3 ...');
   await payment.createPlan('300000000000000000', 15778460, 2);
-  console.log('creating plan 4 ...');
+  console.log('creating plan artist 4 ...');
   await payment.createPlan('500000000000000000', 31556926, 2);
+
+  console.log('creating plan user 1...');
+  await payment.createPlan('50000000000000000', 2629743, 1);
+  console.log('creating plan user 2 ...');
+  await payment.createPlan('100000000000000000', 7889230, 1);
+  console.log('creating plan user 3 ...');
+  await payment.createPlan('150000000000000000', 15778460, 1);
+  console.log('creating plan user 4 ...');
+  await payment.createPlan('250000000000000000', 31556926, 1);
   console.log('plan done');
 
   saveJsonFilesToClientFolder('MintMusicToken', mintMusicToken);

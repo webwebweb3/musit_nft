@@ -1,12 +1,21 @@
-import { FaFire, FaMusic, FaCoffee, FaFireAlt, FaFaucet } from 'react-icons/fa';
+import {
+  FaFire,
+  FaMusic,
+  FaCoffee,
+  FaFireAlt,
+  FaFaucet,
+  FaFlask,
+} from 'react-icons/fa';
 
-export const eventData = [
+export const allDatas = [
   {
     Icons: FaFire,
     subIconTitle: 'Event Plan',
   },
-];
-export const artistDatas = [
+  {
+    Icons: FaFlask,
+    subIconTitle: 'Test Plan',
+  },
   {
     Icons: FaMusic,
     subIconTitle: '1 Months',
@@ -23,8 +32,6 @@ export const artistDatas = [
     Icons: FaFaucet,
     subIconTitle: '1 Year',
   },
-];
-export const userDatas = [
   {
     Icons: FaMusic,
     subIconTitle: '1 Months',

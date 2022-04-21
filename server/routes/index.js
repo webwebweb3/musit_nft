@@ -11,6 +11,7 @@ const uploadMusicRouter = require('./uploadMusic');
 const marketplace = require('./marketplace');
 const studio = require('./studio/studio');
 const music = require('./music/music');
+const subscribe = require('./subscribe/subscribe');
 
 const { isLoggedIn } = require('../middleware/auth');
 
@@ -22,6 +23,7 @@ router.use('/user', authRouter);
 router.use('/marketplace', marketplace);
 router.use('/studio', studio);
 router.use('/music', music);
+router.use('/subscribe', subscribe);
 
 router.use('/uploadmusic', uploadMusicRouter);
 
