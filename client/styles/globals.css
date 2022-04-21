@@ -96,7 +96,6 @@ body:hover {
 .pageList {
   width: 933px;
   text-align: center;
-  margin-left: 70px;
 }
 
 .pageList > ul {
@@ -145,4 +144,16 @@ body:hover {
 .cardETH {
   fontweight: 600;
   color: #18c99b;
+}
+
+.selectBox {
+  margin-left: 20px;
+  color: #fff;
+}
+
+.selectBox > svg {
+  color: #fff;
+}
+.selectBox > div {
+  color: #fff;
 }

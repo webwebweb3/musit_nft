@@ -43,7 +43,7 @@ const MyPageLayout = ({ children }) => {
         <Box
           sx={{
             display: 'inline-block',
-            marginLeft: '70px',
+            marginLeft: '80px',
             marginRight: '70px',
             verticalAlign: 'top',
             minWidth: '700px',

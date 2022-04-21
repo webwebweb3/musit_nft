@@ -3,7 +3,7 @@ import { Box, Card, CardContent, Typography } from '@mui/material';
 import Image from 'next/image';
 import { mintMusicTokenContract } from '$contracts';
 
-const AuctionCard = ({ highestBindingBid, auctionState, tokenID }) => {
+const AuctionCard = ({ highestBindingBid, tokenID }) => {
   const [hover, setHover] = useState();
   const [auctionData, setAuctionData] = useState({
     description: null,
