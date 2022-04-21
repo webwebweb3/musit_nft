@@ -13,10 +13,20 @@ import {
   Headset,
   KeyboardControlKey,
 } from '@mui/icons-material';
-import { Box, Button, Slider } from '@mui/material';
+import { Box, Button, Card, Slider } from '@mui/material';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
+//import { Global } from './indexStyle';
+
+import { styled } from '@mui/material/styles';
+
+const ExpandMore = styled(props => {
+  const { expand, ...other } = props;
+  return <KeyboardControlKey {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+}));
 
 const Footer = () => {
   const audioElement = useRef();
@@ -31,6 +41,7 @@ const Footer = () => {
   const [seekTime, setSeekTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
+  const [expanded, setExpanded] = React.useState(false);
 
   const playingMusic = () => {
     isPlaying
@@ -81,6 +92,14 @@ const Footer = () => {
 
   const toggleAction = () => {
     setToggle(!toggle);
+  };
+
+  const toggleActionX = () => {
+    setToggle(!toggle);
+  };
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
   };
 
   const handleToggle = (type, val) => {
@@ -252,6 +271,7 @@ const Footer = () => {
             </div>
             <div style={{ color: '#ffffffa0' }}>아티스트</div>
           </div>
+
           <Button>
             <Favorite
               fontSize="medium"
@@ -265,10 +285,17 @@ const Footer = () => {
             />
           </Button>
           <Button>
-            <KeyboardControlKey
-              fontSize="medium"
-              sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
-            />
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <KeyboardControlKey
+                fontSize="medium"
+                sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
+              />
+            </ExpandMore>
           </Button>
           <Button onClick={toggleAction}>
             <KeyboardArrowDown
