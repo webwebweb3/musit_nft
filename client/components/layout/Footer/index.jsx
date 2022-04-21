@@ -15,6 +15,7 @@ import {
 } from '@mui/icons-material';
 import { Box, Button, Slider } from '@mui/material';
 import Image from 'next/image';
+import Router from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
 
@@ -57,10 +58,18 @@ const Footer = () => {
 
   useEffect(() => {
     playingMusic();
+    if (audioElement.current != null) {
+      setDuration(audioElement.current.duration);
+    }
   }, [isPlaying, volume, isVolumeClicked]);
 
   useEffect(() => {
     setSeekTime(currTime / (duration / 100));
+    if (audioElement.current.currentTime >= 60) {
+      audioElement.current.pause();
+      alert('이용권을 구매해주세요');
+      Router.push('/subscriptionbuy');
+    }
   }, [currTime, duration]);
 
   // useEffect(() => {

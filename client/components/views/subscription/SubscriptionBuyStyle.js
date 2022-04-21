@@ -7,18 +7,19 @@ export const Global = createGlobalStyle`
     flex-direction: column;
     justify-content: center;
     background: #1c2237;
+    text-align: center;
 }
 
 .buyWrapper{
     display: flex;
-    margin: 0 auto;
-    padding: 30px;
+    width: 300px;
+    margin: 0 30px 0 0;
+    padding: 0px;
 }
 
 .buyHeading{
     color: #fff;
     margin-bottom: 24px;
-    margin-left: 100px
 }
 
 .buyContainer{
@@ -47,7 +48,7 @@ export const Global = createGlobalStyle`
 }
 .buyIcon {
     margin: 50px 0;
-    
+    width: 194.7px;
 
   }
 

@@ -4,14 +4,19 @@ require('dotenv').config();
 
 // Go to https://www.alchemyapi.io, sign up, create
 // a new App in its dashboard, and replace "KEY" with its key
-const { ALCHEMY_ROPSTEN_API_KEY } = process.env;
-const { ALCHEMY_RINKEBY_API_KEY } = process.env;
+const {
+  ALCHEMY_ROPSTEN_API_KEY,
+  ETHERSCAN_API_KEY,
+  ALCHEMY_RINKEBY_API_KEY,
+  ROPSTEN_PRIVATE_KEY,
+} = process.env;
+// const {  } = process.env;
 
 // Replace this private key with your Ropsten account private key
 // To export your private key from Metamask, open Metamask and
 // go to Account Details > Export Private Key
 // Be aware of NEVER putting real Ether into testing accounts
-const { ROPSTEN_PRIVATE_KEY } = process.env;
+// const {  } = process.env;
 
 module.exports = {
   solidity: {
@@ -35,7 +40,7 @@ module.exports = {
       accounts: [`${ROPSTEN_PRIVATE_KEY}`],
     },
   },
-  // etherscan:{
-  //   apiKey:
-  // }
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
+  },
 };
