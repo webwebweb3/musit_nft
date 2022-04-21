@@ -9,6 +9,7 @@ const Music = require('./musicdb/music');
 // const MusicLike = require('./musicdb/musicLike');
 const MusicPlayTime = require('./musicdb/musicPlayTime');
 const UserCover = require('./userdb/userCover');
+const PlayList = require('./streaming/playList');
 
 const db = {};
 const sequelize = new Sequelize(
@@ -26,6 +27,7 @@ db.Music = Music;
 // db.MusicLike = MusicLike;
 db.MusicPlayTime = MusicPlayTime;
 db.UserCover = UserCover;
+db.PlayList = PlayList;
 
 User.init(sequelize);
 Genre.init(sequelize);
@@ -33,6 +35,7 @@ Music.init(sequelize);
 // MusicLike.init(sequelize);
 MusicPlayTime.init(sequelize);
 UserCover.init(sequelize);
+PlayList.init(sequelize);
 
 User.associate(db);
 Genre.associate(db);
@@ -40,5 +43,6 @@ Music.associate(db);
 // MusicLike.associate(db);
 MusicPlayTime.associate(db);
 UserCover.associate(db);
+PlayList.associate(db);
 
 module.exports = db;

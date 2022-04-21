@@ -46,8 +46,9 @@ const Footer = () => {
     audioElement.current.volume = volume / 100;
     audioElement.current.muted = isVolumeClicked;
     audioElement.current.onloadeddata = () => {
-      if (audioElement.current != null)
+      if (audioElement.current != null) {
         setDuration(audioElement.current.duration);
+      }
     };
     setInterval(() => {
       if (audioElement.current !== null)
@@ -57,7 +58,10 @@ const Footer = () => {
 
   useEffect(() => {
     playingMusic();
-  }, [isPlaying, volume, isVolumeClicked]);
+    if (audioElement.current != null) {
+      setDuration(audioElement.current.duration);
+    }
+  }, [isRepeatClicked, isPlaying, volume, isVolumeClicked]);
 
   useEffect(() => {
     setSeekTime(currTime / (duration / 100));
@@ -185,7 +189,9 @@ const Footer = () => {
             onClicked={handleToggle}
           />
           {/* 음악 */}
-          <audio ref={audioElement} src={`2.mp3`} preload={'metadata'} />
+          {/* QmcWB6Pphb22ev9qQMzDnAQod7F9XKaf6fp2JoAuHp7xuD */}
+          {/* <audio ref={audioElement} src={`https://ipfs.infura.io/ipfs/${music}`} preload={'metadata'} /> */}
+          <audio ref={audioElement} src={`3.mp3`} preload={'metadata'} />
           <ControlsToggleButton
             type={'play-pause'}
             defaultIcon={<PlayArrow fontSize={'large'} />}

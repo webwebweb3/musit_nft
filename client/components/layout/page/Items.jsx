@@ -21,7 +21,7 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
           <>
             {currentItems &&
               currentItems.map(v => (
-                <Box key={v.musicTokenId} sx={{ marginLeft: '15px' }}>
+                <Box key={v.musicTokenId}>
                   <MyNFTCards
                     key={v.musicTokenId}
                     account={account}

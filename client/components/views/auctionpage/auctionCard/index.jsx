@@ -1,12 +1,15 @@
 import PageList from '$components/layout/page';
 import { mintMusicTokenContract } from '$contracts';
 import { allAuctionsAction } from '$reduxsaga/request/auction_request';
+import { CircularProgress } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const AuctionCard = () => {
-  const { allAuctionData } = useSelector(state => state.auction);
+  const { allAuctionData, allAuctionLoading } = useSelector(
+    state => state.auction,
+  );
   const [auctionData, setAuctionData] = useState([]);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -70,7 +73,13 @@ const AuctionCard = () => {
 
   return (
     <>
-      <PageList items={auctionData} type="auction" />
+      {!allAuctionLoading ? (
+        <PageList items={auctionData} type="auction" />
+      ) : (
+        <div style={{ width: '100%', alignItems: 'center' }}>
+          <CircularProgress style={{ margin: '100px 500px' }} />
+        </div>
+      )}
     </>
   );
 };

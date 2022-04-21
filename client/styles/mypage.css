@@ -1,5 +1,5 @@
 .approveBox {
-  margin: 10px auto 10px 70px;
+  margin: 10px auto 10px 10px;
   width: 100%;
   background-color: #e2ebf030;
   box-radius: 10px;
@@ -20,7 +20,7 @@ svg[data-testid='AddTaskIcon'] {
 
 .approveGrid {
   margin-top: 18px;
-  margin-left: 60px;
+  margin-left: 35px;
 }
 
 .approveGrid > div {
