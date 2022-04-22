@@ -33,6 +33,7 @@ module.exports = class User extends Sequelize.Model {
         subscription: {
           type: Sequelize.INTEGER,
           allowNull: true,
+          defaultValue: '0',
         },
       },
       {

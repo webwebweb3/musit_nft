@@ -22,7 +22,7 @@ function Pricing() {
                     <FaFire />
                   </div>
                   <h3>3개월 무료</h3>
-                  <h4>$0</h4>
+                  <h4>0 ETH</h4>
                   <p>per month</p>
                   <ul className="pricing__container-features">
                     <li>무료 스트리밍</li>
@@ -40,7 +40,7 @@ function Pricing() {
                     <BsXDiamondFill />
                   </div>
                   <h3>유저</h3>
-                  <h4>$29.99</h4>
+                  <h4>0.05 ETH ~</h4>
                   <p>per month</p>
                   <ul className="pricing__container-features">
                     <li>무제한 스트리밍 서비스</li>
@@ -58,7 +58,7 @@ function Pricing() {
                     <GiCrystalize />
                   </div>
                   <h3>아티스트</h3>
-                  <h4>$99.99</h4>
+                  <h4>0.1 ETH ~</h4>
                   <p>per month</p>
                   <ul className="pricing__container-features">
                     <li>무제한 스트리밍 제공</li>
