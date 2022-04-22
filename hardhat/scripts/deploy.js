@@ -84,7 +84,7 @@ async function main() {
   console.log('creating plan event 1...');
   await payment.createPlan('1', 7889230, 0);
   console.log('creating plan test 1...');
-  await payment.createPlan('10000000000000000', 120, 0);
+  await payment.createPlan('10000000000000000', 10, 0);
   console.log('creating plan artist 1...');
   await payment.createPlan('100000000000000000', 2629743, 2);
   console.log('creating plan artist 2 ...');

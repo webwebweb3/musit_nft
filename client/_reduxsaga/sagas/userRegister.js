@@ -23,6 +23,7 @@ import {
 } from '$reduxsaga/request/types';
 
 function logInAPI(data) {
+  console.log('로그인 data', data);
   let loginData = {
     metamask: data,
     password: '1', // 임시 - 수정 예정
@@ -34,6 +35,7 @@ function logInAPI(data) {
 function* logIn(action) {
   try {
     const result = yield call(logInAPI, action.data);
+    console.log('로그인 result', result);
 
     yield put({
       type: LOGIN_USER_SUCCESS,

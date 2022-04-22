@@ -1,68 +1,92 @@
 import { Button } from '../../homepage/Button';
-import React from 'react';
+import React, { useState } from 'react';
 import { Global } from '../SubscriptionBuyStyle';
 import { IconContext } from 'react-icons/lib';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { paymentContract } from '$contracts';
+import { utils } from 'web3';
 
 <Global />;
-const express = require('express');
-const router = express.Router();
-const { User, Music } = require('../models');
+const SubscriptionLayout = ({
+  Icons,
+  subIconTitle,
+  subPrice,
+  subTarget,
+  frequency,
+  planId,
+}) => {
+  const { userData } = useSelector(state => state.user);
+  const dateNow = parseInt(Math.round(new Date().getTime() / 1000));
 
-//------------------------------------------------
-//               /api/latestmusic
-//------------------------------------------------
-router.get('/', async (req, res) => {
-  try {
-    const latestMusic = await Music.findAll({
-      order: [['createdAt', 'ASC']],
-    });
-    console.log(latestMusic);
-    const user = req.params.id;
-    const exUser = await User.findOne({
-      where: {
-        metamask: user,
-      },
-    });
-    if (exUser) {
-      return res.json({ userName: exUser.dataValues.name });
-    }
-  } catch (error) {
-    console.error(error);
-  }
-});
+  const nextPlanFrequency = dateNow + parseInt(frequency);
 
-module.exports = router;
-
-const SubscriptionLayout = ({ Icons, subIconTitle, subPrice, subTarget }) => {
-  const onClickSubscribe = () => {
-    axios.put('/subscribe');
+  const onClickSubscribe = async () => {
+    console.log('가격', subPrice);
+    console.log('플랜아이디', planId);
+    await paymentContract.methods
+      .subscribe(parseInt(planId))
+      .send({
+        from: userData.metamask,
+        value: utils.toWei(subPrice, 'ether'),
+      })
+      .then(
+        axios.put('/subscribe', {
+          data: nextPlanFrequency,
+          metamask: userData.metamask,
+        }),
+      );
   };
+
+  const onClickExistSubscribe = () => {
+    const date = new Date(userData.subscription * 1000);
+    alert(
+      `이미 ${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}까지 구독중입니다.`,
+    );
+  };
+
   return (
     <>
       <IconContext.Provider value={{ size: 60 }}>
-        <div className="buyWrapper">
-          <div className="buyContainer">
-            <div className="buyContainer-card buyContainer-cardInfo">
-              <div className="buyIcon">
-                <Button
-                  buttonSize="btn--large"
-                  buttonColor="primary"
-                  onClick={onClickSubscribe}
-                >
-                  <Icons />
-                  <>
-                    <br />
-                    {subIconTitle}
-                  </>
-                </Button>
-              </div>
-              <div className="buyInfoContainer">
-                <h1>{subPrice < 0.000001 ? 0 : subPrice} ETH</h1>
-              </div>
-              <div className="buyInfoText">{subTarget}</div>
+        <div className="buyIcon">
+          {userData.subscription < dateNow ? (
+            <div>
+              <Button
+                buttonSize="btn--large"
+                buttonColor="primary"
+                onClickExistSubscribe
+                onClick={onClickSubscribe}
+              >
+                <Icons />
+                <>
+                  <br />
+                  {subIconTitle}
+                </>
+                <div style={{ fontSize: '15px', marginTop: '15px' }}>
+                  {subPrice < 0.000001 ? 0 : <div>{subPrice}</div>} ETH
+                </div>
+              </Button>
             </div>
-          </div>
+          ) : (
+            <div>
+              <Button
+                buttonSize="btn--large"
+                buttonColor="primary"
+                onClick={onClickExistSubscribe}
+              >
+                <Icons />
+                <>
+                  <br />
+                  {subIconTitle}
+                </>
+                <div style={{ fontSize: '15px', marginTop: '15px' }}>
+                  {subPrice < 0.000001 ? 0 : <div>{subPrice}</div>} ETH
+                </div>
+              </Button>
+            </div>
+          )}
         </div>
       </IconContext.Provider>
     </>

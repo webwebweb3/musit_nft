@@ -32,69 +32,139 @@ const SubscriptionBuy = () => {
   return (
     <>
       <Global />
-      <IconContext.Provider value={{ size: 60 }}>
+      <IconContext.Provider value={{ size: 35 }}>
         <div className="buySection">
           <div>
-            <div style={{ color: 'white' }}>구독권 판매</div>
+            <div
+              style={{
+                color: 'white',
+                float: 'left',
+                margin: '0 0 100px 150px',
+                fontSize: '45px',
+                fontWeight: 600,
+              }}
+            >
+              구독권 판매
+            </div>
           </div>
-          <FaBoxOpen color="#fff" />
-          <div style={{ color: 'white' }}>이벤트</div>
+          <div
+            style={{ color: 'white', fontSize: '40px', margin: '40px 0 20px' }}
+          >
+            <FaBoxOpen color="#fff" style={{ marginRight: '10px' }} />
+            Event
+          </div>
+          <div
+            className="buyContainer-card"
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              minWidth: '1200px',
+              maxWidth: '1200px',
+              height: '300px',
+              margin: '0 auto',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+            }}
+          >
+            {plans &&
+              plans.map((v, i) => {
+                return (
+                  <>
+                    {i <= 1 && (
+                      <div style={{ height: '240.56px' }}>
+                        <SubscriptionLayout
+                          Icons={v.Icons}
+                          subIconTitle={v.subIconTitle}
+                          subPrice={utils.fromWei(v.amount)}
+                          subTarget={v.target}
+                          frequency={v.frequency}
+                          planId={v.planId}
+                        />
+                      </div>
+                    )}
+                  </>
+                );
+              })}
+          </div>
+          <div
+            style={{ color: 'white', fontSize: '40px', margin: '40px 0 20px' }}
+          >
+            <FaBoxOpen color="#fff" style={{ marginRight: '10px' }} />
+            Artist
+          </div>
+          <div
+            className="buyContainer-card"
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              minWidth: '1200px',
+              maxWidth: '1200px',
+              height: '300px',
+              margin: '0 auto',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+            }}
+          >
+            {plans &&
+              plans.map((v, i) => {
+                return (
+                  <>
+                    {i > 1 && i <= 5 && (
+                      <div>
+                        <SubscriptionLayout
+                          Icons={v.Icons}
+                          subIconTitle={v.subIconTitle}
+                          subPrice={utils.fromWei(v.amount)}
+                          subTarget={v.target}
+                          frequency={v.frequency}
+                          planId={v.planId}
+                        />
+                      </div>
+                    )}
+                  </>
+                );
+              })}
+          </div>
 
-          {plans &&
-            plans.map((v, i) => {
-              return (
-                <>
-                  {i <= 1 && (
-                    <div>
-                      <SubscriptionLayout
-                        Icons={v.Icons}
-                        subIconTitle={v.subIconTitle}
-                        subPrice={utils.fromWei(v.amount)}
-                        subTarget={v.target}
-                      />
-                    </div>
-                  )}
-                </>
-              );
-            })}
-          <FaUserAstronaut color="#fff" />
-          <div style={{ color: 'white' }}>아티스트</div>
-          {plans &&
-            plans.map((v, i) => {
-              return (
-                <>
-                  {i > 1 && i <= 5 && (
-                    <div>
-                      <SubscriptionLayout
-                        Icons={v.Icons}
-                        subIconTitle={v.subIconTitle}
-                        subPrice={utils.fromWei(v.amount)}
-                        subTarget={v.target}
-                      />
-                    </div>
-                  )}
-                </>
-              );
-            })}
-          <FaUserFriends color="#fff" />
-          <div style={{ color: 'white' }}>유저</div>
-          {plans &&
-            plans.map((v, i) => {
-              return (
-                <>
-                  {i > 5 && (
-                    <div>
-                      <SubscriptionLayout
-                        Icons={v.Icons}
-                        subIconTitle={v.subIconTitle}
-                        subPrice={utils.fromWei(v.amount)}
-                        subTarget={v.target}
-                      />
-                    </div>
-                  )}
-                </>
-              );
-            })}
+          <div
+            style={{ color: 'white', fontSize: '40px', margin: '40px 0 20px' }}
+          >
+            <FaUserFriends color="#fff" style={{ marginRight: '10px' }} />
+            User
+          </div>
+          <div
+            className="buyContainer-card"
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              minWidth: '1200px',
+              maxWidth: '1200px',
+              height: '300px',
+              margin: '0 auto',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+            }}
+          >
+            {plans &&
+              plans.map((v, i) => {
+                return (
+                  <>
+                    {i > 5 && (
+                      <div>
+                        <SubscriptionLayout
+                          Icons={v.Icons}
+                          subIconTitle={v.subIconTitle}
+                          subPrice={utils.fromWei(v.amount)}
+                          subTarget={v.target}
+                          frequency={v.frequency}
+                          planId={v.planId}
+                        />
+                      </div>
+                    )}
+                  </>
+                );
+              })}
+          </div>
 
           <div className="buyFooter">
             <h3>

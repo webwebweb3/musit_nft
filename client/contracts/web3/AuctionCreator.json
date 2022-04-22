@@ -1,5 +1,5 @@
 {
-    "contractAddress": "0x60D3b1735e5e2F84e2307Dc558C0ED61696c5327",
+    "contractAddress": "0x045F4165687b8D439C19059Ec3875F01D04DaAf7",
     "_format": "hh-sol-artifact-1",
     "contractName": "AuctionCreator",
     "sourceName": "contracts/AuctionCreator.sol",

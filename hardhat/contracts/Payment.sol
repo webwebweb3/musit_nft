@@ -94,6 +94,7 @@ contract Payment {
     }
 
     struct userPlan {
+        uint256 planId;
         uint256 amount;
         uint256 frequency;
         Target target;
@@ -112,7 +113,7 @@ contract Payment {
             uint256 amount = plans[i].amount;
             uint256 frequency = plans[i].frequency;
             Target target = plans[i].target;
-            userPlans[i] = userPlan(amount, frequency, target);
+            userPlans[i] = userPlan(i, amount, frequency, target);
         }
         
         return userPlans;
