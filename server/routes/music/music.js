@@ -13,6 +13,9 @@ router.get('/', async (req, res) => {
     const { paramsData } = req.query;
     const jsonData = JSON.parse(paramsData);
     const { editionNum, userMetamask } = jsonData;
+    console.log('---------------------------------------');
+    console.log(userMetamask);
+    console.log('---------------------------------------');
 
     const userId = await User.findOne({
       where: { metamask: userMetamask },
@@ -24,9 +27,9 @@ router.get('/', async (req, res) => {
     });
     console.log('isExistResult', isExistResult);
     if (isExistResult.length !== 0) {
-      res.json({ exist: true });
+      res.json({ exist: true, editionNum });
     } else {
-      res.json({ exist: false });
+      res.json({ exist: false, editionNum });
     }
   } catch (error) {
     console.error(error);
@@ -41,11 +44,11 @@ router.post('/', async (req, res) => {
       where: { metamask: userMetamask },
     });
     const insertSql = `INSERT INTO musiclikes (user, music) VALUE (${userId.id}, ${editionNum});`;
-    const inserting = await sequelize.query(insertSql, {
+    await sequelize.query(insertSql, {
       type: QueryTypes.INSERT,
     });
-    console.log('인설팅', inserting);
-    res.json({ likeSuccess: true });
+
+    res.json({ likeSuccess: true, editionNum });
   } catch (error) {
     res.json({ likeSuccess: false });
     console.error(error);
@@ -70,7 +73,7 @@ router.delete('/', async (req, res) => {
       type: QueryTypes.DELETE,
     });
     console.log('딜리트 쿼리', deletequery);
-    res.json({ delete: true });
+    res.json({ delete: true, editionNum });
   } catch (error) {
     res.json({ delete: false });
     console.error(error);

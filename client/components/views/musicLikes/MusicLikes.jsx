@@ -3,14 +3,14 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Axios from 'axios';
 import {
   musicDisLikeRequest,
-  musicIsLikeRequest,
   musicLikeRequest,
 } from '$reduxsaga/request/music_request';
 
 const MusicLikes = ({ editionNum }) => {
-  const [isFavorite, setIsFavorite] = useState();
+  const [isFavorite, setIsFavorite] = useState(false);
   const { userData } = useSelector(state => state.user);
   const music = useSelector(state => state.music);
   const userMetamask = userData?.metamask;
@@ -21,15 +21,34 @@ const MusicLikes = ({ editionNum }) => {
   const onClickLike = () => {
     dispatch(musicLikeRequest({ editionNum, userMetamask }));
   };
-  const getIsLike = () => {
-    dispatch(musicIsLikeRequest({ editionNum, userMetamask }));
+  const getLike = async () => {
+    let data = {
+      params: {
+        paramsData: { editionNum, userMetamask },
+      },
+    };
+
+    await Axios.get('/music', data).then(res => {
+      if (res.data.exist) {
+        setIsFavorite(true);
+      }
+    });
   };
+
   useEffect(() => {
-    getIsLike();
+    getLike();
   }, []); // 처음 렌더링
+
   useEffect(() => {
-    if (music) {
-      setIsFavorite(music.isLike);
+    if (music.isLike) {
+      if (music.isLike.editionNum === editionNum) {
+        if (music.isLike.likeSuccess) {
+          setIsFavorite(true);
+        }
+        if (music.isLike.delete) {
+          setIsFavorite(false);
+        }
+      }
     }
   }, [music && music.isLike]);
   return (

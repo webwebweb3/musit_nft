@@ -37,7 +37,7 @@ const MusicCard = ({
   return (
     <Card className="cardBox" onClick={onClickPlay}>
       <StyledCard className="styledCard">
-        <MusicLikes editionNum={editionNum} />
+        {editionNum && <MusicLikes editionNum={editionNum} />}
 
         <CardMedia
           className="cardImg"

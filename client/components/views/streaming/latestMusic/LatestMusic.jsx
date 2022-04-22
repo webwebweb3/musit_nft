@@ -36,7 +36,6 @@ const LatestMusic = ({ func }) => {
     if (musics.length === 0) {
       getMusic();
     }
-    console.log(musics);
   }, [musics]);
 
   return (
