@@ -9,11 +9,16 @@ contract Streaming {
     constructor (address _mintMusicTokenAddress){
         mintMusicTokenAddress = MintMusicToken(_mintMusicTokenAddress);
     }
+    
+    struct LatestMusicData {
+            uint256 tokenId;
+            string tokenURI;            
+    }
 
     function getLatestMusicToken()
         view
         public 
-        returns(string[] memory )
+        returns(LatestMusicData[] memory )
     {
 
             uint256 _totalMusicToken = mintMusicTokenAddress.totalSupply();
@@ -30,11 +35,11 @@ contract Streaming {
             } else if (_totalMusicToken==1){
                     k=1;
             } 
-            string[] memory musicTokenDatas = new string[](k);
+            LatestMusicData[] memory musicTokenDatas = new LatestMusicData[](k);
             uint256 j = 0;
 
             for(uint256 i=_totalMusicToken; i>_totalMusicToken-k; i--) {
-                    musicTokenDatas[j] = mintMusicTokenAddress.tokenURI(i);
+                    musicTokenDatas[j] = LatestMusicData(i, mintMusicTokenAddress.tokenURI(i));
                     j++;
             }
 
@@ -51,7 +56,7 @@ contract Streaming {
             string[] memory musicTokenDatas = new string[](_totalMusicToken);
             uint256 j = 0;
 
-            for(uint256 i=_totalMusicToken; i>_totalMusicToken; i--) {
+            for(uint256 i=_totalMusicToken; i>0; i--) {
                     musicTokenDatas[j] = mintMusicTokenAddress.tokenURI(i);
                     j++;
             }
@@ -64,12 +69,12 @@ contract Streaming {
         public
         returns(string[] memory)
     {
-            uint256 _totalMusicToken = mintMusicTokenAddress.totalSupply();
+            uint256 _totalMusicToken = mintMusicTokenAddress.totalSupply(); 
             require(_totalMusicToken > 0, "There are no tokens in the contract.");
-            string[] memory musicTokenDatas = new string[](_totalMusicToken);
-            uint256 j = 0;
+            string[] memory musicTokenDatas = new string[](_totalMusicToken); 
+            uint256 j = 0; 
 
-            for(uint256 i=0; i<_totalMusicToken; i--) {
+            for(uint256 i=1; i<_totalMusicToken+1; i++) {
                     musicTokenDatas[j] = mintMusicTokenAddress.tokenURI(i);
                     j++;
             }
