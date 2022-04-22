@@ -1,5 +1,5 @@
 {
-    "contractAddress": "0x18353c72C0D2acFd48D75da12a6d8b0755D68887",
+    "contractAddress": "0x2BfA1AEE37E462f61C7D5D1972CbE925f923b73B",
     "_format": "hh-sol-artifact-1",
     "contractName": "Payment",
     "sourceName": "contracts/Payment.sol",
