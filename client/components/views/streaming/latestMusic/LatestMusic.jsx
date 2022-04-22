@@ -36,6 +36,7 @@ const LatestMusic = ({ func }) => {
     if (musics.length === 0) {
       getMusic();
     }
+    console.log('직들', musics);
   }, [musics]);
 
   return (
@@ -56,6 +57,7 @@ const LatestMusic = ({ func }) => {
               {musics.map((v, i) => {
                 return (
                   <>
+                    {console.log('v들', v)}
                     <MusicCard
                       musicTitle={`${v.data.properties.dataToSubmit.title}`}
                       albumCover={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.data.properties.S3AlbumCover}`}

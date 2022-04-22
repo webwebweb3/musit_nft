@@ -16,18 +16,30 @@
             "type": "constructor"
         },
         {
-            "inputs": [],
-            "name": "getLatestMusicToken",
-            "outputs": [
-                {
-                    "internalType": "string[]",
-                    "name": "",
-                    "type": "string[]"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "tokenURI",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct Streaming.LatestMusicData[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLatestMusicTokenAll",
+      "outputs": [
         {
             "inputs": [],
             "name": "getLatestMusicTokenAll",
