@@ -63,5 +63,7 @@ module.exports = class Music extends Sequelize.Model {
       as: 'music',
       through: 'musiclikes',
     });
+
+    db.Music.belongsToMany(db.PlayList, { through: 'PlayListMusic' });
   }
 };

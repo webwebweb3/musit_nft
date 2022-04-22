@@ -1,40 +1,18 @@
-// import { Box } from '@mui/material';
-// import React from 'react';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-// const EditionImages = ({ image }) => {
-//   return (
-//     <>
-//       <Box sx={{ float: 'right' }}>
-//         <FavoriteBorderIcon />
-//       </Box>
-//       <Box sx={{ margin: '0 auto' }}>
-//         <img
-//           src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${image}`}
-//           alt="image"
-//           width={'450px'}
-//         />
-//       </Box>
-//     </>
-//   );
-// };
-
-// export default EditionImages;
 import React from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 
-import IconButton from '@mui/material/IconButton';
 import ReactAudioPlayer from 'react-audio-player';
 
-import { useState } from 'react';
-import { Box, Divider } from '@mui/material';
+import { Box } from '@mui/material';
 import MusicLikes from '$components/views/musicLikes/MusicLikes';
+import { useRouter } from 'next/router';
 
 export default function EditionImages({ image, music }) {
-  const [expanded, setExpanded] = useState(false);
+  const router = useRouter();
+  const editionNum = router.query.editionIPFSUrl;
 
   return (
     <Box sx={{ margin: '20px auto' }}>
@@ -47,7 +25,7 @@ export default function EditionImages({ image, music }) {
       >
         <CardHeader
           action={
-            <MusicLikes />
+            <MusicLikes editionNum={editionNum} />
             // <IconButton aria-label="favoriteButton">
             //   {isFavorite ? (
             //     <FavoriteIcon sx={{ color: 'white' }} />

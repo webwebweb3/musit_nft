@@ -30,6 +30,11 @@ module.exports = class User extends Sequelize.Model {
           allowNull: true,
           defaultValue: '0',
         },
+        subscription: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          defaultValue: '0',
+        },
       },
       {
         sequelize,
@@ -57,6 +62,7 @@ module.exports = class User extends Sequelize.Model {
     });
     db.User.belongsToMany(db.Genre, { through: 'UserGenre' });
     // 유저는 여러개의 음악을 가질 수 있다.
+    db.User.hasMany(db.PlayList);
     db.User.hasMany(db.Music, { foreignKey: 'uploader', sourceKey: 'id' });
     db.User.hasOne(db.UserCover, { foreignKey: 'user', through: 'id' });
     db.User.belongsToMany(db.Music, {

@@ -32,10 +32,6 @@ const AuctionProductPage = () => {
     approveAuctionLoading,
     approveAuctionData,
     auctionTokenData,
-    auctionTokenInfoLoading,
-    infoAuctionDone,
-    auctionDone,
-    myBidAuctionDone,
     auctionData,
   } = useSelector(state => state.auction);
   const router = useRouter();
@@ -81,60 +77,55 @@ const AuctionProductPage = () => {
         </div>
       ) : (
         <AuctionAllContainer>
-          {!approve &&
-            auctionData &&
-            auctionData.auctionState !== '3' && ( // 최상단 배치 및 경매 취소 버튼 추가
-              <div className="auctionBlur">
-                <div
-                  style={{
-                    fontSize: '55px',
-                    color: '#173142',
-                    display: 'flex',
-                    margin: 'auto',
-                    flexDirection: 'column',
-                  }}
-                >
-                  <div className="svgContainer">
-                    <div>
-                      <Image
-                        src="/apgifus.gif"
-                        alt="종이"
-                        width="300px"
-                        height="300px"
-                      />
-                    </div>
-                  </div>
-                  <div>판매자 승인 대기중</div>
-
-                  <div style={{ margin: 'auto', padding: '30px' }}>
-                    {userData && owner === userData.metamask && (
-                      <>
-                        <Button
-                          startIcon={<GavelIcon />}
-                          style={{ fontSize: '20px', padding: '10px' }}
-                          onClick={onClickApprove}
-                          variant="text"
-                        >
-                          <span style={{ color: '#6bc4ff' }}>
-                            경매 시작하기
-                          </span>
-                        </Button>
-                        <Button
-                          startIcon={<CancelIcon />}
-                          style={{ fontSize: '20px', padding: '10px' }}
-                          onClick={onClickCancelAuction}
-                          variant="text"
-                        >
-                          <span style={{ color: '#6bc4ff' }}>경매 취소</span>
-                        </Button>
-                      </>
-                    )}
+          {!approve && auctionData && auctionData.auctionState !== '3' && (
+            <div className="auctionBlur">
+              <div
+                style={{
+                  fontSize: '55px',
+                  color: '#173142',
+                  display: 'flex',
+                  margin: 'auto',
+                  flexDirection: 'column',
+                }}
+              >
+                <div className="svgContainer">
+                  <div>
+                    <Image
+                      src="/apgifus.gif"
+                      alt="종이"
+                      width="300px"
+                      height="300px"
+                    />
                   </div>
                 </div>
+                <div>판매자 승인 대기중</div>
+
+                <div style={{ margin: 'auto', padding: '30px' }}>
+                  {userData && owner === userData.metamask && (
+                    <>
+                      <Button
+                        startIcon={<GavelIcon />}
+                        style={{ fontSize: '20px', padding: '10px' }}
+                        onClick={onClickApprove}
+                        variant="text"
+                      >
+                        <span style={{ color: '#6bc4ff' }}>경매 시작하기</span>
+                      </Button>
+                      <Button
+                        startIcon={<CancelIcon />}
+                        style={{ fontSize: '20px', padding: '10px' }}
+                        onClick={onClickCancelAuction}
+                        variant="text"
+                      >
+                        <span style={{ color: '#6bc4ff' }}>경매 취소</span>
+                      </Button>
+                    </>
+                  )}
+                </div>
               </div>
-            )}
+            </div>
+          )}
           <AuctionContentsContainer>
-            {/* 상품 이미지 */}
             <AuctionContentImg>
               {auctionTokenData && (
                 <Image
@@ -147,7 +138,6 @@ const AuctionProductPage = () => {
               )}
             </AuctionContentImg>
             <AuctionContents>
-              {/* 상품 이름 */}
               {auctionTokenData && (
                 <TitleBox
                   text={auctionTokenData.properties.dataToSubmit.title}
@@ -155,7 +145,6 @@ const AuctionProductPage = () => {
               )}
               <AuctionDivider />
 
-              {/* 경매 시간 */}
               <TimeBox
                 product={product}
                 gapTime={gapTime}
@@ -165,16 +154,13 @@ const AuctionProductPage = () => {
               />
               <AuctionDivider />
 
-              {/* 경매가 */}
               <BidBox gapTime={gapTime} />
               <AuctionDivider />
 
-              {/* 나의 경매 금액 */}
               <MyBidBox product={product} gapTime={gapTime} />
               {!gapTime &&
                 owner.toLowerCase() !== userData?.metamask.toLowerCase() && (
                   <>
-                    {/* 입찰하기 */}
                     <AuctionBidButton product={product} />
                   </>
                 )}

@@ -7,9 +7,6 @@ import {
   MUSICS_DISLIKE_REQUEST,
   MUSICS_DISLIKE_SUCCESS,
   MUSICS_DISLIKE_FAILURE,
-  MUSICS_ISLIKE_REQUEST,
-  MUSICS_ISLIKE_SUCCESS,
-  MUSICS_ISLIKE_FAILURE,
 } from '$reduxsaga/request/types';
 
 // ! data 확인 부탁
@@ -29,7 +26,7 @@ function* yieldMusicLike(action) {
 
     yield put({
       type: MUSICS_LIKE_SUCCESS,
-      data: true,
+      data: eventData.data,
     });
   } catch (err) {
     console.error(err);
@@ -55,38 +52,12 @@ function* yieldMusicDisLike(action) {
     console.log('디스이벤트~', eventData);
     yield put({
       type: MUSICS_DISLIKE_SUCCESS,
-      data: false,
+      data: eventData.data,
     });
   } catch (err) {
     console.error(err);
     yield put({
       type: MUSICS_DISLIKE_FAILURE,
-      error: err.response.data,
-    });
-  }
-}
-
-async function isLike(data) {
-  console.log('islike', data);
-  return Axios.get('/music', {
-    params: {
-      paramsData: data,
-    },
-  });
-}
-
-function* yieldIsLike(action) {
-  try {
-    const eventData = yield call(isLike, action.data);
-    console.log('겟이벤트~', eventData.data.exist);
-    yield put({
-      type: MUSICS_ISLIKE_SUCCESS,
-      data: eventData.data.exist,
-    });
-  } catch (err) {
-    console.error(err);
-    yield put({
-      type: MUSICS_ISLIKE_FAILURE,
       error: err.response.data,
     });
   }
@@ -98,10 +69,7 @@ function* watchLikeMusic() {
 function* watchDisLikeMusic() {
   yield takeLatest(MUSICS_DISLIKE_REQUEST, yieldMusicDisLike);
 }
-function* watchIsLike() {
-  yield takeLatest(MUSICS_ISLIKE_REQUEST, yieldIsLike);
-}
 
 export default function* music() {
-  yield all([fork(watchLikeMusic), fork(watchIsLike), fork(watchDisLikeMusic)]);
+  yield all([fork(watchLikeMusic), fork(watchDisLikeMusic)]);
 }

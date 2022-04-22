@@ -2,7 +2,13 @@ import React from 'react';
 import { Global } from './buttonStyle';
 
 const STYLES = ['btn--primary', 'btn--outline'];
-const SIZES = ['btn--medium', 'btn--large', 'btn--mobile', 'btn--wide'];
+const SIZES = [
+  'btn--medium',
+  'btn--large',
+  'btn--mobile',
+  'btn--wide',
+  'btn--resize',
+];
 const COLOR = ['primary', 'blue', 'red', 'green'];
 
 export const Button = ({

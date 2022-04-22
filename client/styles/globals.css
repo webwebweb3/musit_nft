@@ -3,7 +3,6 @@
 @import './mypage.css';
 @import './auction.css';
 
-
 html,
 body {
   background-color: #0d0f1a;
@@ -65,7 +64,7 @@ position: fixed;
   display: flex;
   z-index: 5;
   width: 85%;
-  height: 90%;
+  height: 80%;
   left: 50%;
   transform: translateX(-50%);
   box-shadow: 2px 7px 15px 8px rgba(0, 0, 0, 0.9);

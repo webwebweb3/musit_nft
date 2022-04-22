@@ -21,14 +21,17 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
           <>
             {currentItems &&
               currentItems.map(v => (
-                <MyNFTCards
-                  account={account}
-                  musicTokenIds={v.musicTokenId}
-                  musicTokenDatas={v.musicTokenData}
-                  musicTokenPrices={v.musicTokenPrice}
-                  saleStatus={saleStatus}
-                  {...rest}
-                />
+                <Box key={v.musicTokenId}>
+                  <MyNFTCards
+                    key={v.musicTokenId}
+                    account={account}
+                    musicTokenIds={v.musicTokenId}
+                    musicTokenDatas={v.musicTokenData}
+                    musicTokenPrices={v.musicTokenPrice}
+                    saleStatus={saleStatus}
+                    {...rest}
+                  />
+                </Box>
               ))}
           </>
         )}
@@ -37,7 +40,7 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
             {currentItems &&
               currentItems.map((v, i) => {
                 return (
-                  <Box sx={{ marginLeft: '15px' }}>
+                  <Box key={v.musicTokenId} sx={{ marginLeft: '15px' }}>
                     <MarketPlaceNFTCard
                       musicTokenIds={v.musicTokenId}
                       musicTokenPrices={v.musicTokenPrice}

@@ -84,19 +84,15 @@ async function uploadToServer(data) {
 
 async function mintNFTMusic(data) {
   // const router = useRouter();
-  console.log('11');
-  console.log('타이틀', data.data.dataToSubmit.title);
-  console.log('2', data.IPFSurl);
-  console.log('3', data.S3AlbumUrl);
 
   if (data.data.dataToSubmit.title === '' || null) {
-    throw new Error('a');
+    throw new Error('no title');
   }
   if (data.IPFSurl === '' || null) {
-    throw new Error('b');
+    throw new Error('no IPFS Url');
   }
   if (data.S3AlbumUrl === '' || null) {
-    throw new Error('c');
+    throw new Error('no S3 Album');
   }
   console.log('mint data', data);
   let jsonData = {

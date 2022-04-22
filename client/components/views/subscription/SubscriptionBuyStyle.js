@@ -7,18 +7,19 @@ export const Global = createGlobalStyle`
     flex-direction: column;
     justify-content: center;
     background: #1c2237;
+    text-align: center;
 }
 
 .buyWrapper{
     display: flex;
-    margin: 0 auto;
-    padding: 30px;
+    width: 1200px;
+    margin: 0 30px 0 0;
+    padding: 0px;
 }
 
 .buyHeading{
     color: #fff;
     margin-bottom: 24px;
-    margin-left: 100px
 }
 
 .buyContainer{
@@ -30,8 +31,9 @@ export const Global = createGlobalStyle`
 .buyContainer-card{
     background: linear-gradient(45deg, #252525 0%, #276afb 100%);
     box-shadow: 0 6px 20px rgba(56, 125, 255, 0.2);
-    width: 1000px;
-    height: 100px;
+    width: 250px;
+    height: 100%;
+    
     text-decoration: none;
     border-radius: 4px;
     flex-direction: row;
@@ -46,9 +48,7 @@ export const Global = createGlobalStyle`
     color: #fff;
 }
 .buyIcon {
-    margin: 50px 0;
-    
-
+    width: 194.7px;
   }
 
 .buyFooter{
