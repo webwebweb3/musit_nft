@@ -13,20 +13,18 @@ import {
   Headset,
   KeyboardControlKey,
 } from '@mui/icons-material';
-import { Box, Button, Card, Slider } from '@mui/material';
+import { Box, Button, Slider } from '@mui/material';
 import Image from 'next/image';
+import Router from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
-//import { Global } from './indexStyle';
-
-import { styled } from '@mui/material/styles';
-
-const ExpandMore = styled(props => {
-  const { expand, ...other } = props;
-  return <KeyboardControlKey {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-}));
+import Slide from 'react-reveal/Slide';
+import MusicCard from '../../views/cards/MusicCard';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
 const Footer = () => {
   const audioElement = useRef();
@@ -41,7 +39,6 @@ const Footer = () => {
   const [seekTime, setSeekTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
-  const [expanded, setExpanded] = React.useState(false);
 
   const playingMusic = () => {
     isPlaying
@@ -57,8 +54,9 @@ const Footer = () => {
     audioElement.current.volume = volume / 100;
     audioElement.current.muted = isVolumeClicked;
     audioElement.current.onloadeddata = () => {
-      if (audioElement.current != null)
+      if (audioElement.current != null) {
         setDuration(audioElement.current.duration);
+      }
     };
     setInterval(() => {
       if (audioElement.current !== null)
@@ -68,10 +66,18 @@ const Footer = () => {
 
   useEffect(() => {
     playingMusic();
-  }, [isPlaying, volume, isVolumeClicked]);
+    if (audioElement.current != null) {
+      setDuration(audioElement.current.duration);
+    }
+  }, [isRepeatClicked, isPlaying, volume, isVolumeClicked]);
 
   useEffect(() => {
     setSeekTime(currTime / (duration / 100));
+    if (audioElement.current.currentTime >= 60) {
+      audioElement.current.pause();
+      alert('이용권을 구매해주세요');
+      Router.push('/subscriptionbuy');
+    }
   }, [currTime, duration]);
 
   // useEffect(() => {
@@ -92,14 +98,6 @@ const Footer = () => {
 
   const toggleAction = () => {
     setToggle(!toggle);
-  };
-
-  const toggleActionX = () => {
-    setToggle(!toggle);
-  };
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
   };
 
   const handleToggle = (type, val) => {
@@ -142,8 +140,42 @@ const Footer = () => {
     return s.substring(3);
   };
 
+  ////
+  const [show, setShow] = useState(false);
+  const handleClick = () => {
+    setShow(!show);
+  };
+
   return (
     <>
+      <Slide bottom when={show}>
+        <Box
+          sx={{
+            width: '100%',
+            height: '80vh',
+            backgroundColor: '#242424',
+            marginBottom: '90px',
+          }}
+          style={show ? { display: 'block' } : { display: 'none' }}
+        >
+          <div
+            style={{
+              paddingLeft: '5vw',
+              paddingRight: '5vw',
+              paddingBottom: '3vh',
+              paddingTop: '3vh',
+            }}
+          >
+            <div style={{ marginBottom: '40px', width: '100%' }}>
+              <Image src="/AR.jpg" width="700px" height="700px" />
+
+              <div className="bottomPanel" style={{ width: '50%' }}>
+                <h1>asdasdasdasdas</h1>
+              </div>
+            </div>
+          </div>
+        </Box>
+      </Slide>
       <Box
         style={{
           position: 'fixed',
@@ -168,6 +200,7 @@ const Footer = () => {
           />
         </Button>
       </Box>
+
       {!isNaN(seekTime) && (
         <Slider
           className={'playback-completed'}
@@ -204,7 +237,9 @@ const Footer = () => {
             onClicked={handleToggle}
           />
           {/* 음악 */}
-          <audio ref={audioElement} src={`2.mp3`} preload={'metadata'} />
+          {/* QmcWB6Pphb22ev9qQMzDnAQod7F9XKaf6fp2JoAuHp7xuD */}
+          {/* <audio ref={audioElement} src={`https://ipfs.infura.io/ipfs/${music}`} preload={'metadata'} /> */}
+          <audio ref={audioElement} src={`3.mp3`} preload={'metadata'} />
           <ControlsToggleButton
             type={'play-pause'}
             defaultIcon={<PlayArrow fontSize={'large'} />}
@@ -271,7 +306,6 @@ const Footer = () => {
             </div>
             <div style={{ color: '#ffffffa0' }}>아티스트</div>
           </div>
-
           <Button>
             <Favorite
               fontSize="medium"
@@ -284,18 +318,26 @@ const Footer = () => {
               sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
             />
           </Button>
-          <Button>
-            <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <KeyboardControlKey
-                fontSize="medium"
-                sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
-              />
-            </ExpandMore>
+          <Button
+            className="btn btn-success my-5"
+            type="button"
+            onClick={handleClick}
+          >
+            {show ? (
+              <>
+                <KeyboardArrowDown
+                  fontSize="medium"
+                  sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
+                />
+              </>
+            ) : (
+              <>
+                <KeyboardControlKey
+                  fontSize="medium"
+                  sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
+                />
+              </>
+            )}
           </Button>
           <Button onClick={toggleAction}>
             <KeyboardArrowDown

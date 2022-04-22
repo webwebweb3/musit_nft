@@ -28,14 +28,14 @@ const MainLayout = ({ children }) => {
         </Box>
 
         {/* footer */}
-        <Box
+        {/* <Box
           style={{
             bottom: '0px',
             width: '100%',
-            height: '120px',
+            height: '100%',
             color: 'black',
           }}
-        ></Box>
+        ></Box> */}
         <Box
           style={{
             position: 'fixed',
