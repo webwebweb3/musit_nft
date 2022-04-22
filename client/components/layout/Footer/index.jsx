@@ -20,11 +20,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
 import Slide from 'react-reveal/Slide';
 import MusicCard from '../../views/cards/MusicCard';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 
 const Footer = () => {
   const audioElement = useRef();
@@ -152,7 +147,7 @@ const Footer = () => {
         <Box
           sx={{
             width: '100%',
-            height: '80vh',
+            height: '83vh',
             backgroundColor: '#242424',
             marginBottom: '60px',
           }}
@@ -167,8 +162,14 @@ const Footer = () => {
             }}
           >
             <div style={{ marginBottom: '40px', width: '100%' }}>
-              <Image src="/AR.jpg" width="700px" height="700px" />
-
+              <div className="ListContainer">
+                <Image
+                  className="CoverArt"
+                  src="/AR.jpg"
+                  width="700px"
+                  height="700px"
+                />
+              </div>
               <div className="bottomPanel" style={{ width: '50%' }}>
                 <h1>asdasdasdasdas</h1>
               </div>

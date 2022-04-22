@@ -157,3 +157,10 @@ body:hover {
 .react-reveal {
   display: inline;
 }
+
+.CoverArt :hover{
+  transform: scale(1.01);
+  transition: all 0.3s ease-out;
+  color: #141414;
+  opacity: 50%;
+}
