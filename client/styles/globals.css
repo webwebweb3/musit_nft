@@ -44,11 +44,11 @@ body:hover {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
 }
-.popup{
-width: 100%;
-height: 100%;
-background-color: rgba(255, 255, 255, 0.5);
-position: fixed;
+.popup {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  position: fixed;
   display: flex;
 }
 
@@ -152,4 +152,8 @@ position: fixed;
 .cardETH {
   fontweight: 600;
   color: #18c99b;
+}
+
+.react-reveal {
+  display: inline;
 }

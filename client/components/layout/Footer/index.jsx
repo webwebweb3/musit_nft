@@ -154,7 +154,7 @@ const Footer = () => {
             width: '100%',
             height: '80vh',
             backgroundColor: '#242424',
-            marginBottom: '90px',
+            marginBottom: '60px',
           }}
           style={show ? { display: 'block' } : { display: 'none' }}
         >
