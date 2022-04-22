@@ -3,14 +3,40 @@
 pragma solidity >=0.5.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract Payment {
+    using SafeMath for uint256;
+
     uint public nextPlanId;
+    address public merchant = 0xf6d03c382509eaE7C4B70B7639d237D80A5f6db2;
 
     enum Target {
         Event,
         User,
         Artist
+    }
+
+    struct Plans {
+        uint256 mulMonth;
+        uint256 getAmount;
+    }
+    event Subscribing(address indexed merchant, address indexed buyer, uint256 amount, uint256 date);
+
+
+    function subscribes(uint256 _mulMonth, uint256 _getAmount)
+         external 
+         payable
+    {
+        // IERC20 token = IERC20(plans[planId].token);
+        uint256 totalAmount = _getAmount.mul(_mulMonth);
+        require(totalAmount <= msg.value);
+        // token.transferFrom(msg.sender, plan.merchant, plan.amount);  
+        payable(merchant).transfer(msg.value);
+        emit Subscribing(merchant, msg.sender, totalAmount,  block.timestamp);
+
+        // subscriptions[msg.sender][planId] = Subscription(msg.sender, block.timestamp, block.timestamp + plan.frequency, true);
+        // emit SubscriptionCreated(msg.sender, planId, block.timestamp + plan.frequency);
     }
 
     struct Plan {
