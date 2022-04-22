@@ -8,12 +8,9 @@ import {
   musicIsLikeRequest,
   musicLikeRequest,
 } from '$reduxsaga/request/music_request';
-import { useRouter } from 'next/router';
 
-const MusicLikes = () => {
+const MusicLikes = ({ editionNum }) => {
   const [isFavorite, setIsFavorite] = useState();
-  const router = useRouter();
-  const editionNum = router.query.editionIPFSUrl;
   const { userData } = useSelector(state => state.user);
   const music = useSelector(state => state.music);
   const userMetamask = userData?.metamask;

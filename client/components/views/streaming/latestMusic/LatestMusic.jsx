@@ -34,6 +34,7 @@ const LatestMusic = ({ func }) => {
     if (musics.length === 0) {
       getMusic();
     }
+    console.log(musics);
   }, [musics]);
 
   return (
@@ -53,13 +54,15 @@ const LatestMusic = ({ func }) => {
             <>
               {musics.map((v, i) => {
                 return (
-                  <MusicCard
-                    musicTitle={`${v.properties.dataToSubmit.title}`}
-                    albumCover={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.properties.S3AlbumCover}`}
-                    artistName={`${v.properties.dataToSubmit.artist}`}
-                    key={i}
-                    func={func}
-                  />
+                  <>
+                    <MusicCard
+                      musicTitle={`${v.properties.dataToSubmit.title}`}
+                      albumCover={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.properties.S3AlbumCover}`}
+                      artistName={`${v.properties.dataToSubmit.artist}`}
+                      key={i}
+                      func={func}
+                    />
+                  </>
                 );
               })}
             </>

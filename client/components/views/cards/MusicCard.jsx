@@ -11,6 +11,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import styled from 'styled-components';
 import Link from 'next/link';
+import MusicLikes from '$components/views/musicLikes/MusicLikes';
 
 const StyledCard = styled(Card)`
   ${({}) => `
@@ -30,6 +31,8 @@ const MusicCard = ({ musicTitle, albumCover, artistName, func }) => {
   return (
     <Card className="cardBox" onClick={onClickPlay}>
       <StyledCard className="styledCard">
+        <MusicLikes editionNum={1} />
+
         <CardMedia
           className="cardImg"
           component="img"

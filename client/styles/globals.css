@@ -157,3 +157,7 @@ body:hover {
 .selectBox > div {
   color: #fff;
 }
+
+.react-reveal {
+  display: inline-block;
+}
