@@ -1,6 +1,6 @@
 import { Box, Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { mintMusicTokenContract } from '$contracts';
+import { mintMusicTokenContract, streamingContract } from '$contracts';
 import MusicCard from '../../cards/MusicCard';
 import Link from 'next/link';
 
@@ -8,10 +8,11 @@ const LatestMusic = ({ func }) => {
   const [musics, setMusics] = useState([]);
   const getMusic = async () => {
     try {
-      const getLatestMusicToken = await mintMusicTokenContract.methods
+      const getLatestMusicToken = await streamingContract.methods
         .getLatestMusicToken()
         .call();
 
+      console.log('겟 레이티스트', getLatestMusicToken);
       // const latestMusic = getLatestMusicToken.filter(music => {
       //   return music !== '' && music !== null && music !== undefined;
       // });
@@ -20,11 +21,12 @@ const LatestMusic = ({ func }) => {
 
       for (let i = 0; i < getLatestMusicToken.length; i++) {
         const response = await fetch(
-          `https://ipfs.infura.io/ipfs/${getLatestMusicToken[i]}`,
+          `https://ipfs.infura.io/ipfs/${getLatestMusicToken[i].tokenURI}`,
         );
         const data = await response.json();
-        tempMusics.push(data);
+        tempMusics.push({ data, tokenId: getLatestMusicToken[i].tokenId });
       }
+      console.log('템프 뮤직', tempMusics);
       setMusics(tempMusics);
     } catch (error) {
       console.error(error);
@@ -56,10 +58,11 @@ const LatestMusic = ({ func }) => {
                 return (
                   <>
                     <MusicCard
-                      musicTitle={`${v.properties.dataToSubmit.title}`}
-                      albumCover={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.properties.S3AlbumCover}`}
-                      artistName={`${v.properties.dataToSubmit.artist}`}
+                      musicTitle={`${v.data.properties.dataToSubmit.title}`}
+                      albumCover={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.data.properties.S3AlbumCover}`}
+                      artistName={`${v.data.properties.dataToSubmit.artist}`}
                       key={i}
+                      editionNum={`${v.tokenId}`}
                       func={func}
                     />
                   </>

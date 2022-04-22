@@ -23,7 +23,13 @@ const StyledCard = styled(Card)`
   `}
 `;
 
-const MusicCard = ({ musicTitle, albumCover, artistName, func }) => {
+const MusicCard = ({
+  musicTitle,
+  albumCover,
+  artistName,
+  func,
+  editionNum,
+}) => {
   const onClickPlay = () => {
     func('');
   };
@@ -31,7 +37,7 @@ const MusicCard = ({ musicTitle, albumCover, artistName, func }) => {
   return (
     <Card className="cardBox" onClick={onClickPlay}>
       <StyledCard className="styledCard">
-        <MusicLikes editionNum={1} />
+        <MusicLikes editionNum={editionNum} />
 
         <CardMedia
           className="cardImg"
