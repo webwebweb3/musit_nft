@@ -1,8 +1,7 @@
 export const style = {
   studioContainer: {
     marginTop: '10px',
-    minWidth: '1522.770px',
-
+    minWidth: '1200px',
     justifyContent: 'center',
     display: 'flex',
     flexDirection: 'column',
@@ -85,8 +84,8 @@ export const style = {
 
   studioMyMusics: {
     margin: '0 auto',
-    minWidth: '1522.770px',
-    maxWidth: '1842.770px',
+    minWidth: '1200px',
+    maxWidth: '1200px',
     width: '100%',
     height: '1000px',
     backgroundColor: 'green',

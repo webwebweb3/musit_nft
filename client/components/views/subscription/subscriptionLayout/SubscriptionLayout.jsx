@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { paymentContract } from '$contracts';
 import { utils } from 'web3';
+import Router from 'next/router';
 
 <Global />;
 const SubscriptionLayout = ({
@@ -37,6 +38,10 @@ const SubscriptionLayout = ({
           data: nextPlanFrequency,
           metamask: userData.metamask,
         });
+      })
+      .catch(() => {
+        alert('error..');
+        Router.push('/subscriptionbuy');
       });
   };
 

@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { studioUploadBackground } from '$reduxsaga/request/studio_request';
 
 const StudioBackground = ({ background }) => {
+  console.log('?????????????', background);
   const router = useRouter();
   let { artistName } = router.query;
   const dispatch = useDispatch();
@@ -57,24 +58,27 @@ const StudioBackground = ({ background }) => {
     }
     console.log('이것도 확인좀', background);
     console.log('이거 확인 부탁', backgroundImg);
-  }, [isSelected]);
+  }, [isSelected, backgroundImg]);
 
   const uploadStudioCoverBtn = () => {
     hiddenFileInput.current.click();
   };
   return (
     <Box>
-      {backgroundImg === 'defaultBackground' ? (
+      {background === 'defaultBackground' || background === undefined ? (
         <img
           src="/defaultBackground.jpg"
           alt="default Background"
           width={'100%'}
         />
       ) : (
-        <img
-          src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/background/${artistName}_${background}`}
-          width={'100%'}
-        />
+        <>
+          <img
+            src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/background/${artistName}_${background}`}
+            width={'100%'}
+          />
+          {console.log('mmmmmmmmmmmm', artistName)}
+        </>
       )}
 
       <input
