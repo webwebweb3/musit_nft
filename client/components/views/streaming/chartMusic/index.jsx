@@ -1,6 +1,6 @@
 import { Box, Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { mintMusicTokenContract } from '$contracts';
+import { streamingContract } from '$contracts';
 import MusicCard from '../../cards/MusicCard';
 import Link from 'next/link';
 
@@ -8,7 +8,7 @@ const ChartMusic = ({ func }) => {
   const [musics, setMusics] = useState([]);
   const getMusic = async () => {
     try {
-      const getLatestMusicToken = await mintMusicTokenContract.methods
+      const getLatestMusicToken = await streamingContract.methods
         .getLatestMusicToken()
         .call();
 

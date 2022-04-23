@@ -55,9 +55,12 @@ const MusicLikes = ({ editionNum }) => {
     <div>
       <IconButton aria-label="favoriteButton">
         {isFavorite ? (
-          <FavoriteIcon sx={{ color: 'white' }} onClick={onClickDisLike} />
+          <FavoriteIcon className="LikeButtonIcon" onClick={onClickDisLike} />
         ) : (
-          <FavoriteBorderIcon sx={{ color: 'white' }} onClick={onClickLike} />
+          <FavoriteBorderIcon
+            className="LikeButtonIcon"
+            onClick={onClickLike}
+          />
         )}
       </IconButton>
     </div>

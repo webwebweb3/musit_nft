@@ -19,21 +19,18 @@ button[disabled] {
   color: #ffbbec;
 }
 
-/* @keyframes navbar {
-  0% {
-    transform: translateX(0%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
+.MyPlayList {
+  border-color: transparent;
+  margin-right: 10px;
 }
 
-.streamingNavbar:hover ~ .nftNavbar {
-  animation: navbar 1 1s forwards;
+.MyPlayTitle {
+  margin-right: auto;
+  font-weight: bold;
+  font-size: 25px;
+  padding-right: 300px;
 }
 
-.streamingNavbar:hover ~ .nftNavbar {
-  animation: navbar 1 1s forwards;
-  display: block;
-}  */
+.MyPlayListContainer > .MuiDialog-container > .MuiPaper-root {
+  background-color: #eeeeee;
+}

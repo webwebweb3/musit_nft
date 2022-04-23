@@ -12,19 +12,14 @@ import {
   KeyboardArrowDown,
   Headset,
   KeyboardControlKey,
+  Compress,
 } from '@mui/icons-material';
 import { Box, Button, Slider } from '@mui/material';
 import Image from 'next/image';
-import Router from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
 import Slide from 'react-reveal/Slide';
-import MusicCard from '../../views/cards/MusicCard';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import PlayList from './music/playlist';
 
 const Footer = () => {
   const audioElement = useRef();
@@ -34,6 +29,7 @@ const Footer = () => {
   const [isNextClicked, setNextClicked] = useState(false);
   const [isVolumeClicked, setVolumeClicked] = useState(false);
   const [toggle, setToggle] = useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const [volume, setVolume] = useState(50);
   const [seekTime, setSeekTime] = useState(0);
@@ -73,11 +69,11 @@ const Footer = () => {
 
   useEffect(() => {
     setSeekTime(currTime / (duration / 100));
-    if (audioElement.current.currentTime >= 60) {
-      audioElement.current.pause();
-      alert('이용권을 구매해주세요');
-      Router.push('/subscriptionbuy');
-    }
+    // if (audioElement.current.currentTime >= 60) {
+    //   audioElement.current.pause();
+    //   alert('이용권을 구매해주세요');
+    //   Router.push('/subscriptionbuy');
+    // }
   }, [currTime, duration]);
 
   // useEffect(() => {
@@ -95,6 +91,10 @@ const Footer = () => {
   //     setPrevClicked(false);
   //   }
   // }, [dispatch, id, isNextClicked, isPrevClicked, playlists]);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
   const toggleAction = () => {
     setToggle(!toggle);
@@ -314,6 +314,7 @@ const Footer = () => {
           </Button>
           <Button>
             <PlaylistAdd
+              onClick={handleClickOpen}
               fontSize="medium"
               sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
             />
@@ -325,14 +326,14 @@ const Footer = () => {
           >
             {show ? (
               <>
-                <KeyboardArrowDown
+                <KeyboardControlKey
                   fontSize="medium"
                   sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
                 />
               </>
             ) : (
               <>
-                <KeyboardControlKey
+                <KeyboardArrowDown
                   fontSize="medium"
                   sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
                 />
@@ -340,13 +341,14 @@ const Footer = () => {
             )}
           </Button>
           <Button onClick={toggleAction}>
-            <KeyboardArrowDown
+            <Compress
               fontSize="medium"
               sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
             />
           </Button>
         </Box>
       </Box>
+      <PlayList open={open} setOpen={setOpen} />
     </>
   );
 };

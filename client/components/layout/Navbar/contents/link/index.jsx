@@ -11,7 +11,7 @@ import {
   Home,
   LibraryMusic,
 } from '@mui/icons-material';
-import { Tab } from '@mui/material';
+import { Box, Tab } from '@mui/material';
 
 const NavbarLink = () => {
   const router = useRouter();
@@ -94,6 +94,7 @@ const NavbarLink = () => {
             sx={{ fontSize: '18px', color: '#fff' }}
           />
           <span
+            className="navSpan"
             style={nftShow ? { display: 'inline' } : { display: 'none' }}
             onMouseEnter={handleNFTEnter}
             onMouseLeave={handleNFTLeave}
@@ -133,6 +134,7 @@ const NavbarLink = () => {
             sx={{ fontSize: '18px', marginRight: '10px' }}
           />
           <span
+            className="navSpan"
             style={streamingShow ? { display: 'inline' } : { display: 'none' }}
             onMouseEnter={handleStreamingEnter}
             onMouseLeave={handleStreamingLeave}
@@ -216,6 +218,7 @@ const NavbarLink = () => {
             sx={{ fontSize: '18px', marginRight: '10px' }}
           />
           <span
+            className="navSpan"
             style={streamingShow ? { display: 'inline' } : { display: 'none' }}
             onMouseEnter={handleStreamingEnter}
             onMouseLeave={handleStreamingLeave}
@@ -268,6 +271,7 @@ const NavbarLink = () => {
             sx={{ fontSize: '18px', color: '#fff' }}
           />
           <span
+            className="navSpan"
             style={nftShow ? { display: 'inline' } : { display: 'none' }}
             onMouseEnter={handleNFTEnter}
             onMouseLeave={handleNFTLeave}

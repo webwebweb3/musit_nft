@@ -154,6 +154,13 @@ body:hover {
   color: #18c99b;
 }
 
-.react-reveal {
+.navSpan .react-reveal {
   display: inline;
+}
+
+.LikeButtonIcon {
+  background-color: #dada;
+  border-radius: 50%;
+  padding: 3px;
+  color: #fff;
 }
