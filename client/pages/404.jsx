@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MainLayout from '../components/mainlayout';
+import MainLayout from '$components/layout';
 
 const Custom404 = () => {
   return (

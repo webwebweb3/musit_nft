@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "$reduxsaga/*": ["_reduxsaga/*"],
+      "$components/*": ["components/*"],
+      "$contracts": ["contracts/index"],
+      "$hooks/*": ["hooks/*"],
+      "$providers/*": ["providers/*"],
+      "$util/*": ["util/*"]
+    }
+  }
+}

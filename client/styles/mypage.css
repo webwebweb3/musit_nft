@@ -1,0 +1,38 @@
+.approveBox {
+  margin: 10px auto 10px 70px;
+  width: 100%;
+  background-color: #e2ebf030;
+  box-radius: 10px;
+}
+
+.approveText {
+  color: #fff;
+}
+
+.approveText:hover {
+  text-decoration: underline;
+}
+
+svg[data-testid='AddTaskIcon'] {
+  color: white;
+  margin-right: 5px;
+}
+
+.approveGrid {
+  margin-top: 18px;
+  margin-left: 60px;
+}
+
+.approveGrid > div {
+  margin-bottom: 20px;
+}
+
+.myNFTContainer {
+  width: 100%;
+  color: white;
+  margin: 0;
+}
+
+.css-12lvs33 {
+  margin-left: -20px;
+}

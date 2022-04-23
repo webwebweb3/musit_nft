@@ -2,19 +2,18 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../../_store/configureStore';
-import MainLayout from '../../components/mainlayout';
-import MyPageLayout from '../../components/views/mypage/layout';
-import FavArtists from '../../components/views/mypage/FavArtists';
-import { myInfoRequestAction } from '../../_actions/user_actions';
+import wrapper from '$reduxsaga/store/configureStore';
+import MyPageLayout from '$components/views/mypage/layout';
+import FavArtists from '$components/views/mypage/FavArtists';
+import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
 const FavArtistsPage = () => {
   return (
-    <MainLayout>
+    <>
       <MyPageLayout>
         <FavArtists />
       </MyPageLayout>
-    </MainLayout>
+    </>
   );
 };
 

@@ -24,6 +24,14 @@ module.exports = class Music extends Sequelize.Model {
           type: Sequelize.STRING(200),
           allowNull: true,
         },
+        albumCover: {
+          type: Sequelize.STRING(200),
+          allowNull: false,
+        },
+        IPFSUrl: {
+          type: Sequelize.STRING(200),
+          allowNull: false,
+        },
       },
       {
         sequelize,
@@ -50,10 +58,12 @@ module.exports = class Music extends Sequelize.Model {
       sourceKey: 'id',
     });
 
-    // 음악은 하나의 좋아요를 가진다.
-    db.Music.hasOne(db.MusicLike, {
-      foreignKey: 'musicId',
-      sourceKey: 'id',
+    db.Music.belongsToMany(db.User, {
+      foreignKey: 'music',
+      as: 'music',
+      through: 'musiclikes',
     });
+
+    db.Music.belongsToMany(db.PlayList, { through: 'PlayListMusic' });
   }
 };

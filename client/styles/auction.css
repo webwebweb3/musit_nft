@@ -1,0 +1,38 @@
+.auctionAllContainer {
+  width: 100%;
+}
+
+.auctionMainContainer {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  flex: 0 1 auto;
+  min-width: 1200px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.auctionHeader {
+  color: white;
+  line-height: 52px;
+  padding: 5px 0 15px 0;
+  flex: 0 1 auto;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0 auto 0 0;
+  width: 100%;
+}
+
+.styledNewAuctionButton {
+  display: block;
+  background-color: transparent;
+  padding: 6px 12px;
+  width: auto;
+  margin: 0 0 0 auto;
+  color: #fff;
+}
+
+.styledNewAuctionButton:hover {
+  color: rgb(25, 118, 210);
+  background-color: transparent;
+}

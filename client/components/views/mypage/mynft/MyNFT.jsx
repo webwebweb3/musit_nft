@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
-import {
-  mintMusicTokenContract,
-  saleMusicTokenAddress,
-} from '../../../../contracts';
-import { Box, Button, Grid } from '@mui/material';
-import MyNFTCards from '../../cards/MyNFTCards';
-import { style } from './style';
+import { mintMusicTokenContract, saleMusicTokenAddress } from '$contracts';
+import { Box, Button } from '@mui/material';
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import { useWalletInfo } from '$hooks/web3';
+import PageList from '$components/layout/page';
 
 const MyNFT = () => {
-  const [myNFT, setMyNFT] = useState();
-  const [saleStatus, setSaleStauts] = useState(false);
-
   const { userData } = useSelector(state => state.user);
+  const [myNFT, setMyNFT] = useState();
+  const [saleStatus, setSaleStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { network } = useWalletInfo();
+
   if (userData === null) {
-    alert('로그인 해주세요');
     Router.push('/');
   }
-  const account = userData.metamask;
+  const account = userData?.metamask;
 
   const getMyMusicTokens = async () => {
     try {
+      setLoading(true);
+
       if (!account) return;
       const balanceLength = await mintMusicTokenContract.methods
         .balanceOf(account)
@@ -31,22 +32,24 @@ const MyNFT = () => {
 
       const tempMusicCardArray = [];
 
-      const response = await mintMusicTokenContract.methods
+      const myNFTArray = await mintMusicTokenContract.methods
         .getMusicTokens(account)
         .call();
 
-      for (let i = 0; i < response.length; i++) {
+      for (let i = 0; i < myNFTArray.length; i++) {
         const ipfsData = await fetch(
-          `https://ipfs.io/ipfs/${response[i].musicTokenURI}`,
+          `https://ipfs.infura.io/ipfs/${myNFTArray[i].musicTokenURI}`,
         );
         const data = await ipfsData.json();
         tempMusicCardArray.push({
-          musicTokenId: response[i].musicTokenId,
+          musicTokenId: myNFTArray[i].musicTokenId,
           musicTokenData: data,
-          musicTokenPrice: response[i].musicTokenPrice,
+          musicTokenPrice: myNFTArray[i].musicTokenPrice,
         });
       }
-      setMyNFT(tempMusicCardArray);
+      setMyNFT(tempMusicCardArray.reverse());
+
+      setLoading(true);
     } catch (error) {
       console.error(error);
     }
@@ -58,7 +61,7 @@ const MyNFT = () => {
         .isApprovedForAll(account, saleMusicTokenAddress)
         .call();
       if (response) {
-        setSaleStauts(response);
+        setSaleStatus(response);
       }
     } catch (error) {
       console.error(error);
@@ -76,7 +79,7 @@ const MyNFT = () => {
         .setApprovalForAll(saleMusicTokenAddress, true)
         .send({ from: account });
       if (response.status) {
-        setSaleStauts(true);
+        setSaleStatus(true);
       }
     } catch (error) {
       console.error(error);
@@ -84,41 +87,29 @@ const MyNFT = () => {
   };
 
   useEffect(() => {
-    if (!account) return;
-    if (!myNFT) {
-      getMyMusicTokens();
+    getMyMusicTokens();
+    if (!saleStatus) {
+      getIsApprovedForAll();
     }
-    getIsApprovedForAll();
-  }, [myNFT, saleStatus]);
+  }, [network.isSupported]);
 
   return (
-    <Box style={style.myNFTContainer}>
-      <Box style={style.myNFTSaleApprovalButton}>
-        <Button onClick={onClickSalesApproval}>
-          {!saleStatus && '판매동의'}
-        </Button>
-      </Box>
-      <Grid
-        container
-        spacing={{ xs: 2, md: 4 }}
-        columns={{ xs: 3, sm: 8, md: 12 }}
-      >
-        {myNFT &&
-          myNFT.map((v, i) => {
-            return (
-              <Grid item xs={2} sm={3} md={3} key={i}>
-                <MyNFTCards
-                  account={account}
-                  musicTokenIds={v.musicTokenId}
-                  musicTokenDatas={v.musicTokenData}
-                  musicTokenPrices={v.musicTokenPrice}
-                  saleStatus={saleStatus}
-                />
-              </Grid>
-            );
-          })}
-      </Grid>
-    </Box>
+    <>
+      {loading && (
+        <Box className="myNFTContainer">
+          {!saleStatus && (
+            <Box className="approveBox">
+              <Button onClick={onClickSalesApproval}>
+                <AddTaskIcon className="approveTextIcon" />
+                <span className="approveText">판매동의를 먼저 해주세요!</span>
+              </Button>
+            </Box>
+          )}
+
+          <PageList items={myNFT} saleStatus={saleStatus} type="myNFT" />
+        </Box>
+      )}
+    </>
   );
 };
 

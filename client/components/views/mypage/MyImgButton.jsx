@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React, { useCallback, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { userImgRequestAction } from '../../../_actions/user_actions';
+import { userImgRequestAction } from '$reduxsaga/request/user_request';
 
 const MyImgButton = () => {
   const dispatch = useDispatch();

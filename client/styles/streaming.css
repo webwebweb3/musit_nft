@@ -1,0 +1,77 @@
+:root {
+  /* --upload-font-size: 1.7vw;
+  --upload-font-family: SpoqaHanSansNeo-Regular;
+  --btn-border-color: #dadada;
+  --btn-size: 1.4vw;
+  --btn-border-radius: 10px; */
+  --streaming-font-color: #fff;
+  --streaming-font-artist-color: #dada;
+  --streaming-font-title-size: 30px;
+}
+
+.streamingContainer {
+  color: var(--streaming-font-color);
+  margin-top: 120px;
+}
+
+.streamingTitle {
+  font-size: var(--streaming-font-title-size);
+  font-weight: 600;
+}
+
+.streamingBox {
+  margin: 0 auto;
+  width: 1200px;
+}
+
+.streamingDivider {
+  background: var(--streaming-font-color);
+  margin: 25px 0;
+}
+
+.cardBox {
+  display: inline-block;
+  background-color: transparent;
+  margin: 0 10px;
+}
+
+.styledCard {
+  background-color: transparent;
+}
+
+.cardImg {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.cardText {
+  color: var(--streaming-font-color);
+}
+
+.cardArtist {
+  color: var(--streaming-font-artist-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cardArtist:hover {
+  text-decoration: underline;
+}
+
+.latestMusic {
+  color: #dada;
+  font-size: 18px;
+  padding: 15px;
+  text-decoration: none;
+}
+
+.latestMusic:hover {
+  text-decoration: underline;
+}
+
+.shadowCard:hover {
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 40px 70px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 20px 38px -18px inset;
+}

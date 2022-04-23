@@ -5,8 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import Divider from '@mui/material/Divider';
 
-const muiTheme = createMuiTheme({});
-
 const PurchaseInfo = () => {
   const SectionStyle = styled(Card)(({ theme }) => ({
     width: '100%',
@@ -39,7 +37,6 @@ const PurchaseInfo = () => {
         <SectionStyle>
           <CardMedia component="img" height="300" image="" alt="앨범커버" />
         </SectionStyle>
-
         <Container>
           <ContentStyle>
             <Stack>
@@ -50,7 +47,9 @@ const PurchaseInfo = () => {
               <Divider> STATUS</Divider>
             </Stack>
             <Typography variant="h4">가격그래프</Typography>
-            <Grid item xs={12} md={6} lg={8}></Grid>
+            <Grid item xs={12} md={6} lg={8}>
+              <div style={{ width: 700 }}></div>
+            </Grid>
           </ContentStyle>
         </Container>
       </PurchaseInfoContainer>

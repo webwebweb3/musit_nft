@@ -16,7 +16,7 @@ import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
-const Sidebar = () => {
+const Sidebar = ({ userData }) => {
   return (
     <>
       <Box
@@ -29,12 +29,14 @@ const Sidebar = () => {
       >
         <List>
           <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon sx={{ color: '#fff' }}>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItemButton>
+            <Link href="/mypage">
+              <ListItemButton>
+                <ListItemIcon sx={{ color: '#fff' }}>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItemButton>
+            </Link>
           </ListItem>
         </List>
         <Divider sx={{ bgcolor: '#fff' }} />
@@ -59,14 +61,6 @@ const Sidebar = () => {
                   <ListItemText primary="My NFT" />
                 </ListItemButton>
               </Link>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ color: '#fff' }}>
-                  <AutoAwesomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="내 스튜디오" />
-              </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>

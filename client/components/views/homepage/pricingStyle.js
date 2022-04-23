@@ -26,7 +26,7 @@ export const Global = createGlobalStyle`
   .pricing__container-card:hover {
     transform: scale(1.06);
     transition: all 0.3s ease-out;
-    color: #1c2237;
+    color: #b8c7ff;
   }
   
   .pricing__container-card:nth-child(2) {
@@ -55,7 +55,7 @@ export const Global = createGlobalStyle`
     display: flex;
     flex-direction: column;
     height: 500px;
-    padding: 24px;
+    padding: 80px;
     align-items: center;
     color: #fff;
   }
@@ -103,7 +103,7 @@ export const Global = createGlobalStyle`
     }
   
     .pricing__container-card {
-      width: 90%;
+      width: 80%;
     }
   
     .pricing__wrapper {

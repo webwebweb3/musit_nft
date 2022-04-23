@@ -27,6 +27,11 @@ export const Global = createGlobalStyle`
     border: 1px solid var(--primary);
     transition: all 0.3s ease-out;
   }
+
+  btn--resize {
+    padding: 40px 40px;
+
+  }
   
   .btn--medium {
     padding: 8px 20px;
@@ -34,8 +39,8 @@ export const Global = createGlobalStyle`
   }
   
   .btn--large {
-    padding: 12px 26px;
-    font-size: 20px;
+    padding: 35px 28px;
+    font-size: 23px;
   }
   
   .btn--mobile {
@@ -60,6 +65,7 @@ export const Global = createGlobalStyle`
   .btn--medium:hover,
   .btn--mobile:hover {
     transition: all 0.3s ease-out;
+    transform: scale(1.1);
     background: #fff;
     color: #242424;
   }
@@ -93,15 +99,17 @@ export const Global = createGlobalStyle`
   }
   
   .primary {
-    background-color: #242424;
+    background-color: #000;
     color: #fff;
     border: none;
+    
   }
   
   .primary:hover {
     background-color: #fff;
-    color: #242424;
+    color: #000;
     border: none;
+    fontWeight: 600;
   }
   
   .green {

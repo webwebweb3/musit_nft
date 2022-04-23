@@ -1,0 +1,36 @@
+:root {
+  /* --upload-font-size: 1.7vw;
+  --upload-font-family: SpoqaHanSansNeo-Regular;
+  --btn-border-color: #dadada;
+  --btn-size: 1.4vw;
+  --btn-border-radius: 10px;
+  --btn-bg-color: white; */
+}
+
+button[role='tab'] {
+  color: #fff;
+}
+
+button[role='tab']:hover {
+  color: #ffbbec;
+}
+
+button[disabled] {
+  color: #ffbbec;
+}
+
+.MyPlayList {
+  border-color: transparent;
+  margin-right: 10px;
+}
+
+.MyPlayTitle {
+  margin-right: auto;
+  font-weight: bold;
+  font-size: 25px;
+  padding-right: 300px;
+}
+
+.MyPlayListContainer > .MuiDialog-container > .MuiPaper-root {
+  background-color: #eeeeee;
+}

@@ -2,16 +2,16 @@ import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
 
-import wrapper from '../../../_store/configureStore';
-import { myInfoRequestAction } from '../../../_actions/user_actions';
-import MarketPlace from '../../../components/views/nft/marketplace/MarketPlace';
-import NFTLayout from '../../../components/nftLayout/NFTLayout';
+import wrapper from '$reduxsaga/store/configureStore';
+import { myInfoRequestAction } from '$reduxsaga/request/user_request';
+import MarketPlace from '$components/views/nft/marketplace/MarketPlace';
+import MainLayout from '$components/layout';
 
 const MarketPlacePage = () => {
   return (
-    <NFTLayout>
+    <>
       <MarketPlace />
-    </NFTLayout>
+    </>
   );
 };
 
@@ -28,6 +28,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(END);
       await store.sagaTask.toPromise();
     },
+);
+
+MarketPlacePage.Layout = ({ children }) => (
+  <MainLayout value="nft">{children}</MainLayout>
 );
 
 export default MarketPlacePage;

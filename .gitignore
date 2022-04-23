@@ -19,6 +19,9 @@
 .DS_Store
 *.pem
 
+# mintData
+mint.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*
@@ -41,3 +44,14 @@ yarn-error.log*
 package-lock.json
 yarn.lock
 uploads
+json
+mymusic
+*.mp3
+
+client/package-lock.json
+
+#hardhat
+hardhat/artifacts
+hardhat/cache
+hardhat/node_modules
+hardhat/package-lock.json
