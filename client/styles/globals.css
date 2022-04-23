@@ -158,6 +158,28 @@ body:hover {
   display: inline;
 }
 
+.ListContainer {
+  display: flex;
+  width: 100%;
+}
+
+.CoverArt :hover {
+  transform: scale(1.01);
+  transition: all 0.3s ease-out;
+  color: #141414;
+  opacity: 75%;
+}
+.PlayPauseIcons {
+  font-size: 15em;
+  position: fixed;
+  color: rgb(255, 255, 255);
+  justify-content: center;
+}
+
+.TList {
+  margin-left: 40px;
+}
+
 .LikeButtonIcon {
   background-color: #dada;
   border-radius: 50%;
