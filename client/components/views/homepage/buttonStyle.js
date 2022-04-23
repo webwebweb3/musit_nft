@@ -39,7 +39,7 @@ export const Global = createGlobalStyle`
   }
   
   .btn--large {
-    padding: 50px 50px;
+    padding: 35px 28px;
     font-size: 23px;
   }
   

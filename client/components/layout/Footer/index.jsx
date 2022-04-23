@@ -20,9 +20,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
 import Slide from 'react-reveal/Slide';
 import PlayList from './music/playlist';
+import { useSelector } from 'react-redux';
+import { Router } from 'next/router';
 
 const Footer = () => {
   const audioElement = useRef();
+  const { userData } = useSelector(state => state.user);
+  const dateNow = parseInt(Math.round(new Date().getTime() / 1000));
+
   const [isRepeatClicked, setRepeatClick] = useState(false);
   const [isPrevClicked, setPrevClicked] = useState(false);
   const [isPlaying, setPlayPauseClicked] = useState(false);
@@ -63,17 +68,26 @@ const Footer = () => {
   useEffect(() => {
     playingMusic();
     if (audioElement.current != null) {
-      setDuration(audioElement.current.duration);
+      if (userData.subscription < dateNow) {
+        setDuration(60);
+      } else {
+        setDuration(audioElement.current.duration);
+      }
     }
   }, [isRepeatClicked, isPlaying, volume, isVolumeClicked]);
 
   useEffect(() => {
     setSeekTime(currTime / (duration / 100));
-    // if (audioElement.current.currentTime >= 60) {
-    //   audioElement.current.pause();
-    //   alert('이용권을 구매해주세요');
-    //   Router.push('/subscriptionbuy');
-    // }
+    if (audioElement.current != null) {
+      if (userData.subscription < dateNow) {
+        if (audioElement.current.currentTime >= 60) {
+          audioElement.current.pause();
+          audioElement.current.currentTime = 0;
+          alert('이용권을 구매해주세요');
+          Router.push('/subscriptionbuy');
+        }
+      }
+    }
   }, [currTime, duration]);
 
   // useEffect(() => {

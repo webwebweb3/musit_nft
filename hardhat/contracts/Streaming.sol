@@ -49,15 +49,15 @@ contract Streaming {
     function getLatestMusicTokenAll()
         view
         public 
-        returns(string[] memory )
+        returns(LatestMusicData[] memory )
     {
             uint256 _totalMusicToken = mintMusicTokenAddress.totalSupply();
             require(_totalMusicToken > 0, "There are no tokens in the contract.");
-            string[] memory musicTokenDatas = new string[](_totalMusicToken);
+            LatestMusicData[] memory musicTokenDatas = new LatestMusicData[](_totalMusicToken);
             uint256 j = 0;
 
             for(uint256 i=_totalMusicToken; i>0; i--) {
-                    musicTokenDatas[j] = mintMusicTokenAddress.tokenURI(i);
+                    musicTokenDatas[j] = LatestMusicData(i,mintMusicTokenAddress.tokenURI(i));
                     j++;
             }
 
@@ -67,15 +67,15 @@ contract Streaming {
     function getOldestMusicToken()
         view
         public
-        returns(string[] memory)
+        returns(LatestMusicData[] memory)
     {
             uint256 _totalMusicToken = mintMusicTokenAddress.totalSupply(); 
             require(_totalMusicToken > 0, "There are no tokens in the contract.");
-            string[] memory musicTokenDatas = new string[](_totalMusicToken); 
+            LatestMusicData[] memory musicTokenDatas = new LatestMusicData[](_totalMusicToken); 
             uint256 j = 0; 
 
             for(uint256 i=1; i<_totalMusicToken+1; i++) {
-                    musicTokenDatas[j] = mintMusicTokenAddress.tokenURI(i);
+                    musicTokenDatas[j] = LatestMusicData(i,mintMusicTokenAddress.tokenURI(i));
                     j++;
             }
 
