@@ -49,6 +49,7 @@ mymusic
 *.mp3
 
 client/package-lock.json
+webwebweb3.pem
 
 #hardhat
 hardhat/artifacts
