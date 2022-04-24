@@ -16,7 +16,7 @@ import {
 } from '@mui/icons-material';
 import { Box, Button, Slider } from '@mui/material';
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
 import Slide from 'react-reveal/Slide';
 import PlayList from './music/playlist';
@@ -40,7 +40,7 @@ const Footer = () => {
   const [isPlaying, setPlayPauseClicked] = useState(false);
   const [isNextClicked, setNextClicked] = useState(false);
   const [isVolumeClicked, setVolumeClicked] = useState(false);
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
@@ -51,6 +51,7 @@ const Footer = () => {
   const [seekTime, setSeekTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
+  const [mySeekTime, setMySeekTime] = useState(0);
 
   const playingMusic = () => {
     isPlaying
@@ -77,15 +78,29 @@ const Footer = () => {
   };
 
   useEffect(() => {
-    setCurrentMusic(userData.user[0]);
-  }, []);
+    if (userData) {
+      if (userData.user) {
+        setCurrentMusic(userData.user[0]);
+        setUserInfo(userData.user);
+      }
+    } else {
+      setCurrentMusic(null);
+      setUserInfo(null);
+      setToggle(false);
+      // 재생 시킨 음악의 재생 시간
+      console.log(seekTime);
+      // 이곳에 UserDB 에 마지막 재생 노래정보와 총 재생시간, 현재까지 재생시간을 추가한다.
+      setMySeekTime(seekTime);
+    }
+  }, [userData]);
 
   useEffect(() => {
     if (currentMusic) {
-      console.log(323);
       playingMusic();
     }
-    setUserInfo(userData.user);
+    // 이곳에 UserDB 에 마지막 재생 노래정보와 총 재생시간, 현재까지 재생시간을 추가한다.
+    // 이곳에 음악이 시작되고 1분이 넘어가면 음악DB의 재생횟수가 1 증가한다.
+
     // if (audioElement.current != null) {
     //   if (userData.subscription < dateNow) {
     //     setDuration(60);
@@ -130,15 +145,19 @@ const Footer = () => {
       setCurrentMusic(userInfo[trackId]);
       setPrevClicked(false);
     }
-  }, [isNextClicked, isPrevClicked]);
+  }, [isNextClicked, isPrevClicked, userInfo]);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = useCallback(() => {
     setOpen(true);
-  };
+  }, []);
 
-  const toggleAction = () => {
+  const toggleAction = useCallback(() => {
+    if (!userData) {
+      alert('로그인을 해주세요.');
+      return;
+    }
     setToggle(!toggle);
-  };
+  }, [toggle, userData]);
 
   const handleToggle = (type, val) => {
     switch (type) {
