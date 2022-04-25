@@ -29,12 +29,14 @@ const Sidebar = ({ userData }) => {
       >
         <List>
           <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon sx={{ color: '#fff' }}>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItemButton>
+            <Link href="/mypage">
+              <ListItemButton>
+                <ListItemIcon sx={{ color: '#fff' }}>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItemButton>
+            </Link>
           </ListItem>
         </List>
         <Divider sx={{ bgcolor: '#fff' }} />

@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const { QueryTypes } = require('sequelize');
-const { User, sequelize } = require('../../models');
+const { User, sequelize, Music } = require('../../models');
 
 //------------------------------------------------
 //               /api/music
@@ -76,6 +76,27 @@ router.delete('/', async (req, res) => {
     res.json({ delete: true, editionNum });
   } catch (error) {
     res.json({ delete: false });
+    console.error(error);
+  }
+});
+
+router.post('/favoritemusic', async (req, res) => {
+  try {
+    const { userMetamask } = req.body;
+
+    const userId = await User.findOne({
+      where: { metamask: userMetamask },
+      include: [
+        {
+          model: Music,
+          attributes: ['id'],
+        },
+      ],
+    });
+
+    console.log(userId);
+    res.status(200).json(userId);
+  } catch (error) {
     console.error(error);
   }
 });

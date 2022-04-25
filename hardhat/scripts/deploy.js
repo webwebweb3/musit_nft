@@ -75,28 +75,28 @@ async function main() {
   console.log('payment address:', payment.address);
   /// ///////////////////////////////////////////////////////////////////////////
 
-  // console.log('creating plan event 1...');
-  // await payment.createPlan('1', 7889230, 0);
-  // console.log('creating plan test 1...');
-  // await payment.createPlan('10000000000000000', 10, 0);
-  // console.log('creating plan artist 1...');
-  // await payment.createPlan('100000000000000000', 2629743, 2);
-  // console.log('creating plan artist 2 ...');
-  // await payment.createPlan('200000000000000000', 7889230, 2);
-  // console.log('creating plan artist 3 ...');
-  // await payment.createPlan('300000000000000000', 15778460, 2);
-  // console.log('creating plan artist 4 ...');
-  // await payment.createPlan('500000000000000000', 31556926, 2);
+  console.log('creating plan event 1...');
+  await payment.createPlan('1', 7889230, 0);
+  console.log('creating plan test 1...');
+  await payment.createPlan('10000000000000000', 30, 0);
+  console.log('creating plan artist 1...');
+  await payment.createPlan('100000000000000000', 2629743, 2);
+  console.log('creating plan artist 2 ...');
+  await payment.createPlan('200000000000000000', 7889230, 2);
+  console.log('creating plan artist 3 ...');
+  await payment.createPlan('300000000000000000', 15778460, 2);
+  console.log('creating plan artist 4 ...');
+  await payment.createPlan('500000000000000000', 31556926, 2);
 
-  // console.log('creating plan user 1...');
-  // await payment.createPlan('50000000000000000', 2629743, 1);
-  // console.log('creating plan user 2 ...');
-  // await payment.createPlan('100000000000000000', 7889230, 1);
-  // console.log('creating plan user 3 ...');
-  // await payment.createPlan('150000000000000000', 15778460, 1);
-  // console.log('creating plan user 4 ...');
-  // await payment.createPlan('250000000000000000', 31556926, 1);
-  // console.log('plan done');
+  console.log('creating plan user 1...');
+  await payment.createPlan('50000000000000000', 2629743, 1);
+  console.log('creating plan user 2 ...');
+  await payment.createPlan('100000000000000000', 7889230, 1);
+  console.log('creating plan user 3 ...');
+  await payment.createPlan('150000000000000000', 15778460, 1);
+  console.log('creating plan user 4 ...');
+  await payment.createPlan('250000000000000000', 31556926, 1);
+  console.log('plan done');
 
   saveJsonFilesToClientFolder('MintMusicToken', mintMusicToken);
   saveJsonFilesToClientFolder('SaleMusicToken', saleMusicToken);
