@@ -1,8 +1,10 @@
 import { web3 } from '$contracts';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const GetBalance = ({ metamask }) => {
+  const { t, i18n } = useTranslation();
   const [balance, setBalance] = useState();
   const { userData } = useSelector(state => state.user);
   const getMyBalance = async () => {
@@ -15,7 +17,7 @@ const GetBalance = ({ metamask }) => {
   }, [balance, userData.metamask]);
   return (
     <div style={{ fontSize: '15px', color: '#9e9fa3', fontWeight: 600 }}>
-      내 잔액 {balance && balance} ETH
+      {t('myBalance')} {balance && balance} ETH
     </div>
   );
 };
