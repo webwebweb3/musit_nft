@@ -174,33 +174,7 @@ const Footer = () => {
                 <span className="CoverArt">
                   <Image src="/AR.jpg" width="700px" height="700px" />
                 </span>
-                <div className="TList">
-                  <List
-                    sx={{
-                      width: '100%',
-                      maxWidth: 360,
-                      bgcolor: '#242450',
-                      position: 'relative',
-                      overflow: 'auto',
-                      maxHeight: 300,
-                      '& ul': { padding: 0 },
-                    }}
-                    subheader={<li />}
-                  >
-                    {[0, 1, 2, 3, 4].map(sectionId => (
-                      <li key={`section-${sectionId}`}>
-                        <ul>
-                          <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
-                          {[0, 1, 2].map(item => (
-                            <ListItem key={`item-${sectionId}-${item}`}>
-                              <ListItemText primary={`Item ${item}`} />
-                            </ListItem>
-                          ))}
-                        </ul>
-                      </li>
-                    ))}
-                  </List>
-                </div>
+                <div className="TList"></div>
               </div>
               <div className="bottomPanel" style={{ width: '50%' }}>
                 <h1>asdasdasdasdas</h1>
