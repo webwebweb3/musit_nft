@@ -192,9 +192,11 @@ function* yieldIsSubscribing(action) {
 async function subscribeArtist(data) {
   console.log(data.actionData === 'cancelSubscribe');
   if (data.actionData === 'subscribe') {
+    console.log('ㅌㅊ픁ㅊ퓨', data);
     Axios.post('/studio/subscribe', data);
     return true;
   } else if (data.actionData === 'cancelSubscribe') {
+    console.log('ㅁㄴㅇㄻㄴㅇㄹ', data);
     Axios.delete('/studio/subscribe', {
       params: {
         paramsData: data,
@@ -211,7 +213,7 @@ function* yieldSubscribeArtist(action) {
     console.log('리조뜨이즈에브리띵', result);
     yield put({
       type: STUDIO_SUBSCRIBE_SUCCESS,
-      data: 'success',
+      data: { isSubscribing: result },
     });
   } catch (err) {
     yield put({
