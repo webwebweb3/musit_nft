@@ -161,12 +161,13 @@ body:hover {
 .ListContainer {
   display: flex;
   width: 100%;
+  margin: auto;
 }
 
 .CoverArt :hover {
   transform: scale(1.01);
   transition: all 0.3s ease-out;
-  color: #141414;
+  color: #ffffff;
   opacity: 75%;
 }
 .PlayPauseIcons {

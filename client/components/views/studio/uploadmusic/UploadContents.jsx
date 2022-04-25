@@ -11,7 +11,7 @@ import { style } from './uploadMusicStyle';
 
 const UploadContents = ({ setData }) => {
   const { userData } = useSelector(state => state.user);
-  const account = userData.metamask;
+  const account = userData?.metamask;
   const router = useRouter();
   const artist = router.query.artistName;
   const [title, onChangeTitle] = useInput('');
@@ -23,7 +23,7 @@ const UploadContents = ({ setData }) => {
 
   useEffect(() => {
     const dataToSubmit = {
-      userName: userData.name,
+      userName: userData?.name,
       title,
       artist,
       albumName,

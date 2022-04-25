@@ -26,7 +26,7 @@ const UploadMusic = () => {
   const [dataToSubmit, setDataToSubmit] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedIPFSFile, setSelectedIPFSFile] = useState(null);
-  const account = userData.metamask;
+  const account = userData?.metamask;
 
   const ipfsredux = {
     client,

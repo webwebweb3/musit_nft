@@ -209,31 +209,72 @@ const Footer = () => {
         <Box
           sx={{
             width: '100%',
-            height: '83vh',
+            height: '84vh',
             backgroundColor: '#242424',
-            marginBottom: '60px',
+            marginBottom: '20px',
           }}
           style={show ? { display: 'block' } : { display: 'none' }}
         >
           <div
             style={{
-              paddingLeft: '5vw',
-              paddingRight: '5vw',
-              paddingBottom: '3vh',
-              paddingTop: '3vh',
+              paddingLeft: '15vw',
+              paddingRight: '15vw',
+              paddingBottom: '8vh',
+              paddingTop: '8vh',
+              justifyContent: 'center',
             }}
           >
             <div style={{ marginBottom: '40px', width: '100%' }}>
               <div className="ListContainer">
                 <PlayCircleIcon className="PlayPauseIcons" />
                 <PauseCircleIcon className="PlayPauseIcons" />
+
                 <span className="CoverArt">
-                  <Image src="/AR.jpg" width="700px" height="700px" />
+                  <Image src="/AR.jpg" width="600px" height="600px" />
                 </span>
-                <div className="TList"></div>
+                <div className="TList" style={{ backgroundColor: '#0d0f1a' }}>
+                  <h2 style={{ color: '#fff', paddingLeft: '30px' }}>
+                    재생목록
+                  </h2>
+                  {userInfo &&
+                    userInfo.map(music => (
+                      <div
+                        style={{
+                          display: 'flex',
+                          marginLeft: '30px',
+                          marginBottom: '10px',
+                          backgroundColor: '#0d0f1a',
+                          color: '#fff',
+                        }}
+                      >
+                        <Image
+                          width="50px"
+                          height="50px"
+                          src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${music.albumCover}`}
+                          alt="logo"
+                          layout="fixed"
+                        />
+                        <span style={{ paddingRight: '100px' }}>
+                          <span
+                            style={{
+                              margin: 'auto 20px',
+                              fontWeight: 'bold',
+                              fontSize: '30px',
+                            }}
+                          >
+                            {music.title}
+                          </span>
+                          <span style={{ margin: 'auto 20px' }}>
+                            {music.title}
+                          </span>
+                        </span>
+                        <span style={{ margin: 'auto 50px' }}>00:00</span>
+                      </div>
+                    ))}
+                </div>
               </div>
               <div className="bottomPanel" style={{ width: '50%' }}>
-                <h1>asdasdasdasdas</h1>
+                <h1 style={{ color: '#fff' }}>가수/ 노래제목</h1>
               </div>
             </div>
           </div>
@@ -276,7 +317,7 @@ const Footer = () => {
           onChange={handleSeekChange}
         />
       )}
-      {currentMusic && (
+      {currentMusic ? (
         <Box
           style={{
             position: 'fixed',
@@ -420,6 +461,162 @@ const Footer = () => {
             </Button>
           </Box>
         </Box>
+      ) : (
+        <>
+          <Box
+            style={{
+              position: 'fixed',
+              bottom: '0px',
+              width: '100%',
+              color: 'black',
+              backgroundColor: 'rgb(33,33,33)',
+              height: '90px',
+              display: `${toggle ? 'block' : 'none'}`,
+            }}
+          >
+            <Box
+              style={{
+                margin: '20px',
+                display: 'flex',
+              }}
+            >
+              <ControlsToggleButton
+                type={'prev'}
+                defaultIcon={<SkipPrevious fontSize={'large'} />}
+                changeIcon={<SkipPrevious fontSize={'large'} />}
+                onClicked={handleToggle}
+              />
+              {/* 음악 */}
+              {/* QmcWB6Pphb22ev9qQMzDnAQod7F9XKaf6fp2JoAuHp7xuD */}
+              {/* <audio
+              ref={audioElement}
+              src={`https://ipfs.infura.io/ipfs/${currentMusic.IPFSUrl}`}
+              preload={'metadata'}
+            /> */}
+              {/* <audio ref={audioElement} src={`3.mp3`} preload={'metadata'} /> */}
+              <ControlsToggleButton
+                type={'play-pause'}
+                defaultIcon={<PlayArrow fontSize={'large'} />}
+                changeIcon={<Pause fontSize={'large'} />}
+                onClicked={handleToggle}
+              />
+              <ControlsToggleButton
+                type={'next'}
+                defaultIcon={<SkipNext fontSize={'large'} />}
+                changeIcon={<SkipNext fontSize={'large'} />}
+                onClicked={handleToggle}
+              />
+              <ControlsToggleButton
+                type={'repeat'}
+                defaultIcon={<Repeat fontSize={'large'} />}
+                changeIcon={<RepeatOne fontSize={'large'} />}
+                onClicked={handleToggle}
+              />
+              <div
+                style={{
+                  marginTop: '11.5px',
+                  marginLeft: '10px',
+                  color: '#dada',
+                }}
+              >
+                {formatTime(currTime)}
+                &nbsp;/&nbsp;
+                {formatTime(duration)}
+              </div>
+              <Slider
+                style={{
+                  color: '#dada',
+                  display: 'inline-block',
+                  width: '120px',
+                  marginLeft: 'auto',
+                  marginRight: '10px',
+                  marginTop: '9.5px',
+                }}
+                value={volume}
+                onChange={handleVolumeChange}
+              />
+              <div
+                style={{
+                  display: 'inline-block',
+                }}
+              >
+                <ControlsToggleButton
+                  type={'volume'}
+                  defaultIcon={<VolumeUp fontSize={'large'} />}
+                  changeIcon={<VolumeOff fontSize={'large'} />}
+                  onClicked={handleToggle}
+                />
+              </div>
+              <div style={{ paddingRight: '20px', marginLeft: '24px' }}>
+                {/* <Image
+                src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/`}
+                alt={`album Cover`}
+                layout="fixed"
+                width="48px"
+                height="48px"
+              /> */}
+              </div>
+              <div style={{ marginRight: '20px' }}>
+                <div
+                  style={{
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    color: '#fff',
+                  }}
+                ></div>
+                <div style={{ color: '#ffffffa0' }}></div>
+              </div>
+              <Button>
+                <Favorite
+                  fontSize="medium"
+                  sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
+                />
+              </Button>
+              <Button>
+                <PlaylistAdd
+                  onClick={handleClickOpen}
+                  fontSize="medium"
+                  sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
+                />
+              </Button>
+              <Button
+                className="btn btn-success my-5"
+                type="button"
+                onClick={handleClick}
+              >
+                {show ? (
+                  <>
+                    <KeyboardControlKey
+                      fontSize="medium"
+                      sx={{
+                        color: 'white',
+                        marginLeft: '0px',
+                        marginTop: '0px',
+                      }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <KeyboardArrowDown
+                      fontSize="medium"
+                      sx={{
+                        color: 'white',
+                        marginLeft: '0px',
+                        marginTop: '0px',
+                      }}
+                    />
+                  </>
+                )}
+              </Button>
+              <Button onClick={toggleAction}>
+                <Compress
+                  fontSize="medium"
+                  sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
+                />
+              </Button>
+            </Box>
+          </Box>
+        </>
       )}
       <PlayList open={open} setOpen={setOpen} />
     </>
