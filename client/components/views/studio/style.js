@@ -5,10 +5,11 @@ export const style = {
     justifyContent: 'center',
     display: 'flex',
     flexDirection: 'column',
+    width: '100%',
   },
   studioBackground: {
     width: '100%',
-    minWidth: '1522.770px',
+    minWidth: '1200px',
 
     height: '350px',
     color: 'white',
@@ -83,12 +84,11 @@ export const style = {
   },
 
   studioMyMusics: {
-    margin: '0 auto',
+    margin: '0 auto 170px',
     minWidth: '1200px',
     maxWidth: '1200px',
     width: '100%',
-    height: '1000px',
-    backgroundColor: 'green',
+    height: '100%',
     position: 'relative',
     top: '-60px',
     color: 'white',

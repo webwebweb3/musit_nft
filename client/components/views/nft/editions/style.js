@@ -6,7 +6,7 @@ export const style = {
     minWidth: '1200px',
     maxWidth: '1200px',
     width: '100%',
-    height: '100%',
+
     color: 'white',
   },
   editionBackContainer: {
@@ -19,7 +19,6 @@ export const style = {
     minWidth: '1200px',
     maxWidth: '1200px',
     width: '100%',
-    height: '1000px',
 
     display: 'flex',
     flexDirection: 'row',
@@ -27,9 +26,9 @@ export const style = {
   editionTopLeftContainer: {
     display: 'flex',
     flexDirection: 'column',
-    flex: '24',
+    flex: '18',
     width: '100%',
-    height: '100%',
+
     paddingTop: '100px',
   },
   editionTopRightContainer: {
@@ -37,7 +36,6 @@ export const style = {
     flexDirection: 'column',
     flex: '10',
     width: '100%',
-    height: '100%',
     paddingLeft: '20px',
   },
   editionImgContainer: {
@@ -59,4 +57,8 @@ export const style = {
   editionOwnerContainer: { backgroundColor: 'brown' },
   editionPriceContainer: { backgroundColor: 'orange' },
   eiditionDetailsContainer: { backgroundColor: 'purple' },
+
+  editionBottomContents: {
+    color: 'white',
+  },
 };

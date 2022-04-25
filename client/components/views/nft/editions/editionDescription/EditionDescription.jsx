@@ -43,6 +43,7 @@ const EditionDescription = ({ owner, musicData, musicPrice }) => {
             cursor: 'pointer',
             color: '#2b95e9',
             display: 'inline-block',
+            margin: '20px 0',
           }}
         >
           {artistName}
@@ -61,9 +62,23 @@ const EditionDescription = ({ owner, musicData, musicPrice }) => {
         />
       </Box>
 
-      <Box sx={{ fontSize: '70px', fontWeight: 500 }}>{data.title}</Box>
-      <Box sx={{ fontSize: '20px', color: '#768fb5', fontWeight: 600 }}>
-        <Box sx={{ display: 'inline-block', paddingRight: '10px' }}>
+      <Box sx={{ fontSize: '70px', fontWeight: 500, margin: '20px 0 0 ' }}>
+        {data.title}
+      </Box>
+      <Box
+        sx={{
+          fontSize: '20px',
+          color: '#768fb5',
+          fontWeight: 600,
+        }}
+      >
+        <Box
+          sx={{
+            display: 'inline-block',
+            paddingRight: '10px',
+            margin: '0 0 20px ',
+          }}
+        >
           Owned by
         </Box>
         <Box sx={{ display: 'inline-block' }}>{ownerName && ownerName}</Box>
@@ -74,6 +89,17 @@ const EditionDescription = ({ owner, musicData, musicPrice }) => {
           musicPrice={musicPrice}
           tokenId={router.query.editionIPFSUrl}
         />
+      </Box>
+      <Box
+        sx={{
+          fontSize: '11px',
+          fontWeight: 200,
+          color: '#aaa',
+          marginBottom: '30px',
+        }}
+      >
+        수수료 : {web3.utils.fromWei(musicPrice) / 101} (수수료는 최초
+        발행자에게 지급됩니다.)
       </Box>
     </Box>
   );

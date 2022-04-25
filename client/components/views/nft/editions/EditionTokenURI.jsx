@@ -87,15 +87,16 @@ const EditionTokenURI = () => {
                             musicData={musicData}
                             musicPrice={musicPrice}
                           />
-                          <Box sx={style.editionChartTitle}>이전 판매 기록</Box>
-                          <Box sx={style.editionTopRightChart}>
-                            <EditionChart
-                              tokenId={router.query.editionIPFSUrl}
-                            />
-                          </Box>
                         </Box>
                       </Box>
-                      <Box></Box>
+
+                      <Box sx={style.editionBottomContents}>
+                        <Box className=""></Box>
+                        <Box sx={style.editionChartTitle}>이전 판매 기록</Box>
+                        <Box sx={style.editionTopRightChart}>
+                          <EditionChart tokenId={router.query.editionIPFSUrl} />
+                        </Box>
+                      </Box>
                     </Box>
                   )}
                 </>

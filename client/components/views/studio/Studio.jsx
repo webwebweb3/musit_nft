@@ -64,7 +64,6 @@ const Studio = () => {
         }
       }
     }
-    console.log('이미지들 확인', profileImg, backgroundImg);
   }, [studio.getUserImagesDone, profileImg, backgroundImg]);
 
   useEffect(() => {}, [studio && studio.isSubscribingArtist]);
@@ -97,7 +96,9 @@ const Studio = () => {
           </Box>
           <Box sx={style.studioDescriptionGraphContentRight}>
             <Box sx={style.studioDescriptionGraphContentTitle}>followers</Box>
-            <Box sx={style.studioDescriptionGraphContentContent}>20</Box>
+            <Box sx={style.studioDescriptionGraphContentContent}>
+              {studio.cntFollowers ? studio.cntFollowers : 0}
+            </Box>
           </Box>
         </Box>
       </Box>

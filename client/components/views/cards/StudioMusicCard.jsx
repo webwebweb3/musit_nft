@@ -17,9 +17,8 @@ const StudioMusicCard = ({ musics, albumCovers, datas }) => {
   // };
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      //TODO: 해당 음악으로 가게끔
-      <Link href="/streaming">
+    <div style={{ textAlign: 'center', margin: '20px 0' }}>
+      <Link href="/streaming/home">
         <Card
           sx={{
             display: 'inline-block',
@@ -58,9 +57,6 @@ const StudioMusicCard = ({ musics, albumCovers, datas }) => {
               >
                 {datas.artist}
               </Typography>
-              <Box
-                style={{ fontWeight: '600', color: '#18c99b' }}
-              >{`$  ETH`}</Box>
             </CardContent>
           </Box>
         </Card>

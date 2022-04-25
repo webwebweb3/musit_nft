@@ -21,7 +21,7 @@ import ControlsToggleButton from './music/Button';
 import Slide from 'react-reveal/Slide';
 import PlayList from './music/playlist';
 import { useSelector } from 'react-redux';
-import { Router } from 'next/router';
+import Router from 'next/router';
 import MusicCard from '../../views/cards/MusicCard';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
@@ -75,7 +75,7 @@ const Footer = () => {
   useEffect(() => {
     playingMusic();
     if (audioElement.current != null) {
-      if (userData.subscription < dateNow) {
+      if (userData?.subscription < dateNow) {
         setDuration(60);
       } else {
         setDuration(audioElement.current.duration);
@@ -86,7 +86,7 @@ const Footer = () => {
   useEffect(() => {
     setSeekTime(currTime / (duration / 100));
     if (audioElement.current != null) {
-      if (userData.subscription < dateNow) {
+      if (userData?.subscription < dateNow) {
         if (audioElement.current.currentTime >= 60) {
           audioElement.current.pause();
           audioElement.current.currentTime = 0;
