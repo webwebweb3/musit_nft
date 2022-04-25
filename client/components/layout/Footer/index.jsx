@@ -12,20 +12,23 @@ import {
   KeyboardArrowDown,
   Headset,
   KeyboardControlKey,
+  Compress,
 } from '@mui/icons-material';
 import { Box, Button, Slider } from '@mui/material';
 import Image from 'next/image';
-import Router from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
 import Slide from 'react-reveal/Slide';
-import MusicCard from '../../views/cards/MusicCard';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import PlayList from './music/playlist';
 import { useSelector } from 'react-redux';
+import { Router } from 'next/router';
+import MusicCard from '../../views/cards/MusicCard';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import PauseCircleIcon from '@mui/icons-material/PauseCircle';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
 
 const Footer = () => {
   const audioElement = useRef();
@@ -38,6 +41,7 @@ const Footer = () => {
   const [isNextClicked, setNextClicked] = useState(false);
   const [isVolumeClicked, setVolumeClicked] = useState(false);
   const [toggle, setToggle] = useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const [volume, setVolume] = useState(50);
   const [seekTime, setSeekTime] = useState(0);
@@ -109,6 +113,10 @@ const Footer = () => {
   //   }
   // }, [dispatch, id, isNextClicked, isPrevClicked, playlists]);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   const toggleAction = () => {
     setToggle(!toggle);
   };
@@ -165,7 +173,7 @@ const Footer = () => {
         <Box
           sx={{
             width: '100%',
-            height: '80vh',
+            height: '83vh',
             backgroundColor: '#242424',
             marginBottom: '60px',
           }}
@@ -180,8 +188,40 @@ const Footer = () => {
             }}
           >
             <div style={{ marginBottom: '40px', width: '100%' }}>
-              <Image src="/AR.jpg" width="700px" height="700px" />
-
+              <div className="ListContainer">
+                <PlayCircleIcon className="PlayPauseIcons" />
+                <PauseCircleIcon className="PlayPauseIcons" />
+                <span className="CoverArt">
+                  <Image src="/AR.jpg" width="700px" height="700px" />
+                </span>
+                <div className="TList">
+                  <List
+                    sx={{
+                      width: '100%',
+                      maxWidth: 360,
+                      bgcolor: '#242450',
+                      position: 'relative',
+                      overflow: 'auto',
+                      maxHeight: 300,
+                      '& ul': { padding: 0 },
+                    }}
+                    subheader={<li />}
+                  >
+                    {[0, 1, 2, 3, 4].map(sectionId => (
+                      <li key={`section-${sectionId}`}>
+                        <ul>
+                          <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
+                          {[0, 1, 2].map(item => (
+                            <ListItem key={`item-${sectionId}-${item}`}>
+                              <ListItemText primary={`Item ${item}`} />
+                            </ListItem>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </List>
+                </div>
+              </div>
               <div className="bottomPanel" style={{ width: '50%' }}>
                 <h1>asdasdasdasdas</h1>
               </div>
@@ -327,6 +367,7 @@ const Footer = () => {
           </Button>
           <Button>
             <PlaylistAdd
+              onClick={handleClickOpen}
               fontSize="medium"
               sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
             />
@@ -338,14 +379,14 @@ const Footer = () => {
           >
             {show ? (
               <>
-                <KeyboardArrowDown
+                <KeyboardControlKey
                   fontSize="medium"
                   sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
                 />
               </>
             ) : (
               <>
-                <KeyboardControlKey
+                <KeyboardArrowDown
                   fontSize="medium"
                   sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
                 />
@@ -353,13 +394,14 @@ const Footer = () => {
             )}
           </Button>
           <Button onClick={toggleAction}>
-            <KeyboardArrowDown
+            <Compress
               fontSize="medium"
               sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
             />
           </Button>
         </Box>
       </Box>
+      <PlayList open={open} setOpen={setOpen} />
     </>
   );
 };

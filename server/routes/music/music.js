@@ -80,4 +80,17 @@ router.delete('/', async (req, res) => {
   }
 });
 
+// router.get('/favoritemusic', async (req, res) => {
+//   try {
+//     console.log(req.body);
+//     // const { user } = req.body;
+
+//     // const userId = await User.findOne({
+//     //   where: { user },
+//     // });
+//   } catch (error) {
+//     console.error(error);
+//   }
+// });
+
 module.exports = router;

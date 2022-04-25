@@ -1,7 +1,7 @@
 import { Box, Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { mintMusicTokenContract, streamingContract } from '$contracts';
-import MusicCard from '../../cards/MusicCard';
+import { streamingContract } from '$contracts';
+import MusicCard from '$components/views/cards/MusicCard';
 import Link from 'next/link';
 
 const LatestMusic = ({ func }) => {
@@ -57,7 +57,6 @@ const LatestMusic = ({ func }) => {
               {musics.map((v, i) => {
                 return (
                   <>
-                    {console.log('v들', v)}
                     <MusicCard
                       musicTitle={`${v.data.properties.dataToSubmit.title}`}
                       albumCover={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${v.data.properties.S3AlbumCover}`}
