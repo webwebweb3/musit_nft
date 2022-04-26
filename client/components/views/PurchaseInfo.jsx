@@ -2,7 +2,6 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Card, Stack, Grid, Container, Typography, Box } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import Divider from '@mui/material/Divider';
 
 const PurchaseInfo = () => {

@@ -1,4 +1,3 @@
-import { Box } from '@material-ui/core';
 import Router, { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { mintMusicTokenContract, saleMusicTokenContract } from '$contracts';
@@ -15,6 +14,7 @@ import PurchasingSuccess from './editionPurchasing/PurchasingSuccess';
 import { Divider } from '@mui/material';
 import EditionHistory from './editionHistory/EditionHistory';
 import EditionHistoryLabel from './editionHistory/EditionHistoryLabel';
+import { Box } from '@mui/material';
 
 const EditionTokenURI = () => {
   const [musicData, setMusicData] = useState();

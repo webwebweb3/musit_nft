@@ -30,8 +30,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-EditionIPFSUrlPage.Layout = ({ children }) => (
-  <MainLayout value="nft">{children}</MainLayout>
-);
-
 export default EditionIPFSUrlPage;

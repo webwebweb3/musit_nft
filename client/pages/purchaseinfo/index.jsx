@@ -6,7 +6,7 @@ import wrapper from '$reduxsaga/store/configureStore';
 import PurchaseInfo from '$components/views/PurchaseInfo';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
-const purchaseinfo = () => {
+const PurchaseInfoPage = () => {
   return (
     <>
       <PurchaseInfo />
@@ -32,4 +32,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default purchaseinfo;
+export default PurchaseInfoPage;
