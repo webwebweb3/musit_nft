@@ -36,11 +36,13 @@ export default function EditionImages({ image, music }) {
         />
 
         <CardContent style={{ padding: '10px 0 10px 0' }}>
-          <ReactAudioPlayer
+          zzz
+          <audio controls src={`https://ipfs.infura.io/ipfs/${music}`} />
+          {/* <ReactAudioPlayer
             src={`https://ipfs.infura.io/ipfs/${music}`}
             controls
             style={{ width: '100%' }}
-          />
+          /> */}
         </CardContent>
       </Card>
     </Box>
