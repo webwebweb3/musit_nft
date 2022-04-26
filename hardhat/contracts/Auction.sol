@@ -19,7 +19,7 @@ contract Auction{
     event MyAuctionHistory (address indexed myAddress, uint256 indexed tokenId, uint256 myBid);
     event IsAuctionNFT (address indexed myAddress, uint256 indexed tokenId);
     event CancelAuctionNFT (address indexed myAddress, uint256 indexed tokenId);
-    event FinishAuctionNFT (address indexed seller, address indexed buyer, uint256 indexed tokenId, uint256 price);
+    event FinishAuctionNFT (address indexed seller, address indexed buyer, uint256 indexed tokenId, uint256 price, uint256 timeStamp);
 
     enum State {
         Started,
@@ -151,7 +151,7 @@ contract Auction{
             }
         }
         mintMusicTokenAddress.setTokenState(tokenID, false);
-        emit FinishAuctionNFT(owner,recipient,tokenID,value);
+        emit FinishAuctionNFT(owner,recipient,tokenID,value,block.timestamp);
         bids[recipient] = 0;
         recipient.transfer(value);
     }
