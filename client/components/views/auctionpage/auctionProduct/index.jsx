@@ -69,7 +69,7 @@ const AuctionProductPage = () => {
 
   return (
     <>
-      {!userData && !owner && !auctionTokenData && !gapTime ? (
+      {!auctionData ? (
         <div style={{ display: 'flex' }}>
           <div style={{ margin: 'auto' }}>
             <CircularProgress color="inherit" />
@@ -126,8 +126,8 @@ const AuctionProductPage = () => {
             </div>
           )}
           <AuctionContentsContainer>
-            <AuctionContentImg>
-              {auctionTokenData && (
+            {auctionTokenData && (
+              <AuctionContentImg>
                 <Image
                   src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${auctionTokenData.properties.S3AlbumCover}`}
                   alt="img"
@@ -135,8 +135,8 @@ const AuctionProductPage = () => {
                   width="550px"
                   height="550px"
                 />
-              )}
-            </AuctionContentImg>
+              </AuctionContentImg>
+            )}
             <AuctionContents>
               {auctionTokenData && (
                 <TitleBox
@@ -156,9 +156,13 @@ const AuctionProductPage = () => {
 
               <BidBox gapTime={gapTime} />
               <AuctionDivider />
-
-              <MyBidBox product={product} gapTime={gapTime} />
-              {!gapTime &&
+              {userData && (
+                <>
+                  <MyBidBox product={product} gapTime={gapTime} />
+                </>
+              )}
+              {userData &&
+                !gapTime &&
                 owner.toLowerCase() !== userData?.metamask.toLowerCase() && (
                   <>
                     <AuctionBidButton product={product} />

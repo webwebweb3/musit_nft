@@ -38,6 +38,9 @@ const BidBox = ({ gapTime }) => {
             <EthereumImg src="/ethereum-1.svg" alt="ethereum" />
             {highestBid}
           </AuctionBox>
+          <AuctionGray>
+            최소 낙찰 가능 금액 - {auctionData.minimumBid} ETH
+          </AuctionGray>
           {highestBidder && (
             <AuctionGray>현재 최고 낙찰자 - {highestBidder}</AuctionGray>
           )}

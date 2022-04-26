@@ -16,7 +16,7 @@ const AuctionBidButton = () => {
   let { product } = router.query;
 
   const { userData } = useSelector(state => state.user);
-  const { bidAuctionLoading } = useSelector(state => state.auction);
+  const { bidAuctionLoading, myBidData } = useSelector(state => state.auction);
   const [loading, setLoading] = useState(false);
   const [bid, onChangeBid] = useInput('');
 
@@ -56,7 +56,7 @@ const AuctionBidButton = () => {
         <>
           <AuctionTextField value={bid} onChange={onChangeBid} uint={'ETH'} />
           <AuctionStyledButton onClick={onClickAuction}>
-            추가 입찰하기
+            {myBidData === 0 ? <>입찰하기</> : <>추가 입찰하기</>}
           </AuctionStyledButton>
         </>
       )}

@@ -12,7 +12,7 @@ const MyMenuItem = () => {
   const { userData } = useSelector(state => state.user);
 
   return (
-    <>
+    <div style={{ width: '180px' }}>
       <MyPageButton />
       <Divider />
       <Link href="/studio/[artistName]" as={`/studio/${userData?.name}`}>
@@ -31,14 +31,8 @@ const MyMenuItem = () => {
           My NFT
         </MenuItem>
       </Link>
-      <MenuItem>
-        <ListItemIcon>
-          <QueueMusic fontSize="small" />
-        </ListItemIcon>
-        Listening History
-      </MenuItem>
       <LogoutButton />
-    </>
+    </div>
   );
 };
 
