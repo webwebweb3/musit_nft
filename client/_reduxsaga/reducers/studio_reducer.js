@@ -110,6 +110,7 @@ const studioReducer = (state = initialState, action) =>
         break;
       case STUDIO_SUBSCRIBE_SUCCESS:
         draft.subscribeArtistLoading = false;
+        draft.isSubscribingArtist = action.data;
         draft.subscribeArtistDone = true;
         break;
       case STUDIO_SUBSCRIBE_FAILURE:

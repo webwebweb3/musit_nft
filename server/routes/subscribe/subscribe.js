@@ -4,7 +4,7 @@ const { User } = require('../../models');
 const router = express.Router();
 
 //------------------------------------------------
-//               /api/latestmusic
+//               /api/subscribe
 //------------------------------------------------
 router.put('/', async (req, res) => {
   try {
