@@ -29,6 +29,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
   const audioElement = useRef();
@@ -52,6 +53,7 @@ const Footer = () => {
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
   const [mySeekTime, setMySeekTime] = useState(0);
+  const { t, i18n } = useTranslation();
 
   const playingMusic = () => {
     isPlaying
@@ -170,7 +172,7 @@ const Footer = () => {
 
   const toggleAction = useCallback(() => {
     if (!userData) {
-      alert('로그인을 해주세요.');
+      alert(t('LoginPlz'));
       return;
     }
     setToggle(!toggle);
@@ -228,7 +230,7 @@ const Footer = () => {
             width: '100%',
             height: '84vh',
             backgroundColor: '#242424',
-            marginBottom: '20px',
+            marginBottom: '40px',
           }}
           style={show ? { display: 'block' } : { display: 'none' }}
         >
@@ -251,7 +253,7 @@ const Footer = () => {
                 </span>
                 <div className="TList" style={{ backgroundColor: '#0d0f1a' }}>
                   <h2 style={{ color: '#fff', paddingLeft: '30px' }}>
-                    재생목록
+                    {t('PlayLists')}
                   </h2>
                   {userInfo &&
                     userInfo.map(music => (

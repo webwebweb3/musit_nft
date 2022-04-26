@@ -9,8 +9,10 @@ import { MetamaskButton, RegisterModal } from '../../contents';
 import ProfileButton from '../myMenu';
 import NetworkCheck from './NetworkCheck';
 import GetBalance from '$components/views/getBalance/GetBalance';
+import { useTranslation } from 'react-i18next';
 
 const RegisterCheck = () => {
+  const { t, i18n } = useTranslation();
   const { userData } = useSelector(state => state.user);
 
   const { network, account } = useWalletInfo();
@@ -49,7 +51,7 @@ const RegisterCheck = () => {
               <span style={{ paddingRight: '10px' }}>
                 <ErrorOutline />
               </span>
-              메타마스크를 설치해주세요!
+              {t('InstallMetamask')}
             </div>
           </Button>
         </div>

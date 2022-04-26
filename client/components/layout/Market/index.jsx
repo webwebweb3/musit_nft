@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
-
+import { useTranslation } from 'react-i18next';
 import LeftSideBar from './leftSideBar/LeftSideBar';
 
 import {
@@ -13,7 +13,7 @@ import { Box, Button } from '@mui/material';
 
 const MarketLayout = ({ children, value }) => {
   const { userData } = useSelector(state => state.user);
-
+  const { t, i18n } = useTranslation();
   return (
     <Box className="auctionAllContainer">
       <Box className="auctionMainContainer">
@@ -28,7 +28,7 @@ const MarketLayout = ({ children, value }) => {
                     className="styledNewAuctionButton"
                     variant="contained"
                   >
-                    새 경매 등록하기
+                    {t('NewAuction')}
                   </Button>
                 </Link>
               ) : (
@@ -37,7 +37,7 @@ const MarketLayout = ({ children, value }) => {
                     className="styledNewAuctionButton"
                     variant="contained"
                   >
-                    새 판매 등록하기
+                    {t('NewSales')}
                   </Button>
                 </Link>
               )}
