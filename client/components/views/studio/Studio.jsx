@@ -67,6 +67,8 @@ const Studio = () => {
     console.log('이미지들 확인', profileImg, backgroundImg);
   }, [studio.getUserImagesDone, profileImg, backgroundImg]);
 
+  useEffect(() => {}, [studio && studio.isSubscribingArtist]);
+
   return (
     <Box sx={style.studioContainer}>
       <Box sx={style.studioBackground}>

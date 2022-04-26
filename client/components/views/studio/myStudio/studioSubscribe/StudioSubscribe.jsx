@@ -4,8 +4,11 @@ import { styled } from '@mui/material/styles';
 import { studioSubscribe } from '$reduxsaga/request/studio_request';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import ControlsToggleButton from '$components/layout/Footer/music/Button';
 
 const StudioSubscribe = ({ artist, sub, func, myMetamask }) => {
+  console.log('구독중인지?', sub);
+
   const studio = useSelector(state => state.studio);
   console.log('mymeta', myMetamask);
   const dispatch = useDispatch();
@@ -22,12 +25,19 @@ const StudioSubscribe = ({ artist, sub, func, myMetamask }) => {
 
   useEffect(() => {
     console.log('ㅇㅇ?', sub);
-  }, [studio && studio.subscribeArtistDone]);
+    console.log(
+      '구독 true 여야 돼잖아 ',
+      studio.isSubscribingArtist?.isSubscribing,
+    );
+  }, [
+    studio && studio.subscribeArtistDone,
+    studio.isSubscribingArtist?.isSubscribing,
+  ]);
 
   return (
     <>
       {studio.isSubscribingArtist ? (
-        sub ? (
+        studio.isSubscribingArtist.isSubscribing ? (
           <UnSubscribeButton
             onClick={() => onClickSubscribeButton('cancelSubscribe')}
           >
