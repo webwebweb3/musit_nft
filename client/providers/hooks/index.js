@@ -34,7 +34,6 @@ export default function Web3provider({ children }) {
     };
 
     loadProvider();
-    _web3Api.connect();
   }, []);
 
   const _web3Api = useMemo(() => {
@@ -54,6 +53,11 @@ export default function Web3provider({ children }) {
         : () => console.error('Cannot connect to Metamask'),
     };
   }, [web3Api]);
+  _web3Api.connect();
+
+  // if (_web3Api.isLoading) {
+  //   console.log('로그', _web3Api.connect());
+  // }
 
   return (
     <Web3Context.Provider value={_web3Api}>{children}</Web3Context.Provider>

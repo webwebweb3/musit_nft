@@ -29,7 +29,7 @@ export const style = {
     flex: '18',
     width: '100%',
 
-    paddingTop: '100px',
+    paddingTop: '20px',
   },
   editionTopRightContainer: {
     display: 'flex',
