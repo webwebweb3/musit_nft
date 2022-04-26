@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+const nextConfig = withBundleAnalyzer({
+  compress: true,
   reactStrictMode: true,
   images: {
     domains: [
@@ -9,13 +15,23 @@ const nextConfig = {
   env: {
     BASE_URL: process.env.BASE_URL,
   },
-  webpack: (config, { isServer }) => {
+  webpack: (config, { webpack, isServer }) => {
+    const prod = process.env.NODE_ENV === 'production';
+
     if (!isServer) {
       config.resolve.fallback.fs = false;
     }
 
-    return config;
+    return {
+      ...config,
+      mode: prod ? 'production' : 'development',
+      devtool: prod ? 'hidden-source-map' : 'eval',
+      plugins: [
+        ...config.plugins,
+        new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/ko$/),
+      ],
+    };
   },
-};
+});
 
 module.exports = nextConfig;
