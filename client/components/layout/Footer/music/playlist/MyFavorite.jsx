@@ -9,12 +9,16 @@ import React, { useState } from 'react';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
 
 const MyFavorite = () => {
   const [open, setOpen] = useState(false);
+  const { userData } = useSelector(state => state.user);
+  const [userInfo, setUserInfo] = useState([]);
 
   const handleClick = () => {
     setOpen(!open);
+    setUserInfo(userData.user);
   };
 
   return (
@@ -36,7 +40,25 @@ const MyFavorite = () => {
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            좋아요 음악 불러오기
+            {userInfo &&
+              userInfo.map(music => (
+                <div
+                  style={{
+                    display: 'flex',
+                    marginLeft: '30px',
+                    marginBottom: '10px',
+                  }}
+                >
+                  <Image
+                    width="50px"
+                    height="50px"
+                    src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${music.albumCover}`}
+                    alt="logo"
+                    layout="fixed"
+                  />
+                  <span style={{ margin: 'auto 20px' }}>{music.title}</span>
+                </div>
+              ))}
           </List>
         </Collapse>
       </List>

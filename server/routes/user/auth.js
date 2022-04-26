@@ -1,5 +1,6 @@
 const express = require('express');
-const { User, Genre } = require('../../models');
+const { User, Genre, Music } = require('../../models');
+
 const router = express.Router();
 
 //------------------------------------------------
@@ -14,10 +15,17 @@ router.get('/', async (req, res, next) => {
         attributes: {
           exclude: ['id', 'updatedAt', 'deletedAt'],
         },
-        include: {
-          model: Genre,
-          attributes: ['content'],
-        },
+        include: [
+          {
+            model: Genre,
+            attributes: ['content'],
+          },
+          {
+            model: Music,
+            as: 'user',
+            attributes: ['title', 'albumCover', 'IPFSUrl'],
+          },
+        ],
       });
 
       res.status(200).json(UserInfo);
