@@ -15,12 +15,12 @@ export const Global = createGlobalStyle`
   .home_hero_img{
     width:50%;
     justify-content: center;
-
+    
   }
 
   .row {
     display: flex;
-    margin-right: -15px;
+    margin-right: -5px;
     margin-bottom: -15px;
     margin-left: -5px;
     flex-wrap: wrap;
