@@ -25,6 +25,7 @@
     "chart.js": "^3.7.1",
     "crypto": "1.0.1",
     "fs": "0.0.1-security",
+    "i18next": "^21.6.16",
     "immer": "^9.0.12",
     "ipfs-http-client": "^56.0.1",
     "lottie-web": "^5.9.2",

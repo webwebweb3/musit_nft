@@ -19,5 +19,14 @@
     "TrendingMusics":"Trending Musics",
     "GenreMusic":"Recommendation By Genre",
     "AgreeAlready":"Already Agreed",
-    "SaleAgree":"Sign to the Sales Agreement First!"
+    "SaleAgree":"Sign to the Sales Agreement First!",
+    "UserInfoEdit":"User Info Edit",
+    "LikedTracks":"Liked Tracks",
+    "LikedArtists":"Liked Artists",
+    "MyPlaylists":"My Playlists",
+    "SubscriptionInfo":"Subscription Info",
+    "LoginPlz":"Login Please",
+    "PlayLists":"Playlists",
+    "NewAuction":"Register New Auction",
+    "NewSales":"Register New Sales"
 }

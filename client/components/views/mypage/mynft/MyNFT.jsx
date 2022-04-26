@@ -103,7 +103,7 @@ const MyNFT = () => {
             <Box className="approveBox">
               <Button onClick={onClickSalesApproval}>
                 <AddTaskIcon className="approveTextIcon" />
-                <span className="approveText">`${t('SaleAgree')}`</span>
+                <span className="approveText">{t('SaleAgree')}</span>
               </Button>
             </Box>
           )}
