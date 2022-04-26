@@ -112,15 +112,25 @@ router.get('/isSubscribe', async (req, res) => {
           // },
         },
       ],
-
       attributes: ['id', 'name', 'metamask'],
     });
 
-    let tempData = { isSubscribing: false };
+    const countFollowers = `SELECT COUNT(*) as cntFollower FROM subscribe WHERE subscribing = ${artistId.id} `;
+    const countFollowersResult = await sequelize.query(countFollowers, {
+      type: QueryTypes.SELECT,
+    });
+
+    let tempData = {
+      isSubscribing: false,
+      cntFollower: countFollowersResult[0].cntFollower,
+    };
     for (let i = 0; i < userId.subscribers.length; i += 1) {
-      console.log(i, '번째 체크', userId.subscribers[i].dataValues);
       if (userId.subscribers[i].dataValues.id === artistId.id) {
-        tempData = { isSubscribing: true, artistId: artistId.id };
+        tempData = {
+          isSubscribing: true,
+          artistId: artistId.id,
+          cntFollower: countFollowersResult[0].cntFollower,
+        };
         break;
       }
     }
@@ -130,7 +140,11 @@ router.get('/isSubscribe', async (req, res) => {
     }
 
     if (tempData.isSubscribing === false) {
-      res.json({ isSubscribing: false, artistId: artistId.id });
+      res.json({
+        isSubscribing: false,
+        artistId: artistId.id,
+        cntFollower: countFollowersResult[0].cntFollower,
+      });
     }
   } catch (error) {
     console.error(error);

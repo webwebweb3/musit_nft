@@ -15,8 +15,10 @@ import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = ({ userData }) => {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <Box
@@ -48,7 +50,7 @@ const Sidebar = ({ userData }) => {
                   <ListItemIcon sx={{ color: '#fff' }}>
                     <Person />
                   </ListItemIcon>
-                  <ListItemText primary="회원 정보 수정" />
+                  <ListItemText primary={`${t('UserInfoEdit')}`} />
                 </ListItemButton>
               </Link>
             </ListItem>
@@ -67,7 +69,7 @@ const Sidebar = ({ userData }) => {
                 <ListItemIcon sx={{ color: '#fff' }}>
                   <AudiotrackIcon />
                 </ListItemIcon>
-                <ListItemText primary="좋아하는 노래" />
+                <ListItemText primary={`${t('LikedTracks')}`} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
@@ -75,7 +77,7 @@ const Sidebar = ({ userData }) => {
                 <ListItemIcon sx={{ color: '#fff' }}>
                   <SpatialTrackingIcon />
                 </ListItemIcon>
-                <ListItemText primary="좋아하는 아티스트" />
+                <ListItemText primary={`${t('LikedArtists')}`} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
@@ -83,7 +85,7 @@ const Sidebar = ({ userData }) => {
                 <ListItemIcon sx={{ color: '#fff' }}>
                   <LibraryMusicIcon />
                 </ListItemIcon>
-                <ListItemText primary="나의 재생목록" />
+                <ListItemText primary={`${t('MyPlaylists')}`} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
@@ -91,7 +93,7 @@ const Sidebar = ({ userData }) => {
                 <ListItemIcon sx={{ color: '#fff' }}>
                   <CardMembershipIcon />
                 </ListItemIcon>
-                <ListItemText primary="이용권 정보 조회" />
+                <ListItemText primary={`${t('SubscriptionInfo')}`} />
               </ListItemButton>
             </ListItem>
           </List>

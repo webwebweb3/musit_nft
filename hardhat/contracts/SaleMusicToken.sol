@@ -14,7 +14,7 @@ contract SaleMusicToken {
     }
 
     mapping (uint256 => uint256) public musicTokenPrices;
-    event PurchaseChart (uint256 indexed tokenID, uint256 indexed price, address indexed buyer, uint256 timeStamp);
+    event PurchaseChart (uint256 indexed tokenID, uint256 indexed price, address indexed buyer, address seller, uint256 timeStamp);
 
     uint256[] public onSaleMusicTokenArray;
     struct OnSaleMusicTokenData {
@@ -77,7 +77,7 @@ contract SaleMusicToken {
         mintMusicTokenAddress.safeTransferFrom(musicTokenOwner, msg.sender, _musicTokenId);
         mintMusicTokenAddress.setTokenState(_musicTokenId, false);
         
-        emit PurchaseChart (_musicTokenId, msg.value, msg.sender, block.timestamp);
+        emit PurchaseChart (_musicTokenId, msg.value, msg.sender,musicTokenOwner, block.timestamp);
         musicTokenPrices[_musicTokenId] = 0;
 
         for(uint256 i = 0; i < onSaleMusicTokenArray.length; i++) {

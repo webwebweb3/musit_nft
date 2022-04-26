@@ -27,6 +27,7 @@ function HeroSection({
           style={{
             display: 'flex',
             flexDirection: imgStart === 'start' ? 'row' : 'row-reverse',
+            width: '100%',
           }}
         >
           <div className="row home_hero_img">

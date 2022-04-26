@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import { Box, Checkbox, CircularProgress, Pagination } from '@mui/material';
-import _ from 'lodash';
 
 import { useInput } from '$hooks/useInput';
 import {
@@ -13,13 +12,15 @@ import {
 import { timeFunction } from '$util/timefunc';
 import UploadButton from './UploadButton';
 import { useWalletInfo } from '$hooks/web3';
-import { auctionCreatorContract, mintMusicTokenContract } from '$contracts';
+import { mintMusicTokenContract } from '$contracts';
 import LoadingPage from '$components/views/LoadingPage';
 import { StyledMyNFTText } from '../style';
 
 const AuctionUploadPage = () => {
   const auction = useSelector(state => state.auction);
-  const { createAuctionLoading } = useSelector(state => state.auction);
+  const { createAuctionLoading, createAuctionError } = useSelector(
+    state => state.auction,
+  );
   const [startingBid, onChangeStartingBid] = useInput('');
   const [minimumBid, onChangeMinimumBid] = useInput('');
   const [endAt, onChangeEndAt, setEndAt] = useInput('');
@@ -28,7 +29,6 @@ const AuctionUploadPage = () => {
   const [loading, setLoading] = useState(false);
   const [totalPage, setTotalPage] = useState(1);
   const [auctionTokenId, setAuctionTokenId] = useState([]);
-  const [myTotalNFT, setMyTotalNFT] = useState([]);
   const [page, setPage] = useState(1);
 
   const { network, account } = useWalletInfo();
@@ -39,44 +39,40 @@ const AuctionUploadPage = () => {
     setEndAt(date);
   }, [setEndAt]);
 
+  useEffect(() => {
+    if (createAuctionError) {
+      alert('경매 등록에 실패했습니다.');
+    }
+  }, [createAuctionError]);
+
+  useEffect(() => {
+    if (createAuctionLoading) {
+    }
+  }, [createAuctionLoading]);
+
   const getMyMusicTokens = useCallback(async () => {
     try {
-      let myArray = [];
       const tempMusicCardArray = [];
 
-      for (let i = 0; i < auctionTokenId.length; i++) {
-        myArray.push(
-          myTotalNFT.filter(
-            myTotalNFT => myTotalNFT.musicTokenId === auctionTokenId[i],
-          ),
-        );
-      }
-
-      let myNFTFlatten = _.flatten(myArray);
-
-      let myNFTArray = myTotalNFT.filter(
-        item => !myNFTFlatten.includes(item) || !myTotalNFT.includes(item),
-      );
-
-      let totalPage = Math.ceil(myNFTArray.length / 1); // 숫자 1 보고 싶은 페이지로 수정
+      let totalPage = Math.ceil(auctionTokenId.length / 1);
       setTotalPage(totalPage);
 
-      let startView = (myNFTArray.length / totalPage) * page - 1; // 숫자 1 보고 싶은 페이지로 수정
-      let endView = (myNFTArray.length / totalPage) * page;
+      let startView = (auctionTokenId.length / totalPage) * page - 1;
+      let endView = (auctionTokenId.length / totalPage) * page;
 
       for (let i = startView; i < endView; i++) {
         const ipfsData = await fetch(
-          `https://ipfs.infura.io/ipfs/${myNFTArray[i].musicTokenURI}`,
+          `https://ipfs.infura.io/ipfs/${auctionTokenId[i].musicTokenURI}`,
         );
         const data = await ipfsData.json();
         tempMusicCardArray.push({
-          musicTokenId: myNFTArray[i].musicTokenId,
+          musicTokenId: auctionTokenId[i].musicTokenId,
           musicTokenData: data,
-          musicTokenPrice: myNFTArray[i].musicTokenPrice,
+          musicTokenPrice: auctionTokenId[i].musicTokenPrice,
         });
       }
-      setMyNFT(tempMusicCardArray);
 
+      setMyNFT(tempMusicCardArray);
       setLoading(true);
     } catch (error) {
       console.error(error);
@@ -100,19 +96,18 @@ const AuctionUploadPage = () => {
         .getMusicTokens(account.data)
         .call();
 
-      setMyTotalNFT(myTotalNFT);
+      let token = [];
+      for (let i = 0; i < myTotalNFT.length; i++) {
+        let myAuctionToken = await mintMusicTokenContract.methods
+          .isOnSaleToken(myTotalNFT[i].musicTokenId)
+          .call();
 
-      const myAuctionToken = [];
-
-      const auctionContractAddress = await auctionCreatorContract.methods
-        .getMyAuctions(account.data)
-        .call();
-
-      for (let i = 0; i < auctionContractAddress.length; i++) {
-        myAuctionToken.push(auctionContractAddress[i].tokenId);
+        if (!myAuctionToken) {
+          token.push(myTotalNFT[i]);
+        }
       }
 
-      setAuctionTokenId(myAuctionToken);
+      setAuctionTokenId(token);
     } catch (error) {
       console.error(error);
     }
@@ -164,7 +159,7 @@ const AuctionUploadPage = () => {
 
           {!loading ? (
             <CircularProgress color="inherit" />
-          ) : myNFT ? (
+          ) : myNFT.length !== 0 ? (
             <>
               <StyledMyNFTText id="outlined-weight-helper-text">
                 판매 가능 NFT 목록
@@ -245,7 +240,23 @@ const AuctionUploadPage = () => {
           )}
         </>
       ) : (
-        <LoadingPage />
+        <>
+          <div style={{ position: 'fixed', top: '140px' }}>
+            <div className="auctionBlur">
+              <div
+                style={{
+                  fontSize: '55px',
+                  color: '#173142',
+                  display: 'flex',
+                  margin: 'auto',
+                  flexDirection: 'column',
+                }}
+              >
+                <LoadingPage />
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </Box>
   );

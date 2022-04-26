@@ -11,8 +11,10 @@ import { useWalletInfo } from '$hooks/web3';
 import { NavbarLink } from '$components/layout/Navbar/contents';
 import { RegisterCheck } from '$components/layout/Navbar/base';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
   const { userData, logInUserError } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const { account } = useWalletInfo();
@@ -25,7 +27,7 @@ const Navbar = () => {
 
     if (userData) {
       if (userData.metamask.toUpperCase() !== account.data.toUpperCase()) {
-        let confirmAction = window.confirm('계정을 전환하시겠습니까?');
+        let confirmAction = window.confirm(`${t('AccountChange')}`);
         if (confirmAction) {
           dispatch(loginRequestAction(account.data));
         } else {

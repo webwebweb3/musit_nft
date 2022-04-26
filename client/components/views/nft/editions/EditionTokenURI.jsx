@@ -11,6 +11,9 @@ import { useSelector } from 'react-redux';
 import PurchasingMusic from './editionPurchasing/PurchasingMusic';
 import PurchasingError from './editionPurchasing/PurchasingError';
 import PurchasingSuccess from './editionPurchasing/PurchasingSuccess';
+import { Divider } from '@mui/material';
+import EditionHistory from './editionHistory/EditionHistory';
+import EditionHistoryLabel from './editionHistory/EditionHistoryLabel';
 import { Box } from '@mui/material';
 
 const EditionTokenURI = () => {
@@ -87,15 +90,27 @@ const EditionTokenURI = () => {
                             musicData={musicData}
                             musicPrice={musicPrice}
                           />
-                          <Box sx={style.editionChartTitle}>이전 판매 기록</Box>
-                          <Box sx={style.editionTopRightChart}>
-                            <EditionChart
+                        </Box>
+                      </Box>
+
+                      <Box className="edition_history_container">
+                        <Box className="edition_history_wrapper">
+                          <Box className="edition_history_title">
+                            이전 판매 기록
+                          </Box>
+                          <Divider sx={{ backgroundColor: '#97769c70' }} />
+                          <Box className="edition_history_label_container">
+                            <EditionHistoryLabel />
+                          </Box>
+                          <Box className="edition_history_description">
+                            <EditionHistory
                               tokenId={router.query.editionIPFSUrl}
+                              image={musicData.properties.S3AlbumCover}
+                              musicData={musicData}
                             />
                           </Box>
                         </Box>
                       </Box>
-                      <Box></Box>
                     </Box>
                   )}
                 </>
@@ -109,3 +124,9 @@ const EditionTokenURI = () => {
 };
 
 export default EditionTokenURI;
+
+{
+  /* <EditionChart
+  tokenId={router.query.editionIPFSUrl}
+/> */
+}

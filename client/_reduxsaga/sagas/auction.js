@@ -127,7 +127,9 @@ async function auctionInfoAPI(data) {
   let owner = await data.methods.owner().call();
   let auctionState = await data.methods.auctionState().call();
   let tokenID = await data.methods.tokenID().call();
-  let highestBindingBid = highestBindingBidWei / 1000000000000000000;
+  let minimumBidWei = await data.methods.minimumBid().call();
+  let highestBindingBid = web3.utils.fromWei(highestBindingBidWei);
+  let minimumBid = web3.utils.fromWei(minimumBidWei);
 
   let infoData = {
     time,
@@ -136,6 +138,7 @@ async function auctionInfoAPI(data) {
     owner,
     auctionState,
     tokenID,
+    minimumBid,
   };
 
   return infoData;

@@ -8,14 +8,10 @@ const StudioMyMusics = () => {
 
   return (
     <div>
-      <Grid
-        container
-        spacing={{ xs: 2, md: 4 }}
-        columns={{ xs: 3, sm: 8, md: 12 }}
-      >
+      <Grid container columns={{ xs: 3, sm: 8, md: 12 }}>
         {studio.studioMyMusics.map((v, i) => {
           return (
-            <Grid item xs={2} sm={3} md={3} key={i}>
+            <Grid item xs={2} sm={3} md={4} key={i}>
               <StudioMusicCard
                 musics={v.IPFSUrl}
                 albumCovers={v.S3AlbumCover}

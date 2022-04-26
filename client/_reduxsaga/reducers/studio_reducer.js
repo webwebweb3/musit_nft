@@ -18,6 +18,7 @@ import {
   STUDIO_ISSUBSCRIBING_REQUEST,
   STUDIO_ISSUBSCRIBING_SUCCESS,
   STUDIO_ISSUBSCRIBING_FAILURE,
+  STUDIO_CNT_FOLLOWERS_SUCCESS,
 } from '$reduxsaga/request/types';
 
 export const initialState = {
@@ -44,6 +45,7 @@ export const initialState = {
   studioUserImages: null,
   studioMyMusics: null,
   isSubscribingArtist: null,
+  cntFollowers: null,
 };
 
 const studioReducer = (state = initialState, action) =>
@@ -126,6 +128,9 @@ const studioReducer = (state = initialState, action) =>
         draft.isSubscribingLoading = false;
         draft.isSubscribingArtist = action.data;
         draft.isSubscribingDone = true;
+        break;
+      case STUDIO_CNT_FOLLOWERS_SUCCESS:
+        draft.cntFollowers = action.data;
         break;
       case STUDIO_ISSUBSCRIBING_FAILURE:
         draft.isSubscribingLoading = false;

@@ -7,10 +7,8 @@ import { useEffect } from 'react';
 import ControlsToggleButton from '$components/layout/Footer/music/Button';
 
 const StudioSubscribe = ({ artist, sub, func, myMetamask }) => {
-  console.log('구독중인지?', sub);
-
   const studio = useSelector(state => state.studio);
-  console.log('mymeta', myMetamask);
+
   const dispatch = useDispatch();
   // TODO: 구독한 사람이 NFT 업로드 하면 알림
   const onClickSubscribeButton = action => {
@@ -23,13 +21,7 @@ const StudioSubscribe = ({ artist, sub, func, myMetamask }) => {
     );
   };
 
-  useEffect(() => {
-    console.log('ㅇㅇ?', sub);
-    console.log(
-      '구독 true 여야 돼잖아 ',
-      studio.isSubscribingArtist?.isSubscribing,
-    );
-  }, [
+  useEffect(() => {}, [
     studio && studio.subscribeArtistDone,
     studio.isSubscribingArtist?.isSubscribing,
   ]);

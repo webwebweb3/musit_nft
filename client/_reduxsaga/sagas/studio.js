@@ -20,6 +20,7 @@ import {
   STUDIO_ISSUBSCRIBING_REQUEST,
   STUDIO_ISSUBSCRIBING_SUCCESS,
   STUDIO_ISSUBSCRIBING_FAILURE,
+  STUDIO_CNT_FOLLOWERS_SUCCESS,
 } from '$reduxsaga/request/types';
 import { mintMusicTokenContract } from '$contracts';
 
@@ -165,7 +166,7 @@ function* yieldGetUserImages(action) {
 }
 
 async function isSubscribing(data) {
-  console.log('서브스크라이빙?', data);
+  console.log('구독중인지?', data);
   return Axios.get('/studio/isSubscribe', {
     params: {
       paramsData: data,
@@ -176,7 +177,11 @@ async function isSubscribing(data) {
 function* yieldIsSubscribing(action) {
   try {
     const isSub = yield call(isSubscribing, action.data);
-    console.log('이즈서브?', isSub);
+    console.log('구독중인가?', isSub);
+    yield put({
+      type: STUDIO_CNT_FOLLOWERS_SUCCESS,
+      data: isSub.data.cntFollower,
+    });
     yield put({
       type: STUDIO_ISSUBSCRIBING_SUCCESS,
       data: isSub.data,
@@ -190,19 +195,20 @@ function* yieldIsSubscribing(action) {
 }
 
 async function subscribeArtist(data) {
-  console.log(data.actionData === 'cancelSubscribe');
   if (data.actionData === 'subscribe') {
-    console.log('ㅌㅊ픁ㅊ퓨', data);
+    console.log('구독 할 것이다', data);
     Axios.post('/studio/subscribe', data);
-    return true;
+    const returnData = { isSubscribing: true, artistId: data.artistId };
+    return returnData;
   } else if (data.actionData === 'cancelSubscribe') {
-    console.log('ㅁㄴㅇㄻㄴㅇㄹ', data);
+    console.log('구독 안 할 것이다', data);
     Axios.delete('/studio/subscribe', {
       params: {
         paramsData: data,
       },
     });
-    return false;
+    const returnData = { isSubscribing: false, artistId: data.artistId };
+    return returnData;
   }
   console.log('데이타 보자', data);
 }
@@ -213,7 +219,7 @@ function* yieldSubscribeArtist(action) {
     console.log('리조뜨이즈에브리띵', result);
     yield put({
       type: STUDIO_SUBSCRIBE_SUCCESS,
-      data: { isSubscribing: result },
+      data: result,
     });
   } catch (err) {
     yield put({

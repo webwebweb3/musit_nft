@@ -21,7 +21,7 @@ import ControlsToggleButton from './music/Button';
 import Slide from 'react-reveal/Slide';
 import PlayList from './music/playlist';
 import { useSelector } from 'react-redux';
-import { Router } from 'next/router';
+import Router from 'next/router';
 import MusicCard from '../../views/cards/MusicCard';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
@@ -29,6 +29,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
   const audioElement = useRef();
@@ -52,6 +53,7 @@ const Footer = () => {
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
   const [mySeekTime, setMySeekTime] = useState(0);
+  const { t, i18n } = useTranslation();
 
   const playingMusic = () => {
     isPlaying
@@ -98,6 +100,13 @@ const Footer = () => {
     if (currentMusic) {
       playingMusic();
     }
+    if (audioElement.current != null) {
+      if (userData?.subscription < dateNow) {
+        setDuration(60);
+      } else {
+        setDuration(audioElement.current.duration);
+      }
+    }
     // 이곳에 UserDB 에 마지막 재생 노래정보와 총 재생시간, 현재까지 재생시간을 추가한다.
     // 이곳에 음악이 시작되고 1분이 넘어가면 음악DB의 재생횟수가 1 증가한다.
 
@@ -112,6 +121,16 @@ const Footer = () => {
 
   useEffect(() => {
     setSeekTime(currTime / (duration / 100));
+    if (audioElement.current != null) {
+      if (userData?.subscription < dateNow) {
+        if (audioElement.current.currentTime >= 60) {
+          audioElement.current.pause();
+          audioElement.current.currentTime = 0;
+          alert('이용권을 구매해주세요');
+          Router.push('/subscriptionbuy');
+        }
+      }
+    }
     // if (audioElement.current != null) {
     //   if (userData.subscription < dateNow) {
     //     if (audioElement.current.currentTime >= 60) {
@@ -153,7 +172,7 @@ const Footer = () => {
 
   const toggleAction = useCallback(() => {
     if (!userData) {
-      alert('로그인을 해주세요.');
+      alert(t('LoginPlz'));
       return;
     }
     setToggle(!toggle);
@@ -209,7 +228,7 @@ const Footer = () => {
         <Box
           sx={{
             width: '100%',
-            height: '84vh',
+            height: '85vh',
             backgroundColor: '#242424',
             marginBottom: '20px',
           }}
@@ -217,24 +236,21 @@ const Footer = () => {
         >
           <div
             style={{
-              paddingLeft: '15vw',
-              paddingRight: '15vw',
-              paddingBottom: '8vh',
-              paddingTop: '8vh',
+              paddingLeft: '200PX',
+              paddingRight: '200PX',
+              paddingBottom: '50PX',
+              paddingTop: '50PX',
               justifyContent: 'center',
             }}
           >
             <div style={{ marginBottom: '40px', width: '100%' }}>
               <div className="ListContainer">
-                <PlayCircleIcon className="PlayPauseIcons" />
-                <PauseCircleIcon className="PlayPauseIcons" />
-
                 <span className="CoverArt">
                   <Image src="/AR.jpg" width="600px" height="600px" />
                 </span>
                 <div className="TList" style={{ backgroundColor: '#0d0f1a' }}>
                   <h2 style={{ color: '#fff', paddingLeft: '30px' }}>
-                    재생목록
+                    {t('PlayLists')}
                   </h2>
                   {userInfo &&
                     userInfo.map(music => (
@@ -257,9 +273,9 @@ const Footer = () => {
                         <span style={{ paddingRight: '100px' }}>
                           <span
                             style={{
-                              margin: 'auto 20px',
+                              margin: 'auto 30px',
                               fontWeight: 'bold',
-                              fontSize: '30px',
+                              fontSize: '25px',
                             }}
                           >
                             {music.title}

@@ -8,12 +8,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import TokenIcon from '@mui/icons-material/Token';
 import GavelIcon from '@mui/icons-material/Gavel';
-
-const styles = {
-  '&.MuiButton-text': {
-    color: 'white',
-  },
-};
+import Image from 'next/image';
 
 const LoadingPage = () => {
   const loadingcontainer = useRef();
@@ -31,9 +26,16 @@ const LoadingPage = () => {
     <>
       <Global />
       <div className="LoadingContainer">
-        <h2 className="LoadingTypo"> sdsadasd </h2>
-        <div className="LoadingWrapper" ref={loadingcontainer}></div>
-        <div className="LoadingBtn">
+        <div style={{ marginBottom: '10px' }}>
+          <Image
+            src="/eth.gif"
+            alt="Album Cover"
+            width="150px"
+            height="300px"
+          />
+        </div>
+        <div style={{ fontSize: '30px' }}>블록에 내 음악 올리는 중..</div>
+        <div style={{ marginTop: '15px' }} className="LoadingBtn">
           <ButtonGroup
             variant="text"
             style={{ color: '#fff' }}
@@ -51,7 +53,7 @@ const LoadingPage = () => {
             </Link>
           </ButtonGroup>
           <ButtonGroup variant="text" aria-label="text button group">
-            <Link href="/streaming">
+            <Link href="/streaming/latestMusic">
               <Button
                 sx={{
                   '&.MuiButton-text': { color: '#fff' },
