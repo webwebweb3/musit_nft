@@ -109,6 +109,11 @@ router.post('/', async (req, res) => {
 router.post('/fs', async (req, res) => {
   const jsonData = req.body;
   console.log('json', jsonData);
+
+  if (!fs.existsSync('server/json')) {
+    fs.mkdirSync('server/json');
+  }
+
   fs.writeFileSync('server/json/mint.json', JSON.stringify(jsonData), err => {
     if (err) console.error(err);
   });

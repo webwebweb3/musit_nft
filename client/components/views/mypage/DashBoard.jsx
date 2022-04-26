@@ -36,6 +36,7 @@ const Section = styled.section`
       svg {
         color: white;
       }
+      cursor: pointer;
     }
     .logo {
       background-color: black;
@@ -64,15 +65,6 @@ const DashBoard = () => {
   return (
     <>
       <Section>
-        <div className="analytic ">
-          <div className="content">
-            <h5>총 음악 재생수 </h5>
-            <h2> 재생 시간 분 초 </h2>
-          </div>
-          <div className="logo">
-            <BsMusicPlayerFill />
-          </div>
-        </div>
         <div className="analytic">
           <div className="logo">
             <IoStatsChart />
@@ -89,15 +81,6 @@ const DashBoard = () => {
           <div className="content">
             <h5>좋아하는 노래 트랙</h5>
             <h2>좋아하는 노래 트랙 수 </h2>
-          </div>
-        </div>
-        <div className="analytic ">
-          <div className="content">
-            <h5>현재 구독 정보 </h5>
-            <h2>구독 등급 보여주기</h2>
-          </div>
-          <div className="logo">
-            <SiSubstack />
           </div>
         </div>
       </Section>
