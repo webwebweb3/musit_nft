@@ -4,7 +4,7 @@
   "description": "musit_nft",
   "main": "server/app.js",
   "scripts": {
-    "start": "node server/app.js",
+    "start": "cross-env NODE_ENV=production node server/app.js",
     "test_backend": "cross-env NODE_ENV=test node server/app.js",
     "nodemon": "nodemon server/app.js",
     "test_nodemon": "cross-env NODE_ENV=test nodemon server/app.js",
@@ -38,6 +38,8 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
+    "helmet": "^5.0.2",
+    "hpp": "^0.2.3",
     "ipfs-http-client": "^56.0.1",
     "lottie-web": "^5.9.2",
     "morgan": "^1.10.0",

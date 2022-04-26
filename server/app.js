@@ -6,12 +6,16 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const passport = require('passport');
 const path = require('path');
+const hpp = require('hpp');
+const helmet = require('helmet');
 
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
+
 dotenv.config();
 
 const Router = require('./routes');
+
 const app = express();
 
 app.set('port', process.env.PORT || 8000);
@@ -28,16 +32,24 @@ sequelize
 
 if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'));
+  app.use(hpp());
+  app.use(helmet({ contentSecurityPolicy: false }));
+  app.use(
+    cors({
+      origin: 'http://3.36.53.64',
+      credentials: true,
+    }),
+  );
 } else {
   app.use(morgan('dev'));
+  app.use(
+    cors({
+      origin: true,
+      credentials: true,
+    }),
+  );
 }
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  }),
-);
 app.use(express.static(path.join(__dirname, '')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
