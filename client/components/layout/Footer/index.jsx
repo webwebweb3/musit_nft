@@ -228,26 +228,23 @@ const Footer = () => {
         <Box
           sx={{
             width: '100%',
-            height: '84vh',
+            height: '85vh',
             backgroundColor: '#242424',
-            marginBottom: '40px',
+            marginBottom: '20px',
           }}
           style={show ? { display: 'block' } : { display: 'none' }}
         >
           <div
             style={{
-              paddingLeft: '15vw',
-              paddingRight: '15vw',
-              paddingBottom: '8vh',
-              paddingTop: '8vh',
+              paddingLeft: '200PX',
+              paddingRight: '200PX',
+              paddingBottom: '50PX',
+              paddingTop: '50PX',
               justifyContent: 'center',
             }}
           >
             <div style={{ marginBottom: '40px', width: '100%' }}>
               <div className="ListContainer">
-                <PlayCircleIcon className="PlayPauseIcons" />
-                <PauseCircleIcon className="PlayPauseIcons" />
-
                 <span className="CoverArt">
                   <Image src="/AR.jpg" width="600px" height="600px" />
                 </span>
@@ -276,9 +273,9 @@ const Footer = () => {
                         <span style={{ paddingRight: '100px' }}>
                           <span
                             style={{
-                              margin: 'auto 20px',
+                              margin: 'auto 30px',
                               fontWeight: 'bold',
-                              fontSize: '30px',
+                              fontSize: '25px',
                             }}
                           >
                             {music.title}

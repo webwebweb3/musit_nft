@@ -167,9 +167,9 @@ body:hover {
 }
 
 .ListContainer {
-  display: flex;
   width: 100%;
   margin: auto;
+  padding-bottom: 0px;
 }
 
 .CoverArt :hover {
@@ -178,15 +178,36 @@ body:hover {
   color: #ffffff;
   opacity: 75%;
 }
-.PlayPauseIcons {
-  font-size: 15em;
-  position: fixed;
-  color: rgb(255, 255, 255);
-  justify-content: center;
+
+@media screen and (max-width: 960px) {
+  .CoverArt{
+    align-items: center;
+      width: 100%;
+  }
+  .TList{
+   width: auto;
+  }
+}
+@media screen and (max-width: 480px) {
+  .CoverArt{
+    align-items: center;
+      width: 100%;
+  }
+  .TList{
+   width: auto;
+  }
 }
 
+
 .TList {
-  margin-left: 40px;
+  margin-left: 50px;
+  display: inline-block;
+ 
+}
+.CoverArt{
+  width: 600px;
+  height: 600px;
+  display: inline;
 }
 
 .LikeButtonIcon {
