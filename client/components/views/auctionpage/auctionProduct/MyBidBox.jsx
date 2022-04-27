@@ -39,6 +39,7 @@ const MyBidBox = ({ gapTime }) => {
       {myBidData !== 0 && (
         <>
           <>나의 총 입찰가 - {myBidData} ETH</>
+          <button onClick={onClickAuction}>반환받기</button>
           <AuctionDivider />
         </>
       )}
