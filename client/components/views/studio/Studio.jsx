@@ -129,7 +129,7 @@ const Studio = () => {
         {studio.studioMyMusics ? (
           <StudioMyMusics myMusics={studio.studioMyMusics} />
         ) : (
-          <Box>없음</Box>
+          <Box></Box>
         )}
       </Box>
     </Box>

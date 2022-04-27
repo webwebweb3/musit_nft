@@ -73,12 +73,14 @@ const Sidebar = ({ userData }) => {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ color: '#fff' }}>
-                  <SpatialTrackingIcon />
-                </ListItemIcon>
-                <ListItemText primary={`${t('LikedArtists')}`} />
-              </ListItemButton>
+              <Link href="/mypage/myartist">
+                <ListItemButton>
+                  <ListItemIcon sx={{ color: '#fff' }}>
+                    <SpatialTrackingIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={`${t('LikedArtists')}`} />
+                </ListItemButton>
+              </Link>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton>

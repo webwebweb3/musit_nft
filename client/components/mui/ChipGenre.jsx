@@ -44,8 +44,13 @@ const MultipleSelectChip = ({ value, func }) => {
 
   return (
     <div>
-      <FormControl sx={{ m: 0, width: 320, borderRadius: '50%' }}>
-        <InputLabel id="demo-multiple-chip-label">장르</InputLabel>
+      <Box style={{ color: '#fff', fontWeight: 600, margin: '0 0 5px' }}>
+        Genre
+      </Box>
+      <FormControl sx={{ m: 0, width: 320, backgroundColor: '#fff' }}>
+        {/* <<InputLabel id="demo-multiple-chip-label" style={{ color: 'white' }}>
+          장르
+        </InputLabel>> */}
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
