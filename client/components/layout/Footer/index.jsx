@@ -8,7 +8,6 @@ import {
   VolumeUp,
   VolumeOff,
   Favorite,
-  PlaylistAdd,
   KeyboardArrowDown,
   Headset,
   KeyboardControlKey,
@@ -19,7 +18,6 @@ import Image from 'next/image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
 import Slide from 'react-reveal/Slide';
-import PlayList from './music/playlist';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
 import MusicCard from '../../views/cards/MusicCard';
@@ -42,7 +40,6 @@ const Footer = () => {
   const [isNextClicked, setNextClicked] = useState(false);
   const [isVolumeClicked, setVolumeClicked] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [currentMusic, setCurrentMusic] = useState();
@@ -166,10 +163,6 @@ const Footer = () => {
     }
   }, [isNextClicked, isPrevClicked, userInfo]);
 
-  const handleClickOpen = useCallback(() => {
-    setOpen(true);
-  }, []);
-
   const toggleAction = useCallback(() => {
     if (!userData) {
       alert(t('LoginPlz'));
@@ -290,7 +283,11 @@ const Footer = () => {
                 </div>
               </div>
               <div className="bottomPanel" style={{ width: '50%' }}>
-                <h1 style={{ color: '#fff' }}>가수/ 노래제목</h1>
+                {currentMusic && (
+                  <h1 style={{ color: '#fff' }}>
+                    {currentMusic.title}/ {currentMusic.title}
+                  </h1>
+                )}
               </div>
             </div>
           </div>
@@ -441,13 +438,6 @@ const Footer = () => {
                 sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
               />
             </Button>
-            <Button>
-              <PlaylistAdd
-                onClick={handleClickOpen}
-                fontSize="medium"
-                sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
-              />
-            </Button>
             <Button
               className="btn btn-success my-5"
               type="button"
@@ -588,13 +578,6 @@ const Footer = () => {
                   sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
                 />
               </Button>
-              <Button>
-                <PlaylistAdd
-                  onClick={handleClickOpen}
-                  fontSize="medium"
-                  sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
-                />
-              </Button>
               <Button
                 className="btn btn-success my-5"
                 type="button"
@@ -634,7 +617,6 @@ const Footer = () => {
           </Box>
         </>
       )}
-      <PlayList open={open} setOpen={setOpen} />
     </>
   );
 };
