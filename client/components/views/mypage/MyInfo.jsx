@@ -5,10 +5,10 @@ import { useInput } from '../../../hooks/useInput';
 import { userEditRequestAction } from '$reduxsaga/request/user_request';
 import CustomizedInputs from '../../mui/CustomizedInputs';
 import UnstyledSelectsMultiple from '../../mui/SelectNationality';
-// import MyGenre from './MyGenre';
 import MyImgButton from './MyImgButton';
 import MyInfoButton from './MyInfoButton';
 import NationalityButton from './NationalityButton';
+import MyGenre from './MyGenre';
 
 const MyInfo = () => {
   const dispatch = useDispatch();
@@ -17,8 +17,8 @@ const MyInfo = () => {
   const { userData } = useSelector(state => state.user);
   const { imagePath } = useSelector(state => state.user);
   const [editNationality, onChangeEditNationality] = useState('');
+  const [editGenre, setEditGenre] = useState([]);
   const [editNickname, onChangeEditNickname, setEditNickname] = useInput('');
-  // const [editGenre, setEditGenre] = useState([]);
 
   useEffect(() => {
     if (userData) {
@@ -31,7 +31,7 @@ const MyInfo = () => {
     let editData = {
       metamask: userData.metamask,
       nationality: editNationality,
-      // genre: editGenre,
+      genre: editGenre,
     };
 
     if (editNickname) {
@@ -49,7 +49,7 @@ const MyInfo = () => {
     }
 
     dispatch(userEditRequestAction(editData));
-  }, [dispatch, editNationality, editNickname, imagePath, userData]);
+  }, [dispatch, editGenre, editNationality, editNickname, imagePath, userData]);
 
   const onEditClick = useCallback(() => {
     onEditInfo(prev => !prev);
@@ -91,7 +91,6 @@ const MyInfo = () => {
                 <MyInfoButton type={true} value={editInfo} func={onEditClick} />
               </Box>
             )}
-
             {userData && userData.img ? (
               <>
                 <InputLabel
@@ -183,7 +182,6 @@ const MyInfo = () => {
             >
               Nationality
             </InputLabel>
-
             {booleanNationality ? (
               <UnstyledSelectsMultiple
                 value={editNationality}
@@ -196,9 +194,9 @@ const MyInfo = () => {
               value={booleanNationality}
               func={onBooleanNationalityClick}
             />
-
-            {/* 대기 <MyGenre genre={editGenre} setGenre={setEditGenre} /> */}
-
+            <Box style={{ margin: '20px 0 ' }}>
+              <MyGenre genre={editGenre} setGenre={setEditGenre} />
+            </Box>
             {userData.role === 0 && (
               <Box sx={{ marginTop: '15px' }}>
                 <CustomizedInputs

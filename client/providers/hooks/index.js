@@ -53,7 +53,6 @@ export default function Web3provider({ children }) {
         : () => console.error('Cannot connect to Metamask'),
     };
   }, [web3Api]);
-  _web3Api.connect();
 
   // if (_web3Api.isLoading) {
   //   console.log('로그', _web3Api.connect());
