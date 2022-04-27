@@ -1,21 +1,8 @@
 {
   "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
-    "id": 99651,
+    "id": "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error",
     "files": [
-      "static/chunks/651.c1e427124570bea0.js"
-    ]
-  },
-  "studio\\[artistName]\\index.jsx -> ../../../components/views/studio/Studio": {
-    "id": 4627,
-    "files": [
-      "static/chunks/627.c40c88e8acfc1987.js"
-    ]
-  },
-  "studio\\[artistName]\\uploadmusic.jsx -> ../../../components/views/studio/uploadmusic/UploadMusic": {
-    "id": 35626,
-    "files": [
-      "static/chunks/181.9409a5b856cd8735.js",
-      "static/chunks/398.3f33185d78d54a9c.js"
+      "static/chunks/node_modules_next_dist_pages__error_js.js"
     ]
   }
 }

@@ -1,23 +1,6 @@
 {
-  "/404": "pages/404.html",
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
-  "/auction": "pages/auction.js",
-  "/auction/product": "pages/auction/product.js",
-  "/": "pages/index.js",
-  "/mypage/FavArtitst": "pages/mypage/FavArtitst.js",
-  "/mypage/favorists": "pages/mypage/favorists.js",
-  "/mypage": "pages/mypage.js",
-  "/mypage/infoedit": "pages/mypage/infoedit.js",
-  "/mypage/mynft": "pages/mypage/mynft.js",
-  "/mypage/playlists": "pages/mypage/playlists.js",
-  "/mypage/subscription": "pages/mypage/subscription.js",
-  "/nft": "pages/nft.js",
-  "/nft/marketplace": "pages/nft/marketplace.js",
-  "/purchaseinfo": "pages/purchaseinfo.js",
-  "/streaming": "pages/streaming.js",
-  "/studio/[artistName]": "pages/studio/[artistName].js",
-  "/studio/[artistName]/uploadmusic": "pages/studio/[artistName]/uploadmusic.js",
-  "/subscriptionbuy": "pages/subscriptionbuy.js",
-  "/_error": "pages/_error.js"
+  "/_error": "pages/_error.js",
+  "/streaming/home": "pages/streaming/home.js"
 }
