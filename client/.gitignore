@@ -9,7 +9,9 @@
 /coverage
 
 # next.js
+/.next/
 /out/
+.next
 
 # production
 /build
@@ -17,6 +19,9 @@
 # misc
 .DS_Store
 *.pem
+
+# mintData
+mint.json
 
 # debug
 npm-debug.log*
@@ -29,9 +34,26 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.env.development
+.env.test
+.env.production
 
 # vercel
 .vercel
 
-./package-lock.json
-.next
+.env
+package-lock.json
+yarn.lock
+uploads
+json
+mymusic
+*.mp3
+
+client/package-lock.json
+webwebweb3.pem
+
+#hardhat
+hardhat/artifacts
+hardhat/cache
+hardhat/node_modules
+hardhat/package-lock.json
