@@ -186,7 +186,12 @@ const AuctionProductPage = () => {
               <AuctionDivider />
               {userData && (
                 <>
-                  <MyBidBox product={product} gapTime={gapTime} />
+                  <MyBidBox
+                    product={product}
+                    gapTime={gapTime}
+                    highestBid={highestBid}
+                    owner={owner}
+                  />
                 </>
               )}
               {userData &&
