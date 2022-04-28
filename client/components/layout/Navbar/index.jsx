@@ -14,7 +14,7 @@ import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { userData, logInUserError } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const { account } = useWalletInfo();

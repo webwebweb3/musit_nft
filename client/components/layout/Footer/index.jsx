@@ -50,7 +50,7 @@ const Footer = () => {
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
   const [mySeekTime, setMySeekTime] = useState(0);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const playingMusic = () => {
     isPlaying
@@ -225,7 +225,7 @@ const Footer = () => {
             backgroundColor: '#242424',
             marginBottom: '20px',
           }}
-          style={show ? { display: 'block' } : { display: 'none' }}
+          style={show && toggle ? { display: 'block' } : { display: 'none' }}
         >
           <div
             style={{
@@ -239,7 +239,13 @@ const Footer = () => {
             <div style={{ marginBottom: '40px', width: '100%' }}>
               <div className="ListContainer">
                 <span className="CoverArt">
-                  <Image src="/AR.jpg" width="600px" height="600px" />
+                  {currentMusic && (
+                    <Image
+                      src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${currentMusic.albumCover}`}
+                      width="600px"
+                      height="600px"
+                    />
+                  )}
                 </span>
                 <div className="TList" style={{ backgroundColor: '#0d0f1a' }}>
                   <h2 style={{ color: '#fff', paddingLeft: '30px' }}>
@@ -277,7 +283,7 @@ const Footer = () => {
                             {music.title}
                           </span>
                         </span>
-                        <span style={{ margin: 'auto 50px' }}>00:00</span>
+                        {/* <span style={{ margin: 'auto 50px' }}>00:00</span> */}
                       </div>
                     ))}
                 </div>

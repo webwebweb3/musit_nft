@@ -13,7 +13,7 @@ import { Box, Button } from '@mui/material';
 
 const MarketLayout = ({ children, value }) => {
   const { userData } = useSelector(state => state.user);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Box className="auctionAllContainer">
       <Box className="auctionMainContainer">

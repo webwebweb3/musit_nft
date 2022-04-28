@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 const LatestMusic = ({ func }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [musics, setMusics] = useState([]);
   const getMusic = async () => {
     try {

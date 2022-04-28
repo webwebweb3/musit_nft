@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 const GetBalance = ({ metamask }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [balance, setBalance] = useState();
   const { userData } = useSelector(state => state.user);
   const getMyBalance = async () => {

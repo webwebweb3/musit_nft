@@ -12,7 +12,7 @@ import GetBalance from '$components/views/getBalance/GetBalance';
 import { useTranslation } from 'react-i18next';
 
 const RegisterCheck = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { userData } = useSelector(state => state.user);
 
   const { network, account } = useWalletInfo();

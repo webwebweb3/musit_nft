@@ -9,7 +9,7 @@ import PageList from '$components/layout/page';
 import { useTranslation } from 'react-i18next';
 
 const MyNFT = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { userData } = useSelector(state => state.user);
   const [myNFT, setMyNFT] = useState();
   const [saleStatus, setSaleStatus] = useState(false);
