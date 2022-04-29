@@ -6,10 +6,8 @@ import { Box, Button } from '@mui/material';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import { useWalletInfo } from '$hooks/web3';
 import PageList from '$components/layout/page';
-import { useTranslation } from 'react-i18next';
 
 const MyNFT = () => {
-  const { t } = useTranslation();
   const { userData } = useSelector(state => state.user);
   const [myNFT, setMyNFT] = useState();
   const [saleStatus, setSaleStatus] = useState(false);
@@ -74,7 +72,7 @@ const MyNFT = () => {
     try {
       if (!account) return;
       if (saleStatus) {
-        alert(`${t('AgreeAlready')}`);
+        alert(`$이미 판매에 동의 하셨습니다.`);
         return;
       }
       const response = await mintMusicTokenContract.methods
@@ -103,7 +101,7 @@ const MyNFT = () => {
             <Box className="approveBox">
               <Button onClick={onClickSalesApproval}>
                 <AddTaskIcon className="approveTextIcon" />
-                <span className="approveText">{t('SaleAgree')}</span>
+                <span className="approveText">판매동의를 먼저 해주세요!</span>
               </Button>
             </Box>
           )}
