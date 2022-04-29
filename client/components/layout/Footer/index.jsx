@@ -20,14 +20,6 @@ import ControlsToggleButton from './music/Button';
 import Slide from 'react-reveal/Slide';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
-import MusicCard from '../../views/cards/MusicCard';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import PauseCircleIcon from '@mui/icons-material/PauseCircle';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
   const audioElement = useRef();
@@ -50,7 +42,6 @@ const Footer = () => {
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
   const [mySeekTime, setMySeekTime] = useState(0);
-  const { t } = useTranslation();
 
   const playingMusic = () => {
     isPlaying
@@ -165,7 +156,7 @@ const Footer = () => {
 
   const toggleAction = useCallback(() => {
     if (!userData) {
-      alert(t('LoginPlz'));
+      alert('로그인을 해주세요');
       return;
     }
     setToggle(!toggle);
@@ -249,7 +240,7 @@ const Footer = () => {
                 </span>
                 <div className="TList" style={{ backgroundColor: '#0d0f1a' }}>
                   <h2 style={{ color: '#fff', paddingLeft: '30px' }}>
-                    {t('PlayLists')}
+                    재생목록
                   </h2>
                   {userInfo &&
                     userInfo.map(music => (

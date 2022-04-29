@@ -28,12 +28,9 @@ const MusicCard = ({
   editionNum,
 }) => {
   const { userData } = useSelector(state => state.user);
-  const onClickPlay = () => {
-    func('');
-  };
 
   return (
-    <Card className="cardBox" onClick={onClickPlay}>
+    <Card className="cardBox">
       <Slide top>
         <div className="styledCard" style={{ position: 'relative' }}>
           {userData && editionNum && (

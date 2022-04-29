@@ -33,6 +33,9 @@ import {
   AUCTION_TOKEN_INFO_REQUEST,
   AUCTION_TOKEN_INFO_SUCCESS,
   AUCTION_TOKEN_INFO_FAILURE,
+  AUCTION_GET_MYMONEY_REQUEST,
+  AUCTION_GET_MYMONEY_SUCCESS,
+  AUCTION_GET_MYMONEY_FAILURE,
 } from '$reduxsaga/request/types';
 
 export const initialState = {
@@ -69,6 +72,9 @@ export const initialState = {
   auctionTokenInfoLoading: false,
   auctionTokenInfoDone: false,
   auctionTokenInfoError: null,
+  auctionGetMyMoneyLoading: false,
+  auctionGetMyMoneyDone: false,
+  auctionGetMyMoneyError: null,
   myBidData: null,
   allAuctionData: null,
   auctionData: null,
@@ -231,6 +237,19 @@ const MetamaskReducer = (state = initialState, action) =>
       case AUCTION_FINALIZE_FAILURE:
         draft.finalizeAuctionLoading = false;
         draft.finalizeAuctionError = action.error;
+        break;
+      case AUCTION_GET_MYMONEY_REQUEST:
+        draft.auctionGetMyMoneyLoading = true;
+        draft.auctionGetMyMoneyError = null;
+        draft.auctionGetMyMoneyDone = false;
+        break;
+      case AUCTION_GET_MYMONEY_SUCCESS:
+        draft.auctionGetMyMoneyLoading = false;
+        draft.auctionGetMyMoneyDone = true;
+        break;
+      case AUCTION_GET_MYMONEY_FAILURE:
+        draft.auctionGetMyMoneyLoading = false;
+        draft.auctionGetMyMoneyError = action.error;
         break;
       default:
         return state;

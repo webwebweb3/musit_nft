@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ErrorOutline } from '@mui/icons-material';
 import { Button, CircularProgress } from '@mui/material';
@@ -9,10 +9,8 @@ import { MetamaskButton, RegisterModal } from '../../contents';
 import ProfileButton from '../myMenu';
 import NetworkCheck from './NetworkCheck';
 import GetBalance from '$components/views/getBalance/GetBalance';
-import { useTranslation } from 'react-i18next';
 
 const RegisterCheck = () => {
-  const { t } = useTranslation();
   const { userData } = useSelector(state => state.user);
 
   const { network, account } = useWalletInfo();
@@ -51,7 +49,7 @@ const RegisterCheck = () => {
               <span style={{ paddingRight: '10px' }}>
                 <ErrorOutline />
               </span>
-              {t('InstallMetamask')}
+              메타마스크를 설치해주세요!
             </div>
           </Button>
         </div>
@@ -60,9 +58,9 @@ const RegisterCheck = () => {
           <div style={{ marginLeft: 'auto' }}>
             {account.data && <GetBalance metamask={account.data} />}
           </div>
-          <div style={{ paddingRight: '20px' }}>
+          {/* <div style={{ paddingRight: '20px' }}>
             <ProfileButton value="notice" />
-          </div>
+          </div> */}
           <div style={{ paddingRight: '20px' }}>
             <ProfileButton value="mypage" />
           </div>

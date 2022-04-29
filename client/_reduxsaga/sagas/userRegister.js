@@ -39,7 +39,7 @@ function* logIn(action) {
 
     yield put({
       type: LOGIN_USER_SUCCESS,
-      data: result.data,
+      data: { ...result.data, user: [] },
     });
   } catch (err) {
     console.error(err);

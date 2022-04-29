@@ -13,12 +13,9 @@ import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import SpatialTrackingIcon from '@mui/icons-material/SpatialTracking';
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { useTranslation } from 'react-i18next';
 
 const Sidebar = ({ userData }) => {
-  const { t } = useTranslation();
   return (
     <>
       <Box
@@ -50,7 +47,7 @@ const Sidebar = ({ userData }) => {
                   <ListItemIcon sx={{ color: '#fff' }}>
                     <Person />
                   </ListItemIcon>
-                  <ListItemText primary={`${t('UserInfoEdit')}`} />
+                  <ListItemText primary={`회원 정보 수정`} />
                 </ListItemButton>
               </Link>
             </ListItem>
@@ -69,7 +66,7 @@ const Sidebar = ({ userData }) => {
                 <ListItemIcon sx={{ color: '#fff' }}>
                   <AudiotrackIcon />
                 </ListItemIcon>
-                <ListItemText primary={`${t('LikedTracks')}`} />
+                <ListItemText primary={`좋아하는 노래`} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
@@ -78,7 +75,7 @@ const Sidebar = ({ userData }) => {
                   <ListItemIcon sx={{ color: '#fff' }}>
                     <SpatialTrackingIcon />
                   </ListItemIcon>
-                  <ListItemText primary={`${t('LikedArtists')}`} />
+                  <ListItemText primary={`좋아하는 아티스트`} />
                 </ListItemButton>
               </Link>
             </ListItem>
@@ -88,18 +85,20 @@ const Sidebar = ({ userData }) => {
                   <ListItemIcon sx={{ color: '#fff' }}>
                     <LibraryMusicIcon />
                   </ListItemIcon>
-                  <ListItemText primary={`${t('MyPlaylists')}`} />
+                  <ListItemText primary={`나의 재생목록`} />
                 </ListItemButton>
               </Link>
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ color: '#fff' }}>
-                  <CardMembershipIcon />
-                </ListItemIcon>
-                <ListItemText primary={`${t('SubscriptionInfo')}`} />
-              </ListItemButton>
+              <Link href="/mypage/mysubinfo">
+                <ListItemButton>
+                  <ListItemIcon sx={{ color: '#fff' }}>
+                    <CardMembershipIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={`이용권 정보 조회`} />
+                </ListItemButton>
+              </Link>
             </ListItem>
           </List>
         </nav>

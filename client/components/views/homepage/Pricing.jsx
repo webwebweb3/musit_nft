@@ -6,10 +6,8 @@ import { GiCrystalize } from 'react-icons/gi';
 import { IconContext } from 'react-icons/lib';
 import { Button } from './Button';
 import { Global } from './pricingStyle';
-import { useTranslation } from 'react-i18next';
 
 function Pricing() {
-  const { t } = useTranslation();
   return (
     <>
       <Global />
@@ -23,13 +21,13 @@ function Pricing() {
                   <div className="icon">
                     <FaFire />
                   </div>
-                  <h3>{t('3monthsfree')}</h3>
+                  <h3>3개월 무료</h3>
                   <h4>0 ETH</h4>
                   <p>per month</p>
                   <ul className="pricing__container-features">
-                    <li>{t('FreeStreaming')}</li>
-                    <li>{t('SubscriptionFree')}</li>
-                    <li>{t('3MonthsFreeNFT')}</li>
+                    <li>무료 스트리밍</li>
+                    <li>아티스트 가입비 무료</li>
+                    <li>3개월간 NFT 거래 가능</li>
                   </ul>
                   <Button buttonSize="btn--wide" buttonColor="primary">
                     Choose Plan
@@ -41,13 +39,13 @@ function Pricing() {
                   <div className="icon">
                     <BsXDiamondFill />
                   </div>
-                  <h3>{t('User')}</h3>
+                  <h3>유저</h3>
                   <h4>0.05 ETH ~</h4>
                   <p>per month</p>
                   <ul className="pricing__container-features">
-                    <li>{t('UnlimitedStreaming')}</li>
-                    <li>{t('PlayListsService')}</li>
-                    <li>{t('ArtistsBucket')}</li>
+                    <li>무제한 스트리밍 서비스</li>
+                    <li>플레이리스트 제공</li>
+                    <li>아티스트 바구니 제공</li>
                   </ul>
                   <Button buttonSize="btn--wide" buttonColor="blue">
                     Choose Plan
@@ -59,13 +57,13 @@ function Pricing() {
                   <div className="icon">
                     <GiCrystalize />
                   </div>
-                  <h3>{t('Artists')}</h3>
+                  <h3>아티스트</h3>
                   <h4>0.1 ETH ~</h4>
                   <p>per month</p>
                   <ul className="pricing__container-features">
-                    <li>{t('UnlimitedStreaming')}</li>
-                    <li>{t('NFTTrade')}</li>
-                    <li>{t('NFTTrack')}</li>
+                    <li>무제한 스트리밍 서비스</li>
+                    <li>NFT 거래/경매 가능</li>
+                    <li>NFT 음원 등록 가능</li>
                   </ul>
                   <Button buttonSize="btn--wide" buttonColor="primary">
                     Choose Plan

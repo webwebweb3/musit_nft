@@ -4,6 +4,7 @@
 @import './auction.css';
 @import './marketplace.css';
 @import './myArtist.css';
+@import './mysubinfo.css';
 
 html,
 body {
@@ -181,31 +182,29 @@ body:hover {
 }
 
 @media screen and (max-width: 960px) {
-  .CoverArt{
+  .CoverArt {
     align-items: center;
-      width: 100%;
+    width: 100%;
   }
-  .TList{
-   width: auto;
+  .TList {
+    width: auto;
   }
 }
 @media screen and (max-width: 480px) {
-  .CoverArt{
+  .CoverArt {
     align-items: center;
-      width: 100%;
+    width: 100%;
   }
-  .TList{
-   width: auto;
+  .TList {
+    width: auto;
   }
 }
-
 
 .TList {
   margin-left: 50px;
   display: inline-block;
- 
 }
-.CoverArt{
+.CoverArt {
   width: 600px;
   height: 600px;
   display: inline;

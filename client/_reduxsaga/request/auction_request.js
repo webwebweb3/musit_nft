@@ -7,6 +7,7 @@ import {
   AUCTION_MYBID_REQUEST,
   AUCTION_FINALIZE_REQUEST,
   AUCTION_APPROVE_REQUEST,
+  AUCTION_GET_MYMONEY_REQUEST,
 } from '$reduxsaga/request/types';
 
 export const createAuctionAction = data => ({
@@ -45,5 +46,9 @@ export const auctionMyBidAction = data => ({
 
 export const auctionFinalizeAction = data => ({
   type: AUCTION_FINALIZE_REQUEST,
+  data,
+});
+export const auctionGetMyMoney = data => ({
+  type: AUCTION_GET_MYMONEY_REQUEST,
   data,
 });

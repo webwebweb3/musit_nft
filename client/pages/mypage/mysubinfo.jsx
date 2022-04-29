@@ -1,14 +1,19 @@
 import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
+
 import wrapper from '$reduxsaga/store/configureStore';
-import HomePage from '$components/views/homepage/Home';
+import MyPageLayout from '$components/views/mypage/layout';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';
 
-const Home = () => {
+import MySubInfo from '$components/views/mypage/mysubinfo/MySubInfo';
+
+const MySubInfoPage = () => {
   return (
     <>
-      <HomePage />
+      <MyPageLayout>
+        <MySubInfo />
+      </MyPageLayout>
     </>
   );
 };
@@ -21,7 +26,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (req && cookie) {
         axios.defaults.headers.Cookie = cookie;
       }
-
       store.dispatch(myInfoRequestAction());
 
       store.dispatch(END);
@@ -29,4 +33,4 @@ export const getServerSideProps = wrapper.getServerSideProps(
     },
 );
 
-export default Home;
+export default MySubInfoPage;
