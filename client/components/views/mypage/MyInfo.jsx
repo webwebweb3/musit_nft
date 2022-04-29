@@ -61,7 +61,7 @@ const MyInfo = () => {
 
   return (
     <>
-      <h1 style={{ marginTop: '-1px', marginBottom: '25px', color: '#dada' }}>
+      <h1 style={{ marginTop: '-1px', marginBottom: '25px', color: '#fff' }}>
         프로필 편집하기
       </h1>
       <form encType="multipart/form-data" onSubmit={onSubmit}>

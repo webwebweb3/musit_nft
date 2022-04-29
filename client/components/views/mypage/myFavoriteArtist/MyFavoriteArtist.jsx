@@ -30,7 +30,7 @@ const MyFavoriteArtist = () => {
   return (
     <Box>
       <Box>
-        <h1 style={{ marginTop: '-1px', color: '#dada' }}>좋아하는 아티스트</h1>
+        <h1 style={{ marginTop: '-1px', color: '#fff' }}>좋아하는 아티스트</h1>
       </Box>
       <Box className="mypage_myfavorite_artist_contents">
         <Grid container columns={{ xs: 3, sm: 8, md: 12 }}>

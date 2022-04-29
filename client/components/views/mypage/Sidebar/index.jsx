@@ -94,12 +94,14 @@ const Sidebar = ({ userData }) => {
             </ListItem>
 
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon sx={{ color: '#fff' }}>
-                  <CardMembershipIcon />
-                </ListItemIcon>
-                <ListItemText primary={`${t('SubscriptionInfo')}`} />
-              </ListItemButton>
+              <Link href="/mypage/mysubinfo">
+                <ListItemButton>
+                  <ListItemIcon sx={{ color: '#fff' }}>
+                    <CardMembershipIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={`${t('SubscriptionInfo')}`} />
+                </ListItemButton>
+              </Link>
             </ListItem>
           </List>
         </nav>
