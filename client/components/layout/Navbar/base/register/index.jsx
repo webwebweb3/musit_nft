@@ -58,9 +58,9 @@ const RegisterCheck = () => {
           <div style={{ marginLeft: 'auto' }}>
             {account.data && <GetBalance metamask={account.data} />}
           </div>
-          <div style={{ paddingRight: '20px' }}>
+          {/* <div style={{ paddingRight: '20px' }}>
             <ProfileButton value="notice" />
-          </div>
+          </div> */}
           <div style={{ paddingRight: '20px' }}>
             <ProfileButton value="mypage" />
           </div>

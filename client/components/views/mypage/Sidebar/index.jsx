@@ -47,7 +47,7 @@ const Sidebar = ({ userData }) => {
                   <ListItemIcon sx={{ color: '#fff' }}>
                     <Person />
                   </ListItemIcon>
-                  <ListItemText primary={`$회원 정보 수정`} />
+                  <ListItemText primary={`회원 정보 수정`} />
                 </ListItemButton>
               </Link>
             </ListItem>
@@ -66,7 +66,7 @@ const Sidebar = ({ userData }) => {
                 <ListItemIcon sx={{ color: '#fff' }}>
                   <AudiotrackIcon />
                 </ListItemIcon>
-                <ListItemText primary={`$좋아하는 노래`} />
+                <ListItemText primary={`좋아하는 노래`} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
@@ -75,7 +75,7 @@ const Sidebar = ({ userData }) => {
                   <ListItemIcon sx={{ color: '#fff' }}>
                     <SpatialTrackingIcon />
                   </ListItemIcon>
-                  <ListItemText primary={`$좋아하는 아티스트`} />
+                  <ListItemText primary={`좋아하는 아티스트`} />
                 </ListItemButton>
               </Link>
             </ListItem>
@@ -85,7 +85,7 @@ const Sidebar = ({ userData }) => {
                   <ListItemIcon sx={{ color: '#fff' }}>
                     <LibraryMusicIcon />
                   </ListItemIcon>
-                  <ListItemText primary={`$나의 재생목록`} />
+                  <ListItemText primary={`나의 재생목록`} />
                 </ListItemButton>
               </Link>
             </ListItem>
@@ -96,7 +96,7 @@ const Sidebar = ({ userData }) => {
                   <ListItemIcon sx={{ color: '#fff' }}>
                     <CardMembershipIcon />
                   </ListItemIcon>
-                  <ListItemText primary={`$이용권 정보 조회`} />
+                  <ListItemText primary={`이용권 정보 조회`} />
                 </ListItemButton>
               </Link>
             </ListItem>
