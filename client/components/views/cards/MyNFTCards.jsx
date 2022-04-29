@@ -92,7 +92,7 @@ const NFTCards = ({
       if (response.status) {
         setMyNFTPrice(web3.utils.toWei(sellPrice, 'ether'));
         setIsLoading(false);
-        Router.push(`/nft/marketplace/edition/${musicTokenIds}`);
+        // Router.push(`/nft/marketplace/edition/${musicTokenIds}`);
       }
     } catch (error) {
       console.error(error);

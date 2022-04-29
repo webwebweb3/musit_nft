@@ -14,7 +14,7 @@ const MySubInfo = () => {
       fromBlock: 0,
     });
 
-    const mySub = mySubHistory.slice(mySubHistory.length - 1).reverse();
+    const mySub = mySubHistory.reverse();
     setMySubscribe(mySub);
   };
   let dateNow = parseInt(Math.round(new Date().getTime() / 1000));
@@ -60,44 +60,47 @@ const MySubInfo = () => {
                   <Box className="mypage_mysubinfo_contents_title">
                     이전 구독 정보
                   </Box>
-                  <Box
-                    style={{
-                      display: 'inline-block',
-                      fontSize: '20px',
-                      marginRight: '40px',
-                    }}
-                  >
-                    {new Date(
-                      mySubscribe[0].returnValues.date * 1000,
-                    ).getFullYear() +
-                      '-' +
-                      (new Date(
-                        mySubscribe[0].returnValues.date * 1000,
-                      ).getMonth() +
-                        1) +
-                      '-' +
-                      new Date(
-                        mySubscribe[0].returnValues.date * 1000,
-                      ).getDate()}
-                  </Box>
-                  <FirstIcon />
-                  <Box className="mypage_mysubinfo_contents_contents">
-                    <Box
-                      style={{
-                        display: 'inline-block',
-                        marginLeft: '10px',
-                        marginRight: '10px',
-                      }}
-                    >
-                      {
-                        allDatas[mySubscribe[0].returnValues.planId]
-                          .subIconTitle
-                      }
-                    </Box>
-                    <Box style={{ display: 'inline-block' }}>
-                      {allDatas[mySubscribe[0].returnValues.planId].months}달
-                    </Box>
-                  </Box>
+                  {mySubscribe.map((v, i) => {
+                    return (
+                      <>
+                        <Box>
+                          <Box
+                            style={{
+                              display: 'inline-block',
+                              fontSize: '20px',
+                              marginRight: '40px',
+                            }}
+                          >
+                            {new Date(
+                              v.returnValues.date * 1000,
+                            ).getFullYear() +
+                              '-' +
+                              (new Date(v.returnValues.date * 1000).getMonth() +
+                                1) +
+                              '-' +
+                              new Date(v.returnValues.date * 1000).getDate()}
+                          </Box>
+
+                          {/* {allDatas[v.returnValues.planId].Icon} */}
+                          <FirstIcon />
+                          <Box className="mypage_mysubinfo_contents_contents">
+                            <Box
+                              style={{
+                                display: 'inline-block',
+                                marginLeft: '10px',
+                                marginRight: '10px',
+                              }}
+                            >
+                              {allDatas[v.returnValues.planId].subIconTitle}
+                            </Box>
+                            <Box style={{ display: 'inline-block' }}>
+                              {allDatas[v.returnValues.planId].months}달
+                            </Box>
+                          </Box>
+                        </Box>
+                      </>
+                    );
+                  })}
                 </Box>
                 <Box style={{ marginTop: '20px' }}>
                   {userData?.subscription * 1000 <= Date.now() && (

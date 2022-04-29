@@ -15,6 +15,7 @@ import {
   MARKETPLACE_PURCHASE_REQUEST,
   MARKETPLACE_PURCHASE_SUCCESS,
 } from '$reduxsaga/request/types';
+import Router from 'next/router';
 
 function getNFTOwner(data) {
   return Axios.get('/marketplace', {
@@ -53,6 +54,7 @@ function* cancelNFT(action) {
       type: MARKETPLACE_CANCEl_SUCCESS,
       data: 'success',
     });
+    Router.push('/mypage/mynft');
   } catch (err) {
     console.error(err);
     yield put({

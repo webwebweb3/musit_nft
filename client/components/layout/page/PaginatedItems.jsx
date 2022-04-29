@@ -13,7 +13,7 @@ const PaginatedItems = ({ items, saleStatus, type }) => {
     if (!items) return;
 
     const endOffset = itemOffset + sizeState;
-    setCurrentItems(items.slice(itemOffset, endOffset));
+    setCurrentItems(items.slice(itemOffset, endOffset).reverse());
     setPageCount(Math.ceil(items.length / sizeState));
   }, [itemOffset, sizeState, items]);
 
