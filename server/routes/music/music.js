@@ -43,7 +43,11 @@ router.post('/', async (req, res) => {
     const userId = await User.findOne({
       where: { metamask: userMetamask },
     });
-    const insertSql = `INSERT INTO musiclikes (user, music) VALUE (${userId.id}, ${editionNum});`;
+    const dateNow = new Date();
+    const date = `${dateNow.toISOString().split('T')[0]} ${
+      dateNow.toTimeString().split(' ')[0]
+    }`;
+    const insertSql = `INSERT INTO musiclikes (createdAt, user, music) VALUE ('${date}',${userId.id}, ${editionNum});`;
     await sequelize.query(insertSql, {
       type: QueryTypes.INSERT,
     });

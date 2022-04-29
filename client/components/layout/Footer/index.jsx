@@ -271,7 +271,7 @@ const Footer = () => {
                             {music.title}
                           </span>
                           <span style={{ margin: 'auto 20px' }}>
-                            {music.title}
+                            {music.User.name}
                           </span>
                         </span>
                         {/* <span style={{ margin: 'auto 50px' }}>00:00</span> */}
@@ -282,7 +282,7 @@ const Footer = () => {
               <div className="bottomPanel" style={{ width: '50%' }}>
                 {currentMusic && (
                   <h1 style={{ color: '#fff' }}>
-                    {currentMusic.title}/ {currentMusic.title}
+                    {currentMusic.title}/ {currentMusic.User.name}
                   </h1>
                 )}
               </div>
@@ -429,12 +429,7 @@ const Footer = () => {
               </div>
               <div style={{ color: '#ffffffa0' }}>{currentMusic.title}</div>
             </div>
-            <Button>
-              <Favorite
-                fontSize="medium"
-                sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
-              />
-            </Button>
+            <Button></Button>
             <Button
               className="btn btn-success my-5"
               type="button"
