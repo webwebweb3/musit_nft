@@ -1,3 +1,4 @@
+import Web3provider from '$providers/hooks';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import MultipleSelectChip from '../../mui/ChipGenre';

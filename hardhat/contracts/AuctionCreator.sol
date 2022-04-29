@@ -6,8 +6,6 @@ import "./MintMusicToken.sol";
 import { Auction } from "./Auction.sol";
 
 contract AuctionCreator{
-    uint256 public tokenID;    // 토큰 ID
-
     MintMusicToken public mintMusicTokenAddress;
 
     AuctionInformation[] public auctions;

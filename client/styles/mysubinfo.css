@@ -1,0 +1,11 @@
+.mypage_mysubinfo_contents {
+  color: #fff;
+}
+.mypage_mysubinfo_contents_title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.mypage_mysubinfo_contents_contents {
+  display: inline-block;
+  font-size: 20px;
+}

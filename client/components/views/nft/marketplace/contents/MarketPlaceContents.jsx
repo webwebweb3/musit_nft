@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 const MarketPlaceContents = () => {
   const [saleMusicTokens, setSaleMusicTokens] = useState();
   const router = useRouter();
-  let { search, genre } = router.query;
+  let { artist, genre, title } = router.query;
 
   const getOnSaleMusicTokens = async () => {
     try {
@@ -31,14 +31,22 @@ const MarketPlaceContents = () => {
         });
       }
 
-      if (search) {
+      if (artist) {
         let searchTokenArray = tempMusicTokenArray.filter(
           tempMusicToken =>
             tempMusicToken.musicTokenData.properties.dataToSubmit.artist ===
-            search,
+            artist,
         );
 
         tempMusicTokenArray = searchTokenArray;
+      } else if (title) {
+        let searchTitleTokenArray = tempMusicTokenArray.filter(
+          tempMusicToken =>
+            tempMusicToken.musicTokenData.properties.dataToSubmit.title ===
+            title,
+        );
+
+        tempMusicTokenArray = searchTitleTokenArray;
       } else if (genre) {
         let genreArray = tempMusicTokenArray.filter(
           tempMusicToken =>
@@ -56,7 +64,7 @@ const MarketPlaceContents = () => {
   };
   useEffect(() => {
     getOnSaleMusicTokens();
-  }, [search, genre]);
+  }, [artist, title, genre]);
 
   return (
     <Box sx={style.ContentsContainer}>

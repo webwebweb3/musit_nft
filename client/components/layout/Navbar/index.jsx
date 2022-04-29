@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
+import Image from 'next/image';
 import { AppBar, Toolbar, Tabs } from '@mui/material';
 
 import {
@@ -10,11 +11,8 @@ import {
 import { useWalletInfo } from '$hooks/web3';
 import { NavbarLink } from '$components/layout/Navbar/contents';
 import { RegisterCheck } from '$components/layout/Navbar/base';
-import Image from 'next/image';
-import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
-  const { t, i18n } = useTranslation();
   const { userData, logInUserError } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const { account } = useWalletInfo();
@@ -27,7 +25,7 @@ const Navbar = () => {
 
     if (userData) {
       if (userData.metamask.toUpperCase() !== account.data.toUpperCase()) {
-        let confirmAction = window.confirm(`${t('AccountChange')}`);
+        let confirmAction = window.confirm(`계정을 전환하시겠습니까?`);
         if (confirmAction) {
           dispatch(loginRequestAction(account.data));
         } else {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { END } from 'redux-saga';
 import axios from 'axios';
-import './i18next';
 import wrapper from '$reduxsaga/store/configureStore';
 import HomePage from '$components/views/homepage/Home';
 import { myInfoRequestAction } from '$reduxsaga/request/user_request';

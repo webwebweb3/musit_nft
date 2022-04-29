@@ -37,11 +37,11 @@ const EditionTokenURI = () => {
         .call();
 
       const ipfsData = await fetch(`https://ipfs.infura.io/ipfs/${tokenURI}`);
-      const data = await ipfsData.json();
-      console.log(data);
+      const jsonData = await ipfsData.json();
+      console.log(jsonData);
       setMusicOwner(ownerOf);
       setMusicPrice(tokenPrice);
-      setMusicData(data);
+      setMusicData(jsonData);
     } catch (error) {
       console.error(error);
     }

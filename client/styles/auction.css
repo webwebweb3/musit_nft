@@ -36,3 +36,15 @@
   color: rgb(25, 118, 210);
   background-color: transparent;
 }
+
+.page > .pageList > .selectBox {
+  color: white;
+  border: 1px solid white;
+  margin-left: 20px;
+  margin-bottom: 120px;
+  height: 45px;
+}
+
+.page > .pageList > .selectBox > svg {
+  color: white;
+}

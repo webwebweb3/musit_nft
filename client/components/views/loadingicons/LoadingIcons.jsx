@@ -24,7 +24,7 @@ const LoadingIcons = () => {
           </Link>
         </ButtonGroup>
         <ButtonGroup variant="text" aria-label="text button group">
-          <Link href="/streaming">
+          <Link href="/streaming/latestMusic">
             <Button
               sx={{
                 '&.MuiButton-text': { color: '#fff' },

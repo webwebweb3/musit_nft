@@ -8,7 +8,6 @@ import {
   VolumeUp,
   VolumeOff,
   Favorite,
-  PlaylistAdd,
   KeyboardArrowDown,
   Headset,
   KeyboardControlKey,
@@ -19,17 +18,8 @@ import Image from 'next/image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ControlsToggleButton from './music/Button';
 import Slide from 'react-reveal/Slide';
-import PlayList from './music/playlist';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
-import MusicCard from '../../views/cards/MusicCard';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import PauseCircleIcon from '@mui/icons-material/PauseCircle';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
   const audioElement = useRef();
@@ -42,7 +32,6 @@ const Footer = () => {
   const [isNextClicked, setNextClicked] = useState(false);
   const [isVolumeClicked, setVolumeClicked] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [currentMusic, setCurrentMusic] = useState();
@@ -53,7 +42,6 @@ const Footer = () => {
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
   const [mySeekTime, setMySeekTime] = useState(0);
-  const { t, i18n } = useTranslation();
 
   const playingMusic = () => {
     isPlaying
@@ -166,13 +154,9 @@ const Footer = () => {
     }
   }, [isNextClicked, isPrevClicked, userInfo]);
 
-  const handleClickOpen = useCallback(() => {
-    setOpen(true);
-  }, []);
-
   const toggleAction = useCallback(() => {
     if (!userData) {
-      alert(t('LoginPlz'));
+      alert('로그인을 해주세요');
       return;
     }
     setToggle(!toggle);
@@ -232,7 +216,7 @@ const Footer = () => {
             backgroundColor: '#242424',
             marginBottom: '20px',
           }}
-          style={show ? { display: 'block' } : { display: 'none' }}
+          style={show && toggle ? { display: 'block' } : { display: 'none' }}
         >
           <div
             style={{
@@ -246,11 +230,17 @@ const Footer = () => {
             <div style={{ marginBottom: '40px', width: '100%' }}>
               <div className="ListContainer">
                 <span className="CoverArt">
-                  <Image src="/AR.jpg" width="600px" height="600px" />
+                  {currentMusic && (
+                    <Image
+                      src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/upload/${currentMusic.albumCover}`}
+                      width="600px"
+                      height="600px"
+                    />
+                  )}
                 </span>
                 <div className="TList" style={{ backgroundColor: '#0d0f1a' }}>
                   <h2 style={{ color: '#fff', paddingLeft: '30px' }}>
-                    {t('PlayLists')}
+                    재생목록
                   </h2>
                   {userInfo &&
                     userInfo.map(music => (
@@ -284,13 +274,17 @@ const Footer = () => {
                             {music.title}
                           </span>
                         </span>
-                        <span style={{ margin: 'auto 50px' }}>00:00</span>
+                        {/* <span style={{ margin: 'auto 50px' }}>00:00</span> */}
                       </div>
                     ))}
                 </div>
               </div>
               <div className="bottomPanel" style={{ width: '50%' }}>
-                <h1 style={{ color: '#fff' }}>가수/ 노래제목</h1>
+                {currentMusic && (
+                  <h1 style={{ color: '#fff' }}>
+                    {currentMusic.title}/ {currentMusic.title}
+                  </h1>
+                )}
               </div>
             </div>
           </div>
@@ -441,13 +435,6 @@ const Footer = () => {
                 sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
               />
             </Button>
-            <Button>
-              <PlaylistAdd
-                onClick={handleClickOpen}
-                fontSize="medium"
-                sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
-              />
-            </Button>
             <Button
               className="btn btn-success my-5"
               type="button"
@@ -588,13 +575,6 @@ const Footer = () => {
                   sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
                 />
               </Button>
-              <Button>
-                <PlaylistAdd
-                  onClick={handleClickOpen}
-                  fontSize="medium"
-                  sx={{ color: 'white', marginLeft: '0px', marginTop: '0px' }}
-                />
-              </Button>
               <Button
                 className="btn btn-success my-5"
                 type="button"
@@ -634,7 +614,6 @@ const Footer = () => {
           </Box>
         </>
       )}
-      <PlayList open={open} setOpen={setOpen} />
     </>
   );
 };

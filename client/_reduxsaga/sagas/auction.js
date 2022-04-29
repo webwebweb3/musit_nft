@@ -39,6 +39,9 @@ import {
   AUCTION_TOKEN_INFO_REQUEST,
   AUCTION_TOKEN_INFO_SUCCESS,
   AUCTION_TOKEN_INFO_FAILURE,
+  AUCTION_GET_MYMONEY_SUCCESS,
+  AUCTION_GET_MYMONEY_FAILURE,
+  AUCTION_GET_MYMONEY_REQUEST,
 } from '$reduxsaga/request/types';
 
 async function createauctionAPI(data) {
@@ -264,6 +267,32 @@ function* auctionfinalize(action) {
   }
 }
 
+async function auctionGetMyMoneyAPI(data) {
+  console.log('데이타', data);
+  let auctionContract = await new web3.eth.Contract(auctionAbi, data.product);
+  await auctionContract.methods.getMyMoney().send({ from: data.metamask });
+
+  return;
+}
+
+function* auctionGetMyMoney(action) {
+  try {
+    let result = yield call(auctionGetMyMoneyAPI, action.data);
+    console.log('리저트', result);
+
+    yield put({
+      type: AUCTION_GET_MYMONEY_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: AUCTION_GET_MYMONEY_FAILURE,
+      error: 'err',
+    });
+  }
+}
+
 async function auctionCheckApproveAPI({ result, product }) {
   let auctionOwner = await result.methods.owner().call();
 
@@ -387,6 +416,10 @@ function* watchAuctionTokenInfo() {
   yield takeLatest(AUCTION_TOKEN_INFO_REQUEST, auctiontokeninfo);
 }
 
+function* watchAuctionGetMyMoney() {
+  yield takeLatest(AUCTION_GET_MYMONEY_REQUEST, auctionGetMyMoney);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchCreateAuction),
@@ -400,5 +433,6 @@ export default function* userSaga() {
     fork(watchAuctionApproveCheck),
     fork(watchAuctionApprove),
     fork(watchAuctionTokenInfo),
+    fork(watchAuctionGetMyMoney),
   ]);
 }

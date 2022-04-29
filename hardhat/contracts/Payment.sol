@@ -17,28 +17,6 @@ contract Payment {
         Artist
     }
 
-    struct Plans {
-        uint256 mulMonth;
-        uint256 getAmount;
-    }
-    event Subscribing(address indexed merchant, address indexed buyer, uint256 amount, uint256 date);
-
-
-    function subscribes(uint256 _mulMonth, uint256 _getAmount)
-         external 
-         payable
-    {
-        // IERC20 token = IERC20(plans[planId].token);
-        uint256 totalAmount = _getAmount.mul(_mulMonth);
-        require(totalAmount <= msg.value);
-        // token.transferFrom(msg.sender, plan.merchant, plan.amount);  
-        payable(merchant).transfer(msg.value);
-        emit Subscribing(merchant, msg.sender, totalAmount,  block.timestamp);
-
-        // subscriptions[msg.sender][planId] = Subscription(msg.sender, block.timestamp, block.timestamp + plan.frequency, true);
-        // emit SubscriptionCreated(msg.sender, planId, block.timestamp + plan.frequency);
-    }
-
     struct Plan {
         address merchant;
         // address token; 

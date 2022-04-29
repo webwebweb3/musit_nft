@@ -120,7 +120,7 @@ export const AuctionBox = styled(Box)`
 
 export const AuctionGray = styled(AuctionBox)`
   color: #dada;
-  font-size: 20px;
+  font-size: 17px;
 `;
 
 export const AuctionTime = styled(AuctionBox)`
@@ -162,7 +162,7 @@ export const StyledOutlinedInput = styled(OutlinedInput)`
 export const StyledFormControl = styled(FormControl)`
   display: block;
   width: 100%;
-  margin: 25px auto;
+  margin: 10px auto 20px auto;
   text-align: center;
 `;
 

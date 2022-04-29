@@ -50,19 +50,6 @@ const NavbarLink = () => {
             label="STREAMING"
             sx={{ fontSize: '18px', marginRight: '10px' }}
           />
-          <Link href="/streaming/home">
-            <Tab
-              disabled={linkDisabled.includes('home')}
-              icon={<Home />}
-              iconPosition="start"
-              label="HOME"
-              sx={{
-                fontSize: '18px',
-                marginLeft: '-20px',
-                marginRight: '10px',
-              }}
-            />
-          </Link>
           <Link href="/streaming/latestMusic">
             <Tab
               disabled={linkDisabled.includes('latestMusic')}
@@ -140,19 +127,6 @@ const NavbarLink = () => {
             onMouseLeave={handleStreamingLeave}
           >
             <Fade left when={streamingShow}>
-              <Link href="/streaming/home">
-                <Tab
-                  disabled={linkDisabled.includes('home')}
-                  icon={<Home />}
-                  iconPosition="start"
-                  label="HOME"
-                  sx={{
-                    fontSize: '18px',
-                    marginLeft: '-20px',
-                    marginRight: '10px',
-                  }}
-                />
-              </Link>
               <Link href="/streaming/latestMusic">
                 <Tab
                   disabled={linkDisabled.includes('latestMusic')}
@@ -224,19 +198,6 @@ const NavbarLink = () => {
             onMouseLeave={handleStreamingLeave}
           >
             <Fade left when={streamingShow}>
-              <Link href="/streaming/home">
-                <Tab
-                  disabled={linkDisabled.includes('home')}
-                  icon={<Home />}
-                  iconPosition="start"
-                  label="HOME"
-                  sx={{
-                    fontSize: '18px',
-                    marginLeft: '-20px',
-                    marginRight: '10px',
-                  }}
-                />
-              </Link>
               <Link href="/streaming/latestMusic">
                 <Tab
                   disabled={linkDisabled.includes('latestMusic')}

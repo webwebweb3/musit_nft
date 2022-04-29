@@ -8,7 +8,10 @@ import marketPlace from './marketPlace';
 import studio from './studio';
 import music from './music';
 
-Axios.defaults.baseURL = 'http://13.125.197.70';
+Axios.defaults.baseURL =
+  process.env.NODE_ENV === 'production'
+    ? 'http://13.125.197.70'
+    : 'http://localhost:8000/api';
 Axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {

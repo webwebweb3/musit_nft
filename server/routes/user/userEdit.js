@@ -1,10 +1,12 @@
 const express = require('express');
+
 const router = express.Router();
 const path = require('path');
 const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 const multer = require('multer');
-const { User, Genre } = require('../../models');
+const { QueryTypes } = require('sequelize');
+const { User, Genre, sequelize } = require('../../models');
 
 require('dotenv').config();
 
@@ -32,7 +34,7 @@ const upload = multer({
 router.post('/', upload.none(), async (req, res) => {
   try {
     console.log(req.body);
-    const { metamask, name, nationality, img, pass } = req.body;
+    const { metamask, name, nationality, img, pass, genre } = req.body;
 
     await User.update(
       {
@@ -49,7 +51,7 @@ router.post('/', upload.none(), async (req, res) => {
     const UserInfo = await User.findOne({
       where: { metamask },
       attributes: {
-        exclude: ['id', 'updatedAt', 'deletedAt'],
+        exclude: ['updatedAt', 'deletedAt'],
       },
       include: {
         model: Genre,
@@ -57,18 +59,24 @@ router.post('/', upload.none(), async (req, res) => {
       },
     });
 
-    // if (genre) {
-    //   const result = await Promise.all(
-    //     genre.map(index => {
-    //       return Genre.findOrCreate({
-    //         where: { content: index },
-    //       });
-    //     }),
-    //   );
-    //   await UserInfo.addGenre(result.map(r => r[0]));
-    // }
+    const deleteGenre = `DELETE FROM UserGenre WHERE UserId = ${UserInfo.id};`;
+    const deleteGenreResult = await sequelize.query(deleteGenre, {
+      type: QueryTypes.DELETE,
+    });
+    console.log('딜리트', deleteGenreResult);
 
-    return res.status(200).json(UserInfo);
+    if (genre) {
+      const result = await Promise.all(
+        genre.map(index => {
+          return Genre.findOrCreate({
+            where: { content: index },
+          });
+        }),
+      );
+      await UserInfo.addGenre(result.map(r => r[0]));
+    }
+
+    res.status(200).json(UserInfo);
   } catch (error) {
     console.error(error);
   }

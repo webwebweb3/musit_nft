@@ -1,5 +1,5 @@
 {
-    "contractAddress": "0x606bFc71C50cBB7e002EdDbb5e3Ad1912F595896",
+    "contractAddress": "0xec77628f791FE7cFb10f7c0aC7352f146a9AB68b",
     "_format": "hh-sol-artifact-1",
     "contractName": "MintMusicToken",
     "sourceName": "contracts/MintMusicToken.sol",

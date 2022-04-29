@@ -3,10 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { streamingContract } from '$contracts';
 import MusicCard from '$components/views/cards/MusicCard';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 
 const LatestMusic = ({ func }) => {
-  const { t, i18n } = useTranslation();
   const [musics, setMusics] = useState([]);
   const getMusic = async () => {
     try {
@@ -45,9 +43,9 @@ const LatestMusic = ({ func }) => {
     <Box className="streamingBox">
       <Box>
         <Box className="streamingTitle">
-          {t('LatestMusics')}
+          최신 등록 음악
           <Link href={`/streaming/latestMusic`}>
-            <span className="latestMusic">{t('SeeAll')}</span>
+            <span className="latestMusic">모두 보기</span>
           </Link>
         </Box>
       </Box>

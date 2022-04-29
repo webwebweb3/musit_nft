@@ -6,11 +6,17 @@ const StudioProfile = ({ profile }) => {
       {profile === 'defaultProfile' ? (
         <img
           src="/defaultProfile.png"
-          width={'100%'}
+          width={'150px'}
+          height={'150px'}
           style={{ borderRadius: '100%' }}
         />
       ) : (
-        <img src={profile} width={'100%'} style={{ borderRadius: '100%' }} />
+        <img
+          src={profile}
+          width={'150px'}
+          height={'150px'}
+          style={{ borderRadius: '100%' }}
+        />
       )}
     </>
   );

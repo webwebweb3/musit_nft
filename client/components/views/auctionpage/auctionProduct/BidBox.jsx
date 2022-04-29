@@ -1,25 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { AuctionBox, AuctionGray, EthereumImg } from '../style';
 
-const BidBox = ({ gapTime }) => {
-  const { auctionData } = useSelector(state => state.auction);
-  const [highestBid, setHighestBid] = useState('');
-  const [highestBidder, setHighestBidder] = useState('');
-
-  useEffect(() => {
-    if (auctionData) {
-      setHighestBid(auctionData.highestBindingBid);
-      if (
-        auctionData.highestBidder !==
-        '0x0000000000000000000000000000000000000000'
-      ) {
-        setHighestBidder(auctionData.highestBidder);
-      }
-    }
-  }, [auctionData]);
-
+const BidBox = ({ gapTime, highestBidder, auctionMinimumBid, highestBid }) => {
   return (
     <>
       {gapTime ? (
@@ -39,7 +22,7 @@ const BidBox = ({ gapTime }) => {
             {highestBid}
           </AuctionBox>
           <AuctionGray>
-            최소 낙찰 가능 금액 - {auctionData.minimumBid} ETH
+            현재 최소 낙찰 가능 금액 - {auctionMinimumBid} ETH
           </AuctionGray>
           {highestBidder && (
             <AuctionGray>현재 최고 낙찰자 - {highestBidder}</AuctionGray>

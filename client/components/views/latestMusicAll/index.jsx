@@ -1,12 +1,9 @@
 import { Box, Divider } from '@mui/material';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { streamingContract } from '$contracts';
 import MusicCard from '$components/views/cards/MusicCard';
-import { useTranslation } from 'react-i18next';
 
 const LatestMusicAll = ({ func }) => {
-  const { t, i18n } = useTranslation();
   const [musics, setMusics] = useState([]);
   const getMusic = async () => {
     try {
@@ -44,11 +41,8 @@ const LatestMusicAll = ({ func }) => {
   return (
     <Box className="streamingBox">
       <Box>
-        <Box className="streamingTitle">
-          {t('LatestMusics')}
-          <Link href={`/streaming/latestMusic`}>
-            <span className="latestMusic">{t('SeeAll')}</span>
-          </Link>
+        <Box style={{ color: '#fff' }} className="streamingTitle">
+          최신 등록 음악
         </Box>
       </Box>
       <Divider className="streamingDivider" />

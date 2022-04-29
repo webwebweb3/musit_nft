@@ -140,6 +140,7 @@ contract Auction{
             if(msg.sender == owner) {
                 recipient = owner;
                 value = highestBindingBid;
+                auctionState = State.Ended;
             } else {
                 if(msg.sender == highestBidder) { 
                     recipient = highestBidder;

@@ -13,15 +13,15 @@ const AuctionCard = () => {
   const [auctionData, setAuctionData] = useState([]);
   const dispatch = useDispatch();
   const router = useRouter();
-  let { search, genre } = router.query;
+  let { artist, genre, title } = router.query;
 
   useEffect(() => {
     dispatch(allAuctionsAction());
-  }, [dispatch, search, genre]);
+  }, [dispatch, artist, genre]);
 
   useEffect(() => {
     content();
-  }, [allAuctionData, search, genre]);
+  }, [allAuctionData, artist, genre, title]);
 
   const content = useCallback(async () => {
     try {
@@ -29,7 +29,6 @@ const AuctionCard = () => {
 
       if (allAuctionData) {
         for (let i = 0; i < allAuctionData.length; i++) {
-          console.log(allAuctionData[0]);
           let { tokenId } = allAuctionData[i];
           let tokenURI = await mintMusicTokenContract.methods
             .tokenURI(tokenId)
@@ -46,14 +45,22 @@ const AuctionCard = () => {
           });
         }
 
-        if (search) {
-          let searchTokenArray = ipfsInfo.filter(
+        if (artist) {
+          let searchArtistTokenArray = ipfsInfo.filter(
             auctionToken =>
               auctionToken.AuctionTokenData.properties.dataToSubmit.artist ===
-              search,
+              artist,
           );
 
-          ipfsInfo = searchTokenArray;
+          ipfsInfo = searchArtistTokenArray;
+        } else if (title) {
+          let searchTitleTokenArray = ipfsInfo.filter(
+            auctionToken =>
+              auctionToken.AuctionTokenData.properties.dataToSubmit.title ===
+              title,
+          );
+
+          ipfsInfo = searchTitleTokenArray;
         } else if (genre) {
           let genreArray = ipfsInfo.filter(
             auctionToken =>

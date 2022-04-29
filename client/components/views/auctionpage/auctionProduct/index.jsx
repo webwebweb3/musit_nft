@@ -33,22 +33,45 @@ const AuctionProductPage = () => {
     approveAuctionData,
     auctionTokenData,
     auctionData,
+    bidAuctionDone,
   } = useSelector(state => state.auction);
   const router = useRouter();
   let { product } = router.query;
   const [gapTime, setGapTime] = useState(false);
   const [approve, setApprove] = useState(false);
   const [owner, setOwner] = useState('');
+  const [highestBid, setHighestBid] = useState('');
+  const [auctionMinimumBid, setAuctionMinimumBid] = useState('');
+  const [highestBidder, setHighestBidder] = useState('');
 
   useEffect(() => {
     if (!approveCheckAuctionLoading) {
       setApprove(approveAuctionData);
     }
-  }, [approveCheckAuctionLoading]);
+  }, [approveCheckAuctionLoading, bidAuctionDone]);
 
   useEffect(() => {
     dispatch(auctionAction(product));
   }, [approveAuctionLoading]);
+
+  useEffect(() => {
+    if (auctionData) {
+      setHighestBid(auctionData.highestBindingBid);
+      let minimumBid = parseFloat(
+        (
+          parseFloat(auctionData.highestBindingBid) +
+          parseFloat(auctionData.minimumBid)
+        ).toFixed(10),
+      );
+      setAuctionMinimumBid(minimumBid);
+      if (
+        auctionData.highestBidder !==
+        '0x0000000000000000000000000000000000000000'
+      ) {
+        setHighestBidder(auctionData.highestBidder);
+      }
+    }
+  }, [auctionData]);
 
   const onClickApprove = useCallback(() => {
     let data = {
@@ -154,18 +177,28 @@ const AuctionProductPage = () => {
               />
               <AuctionDivider />
 
-              <BidBox gapTime={gapTime} />
+              <BidBox
+                gapTime={gapTime}
+                highestBidder={highestBidder}
+                auctionMinimumBid={auctionMinimumBid}
+                highestBid={highestBid}
+              />
               <AuctionDivider />
               {userData && (
                 <>
-                  <MyBidBox product={product} gapTime={gapTime} />
+                  <MyBidBox
+                    product={product}
+                    gapTime={gapTime}
+                    highestBid={highestBid}
+                    owner={owner}
+                  />
                 </>
               )}
               {userData &&
                 !gapTime &&
                 owner.toLowerCase() !== userData?.metamask.toLowerCase() && (
                   <>
-                    <AuctionBidButton product={product} />
+                    <AuctionBidButton auctionMinimumBid={auctionMinimumBid} />
                   </>
                 )}
             </AuctionContents>
