@@ -1,7 +1,8 @@
 const express = require('express');
+
 const router = express.Router();
 const passport = require('passport');
-const { User, Genre } = require('../../models');
+const { User, Genre, Music } = require('../../models');
 
 //------------------------------------------------
 //               /api/login
@@ -28,10 +29,23 @@ router.post('/', async (req, res, next) => {
         attributes: {
           exclude: ['id', 'updatedAt', 'deletedAt'],
         },
-        include: {
-          model: Genre,
-          attribute: ['content'],
-        },
+        include: [
+          {
+            model: Genre,
+            attributes: ['content'],
+          },
+          {
+            model: Music,
+            as: 'user',
+            attributes: ['title', 'uploader', 'albumCover', 'IPFSUrl'],
+            include: [
+              {
+                model: User,
+                attributes: ['metamask', 'name'],
+              },
+            ],
+          },
+        ],
       });
 
       return res.status(200).json(UserInfo);

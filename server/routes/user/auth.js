@@ -23,7 +23,13 @@ router.get('/', async (req, res, next) => {
           {
             model: Music,
             as: 'user',
-            attributes: ['title', 'albumCover', 'IPFSUrl'],
+            attributes: ['title', 'uploader', 'albumCover', 'IPFSUrl'],
+            include: [
+              {
+                model: User,
+                attributes: ['metamask', 'name'],
+              },
+            ],
           },
         ],
       });

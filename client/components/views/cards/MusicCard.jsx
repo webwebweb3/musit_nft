@@ -40,7 +40,6 @@ const MusicCard = ({
                 position: 'absolute',
                 width: '200px',
                 height: '200px',
-                zIndex: 999,
               }}
             >
               <MusicLikes editionNum={editionNum} />

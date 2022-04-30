@@ -12,6 +12,7 @@ const { ALCHEMY_RINKEBY_API_KEY } = process.env;
 // go to Account Details > Export Private Key
 // Be aware of NEVER putting real Ether into testing accounts
 const { ROPSTEN_PRIVATE_KEY } = process.env;
+const { ETHERSCAN_API_KEY } = process.env;
 
 module.exports = {
   solidity: {
@@ -35,7 +36,7 @@ module.exports = {
       accounts: [`${ROPSTEN_PRIVATE_KEY}`],
     },
   },
-  // etherscan:{
-  //   apiKey:
-  // }
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
+  },
 };

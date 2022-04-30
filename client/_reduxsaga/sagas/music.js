@@ -7,6 +7,7 @@ import {
   MUSICS_DISLIKE_REQUEST,
   MUSICS_DISLIKE_SUCCESS,
   MUSICS_DISLIKE_FAILURE,
+  MY_INFO_SUCCESS,
 } from '$reduxsaga/request/types';
 
 // ! data 확인 부탁
@@ -18,15 +19,22 @@ async function musicLike(data) {
   console.log('musiclike', data);
   return await Axios.post('/music', data);
 }
+function myInfoAPI() {
+  return Axios.get('/user');
+}
 
 function* yieldMusicLike(action) {
   try {
     const eventData = yield call(musicLike, action.data);
     console.log('이벤트~', eventData);
-
     yield put({
       type: MUSICS_LIKE_SUCCESS,
       data: eventData.data,
+    });
+    const result = yield call(myInfoAPI);
+    yield put({
+      type: MY_INFO_SUCCESS,
+      data: result.data,
     });
   } catch (err) {
     console.error(err);
@@ -53,6 +61,11 @@ function* yieldMusicDisLike(action) {
     yield put({
       type: MUSICS_DISLIKE_SUCCESS,
       data: eventData.data,
+    });
+    const result = yield call(myInfoAPI);
+    yield put({
+      type: MY_INFO_SUCCESS,
+      data: result.data,
     });
   } catch (err) {
     console.error(err);
