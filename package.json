@@ -11,7 +11,7 @@
     "test_nodemon": "cross-env NODE_ENV=test nodemon server/app.js",
     "front": "npm start --prefix client",
     "front_dev": "npm run dev --prefix client",
-    "start": "concurrently \"npm start_backend\" \"npm run front\"",
+    "start": "pm2 start server/app.js",
     "dev": "concurrently \"npm run dev_backend\" \"npm run front_dev\"",
     "dev_nodemon": "concurrently \"npm run nodemon\" \"npm run front_dev\"",
     "test": "concurrently \"npm run test_backend\" \"npm run front_dev\"",
