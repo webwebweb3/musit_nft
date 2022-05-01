@@ -30,9 +30,19 @@ const MusicCard = ({
   const { userData } = useSelector(state => state.user);
 
   return (
-    <Card className="cardBox">
+    <Card
+      className="cardBox"
+      sx={{
+        display: 'inline-block',
+        backgroundColor: 'transparent',
+        margin: '0 10px',
+      }}
+    >
       <Slide top>
-        <div className="styledCard" style={{ position: 'relative' }}>
+        <div
+          className="styledCard"
+          style={{ position: 'relative', backgroundColor: 'transparent' }}
+        >
           {userData && editionNum && (
             <span
               className="shadowCard"
@@ -40,6 +50,9 @@ const MusicCard = ({
                 position: 'absolute',
                 width: '200px',
                 height: '200px',
+                cursor: 'pointer',
+                boxShadow:
+                  'rgba(50, 50, 93, 0.25) 0px 40px 70px -12px inset, rgba(0, 0, 0, 0.3) 0px 20px 38px -18px inset',
               }}
             >
               <MusicLikes editionNum={editionNum} />
@@ -47,6 +60,7 @@ const MusicCard = ({
           )}
           <CardMedia
             className="cardImg"
+            sx={{ width: '200px', height: '200px', borderRadius: '10px' }}
             component="img"
             image={albumCover}
             alt={`${musicTitle} album Cover`}
@@ -54,7 +68,12 @@ const MusicCard = ({
 
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             <CardContent sx={{ flex: '1 0 auto' }}>
-              <Typography className="cardText" component="div" variant="h5">
+              <Typography
+                className="cardText"
+                sx={{ color: 'var(--streaming-font-color)' }}
+                component="div"
+                variant="h5"
+              >
                 {musicTitle}
               </Typography>
               <Typography
@@ -63,7 +82,17 @@ const MusicCard = ({
                 component="div"
               >
                 <Link href={`/studio/${artistName}`}>
-                  <span className="cardText cardArtist">{artistName}</span>
+                  <span
+                    className="cardText cardArtist"
+                    sx={{
+                      color: 'var(--streaming-font-color)',
+                      color: 'var(--streaming-font-artist-color)',
+                      textDecoration: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {artistName}
+                  </span>
                 </Link>
               </Typography>
             </CardContent>
