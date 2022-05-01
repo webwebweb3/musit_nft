@@ -41,7 +41,10 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
             {currentItems &&
               currentItems.map((v, i) => {
                 return (
-                  <Box key={v.musicTokenId} sx={{ marginLeft: '15px' }}>
+                  <Box
+                    key={v.musicTokenId}
+                    sx={{ marginBottom: '20px', marginLeft: '45px' }}
+                  >
                     <MarketPlaceNFTCard
                       musicTokenIds={v.musicTokenId}
                       musicTokenPrices={v.musicTokenPrice}
@@ -56,7 +59,10 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
           <>
             {currentItems &&
               currentItems.map(auction => (
-                <div key={auction.tokenId}>
+                <div
+                  key={auction.tokenId}
+                  sx={{ marginBottom: '20px', marginLeft: '45px' }}
+                >
                   <Link
                     href="/nft/auction/[product]"
                     as={`/nft/auction/${auction.newAuctionContract}`}

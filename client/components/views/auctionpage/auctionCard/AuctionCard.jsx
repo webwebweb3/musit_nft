@@ -46,7 +46,7 @@ const AuctionCard = ({ highestBindingBid, tokenID }) => {
             display: 'inline-block',
             width: '300px',
             opacity: '1',
-            backgroundVolor: '#2c3352',
+            backgroundColor: '#2c3352',
             color: 'white',
             borderRadius: '1rem',
           }}
