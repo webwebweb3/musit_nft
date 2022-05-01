@@ -7,7 +7,7 @@ const PaginatedItems = ({ items, saleStatus, type }) => {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const [sizeState, setSize] = useState(3);
+  const [sizeState, setSize] = useState(6);
 
   useEffect(() => {
     if (!items) return;
