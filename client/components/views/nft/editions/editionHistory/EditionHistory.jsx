@@ -23,11 +23,12 @@ const EditionHistory = ({ tokenId, image, musicData }) => {
           const timestamp = v.returnValues.timeStamp * 1000;
           var getDate = new Date(timestamp);
 
-          const date = `${getDate.getFullYear()}/${
-            getDate.getMonth() + 1
-          }/${getDate.getDate()} ${getDate.getHours()}:${(
-            '00' + getDate.getMinutes()
-          ).slice(-2)}`;
+          const date = `${('00' + getDate.getFullYear()).slice(-2)}/${(
+            '00' +
+            (getDate.getMonth() + 1)
+          ).slice(-2)}/${('00' + getDate.getDate()).slice(-2)} ${(
+            '00' + getDate.getHours()
+          ).slice(-2)}:${('00' + getDate.getMinutes()).slice(-2)}`;
 
           return (
             <Box className="edition_history_contents_container">
@@ -48,7 +49,7 @@ const EditionHistory = ({ tokenId, image, musicData }) => {
                   <img src="/ethereum.png" width="52px" height="52px" />
                 </Box>
                 <Box style={{ display: 'inline-block', margin: 'auto 0' }}>
-                  {web3.utils.fromWei(v.returnValues.price)} ETH
+                  {(web3.utils.fromWei(v.returnValues.price) / 101) * 100} ETH
                 </Box>
               </Box>
               <Box className="edition_history_contents_buyer">
