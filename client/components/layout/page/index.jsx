@@ -8,7 +8,7 @@ const PageList = ({ items, saleStatus, type }) => {
         className="page"
         style={{
           alignItems: 'center',
-          margin: '0 auto',
+          margin: '10px auto',
         }}
       >
         <PaginatedItems items={items} saleStatus={saleStatus} type={type} />
