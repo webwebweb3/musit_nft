@@ -114,7 +114,7 @@ async function mapMyMusic(data) {
     tempArray.push(returnData.properties);
   }
 
-  return tempArray;
+  return tempArray.reverse();
 }
 
 function* yieldGetMymusics(action) {
