@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(
     cors({
-      origin: 'http://3.36.53.64',
+      origin: 'http://3.34.10.114/',
       credentials: true,
     }),
   );

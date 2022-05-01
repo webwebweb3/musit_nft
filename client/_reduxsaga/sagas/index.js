@@ -10,7 +10,7 @@ import music from './music';
 
 Axios.defaults.baseURL =
   process.env.NODE_ENV === 'production'
-    ? 'http://13.125.197.70'
+    ? 'http://3.34.10.114/'
     : 'http://localhost:8000/api';
 Axios.defaults.withCredentials = true;
 
