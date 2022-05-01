@@ -15,7 +15,7 @@ const RegisterCheck = () => {
 
   const { network, account } = useWalletInfo();
   const { hasInitialResponse, isSupported, target } = network;
-  const { isLoading, requireInstall } = useWeb3();
+  const { isLoading, requireInstall, connect } = useWeb3();
   const [open, setOpen] = useState(false);
 
   const handleMetaMaskOpen = useCallback(() => {
@@ -27,6 +27,10 @@ const RegisterCheck = () => {
   //   if (!account.data) return;
   //   console.log('Ok!');
   // }, [network]);
+
+  const onClickMetamask = useCallback(() => {
+    connect();
+  }, [connect]);
 
   return (
     <>
@@ -70,10 +74,21 @@ const RegisterCheck = () => {
       ) : (
         <div style={{ marginLeft: 'auto', color: 'yellow' }}>
           <div>
-            <span style={{ paddingRight: '10px' }}>
-              <ErrorOutline />
-            </span>
-            메타마스크 로그인 해주세요!
+            <button
+              onClick={onClickMetamask}
+              style={{
+                backgroundColor: 'transparent',
+                marginLeft: 'auto',
+                color: 'yellow',
+                padding: '15px',
+                border: 'none',
+              }}
+            >
+              <span style={{ paddingRight: '10px' }}>
+                <ErrorOutline />
+              </span>
+              메타마스크 로그인 해주세요!
+            </button>
           </div>
         </div>
       )}
