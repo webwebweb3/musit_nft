@@ -61,7 +61,7 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
               currentItems.map(auction => (
                 <Box
                   key={auction.tokenId}
-                  sx={{ marginBottom: '20px', marginLeft: '45px' }}
+                  sx={{ marginBottom: '20px', marginLeft: '25px' }}
                 >
                   <Link
                     href="/nft/auction/[product]"
