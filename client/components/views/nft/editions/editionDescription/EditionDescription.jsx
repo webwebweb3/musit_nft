@@ -84,7 +84,9 @@ const EditionDescription = ({ owner, musicData, musicPrice }) => {
         <Box sx={{ display: 'inline-block' }}>{ownerName && ownerName}</Box>
       </Box>
       <Box sx={{ fontSize: '40px', fontWeight: 500, marginTop: '30px' }}>
-        {(web3.utils.fromWei(musicPrice) / 101) * 100} ETH
+        {`$ ${parseFloat((web3.utils.fromWei(musicPrice) / 101) * 100).toFixed(
+          10,
+        )} ETH`}
         <EditionPurchase
           musicPrice={musicPrice}
           tokenId={router.query.editionIPFSUrl}
