@@ -16,7 +16,6 @@ import {
 //   userMetamask: user metamask
 // }
 async function musicLike(data) {
-  console.log('musiclike', data);
   return await Axios.post('/music', data);
 }
 function myInfoAPI() {
@@ -26,7 +25,6 @@ function myInfoAPI() {
 function* yieldMusicLike(action) {
   try {
     const eventData = yield call(musicLike, action.data);
-    console.log('이벤트~', eventData);
     yield put({
       type: MUSICS_LIKE_SUCCESS,
       data: eventData.data,
@@ -46,7 +44,6 @@ function* yieldMusicLike(action) {
 }
 
 async function musicDisLike(data) {
-  console.log('musiclike', data);
   return await Axios.delete('/music', {
     params: {
       paramsData: data,
@@ -57,7 +54,6 @@ async function musicDisLike(data) {
 function* yieldMusicDisLike(action) {
   try {
     const eventData = yield call(musicDisLike, action.data);
-    console.log('디스이벤트~', eventData);
     yield put({
       type: MUSICS_DISLIKE_SUCCESS,
       data: eventData.data,

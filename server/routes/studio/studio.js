@@ -27,9 +27,7 @@ router.get('/', async (req, res) => {
     if (userCover === null) {
       res.json({ userProfile, userCover });
     } else {
-      console.log('유저카버 널?', userCover);
       const userBackground = userCover.backgroundImg;
-      console.log('유저 백그라운드?', userBackground);
       res.json({ userProfile, userBackground });
     }
   } catch (error) {
@@ -90,12 +88,9 @@ router.get('/isSubscribe', async (req, res) => {
     const jsonData = JSON.parse(paramsData);
     const myMetamask = jsonData.metamask;
     const { artistName } = jsonData;
-    console.log('아티스트 이름', artistName);
-    console.log('메타마스크', myMetamask);
     const artistId = await User.findOne({
       where: { name: artistName },
     });
-    console.log('artist 아이디는 ', artistId.id);
 
     const userId = await User.findOne({
       where: { metamask: myMetamask },
@@ -163,16 +158,14 @@ router.post('/subscribe', async (req, res) => {
     const isExistResult = await sequelize.query(isExistSql, {
       type: QueryTypes.SELECT,
     });
-    console.log('쿼리 결과 한번 봅시다', isExistResult);
     if (isExistResult) {
       res.json({ message: '이미 구독중입니다.' });
     }
 
     const insertSql = `INSERT INTO subscribe (subscribers, subscribing) VALUE (${myId.id}, ${artistId});`;
-    const inserting = await sequelize.query(insertSql, {
+    await sequelize.query(insertSql, {
       type: QueryTypes.INSERT,
     });
-    console.log('인설팅', inserting);
     res.json({ insert: true });
   } catch (error) {
     console.error(error);
@@ -185,18 +178,14 @@ router.delete('/subscribe', async (req, res) => {
     const jsonData = JSON.parse(paramsData);
     const { artistId } = jsonData;
     const { myMetamask } = jsonData;
-    console.log('앝아이디', artistId);
-    console.log('내멭아이디', myMetamask);
 
     const myId = await User.findOne({
       where: { metamask: myMetamask },
     });
-    console.log('내 아이디', myId.id);
     const sql = `DELETE FROM subscribe WHERE subscribers =${myId.id} AND subscribing = ${artistId};`;
-    const deletequery = await sequelize.query(sql, {
+    await sequelize.query(sql, {
       type: QueryTypes.DELETE,
     });
-    console.log('딜리트 쿼리', deletequery);
 
     // await User.destroy({
     //   include: [

@@ -100,8 +100,11 @@ const EditionDescription = ({ owner, musicData, musicPrice }) => {
           marginBottom: '30px',
         }}
       >
-        수수료 : {web3.utils.fromWei(musicPrice) / 101} (수수료는 최초
-        발행자에게 지급됩니다.)
+        수수료 :
+        {parseFloat(
+          parseFloat(web3.utils.fromWei(musicPrice) / 101).toFixed(10),
+        )}
+        (수수료는 최초 발행자에게 지급됩니다.)
       </Box>
     </Box>
   );

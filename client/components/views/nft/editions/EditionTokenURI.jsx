@@ -38,7 +38,6 @@ const EditionTokenURI = () => {
 
       const ipfsData = await fetch(`https://ipfs.infura.io/ipfs/${tokenURI}`);
       const jsonData = await ipfsData.json();
-      console.log(jsonData);
       setMusicOwner(ownerOf);
       setMusicPrice(tokenPrice);
       setMusicData(jsonData);

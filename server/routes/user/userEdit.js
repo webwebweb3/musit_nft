@@ -33,7 +33,6 @@ const upload = multer({
 
 router.post('/', upload.none(), async (req, res) => {
   try {
-    console.log(req.body);
     const { metamask, name, nationality, img, pass, genre } = req.body;
 
     await User.update(
@@ -83,7 +82,6 @@ router.post('/', upload.none(), async (req, res) => {
 });
 
 router.post('/img', upload.array('image'), (req, res) => {
-  console.log(req.files);
   res.json(req.files.map(v => v.location));
 });
 

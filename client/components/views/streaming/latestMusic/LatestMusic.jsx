@@ -12,7 +12,6 @@ const LatestMusic = ({ func }) => {
         .getLatestMusicToken()
         .call();
 
-      console.log('겟 레이티스트', getLatestMusicToken);
       // const latestMusic = getLatestMusicToken.filter(music => {
       //   return music !== '' && music !== null && music !== undefined;
       // });
@@ -26,7 +25,6 @@ const LatestMusic = ({ func }) => {
         const data = await response.json();
         tempMusics.push({ data, tokenId: getLatestMusicToken[i].tokenId });
       }
-      console.log('템프 뮤직', tempMusics);
       setMusics(tempMusics);
     } catch (error) {
       console.error(error);
@@ -36,7 +34,6 @@ const LatestMusic = ({ func }) => {
     if (musics.length === 0) {
       getMusic();
     }
-    console.log('직들', musics);
   }, [musics]);
 
   return (

@@ -26,7 +26,6 @@ function saveJsonFilesToClientFolder(name, contract) {
       4,
     ),
   );
-  console.log(name, ' json is created');
 }
 
 async function main() {

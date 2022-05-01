@@ -23,7 +23,6 @@ const AuctionBidButton = ({ auctionMinimumBid }) => {
       (parseFloat(myBidData) + parseFloat(bid)).toFixed(10),
     );
     setMyBid(bidInput);
-    console.log();
   }, [bid]);
 
   const onClickAuction = useCallback(async () => {

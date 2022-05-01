@@ -48,7 +48,6 @@ const MyBidBox = ({ gapTime, highestBid, owner }) => {
 
     dispatch(auctionGetMyMoney(data));
   }, [dispatch, product, userData]);
-  console.log(myBidData);
 
   return (
     <>

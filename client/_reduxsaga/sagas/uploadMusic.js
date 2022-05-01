@@ -16,14 +16,12 @@ import {
 import { mintMusicTokenContract, web3 } from '$contracts';
 
 function uploadS3AlbumCover(data) {
-  console.log('s3data', data);
   if (data.selectedFile === null) {
     alert('앨범 카버를 선택해주세요!');
     Router.reload();
   }
   const myFile = data.selectedFile;
   const fileName = `${Date.now()}_${myFile.name}`;
-  console.log('s3F', fileName);
 
   const target = {
     Bucket: 'webwebweb3',
@@ -34,7 +32,6 @@ function uploadS3AlbumCover(data) {
     accessKeyId: process.env.NEXT_PUBLIC_AWS_S3_ACCESS_KEY_ID,
     secretAccessKey: process.env.NEXT_PUBLIC_AWS_S3_SECRET_ACCESS_KEY,
   };
-  console.log('?', creds);
 
   const parallelUploads3 = new Upload({
     client:
@@ -53,8 +50,6 @@ function uploadS3AlbumCover(data) {
 }
 
 async function uploadIPFSMusic(data) {
-  console.log('ipfsdata', data);
-
   if (data.selectedIPFSFile === null) {
     alert('음악을 업로드해주세요!');
     Router.reload();
@@ -65,7 +60,6 @@ async function uploadIPFSMusic(data) {
 }
 
 async function uploadToServer(data) {
-  console.log('datatoserver', data);
   await axios.post(`/uploadmusic`, data).then(res => {
     if (res.data.uploadSuccess === 'true') {
       // TODO: studio/artistname/uploadmusic 일 시 아래 실행
@@ -94,7 +88,6 @@ async function mintNFTMusic(data) {
   if (data.S3AlbumUrl === '' || null) {
     throw new Error('no S3 Album');
   }
-  console.log('mint data', data);
   let jsonData = {
     title: 'musit NFT',
     description: 'This data is for minting a NFT.',
@@ -107,16 +100,10 @@ async function mintNFTMusic(data) {
   };
 
   const mintIPFSurl = await axios.post('/uploadmusic/fs', jsonData);
-  console.log('민트 ipfs', mintIPFSurl);
   const accounts = await web3.eth.getAccounts();
-  console.log('어카운트', accounts);
-
-  console.log('account', data.data.account);
   const response = await mintMusicTokenContract.methods
     .mintMusicToken(mintIPFSurl.data.path)
     .send({ from: data.data.account });
-
-  console.log('res', response);
 
   // if (response.status) { 성공시
   //   if (router.asPath.split('/').reverse()[0] === 'uploadmusic') {
@@ -133,7 +120,6 @@ function* mintNFT(action) {
       data: S3AlbumUrl,
     });
     const IPFSurl = yield call(uploadIPFSMusic, action.data);
-    console.log('IPFSurl', IPFSurl);
     yield put({
       type: IPFS_MUSIC_SUCCESS,
       data: IPFSurl,

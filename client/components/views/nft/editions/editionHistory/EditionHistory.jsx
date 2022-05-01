@@ -5,7 +5,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const EditionHistory = ({ tokenId, image, musicData }) => {
-  console.log('뮤직데이타', musicData);
   const dispatch = useDispatch();
   const { eventData } = useSelector(state => state.market);
   const getEvent = async () => {
@@ -14,7 +13,6 @@ const EditionHistory = ({ tokenId, image, musicData }) => {
 
   useEffect(() => {
     if (!eventData) getEvent();
-    console.log('이벤트 데이터', eventData);
   }, [eventData]);
   return (
     <>

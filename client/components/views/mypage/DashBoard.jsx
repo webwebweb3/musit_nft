@@ -84,7 +84,6 @@ const DashBoard = () => {
   }, []);
   useEffect(() => {
     if (!cntMyNFT) getMyMusicTokens();
-    console.log(cntMyNFT);
   }, [cntMyNFT]);
 
   const theme = useTheme();

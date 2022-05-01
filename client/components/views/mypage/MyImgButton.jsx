@@ -14,7 +14,6 @@ const MyImgButton = () => {
   const onChangeImages = useCallback(
     e => {
       const imgData = e.target.files;
-      console.log(imgData[0]);
       const imageFormData = new FormData();
       [].forEach.call(e.target.files, f => {
         imageFormData.append('image', f);

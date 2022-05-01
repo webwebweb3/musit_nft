@@ -13,9 +13,6 @@ router.get('/', async (req, res) => {
     const { paramsData } = req.query;
     const jsonData = JSON.parse(paramsData);
     const { editionNum, userMetamask } = jsonData;
-    console.log('---------------------------------------');
-    console.log(userMetamask);
-    console.log('---------------------------------------');
 
     const userId = await User.findOne({
       where: { metamask: userMetamask },
@@ -25,7 +22,6 @@ router.get('/', async (req, res) => {
     const isExistResult = await sequelize.query(isExistSql, {
       type: QueryTypes.SELECT,
     });
-    console.log('isExistResult', isExistResult);
     if (isExistResult.length !== 0) {
       res.json({ exist: true, editionNum });
     } else {
@@ -38,8 +34,6 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { editionNum, userMetamask } = req.body;
-    console.log('edition', editionNum);
-    console.log('userMetamask', userMetamask);
     const userId = await User.findOne({
       where: { metamask: userMetamask },
     });
@@ -65,18 +59,13 @@ router.delete('/', async (req, res) => {
     const jsonData = JSON.parse(paramsData);
     const { editionNum, userMetamask } = jsonData;
 
-    console.log('editionNum', editionNum);
-    console.log('userMetamask', userMetamask);
-
     const userId = await User.findOne({
       where: { metamask: userMetamask },
     });
-    console.log('내 아이디', userId.id);
     const deleteSql = `DELETE FROM musiclikes WHERE user =${userId.id} AND music = ${editionNum};`;
-    const deletequery = await sequelize.query(deleteSql, {
+    await sequelize.query(deleteSql, {
       type: QueryTypes.DELETE,
     });
-    console.log('딜리트 쿼리', deletequery);
     res.json({ delete: true, editionNum });
   } catch (error) {
     res.json({ delete: false });
@@ -98,7 +87,6 @@ router.post('/favoritemusic', async (req, res) => {
       ],
     });
 
-    console.log(userId);
     res.status(200).json(userId);
   } catch (error) {
     console.error(error);

@@ -20,9 +20,6 @@ const MySubInfo = () => {
   let dateNow = parseInt(Math.round(new Date().getTime() / 1000));
   useEffect(() => {
     if (!mySubscribe) getMySubInfo();
-
-    // console.log('지금!', dateNow);
-    console.log('정보', mySubscribe);
   }, [mySubscribe]);
 
   let FirstIcon;

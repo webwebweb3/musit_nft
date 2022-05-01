@@ -26,7 +26,6 @@ const SubscriptionBuy = () => {
 
   useEffect(() => {
     if (!plans) getAllPlans();
-    console.log('플랜들', plans);
   }, [plans]);
 
   return (

@@ -36,7 +36,6 @@ const UploadButton = ({ endAt, startingBid, minimumBid, tokenID }) => {
       account,
     };
 
-    console.log(auctionData);
     dispatch(createAuctionAction(auctionData));
   }, [dispatch, startingBid, endAt, tokenID, minimumBid, account]);
 

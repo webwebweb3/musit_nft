@@ -27,7 +27,6 @@ import { mintMusicTokenContract } from '$contracts';
 async function uploadBackground(data) {
   const myFile = data.selectedFile;
   const fileName = `${data.artistName}_${myFile.name}`;
-  console.log('s3F', fileName);
 
   const target = {
     Bucket: 'webwebweb3',
@@ -93,7 +92,6 @@ function getUserMetamask(data) {
   });
 }
 async function getMyMusic(data) {
-  console.log('getMyMusic 안', data);
   // const mintOwner = await mintMusicTokenContract.getPastEvents('Minter', {
   //   filter: { Minter: data.data.user },
   //   fromBlock: 0,
@@ -120,12 +118,9 @@ async function mapMyMusic(data) {
 function* yieldGetMymusics(action) {
   try {
     const userMetamask = yield call(getUserMetamask, action.data);
-    console.log('usermetamask', userMetamask);
     const getMyMusics = yield call(getMyMusic, userMetamask);
-    console.log('getMyMusics', getMyMusics);
 
     const mapMyMusics = yield call(mapMyMusic, getMyMusics);
-    console.log('mapMyMusics', mapMyMusics);
 
     yield put({
       type: STUDIO_GET_MYMUSICS_SUCCESS,
@@ -166,7 +161,6 @@ function* yieldGetUserImages(action) {
 }
 
 async function isSubscribing(data) {
-  console.log('구독중인지?', data);
   return Axios.get('/studio/isSubscribe', {
     params: {
       paramsData: data,
@@ -177,7 +171,6 @@ async function isSubscribing(data) {
 function* yieldIsSubscribing(action) {
   try {
     const isSub = yield call(isSubscribing, action.data);
-    console.log('구독중인가?', isSub);
     yield put({
       type: STUDIO_CNT_FOLLOWERS_SUCCESS,
       data: isSub.data.cntFollower,
@@ -196,12 +189,10 @@ function* yieldIsSubscribing(action) {
 
 async function subscribeArtist(data) {
   if (data.actionData === 'subscribe') {
-    console.log('구독 할 것이다', data);
     Axios.post('/studio/subscribe', data);
     const returnData = { isSubscribing: true, artistId: data.artistId };
     return returnData;
   } else if (data.actionData === 'cancelSubscribe') {
-    console.log('구독 안 할 것이다', data);
     Axios.delete('/studio/subscribe', {
       params: {
         paramsData: data,
@@ -210,13 +201,11 @@ async function subscribeArtist(data) {
     const returnData = { isSubscribing: false, artistId: data.artistId };
     return returnData;
   }
-  console.log('데이타 보자', data);
 }
 
 function* yieldSubscribeArtist(action) {
   try {
     const result = yield call(subscribeArtist, action.data);
-    console.log('리조뜨이즈에브리띵', result);
     yield put({
       type: STUDIO_SUBSCRIBE_SUCCESS,
       data: result,

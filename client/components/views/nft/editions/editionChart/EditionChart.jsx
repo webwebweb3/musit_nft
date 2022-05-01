@@ -39,7 +39,6 @@ const EditionChart = ({ tokenId }) => {
       for (let i = 0; i < eventData.length; i++) {
         const timeStamp = eventData[i].returnValues.timeStamp * 1000;
         const date = new Date(timeStamp);
-        console.log('날짜!', date);
 
         const data = {
           buyer: eventData[i].returnValues.buyer,
@@ -73,9 +72,6 @@ const EditionChart = ({ tokenId }) => {
           },
         ],
       };
-
-      console.log(tempXArray);
-      console.log(tempYArray);
     }
   }
   const getEvent = async () => {
@@ -84,7 +80,6 @@ const EditionChart = ({ tokenId }) => {
 
   useEffect(() => {
     if (!eventData) getEvent();
-    console.log('이벤트 데이터', eventData);
   }, [eventData]);
 
   return (

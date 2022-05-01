@@ -6,7 +6,6 @@ export const withToast = promise => {
     {
       pending: {
         render() {
-          console.log(333);
           return (
             <div>
               <p>Your transaction is being processed.</p>
@@ -18,7 +17,6 @@ export const withToast = promise => {
       },
       success: {
         render({ data }) {
-          console.log(data);
           return (
             <div>
               <p>Tx: {data.transactionHash.slice(0, 20)}...</p>
@@ -38,8 +36,6 @@ export const withToast = promise => {
       },
       error: {
         render({ data }) {
-          console.log(data);
-
           // When the promise reject, data will contains the error
           return <div>{data.message ?? 'Transaction has failed'}</div>;
         },

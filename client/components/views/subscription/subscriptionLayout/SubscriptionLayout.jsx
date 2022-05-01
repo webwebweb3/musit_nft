@@ -23,8 +23,6 @@ const SubscriptionLayout = ({
   //   const nextPlanFrequency = dateNow + parseInt(frequency);
 
   const onClickSubscribe = async () => {
-    console.log('가격', subPrice);
-    console.log('플랜아이디', planId);
     await paymentContract.methods
       .subscribe(parseInt(planId))
       .send({

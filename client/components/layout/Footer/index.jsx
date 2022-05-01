@@ -78,7 +78,6 @@ const Footer = () => {
       setUserInfo(null);
       setToggle(false);
       // 재생 시킨 음악의 재생 시간
-      console.log(seekTime);
       // 이곳에 UserDB 에 마지막 재생 노래정보와 총 재생시간, 현재까지 재생시간을 추가한다.
       setMySeekTime(seekTime);
     }
@@ -133,7 +132,6 @@ const Footer = () => {
 
   useEffect(() => {
     if (isNextClicked) {
-      console.log(currTrackId);
       let trackId = currTrackId + 1;
       if (userInfo.length <= currTrackId + 1) {
         trackId = 0;
@@ -143,7 +141,6 @@ const Footer = () => {
       setNextClicked(false);
     }
     if (isPrevClicked) {
-      console.log(currTrackId);
       let trackId = userInfo.length - 1;
       if (currTrackId - 1 >= 0) {
         trackId = currTrackId - 1;

@@ -74,7 +74,6 @@ const StudioBackground = ({ background }) => {
             src={`https://webwebweb3.s3.ap-northeast-2.amazonaws.com/background/${artistName}_${background}`}
             width={'100%'}
           />
-          {console.log('mmmmmmmmmmmm', artistName)}
         </>
       )}
 

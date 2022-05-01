@@ -32,7 +32,6 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    console.log('req데이타!', req.body);
     const { IPFSurl, S3AlbumUrl, data } = req.body;
     const { userName, title, artist } = data.dataToSubmit;
     let { albumName, genre, release, songwriter, lyricist } = data.dataToSubmit;
@@ -108,7 +107,6 @@ router.post('/', async (req, res) => {
 
 router.post('/fs', async (req, res) => {
   const jsonData = req.body;
-  console.log('json', jsonData);
 
   if (!fs.existsSync('server/json')) {
     fs.mkdirSync('server/json');
@@ -120,7 +118,6 @@ router.post('/fs', async (req, res) => {
   const mintIPFSurl = await client.add(
     fs.readFileSync('server/json/mint.json'),
   );
-  console.log('mintipfs', mintIPFSurl);
 
   res.json(mintIPFSurl);
 });

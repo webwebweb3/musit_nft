@@ -177,7 +177,6 @@ async function auctioncancelAPI(data) {
 
 function* auctioncancel(action) {
   try {
-    console.log(action.data);
     yield call(auctioncancelAPI, action.data);
 
     yield put({
@@ -268,7 +267,6 @@ function* auctionfinalize(action) {
 }
 
 async function auctionGetMyMoneyAPI(data) {
-  console.log('데이타', data);
   let auctionContract = await new web3.eth.Contract(auctionAbi, data.product);
   await auctionContract.methods.getMyMoney().send({ from: data.metamask });
 
@@ -278,7 +276,6 @@ async function auctionGetMyMoneyAPI(data) {
 function* auctionGetMyMoney(action) {
   try {
     let result = yield call(auctionGetMyMoneyAPI, action.data);
-    console.log('리저트', result);
 
     yield put({
       type: AUCTION_GET_MYMONEY_SUCCESS,
