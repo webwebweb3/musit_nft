@@ -50,8 +50,10 @@ const EditionHistory = ({ tokenId, image, musicData }) => {
                 </Box>
                 <Box style={{ display: 'inline-block', margin: 'auto 0' }}>
                   {`$ ${parseFloat(
-                    (web3.utils.fromWei(v.returnValues.price) / 101) * 100,
-                  ).toFixed(10)} ETH`}
+                    parseFloat(
+                      (web3.utils.fromWei(v.returnValues.price) / 101) * 100,
+                    ).toFixed(10),
+                  )} ETH`}
                 </Box>
               </Box>
               <Box className="edition_history_contents_buyer">
