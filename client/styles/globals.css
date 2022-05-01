@@ -148,7 +148,7 @@ body:hover {
 
 .cardBottom {
   display: flex;
-  flexdirection: column;
+  flex-direction: column;
 }
 
 .cardContent {
@@ -160,7 +160,7 @@ body:hover {
 }
 
 .cardETH {
-  fontweight: 600;
+  font-weight: 600;
   color: #18c99b;
 }
 

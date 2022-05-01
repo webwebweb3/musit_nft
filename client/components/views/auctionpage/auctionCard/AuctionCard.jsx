@@ -42,6 +42,14 @@ const AuctionCard = ({ highestBindingBid, tokenID }) => {
       {auctionData.description && (
         <Card
           className="cardContract"
+          sx={{
+            display: 'inline-block',
+            width: '300px',
+            opacity: '1',
+            backgroundVolor: '#2c3352',
+            color: 'white',
+            borderRadius: '1rem',
+          }}
           onMouseOver={handleMouseIn}
           onMouseOut={handleMouseOut}
         >
@@ -56,19 +64,26 @@ const AuctionCard = ({ highestBindingBid, tokenID }) => {
             />
           </div>
 
-          <Box className="cardBottom">
-            <CardContent className="cardContent">
+          <Box
+            sx={{ display: 'flex', flexDirection: 'column' }}
+            className="cardBottom"
+          >
+            <CardContent className="cardContent" sx={{ flex: '1 0 auto' }}>
               <Typography component="div" variant="h5">
                 {auctionData.properties.dataToSubmit.title}
               </Typography>
               <Typography
+                sx={{ color: '#768fb5' }}
                 className="cardTitle"
                 variant="subtitle1"
                 component="div"
               >
                 {auctionData.properties.dataToSubmit.artist}
               </Typography>
-              <Box className="cardETH">{`현재 최고가 : ${highestBindingBid} ETH`}</Box>
+              <Box
+                className="cardETH"
+                sx={{ fontWeight: '600', color: '#18c99b' }}
+              >{`현재 최고가 : ${highestBindingBid} ETH`}</Box>
             </CardContent>
           </Box>
         </Card>
