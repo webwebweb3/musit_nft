@@ -13,6 +13,7 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
     <>
       <Grid
         className="approveGrid"
+        sx={{ marginTop: '18px', marginLeft: '60px' }}
         container
         spacing={{ xs: 2, md: 4 }}
         columns={{ xs: 3, sm: 8, md: 12 }}
@@ -21,7 +22,7 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
           <>
             {currentItems &&
               currentItems.map(v => (
-                <Box key={v.musicTokenId}>
+                <Box key={v.musicTokenId} sx={{ marginBottom: '20px' }}>
                   <MyNFTCards
                     key={v.musicTokenId}
                     account={account}

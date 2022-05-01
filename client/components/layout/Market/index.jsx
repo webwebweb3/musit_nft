@@ -26,6 +26,18 @@ const MarketLayout = ({ children, value }) => {
                   <Button
                     className="styledNewAuctionButton"
                     variant="contained"
+                    sx={{
+                      display: 'block',
+                      backgroundColor: 'transparent',
+                      padding: '6px 12px',
+                      width: 'auto',
+                      margin: '0 0 0 auto',
+                      color: '#fff',
+                      '&:hover': {
+                        color: 'rgb(25, 118, 210)',
+                        backgroundColor: 'transparent',
+                      },
+                    }}
                   >
                     새 경매 등록하기
                   </Button>
@@ -35,6 +47,18 @@ const MarketLayout = ({ children, value }) => {
                   <Button
                     className="styledNewAuctionButton"
                     variant="contained"
+                    sx={{
+                      display: 'block',
+                      backgroundColor: 'transparent',
+                      padding: '6px 12px',
+                      width: 'auto',
+                      margin: '0 0 0 auto',
+                      color: '#fff',
+                      '&:hover': {
+                        color: 'rgb(25, 118, 210)',
+                        backgroundColor: 'transparent',
+                      },
+                    }}
                   >
                     새 판매 등록하기
                   </Button>
