@@ -59,7 +59,7 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
           <>
             {currentItems &&
               currentItems.map(auction => (
-                <div
+                <Box
                   key={auction.tokenId}
                   sx={{ marginBottom: '20px', marginLeft: '45px' }}
                 >
@@ -71,7 +71,7 @@ const Items = ({ currentItems, saleStatus, type, ...rest }) => {
                       <AuctionContents auction={auction.newAuctionContract} />
                     </a>
                   </Link>
-                </div>
+                </Box>
               ))}
           </>
         )}
