@@ -55,3 +55,8 @@ ETHERSCAN_API_KEY='ETHERSCAN_API_KEY'
 # ER Diagram
 ##### * 사진을 클릭하면 크게 자세히 볼 수 있어요!!
 <img src="https://user-images.githubusercontent.com/89543695/166198280-bfc6ba81-9a52-4ee8-8bd7-a15745735511.png" width="470px" hight="610px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
+
+# Contract Diagram
+##### * 사진을 클릭하면 크게 자세히 볼 수 있어요!!
+<img src="https://user-images.githubusercontent.com/89627319/166200057-ee822838-1fdb-4a63-a29e-64eae264cec9.png" width="470px" hight="610px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
+
