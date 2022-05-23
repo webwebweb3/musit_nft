@@ -57,7 +57,7 @@ ETHERSCAN_API_KEY='ETHERSCAN_API_KEY'
 <img src="https://user-images.githubusercontent.com/89543695/166198280-bfc6ba81-9a52-4ee8-8bd7-a15745735511.png" width="470px" hight="610px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
 
 # Contract Diagram
-### 컨트랙트 설명서 : <a href="[https://quiver-revolve-23f.notion.site/aa58a42722a54bc9ad5cc70ddaf86ed0](https://quiver-revolve-23f.notion.site/Contract-Diagram-Menual-649fd26af96f4aa1874c2200331bc57b)"><img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/></a>
+### 컨트랙트 설명서 : <a href="https://quiver-revolve-23f.notion.site/Contract-Diagram-Menual-649fd26af96f4aa1874c2200331bc57b"><img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/></a>
 ##### * 사진을 클릭하면 크게 자세히 볼 수 있어요!!
 <img src="https://user-images.githubusercontent.com/89627319/166200057-ee822838-1fdb-4a63-a29e-64eae264cec9.png" width="470px" hight="610px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
 
