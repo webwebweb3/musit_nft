@@ -100,27 +100,6 @@ contract MintMusicToken is  ERC721Enumerable, ERC721URIStorage  {
                 return musicTokenDatas;
         }
 
-        function getMusicTokens(address _musicTokenOwner) 
-                view
-                public
-                returns(MusicTokenData[] memory)
-        {
-                uint256 balanceLength = balanceOf(_musicTokenOwner);
-                require(balanceLength != 0 , "Owner did not have token.");
-
-                MusicTokenData[] memory musicTokenData = new MusicTokenData[](balanceLength);
-
-                for(uint256 i = 0; i < balanceLength; i++){
-                        uint256 musicTokenId = tokenOfOwnerByIndex(_musicTokenOwner, i);
-                        string memory musicTokenURI = musicTokens[musicTokenId];
-                        uint256 musicTokenPrice = saleMusicToken.getMusicTokenPrice(musicTokenId);
-
-                        musicTokenData[i] = MusicTokenData(musicTokenId, musicTokenURI, musicTokenPrice);
-                }
-                
-                return musicTokenData;
-        }
-
         function getMusicTokenMinter(uint256 _musicTokenId)
                 view
                 public
